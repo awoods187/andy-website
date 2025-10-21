@@ -1,0 +1,46 @@
+---
+interface Props {
+  title: string;
+  date: Date;
+  excerpt: string;
+  slug: string;
+  tags: string[];
+  showExcerpt?: boolean;
+}
+
+const { title, date, excerpt, slug, tags, showExcerpt = true } = Astro.props;
+
+const formattedDate = new Intl.DateTimeFormat('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+}).format(date);
+---
+
+<article class="mb-10 pb-10 border-b border-gray-200 last:border-b-0">
+  <h2 class="font-sans text-2xl font-semibold mb-2">
+    <a href={`/blog/${slug}`} class="text-black no-underline hover:opacity-70 transition-opacity">
+      {title}
+    </a>
+  </h2>
+  <time datetime={date.toISOString()} class="text-sm text-gray-500 block mb-3">
+    {formattedDate}
+  </time>
+  {showExcerpt && (
+    <p class="text-base leading-relaxed mb-3 text-gray-700">
+      {excerpt}
+    </p>
+  )}
+  {tags.length > 0 && (
+    <div class="flex gap-2 flex-wrap">
+      {tags.map(tag => (
+        <a
+          href={`/blog/tag/${tag}`}
+          class="text-xs px-2 py-1 bg-gray-100 text-gray-700 rounded no-underline hover:bg-gray-200 transition-colors"
+        >
+          {tag}
+        </a>
+      ))}
+    </div>
+  )}
+</article>

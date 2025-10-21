@@ -1,0 +1,39 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BlogPostCard from '../../components/BlogPostCard.astro';
+
+// Get all published blog posts and sort by date (newest first)
+const allPosts = await getCollection('blog');
+const publishedPosts = allPosts
+  .filter(post => !post.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<BaseLayout
+  title="Blog - Andy Woods"
+  description="Writing about AI, databases, and product management"
+>
+  <header class="mb-12">
+    <h1 class="font-sans text-4xl font-bold mb-4 text-black">Blog</h1>
+    <p class="text-lg text-gray-600">
+      Thoughts on AI, databases, product management, and building products developers love.
+    </p>
+  </header>
+
+  <div>
+    {publishedPosts.map(post => (
+      <BlogPostCard
+        title={post.data.title}
+        date={post.data.date}
+        excerpt={post.data.excerpt}
+        slug={post.slug}
+        tags={post.data.tags}
+      />
+    ))}
+  </div>
+
+  {publishedPosts.length === 0 && (
+    <p class="text-gray-500 italic">No blog posts yet. Check back soon!</p>
+  )}
+</BaseLayout>

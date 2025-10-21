@@ -1,0 +1,109 @@
+---
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map(post => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+
+// Calculate reading time (average reading speed: 200 words/min)
+const wordsPerMinute = 200;
+const textContent = post.body;
+const wordCount = textContent.split(/\s+/g).length;
+const readingTime = Math.ceil(wordCount / wordsPerMinute);
+
+// Format date
+const formattedDate = new Intl.DateTimeFormat('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+}).format(post.data.date);
+
+// Get all posts for prev/next navigation
+const allPosts = await getCollection('blog');
+const sortedPosts = allPosts
+  .filter(p => !p.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const currentIndex = sortedPosts.findIndex(p => p.slug === post.slug);
+const prevPost = currentIndex < sortedPosts.length - 1 ? sortedPosts[currentIndex + 1] : null;
+const nextPost = currentIndex > 0 ? sortedPosts[currentIndex - 1] : null;
+---
+
+<BaseLayout
+  title={post.data.title}
+  description={post.data.excerpt}
+>
+  <article>
+    <header class="mb-8">
+      <h1 class="font-sans text-4xl font-bold mb-4 text-black">
+        {post.data.title}
+      </h1>
+      <div class="flex items-center gap-4 text-sm text-gray-500 mb-4">
+        <time datetime={post.data.date.toISOString()}>
+          {formattedDate}
+        </time>
+        <span>·</span>
+        <span>{readingTime} min read</span>
+      </div>
+      {post.data.tags.length > 0 && (
+        <div class="flex gap-2 flex-wrap">
+          {post.data.tags.map(tag => (
+            <a
+              href={`/blog/tag/${tag}`}
+              class="text-xs px-2 py-1 bg-gray-100 text-gray-700 rounded no-underline hover:bg-gray-200 transition-colors"
+            >
+              {tag}
+            </a>
+          ))}
+        </div>
+      )}
+    </header>
+
+    <div class="prose prose-lg max-w-none mb-12">
+      <Content />
+    </div>
+
+    <!-- Post Navigation -->
+    {(prevPost || nextPost) && (
+      <nav class="border-t border-gray-200 pt-8 mt-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {prevPost && (
+            <div>
+              <p class="text-sm text-gray-500 mb-2">← Previous</p>
+              <a
+                href={`/blog/${prevPost.slug}`}
+                class="text-lg font-sans font-semibold text-black no-underline hover:opacity-70 transition-opacity"
+              >
+                {prevPost.data.title}
+              </a>
+            </div>
+          )}
+          {nextPost && (
+            <div class={prevPost ? "text-right" : ""}>
+              <p class="text-sm text-gray-500 mb-2">Next →</p>
+              <a
+                href={`/blog/${nextPost.slug}`}
+                class="text-lg font-sans font-semibold text-black no-underline hover:opacity-70 transition-opacity"
+              >
+                {nextPost.data.title}
+              </a>
+            </div>
+          )}
+        </div>
+      </nav>
+    )}
+  </article>
+</BaseLayout>

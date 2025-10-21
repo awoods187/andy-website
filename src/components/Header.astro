@@ -1,0 +1,57 @@
+---
+const currentPath = Astro.url.pathname;
+---
+
+<header class="mb-12">
+  <nav class="flex items-center justify-between">
+    <a href="/" class="text-2xl font-sans font-bold text-black no-underline hover:opacity-70 transition-opacity">
+      Andy Woods
+    </a>
+    <ul class="flex gap-6 list-none m-0 p-0">
+      <li>
+        <a
+          href="/"
+          class:list={[
+            "text-base no-underline hover:opacity-70 transition-opacity",
+            currentPath === "/" ? "text-black font-medium" : "text-gray-600"
+          ]}
+        >
+          Home
+        </a>
+      </li>
+      <li>
+        <a
+          href="/blog"
+          class:list={[
+            "text-base no-underline hover:opacity-70 transition-opacity",
+            currentPath.startsWith("/blog") ? "text-black font-medium" : "text-gray-600"
+          ]}
+        >
+          Blog
+        </a>
+      </li>
+      <li>
+        <a
+          href="/archive"
+          class:list={[
+            "text-base no-underline hover:opacity-70 transition-opacity",
+            currentPath === "/archive" ? "text-black font-medium" : "text-gray-600"
+          ]}
+        >
+          Archive
+        </a>
+      </li>
+      <li>
+        <a
+          href="/about"
+          class:list={[
+            "text-base no-underline hover:opacity-70 transition-opacity",
+            currentPath === "/about" ? "text-black font-medium" : "text-gray-600"
+          ]}
+        >
+          About
+        </a>
+      </li>
+    </ul>
+  </nav>
+</header>
