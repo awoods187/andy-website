@@ -1,4 +1,18 @@
 ---
+/**
+ * Blog Post Card Component
+ *
+ * Displays a blog post preview card with title, date, excerpt, and tags.
+ * Used on the home page, blog listing page, and tag archive pages.
+ *
+ * @param title - The blog post title
+ * @param date - Publication date as Date object
+ * @param excerpt - Brief summary/preview text
+ * @param slug - URL slug for the post
+ * @param tags - Array of tag strings for categorization
+ * @param showExcerpt - Optional flag to show/hide excerpt (default: true)
+ */
+
 interface Props {
   title: string;
   date: Date;
@@ -8,8 +22,10 @@ interface Props {
   showExcerpt?: boolean;
 }
 
+// Destructure props with default value for showExcerpt
 const { title, date, excerpt, slug, tags, showExcerpt = true } = Astro.props;
 
+// Format date in readable format (e.g., "October 21, 2024")
 const formattedDate = new Intl.DateTimeFormat('en-US', {
   year: 'numeric',
   month: 'long',

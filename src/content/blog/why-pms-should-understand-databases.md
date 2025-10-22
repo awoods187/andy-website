@@ -122,4 +122,4 @@ When defining product strategy, you can anticipate technical constraints and arc
 
 You don't need to be a database expert, but understanding fundamentals will make you a more effective PM. Your engineering team will appreciate it, and your product will be better for it.
 
-What database concepts have you found most useful as a PM? [Tweet at me](https://twitter.com/iamandywoods) - I'd love to hear your experiences.
+What database concepts have you found most useful as a PM? [Message me on X](https://twitter.com/iamandywoods) - I'd love to hear your experiences.

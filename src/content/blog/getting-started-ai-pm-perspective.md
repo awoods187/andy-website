@@ -195,4 +195,4 @@ The difference is the solution space is expanding rapidly. Features that were im
 
 ---
 
-Building AI products? I'd love to hear about your experience. What's working? What's not? [Reach out on Twitter](https://twitter.com/iamandywoods) or [LinkedIn](https://www.linkedin.com/in/andrewscottwoods/).
+Building AI products? I'd love to hear about your experience. What's working? What's not? [Reach out on X](https://twitter.com/iamandywoods) or [LinkedIn](https://www.linkedin.com/in/andrewscottwoods/).
