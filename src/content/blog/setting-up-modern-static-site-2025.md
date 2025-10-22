@@ -69,7 +69,7 @@ This conversation took 2 minutes. Researching and evaluating these options manua
 - Performance optimization: 30 minutes
 - **Total**: ~4 hours in one afternoon
 
-The 8x speedup wasn't just about typing faster—Claude Code brought best practices, edge case handling, and production-ready patterns from the start.
+The 8x speedup wasn't just about typing faster—Claude Code brought best practices, edge case handling, and deployable patterns from the start.
 
 ## Architecture Overview
 
@@ -377,7 +377,7 @@ Claude Code knew this instinctively—it suggested integration tests over unit t
 
 ### 4. AI makes "good enough" actually good
 
-With Claude Code, "MVP" doesn't mean "barely functional." The AI helped implement production-ready features from day one:
+With Claude Code, "MVP" doesn't mean "barely functional." The AI helped implement robust features from day one:
 - Error handling with retry logic
 - Accessibility features (semantic HTML, ARIA labels)
 - Performance optimizations (font subsetting, critical CSS)
@@ -427,7 +427,7 @@ Create a Python scraper that:
 The author page uses <article> cards with varying structures.
 ```
 
-**Result**: Claude Code generated a ~500-line production-ready scraper including:
+**Result**: Claude Code generated a ~500-line comprehensive scraper including:
 - BeautifulSoup setup with proper error handling
 - Multiple fallback strategies for each field
 - TypeScript interface generation
