@@ -109,10 +109,10 @@ This catches errors at build time rather than runtime. Common issues like malfor
 
 ### Hybrid Content System
 
-The interesting part is how external content integrates. Instead of manual copying, I built a scraper that extracts my posts from the Cockroach Labs blog:
+The interesting part is how external content integrates. Instead of manual copying, I built a scraper that extracts my posts from the Cockroach Labs blog. Here's the core pattern (simplified for clarity—actual implementation has more robust error handling):
 
 ```python
-# scripts/scrape-crl-posts.py
+# scripts/scrape-crl-posts.py (simplified)
 def scrape_author_posts(author_url):
     """
     Extract blog posts from CRL author page.
@@ -204,33 +204,42 @@ This defensive programming pattern would have taken me hours to discover through
 
 ### Unified Rendering
 
-Both content types render through the same component interface:
+All content types (personal blog, Cockroach Labs posts, publications) render through the same component interface. Here's the core pattern (simplified for clarity):
 
 ```typescript
-// src/pages/blog/[category].astro
+// src/pages/blog/[category].astro (simplified)
 export async function getStaticPaths() {
   const personalPosts = await getCollection('blog');
-  const externalPosts = await import('../../data/crl-posts');
+  const crlPosts = await import('../../data/crl-posts');
+  const publications = await import('../../data/publications');
 
-  // Generate pages for each category
-  return [
-    {
-      params: { category: 'all' },
-      props: { posts: [...personalPosts, ...externalPosts] }
-    },
-    {
-      params: { category: 'personal' },
-      props: { posts: personalPosts }
-    },
-    {
-      params: { category: 'external' },
-      props: { posts: externalPosts }
-    }
+  // Combine and normalize all content sources
+  const allPosts = [...personalPosts, ...crlPosts, ...publications]
+    .sort((a, b) => b.date - a.date);
+
+  // Extract unique tags for category pages
+  const allTags = Array.from(new Set(allPosts.flatMap(p => p.tags)));
+
+  // Generate static pages for sources AND categories
+  const categories = [
+    { slug: 'all', posts: allPosts },
+    { slug: 'personal', posts: allPosts.filter(p => p.source === 'personal') },
+    { slug: 'cockroach-labs', posts: allPosts.filter(p => p.source === 'cockroach-labs') },
+    { slug: 'publications', posts: allPosts.filter(p => p.source === 'publications') },
+    ...allTags.map(tag => ({
+      slug: tag,
+      posts: allPosts.filter(p => p.tags.includes(tag))
+    }))
   ];
+
+  return categories.map(cat => ({
+    params: { category: cat.slug },
+    props: { posts: cat.posts }
+  }));
 }
 ```
 
-This creates three static HTML pages at build time. No client-side filtering needed.
+This generates ~10 static HTML pages at build time (sources + tag-based categories). The two-row filter UI (Sources / Categories) is pure HTML with no client-side JavaScript needed.
 
 ## Testing Strategy
 
