@@ -4,6 +4,11 @@ date: 2024-10-01
 excerpt: "Practical advice for product managers exploring AI features, based on building production AI systems with GPT-4 and Claude at scale."
 tags: ["ai", "product-management", "llms"]
 draft: true
+
+# License Information
+license: "CC BY-NC 4.0"
+copyright: "© 2024 Andy Woods"
+attribution: "If you quote or translate this post, please provide attribution with a link back to the original at andywoods.me"
 ---
 
 Every PM is being asked: "What's our AI strategy?" After spending the last year building production AI systems analyzing 10,000+ monthly signals, here's what I've learned about integrating AI into products.
@@ -197,3 +202,9 @@ The difference is the solution space is expanding rapidly. Features that were im
 ---
 
 Building AI products? I'd love to hear about your experience. What's working? What's not? [Reach out on X](https://twitter.com/iamandywoods) or [LinkedIn](https://www.linkedin.com/in/andrewscottwoods/).
+
+---
+
+## License
+
+*This post is licensed under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/). You may quote or translate with attribution. For commercial republishing, please contact me via [LinkedIn](https://www.linkedin.com/in/andrewscottwoods/).*

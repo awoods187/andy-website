@@ -4,6 +4,11 @@ date: 2024-10-10
 excerpt: "Database architecture decisions have profound product implications. Here's what every PM should know about databases, even if they're not technical."
 tags: ["product-management", "databases", "technical-pm"]
 draft: true
+
+# License Information
+license: "CC BY-NC 4.0"
+copyright: "© 2024 Andy Woods"
+attribution: "If you quote or translate this post, please provide attribution with a link back to the original at andywoods.me"
 ---
 
 Most product managers treat databases as infrastructure—something the engineering team worries about. But database decisions profoundly impact product capabilities, user experience, and business outcomes.
@@ -124,3 +129,9 @@ When defining product strategy, you can anticipate technical constraints and arc
 You don't need to be a database expert, but understanding fundamentals will make you a more effective PM. Your engineering team will appreciate it, and your product will be better for it.
 
 What database concepts have you found most useful as a PM? [Message me on X](https://twitter.com/iamandywoods) - I'd love to hear your experiences.
+
+---
+
+## License
+
+*This post is licensed under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/). You may quote or translate with attribution. For commercial republishing, please contact me via [LinkedIn](https://www.linkedin.com/in/andrewscottwoods/).*

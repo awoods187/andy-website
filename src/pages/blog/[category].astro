@@ -110,86 +110,130 @@ const { filteredPosts, selectedCategory, allTags } = Astro.props;
     </p>
   </header>
 
-  {/* Category Filters */}
+  {/* Two-Row Filter System */}
   <nav class="mb-8 pb-6 border-b border-gray-200">
-    <ul class="flex gap-6 flex-wrap list-none m-0 p-0">
-      {/* All categories */}
-      <li>
-        <a
-          href="/blog/all"
-          class:list={[
-            "text-base no-underline transition-colors pb-2",
-            selectedCategory === 'all'
-              ? "text-black font-medium border-b-2 border-black"
-              : "text-gray-600 hover:text-black"
-          ]}
-        >
-          All categories
-        </a>
-      </li>
-
-      {/* Personal blog */}
-      <li>
-        <a
-          href="/blog/personal"
-          class:list={[
-            "text-base no-underline transition-colors pb-2",
-            selectedCategory === 'personal'
-              ? "text-black font-medium border-b-2 border-black"
-              : "text-gray-600 hover:text-black"
-          ]}
-        >
-          Personal Blog
-        </a>
-      </li>
-
-      {/* Cockroach Labs */}
-      <li>
-        <a
-          href="/blog/cockroach-labs"
-          class:list={[
-            "text-base no-underline transition-colors pb-2",
-            selectedCategory === 'cockroach-labs'
-              ? "text-black font-medium border-b-2 border-black"
-              : "text-gray-600 hover:text-black"
-          ]}
-        >
-          Cockroach Labs
-        </a>
-      </li>
-
-      {/* Publications */}
-      <li>
-        <a
-          href="/blog/publications"
-          class:list={[
-            "text-base no-underline transition-colors pb-2",
-            selectedCategory === 'publications'
-              ? "text-black font-medium border-b-2 border-black"
-              : "text-gray-600 hover:text-black"
-          ]}
-        >
-          Publications
-        </a>
-      </li>
-
-      {/* Popular tag categories */}
-      {['ai', 'databases', 'product-management'].filter(tag => allTags.includes(tag)).map(tag => (
+    {/* Row 1: Sources */}
+    <div class="mb-4">
+      <h2 class="text-sm font-medium text-gray-500 uppercase tracking-wide mb-2">Sources</h2>
+      <ul class="flex gap-6 flex-wrap list-none m-0 p-0">
+        {/* All */}
         <li>
           <a
-            href={`/blog/${tag}`}
+            href="/blog/all"
             class:list={[
-              "text-base no-underline transition-colors pb-2 capitalize",
-              selectedCategory === tag
+              "text-base no-underline transition-colors pb-2",
+              selectedCategory === 'all'
                 ? "text-black font-medium border-b-2 border-black"
                 : "text-gray-600 hover:text-black"
             ]}
           >
-            {tag.replace('-', ' ')}
+            All
           </a>
         </li>
-      ))}
-    </ul>
+
+        {/* Personal Blog */}
+        <li>
+          <a
+            href="/blog/personal"
+            class:list={[
+              "text-base no-underline transition-colors pb-2",
+              selectedCategory === 'personal'
+                ? "text-black font-medium border-b-2 border-black"
+                : "text-gray-600 hover:text-black"
+            ]}
+          >
+            Personal Blog
+          </a>
+        </li>
+
+        {/* Cockroach Labs */}
+        <li>
+          <a
+            href="/blog/cockroach-labs"
+            class:list={[
+              "text-base no-underline transition-colors pb-2",
+              selectedCategory === 'cockroach-labs'
+                ? "text-black font-medium border-b-2 border-black"
+                : "text-gray-600 hover:text-black"
+            ]}
+          >
+            Cockroach Labs
+          </a>
+        </li>
+
+        {/* Publications */}
+        <li>
+          <a
+            href="/blog/publications"
+            class:list={[
+              "text-base no-underline transition-colors pb-2",
+              selectedCategory === 'publications'
+                ? "text-black font-medium border-b-2 border-black"
+                : "text-gray-600 hover:text-black"
+            ]}
+          >
+            Publications
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    {/* Row 2: Categories */}
+    <div>
+      <h2 class="text-sm font-medium text-gray-500 uppercase tracking-wide mb-2">Categories</h2>
+      <ul class="flex gap-6 flex-wrap list-none m-0 p-0">
+        {/* AI */}
+        {allTags.includes('ai') && (
+          <li>
+            <a
+              href="/blog/ai"
+              class:list={[
+                "text-base no-underline transition-colors pb-2",
+                selectedCategory === 'ai'
+                  ? "text-black font-medium border-b-2 border-black"
+                  : "text-gray-600 hover:text-black"
+              ]}
+            >
+              AI
+            </a>
+          </li>
+        )}
+
+        {/* Databases */}
+        {allTags.includes('databases') && (
+          <li>
+            <a
+              href="/blog/databases"
+              class:list={[
+                "text-base no-underline transition-colors pb-2",
+                selectedCategory === 'databases'
+                  ? "text-black font-medium border-b-2 border-black"
+                  : "text-gray-600 hover:text-black"
+              ]}
+            >
+              Databases
+            </a>
+          </li>
+        )}
+
+        {/* Product Management */}
+        {allTags.includes('product-management') && (
+          <li>
+            <a
+              href="/blog/product-management"
+              class:list={[
+                "text-base no-underline transition-colors pb-2",
+                selectedCategory === 'product-management'
+                  ? "text-black font-medium border-b-2 border-black"
+                  : "text-gray-600 hover:text-black"
+              ]}
+            >
+              Product Management
+            </a>
+          </li>
+        )}
+      </ul>
+    </div>
   </nav>
 
   {/* Post Cards */}

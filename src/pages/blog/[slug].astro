@@ -72,6 +72,18 @@ const nextPost = currentIndex > 0 ? sortedPosts[currentIndex - 1] : null;
       )}
     </header>
 
+    {post.data.image && (
+      <div class="mb-8">
+        <img
+          src={post.data.image}
+          alt={post.data.title}
+          class="w-full max-w-xl h-auto rounded-lg mx-auto"
+          style="max-height: 400px; object-fit: cover;"
+          loading="eager"
+        />
+      </div>
+    )}
+
     <div class="prose prose-lg max-w-none mb-12">
       <Content />
     </div>

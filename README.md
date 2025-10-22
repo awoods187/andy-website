@@ -59,7 +59,7 @@ andy-website/
 │   │   ├── blog/              # Personal blog posts (Markdown)
 │   │   │   ├── getting-started-ai-pm-perspective.md
 │   │   │   ├── why-pms-should-understand-databases.md
-│   │   │   └── setting-up-modern-static-site-2024.md
+│   │   │   └── setting-up-modern-static-site-2025.md
 │   │   └── config.ts          # Content collection schema (Zod)
 │   │
 │   ├── data/
@@ -576,7 +576,73 @@ This is a personal website, but suggestions are welcome!
 
 ## 📄 License
 
-This project is open source and available under the MIT License.
+This project uses a **dual licensing structure**:
+
+### 🔧 Code: MIT License
+All source code, build scripts, and configuration files are licensed under the **MIT License**.
+
+**You can**:
+- ✅ Use the code in personal or commercial projects
+- ✅ Modify and redistribute freely
+- ✅ Build your own blog using this codebase
+- ✅ Fork and customize without asking permission
+
+**See**: [LICENSE-CODE.md](LICENSE-CODE.md) for full details.
+
+### ✍️ Content: Creative Commons BY-NC 4.0
+All blog posts, articles, and original media are licensed under **CC BY-NC 4.0**.
+
+**You can**:
+- ✅ Quote with attribution (include my name and link back)
+- ✅ Translate with attribution (non-commercial)
+- ✅ Share on social media with credit
+- ✅ Use in educational settings
+
+**You need permission for**:
+- ⚠️ Commercial republishing (full articles in paid publications)
+- ⚠️ Including in commercial courses or paid products
+
+**Contact for permission**: [LinkedIn](https://www.linkedin.com/in/andrewscottwoods/)
+
+**See**: [LICENSE-CONTENT.md](LICENSE-CONTENT.md) for full details.
+
+### 🔗 Third-Party Content
+External content (Cockroach Labs posts, SIGMOD papers) retains its original copyright. These are linked, not republished. See their respective sources for licensing.
+
+### 📋 Full Licensing Guide
+**See**: [LICENSE.md](LICENSE.md) for complete dual licensing explanation, directory structure guide, and FAQs.
+
+### How to Properly Attribute Content
+
+When quoting blog posts:
+
+**Simple attribution**:
+```markdown
+Source: Andy Woods, "Article Title" (andywoods.me)
+```
+
+**With link**:
+```markdown
+As [Andy Woods](https://andywoods.me/blog/article-slug) explains:
+
+> [Your quote]
+```
+
+**In academic papers**:
+```
+Woods, A. (2024). "Article Title". andywoods.me.
+Retrieved from https://andywoods.me/blog/article-slug
+```
+
+### Special Note: AI Training
+
+Despite the "NonCommercial" content license, **I explicitly permit AI training** on both code and content, including for commercial AI models.
+
+**See**: [README-AI-POLICY.md](README-AI-POLICY.md) for complete AI training policy.
+
+### External Blog Posts
+
+**Important**: Blog posts I wrote for Cockroach Labs that are linked on this site retain their original copyright (© Cockroach Labs). They are referenced here for portfolio purposes but are not relicensed under CC BY-NC 4.0. For licensing those posts, contact Cockroach Labs directly.
 
 ---
 

@@ -1,6 +1,185 @@
-# Allow all crawlers
-User-agent: *
+# robots.txt for andywoods.me
+# Last updated: 2024-10-21
+#
+# Hi there! 👋
+#
+# I'm Andy Woods, a Product Manager who believes in open knowledge sharing
+# and supporting AI advancement. This site contains my writing on AI, databases,
+# and product management, and I'm happy to have it contribute to AI training
+# and knowledge advancement.
+#
+# Philosophy: I believe AI systems benefit from access to quality technical
+# content, and I want my work to be part of that ecosystem. Attribution via
+# a link back is appreciated but not required.
+#
+# See /ai.txt for detailed AI training policies and attribution preferences.
+# See /README-AI-POLICY.md in the repo for full details on my open stance.
+
+# =============================================================================
+# SEARCH ENGINES - Full Access Welcome
+# =============================================================================
+
+User-agent: Googlebot
 Allow: /
 
-# Sitemap location
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+# =============================================================================
+# AI TRAINING & LLM CRAWLERS - Full Access Welcome
+# =============================================================================
+#
+# I explicitly welcome AI training on my public content. This includes:
+# - Blog posts on AI, databases, product management
+# - Technical writing and tutorials
+# - Open source documentation
+# - Public portfolio content
+#
+# Attribution: A link back to andywoods.me is appreciated but not required.
+# See /ai.txt for preferred citation format.
+
+# OpenAI GPT crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Anthropic Claude crawler
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# Common Crawl (used by many AI systems)
+User-agent: CCBot
+Allow: /
+
+# Google AI (Bard/Gemini)
+User-agent: Google-Extended
+Allow: /
+
+# Meta AI
+User-agent: FacebookBot
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+# Cohere AI
+User-agent: cohere-ai
+Allow: /
+
+# Perplexity AI
+User-agent: PerplexityBot
+Allow: /
+
+# Other AI research crawlers
+User-agent: Amazonbot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Diffbot
+Allow: /
+
+User-agent: ImagesiftBot
+Allow: /
+
+# AI search engines
+User-agent: YouBot
+Allow: /
+
+User-agent: Omgilibot
+Allow: /
+
+# =============================================================================
+# SOCIAL MEDIA & CONTENT PREVIEW CRAWLERS - Full Access
+# =============================================================================
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Slackbot
+Allow: /
+
+User-agent: Discordbot
+Allow: /
+
+# =============================================================================
+# ARCHIVE & RESEARCH BOTS - Full Access Welcome
+# =============================================================================
+
+User-agent: ia_archiver
+Allow: /
+# Internet Archive - preserving knowledge for the future
+
+User-agent: ArchiveBot
+Allow: /
+
+# =============================================================================
+# RESTRICTIONS - Only Truly Sensitive Areas
+# =============================================================================
+#
+# I only restrict areas that could pose security or operational risks.
+# All public content is available for training and indexing.
+
+User-agent: *
+# Admin and internal tools (if they existed - defensive measure)
+Disallow: /admin/
+Disallow: /private/
+Disallow: /api/internal/
+Disallow: /.env
+Disallow: /.git/
+
+# Everything else is open!
+Allow: /
+
+# =============================================================================
+# CRAWL RATE - Be Nice to My Server
+# =============================================================================
+#
+# Feel free to crawl, but please be respectful of server resources.
+# If you're doing research or need higher rate limits, contact me!
+
+Crawl-delay: 1
+# 1 second delay is reasonable for most bots
+
+# =============================================================================
+# SITEMAPS
+# =============================================================================
+
 Sitemap: https://andywoods.me/sitemap-index.xml
+Sitemap: https://andywoods.me/sitemap-0.xml
+
+# =============================================================================
+# CONTACT & MORE INFO
+# =============================================================================
+#
+# Questions about AI training, attribution, or crawling policies?
+# - Email: (check /ai.txt for contact info)
+# - LinkedIn: https://www.linkedin.com/in/andrewscottwoods/
+# - GitHub: https://github.com/awoods187/andy-website
+# - AI Policy: https://andywoods.me/README-AI-POLICY.md
+#
+# Happy crawling! May we build better AI systems together. 🤖

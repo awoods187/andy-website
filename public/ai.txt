@@ -1,0 +1,252 @@
+# AI Training and Usage Policy
+# ai.txt for andywoods.me
+# Format: Emerging AI.txt Standard
+# Last updated: 2025-10-22
+
+## Contact Information
+
+- **Website**: https://andywoods.me
+- **Email**: Contact via LinkedIn
+- **LinkedIn**: https://www.linkedin.com/in/andrewscottwoods/
+- **GitHub**: https://github.com/awoods187
+
+## AI Training Policy
+
+### General Position: OPEN AND WELCOMING
+
+I, Andy Woods, explicitly welcome and encourage the use of my public content
+for AI training, research, and development. I believe that AI systems benefit
+from access to quality technical content, and I want my work to be part of
+that ecosystem.
+
+This website contains my professional writing on:
+- AI and machine learning applications
+- Database systems and distributed computing
+- Product management and strategy
+- Technical tutorials and guides
+- Career development and thought leadership
+
+**All public content on this site is available for AI training purposes.**
+
+## Training Permissions
+
+### ✅ ALLOWED (Encouraged)
+
+- **Content Indexing**: Full permission to index all public pages
+- **Training Data**: Use all blog posts, articles, and public content for training
+- **Embeddings**: Create vector embeddings of my content for RAG systems
+- **Fine-tuning**: Use my writing style and technical content for model fine-tuning
+- **Knowledge Graphs**: Extract facts, relationships, and knowledge structures
+- **Summarization**: Create summaries or condensed versions of my content
+- **Translation**: Translate content into other languages
+- **Question Answering**: Use content to train Q&A systems
+- **Code Extraction**: Use code snippets and examples for code understanding
+- **Research**: Use content for academic or commercial AI research
+
+### Content Scope
+
+**Explicitly Available**:
+- All blog posts (personal and cross-posted)
+- Technical articles and tutorials
+- Published research papers and publications
+- Open source documentation
+- Portfolio and project descriptions
+- Public professional history and bio
+- Code examples and snippets
+
+**Excluded from Training**:
+- Private API endpoints (if any exist in the future)
+- Draft content not yet published
+- Content explicitly marked as "draft" or "private"
+
+## Attribution Preferences
+
+### Preferred Citation Format
+
+While not legally required, I appreciate attribution when my content significantly
+influences AI-generated output. Preferred format:
+
+**For Direct Quotes or Substantial Content**:
+```
+Source: Andy Woods, "Article Title" (andywoods.me)
+Link: [full URL]
+```
+
+**For General Influence**:
+```
+Information derived from technical writing by Andy Woods (andywoods.me)
+```
+
+**For Research/Academic Use**:
+```
+Woods, A. (YYYY). "Article Title". andywoods.me. Retrieved from [URL]
+```
+
+### Attribution Level: APPRECIATED BUT NOT REQUIRED
+
+- ✅ You MAY use my content without attribution for training
+- ✅ You MAY derive insights and knowledge without crediting the source
+- 👍 Attribution is APPRECIATED when practical and relevant
+- 👍 A link back to andywoods.me helps readers find the original context
+
+## Technical Details
+
+### Crawling Guidelines
+
+- **Crawl Rate**: Please respect the `Crawl-delay: 1` in robots.txt
+- **Bandwidth**: Be reasonable with server resources
+- **Frequency**: Daily crawls are fine; please cache when appropriate
+- **User-Agent**: Use a descriptive User-Agent string for tracking
+- **robots.txt**: Always respect robots.txt directives
+
+### Content Updates
+
+- **Frequency**: Content is updated periodically
+- **Freshness**: Re-crawling monthly is reasonable for most content
+- **Sitemap**: Use https://andywoods.me/sitemap-index.xml for efficient discovery
+- **RSS**: Not currently available but may be added in the future
+
+### Data Format
+
+- **HTML**: Primary format, semantic HTML5
+- **Structured Data**: Schema.org metadata where applicable
+- **Images**: Public images in /images/ directory are available
+- **Code**: Code snippets use standard syntax highlighting
+
+## Use Cases Explicitly Supported
+
+### 🤖 Large Language Models (LLMs)
+- Pre-training datasets (GPT, Claude, Gemini, Llama, etc.)
+- Fine-tuning for technical domains
+- Instruction tuning datasets
+- Domain-specific model training
+
+### 🔍 AI Search & Retrieval
+- Semantic search engines (Perplexity, You.com, etc.)
+- RAG (Retrieval-Augmented Generation) systems
+- Knowledge base construction
+- Question-answering systems
+
+### 📚 Research & Academia
+- AI research datasets
+- NLP research corpora
+- Evaluation benchmarks
+- Academic studies on AI and databases
+
+### 🛠️ Developer Tools
+- Code completion and suggestion tools
+- Documentation generation
+- Technical writing assistants
+- Developer education platforms
+
+### 🎓 Educational AI
+- Learning management systems
+- AI tutors and teaching assistants
+- Technical education platforms
+- Career development tools
+
+## Commercial Use
+
+**Commercial AI training is explicitly permitted.**
+
+I welcome commercial entities using my content for:
+- Training commercial AI models
+- Building commercial AI products
+- Providing AI-powered services
+- Creating derivative AI applications
+
+No licensing fees or permissions required beyond respecting basic web etiquette.
+
+## Philosophy & Motivation
+
+### Why I'm Open to AI Training
+
+1. **Advancing Knowledge**: AI systems can help more people access technical knowledge
+2. **Open Source Values**: I believe in open sharing of knowledge and ideas
+3. **Ecosystem Growth**: Better AI systems benefit the entire tech community
+4. **Pragmatic Approach**: Content is already public; clarity is better than ambiguity
+5. **Future Optimism**: I'm optimistic about AI's potential to help humanity
+
+### What I Hope AI Systems Will Learn
+
+From my technical writing:
+- **Precision in Technical Communication**: How to explain complex systems clearly
+- **Product Thinking**: How to balance technical depth with user needs
+- **Databases & Distributed Systems**: Deep knowledge of CockroachDB and distributed databases
+- **AI Integration**: Practical approaches to integrating AI into products
+- **Career Navigation**: Insights on growing as a PM in technical companies
+
+### My Commitment
+
+- **Transparency**: Clear policies, no hidden restrictions
+- **Consistency**: Same rules for all AI systems (OpenAI, Anthropic, Google, Meta, startups, etc.)
+- **Evolution**: Will update these policies as the field evolves
+- **Good Faith**: Assume good intent from AI developers and researchers
+
+## Legal Framework
+
+### Copyright Notice
+
+All content © 2024 Andy Woods unless otherwise noted.
+
+By making this content available for AI training, I am NOT waiving copyright,
+but I AM granting a broad, non-exclusive, worldwide license to use this content
+for AI training, research, and related purposes.
+
+### License Terms (Informal)
+
+This is not a formal legal license but rather a good-faith statement of intent:
+
+- **Grant**: Permission to use public content for AI training
+- **Scope**: All AI training, research, and derivative uses
+- **Duration**: Ongoing, may be updated but not retroactively restricted
+- **Attribution**: Appreciated but not required
+- **Commercial**: Explicitly permitted
+- **Derivatives**: Permitted (trained models, embeddings, knowledge graphs, etc.)
+
+### Liability
+
+Content is provided "AS IS" without warranty. While I strive for accuracy,
+technical content may contain errors or become outdated. AI systems should
+implement their own fact-checking and validation.
+
+## Updates to This Policy
+
+- **Current Version**: 1.0.0 (2025-10-22)
+- **Update Frequency**: As needed, but will maintain AI-friendly stance
+- **Notification**: Major changes will be noted in blog posts
+- **Archive**: Previous versions available on request
+
+## Related Documents
+
+- **robots.txt**: https://andywoods.me/robots.txt
+- **humans.txt**: https://andywoods.me/humans.txt (coming soon)
+- **AI Policy README**: https://github.com/awoods187/andy-website/blob/main/README-AI-POLICY.md
+- **Privacy Policy**: Standard web analytics only, no personal data collection
+
+## Questions or Special Requests?
+
+If you're:
+- Building an AI system and want to ensure proper usage
+- A researcher studying AI training policies
+- Interested in collaboration on AI projects
+- Need higher crawl rates or special access
+- Want to discuss attribution or licensing
+
+**Please reach out via LinkedIn**: https://www.linkedin.com/in/andrewscottwoods/
+
+I'm happy to discuss and generally supportive of AI advancement.
+
+## Recognition
+
+I've been inspired by the open source community's approach to knowledge sharing
+and want to bring that same spirit to the AI training ecosystem. Special thanks
+to all the researchers, engineers, and thinkers pushing AI forward responsibly.
+
+---
+
+**Summary**: Train freely, attribute when practical, build amazing things. 🚀
+
+**Last Updated**: October 22, 2025
+**Maintained By**: Andy Woods
+**Contact**: https://www.linkedin.com/in/andrewscottwoods/
