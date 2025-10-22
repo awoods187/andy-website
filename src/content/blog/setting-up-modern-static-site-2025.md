@@ -284,25 +284,33 @@ The tests verify the build output rather than implementation details. They catch
 
 ## Performance Results
 
-The minimal JavaScript approach delivers measurable benefits. Real Lighthouse scores from production deployment:
+The minimal JavaScript approach delivers measurable benefits. Real Lighthouse scores from production deployment after optimization:
 
 ```bash
 # Lighthouse Performance Metrics (Mobile, Slow 4G)
-Performance Score: 95/100
-First Contentful Paint: 1.8s
-Largest Contentful Paint: 4.9s (optimized to ~2s after image compression)
-Total Blocking Time: 0ms (zero JavaScript!)
-Cumulative Layout Shift: 0.027 (excellent - < 0.1 threshold)
-Speed Index: 1.8s
+Performance Score: 89/100
+Accessibility: 95/100
+Best Practices: 100/100 ⭐
+SEO: 100/100 ⭐
+
+Core Web Vitals:
+├── First Contentful Paint: 1.1s (excellent - text visible quickly)
+├── Largest Contentful Paint: 3.7s (good - under 4s threshold)
+├── Total Blocking Time: 0ms (perfect - zero JavaScript!)
+├── Cumulative Layout Shift: 0.061 (excellent - < 0.1 threshold)
+└── Speed Index: 1.4s (excellent - page renders fast)
 
 # Production Bundle Sizes
 HTML: 9-20 KB per page (uncompressed)
 CSS: 15 KB (4 KB gzipped, shared across all pages)
 JS: 0 KB for blog pages
-Images: Optimized to < 250 KB per hero image
+Images: 88-219 KB (responsive srcset for mobile/desktop)
 ```
 
-**Perfect scores**: Accessibility (100/100) and Best Practices (100/100).
+**Key optimizations that moved the needle**:
+- Async font loading eliminated 1.7s of render blocking
+- Responsive images (400w/800w/1200w) save 60% bandwidth on mobile
+- Zero JavaScript = 0ms Total Blocking Time
 
 For comparison, a typical Next.js blog ships 70-100 KB of JavaScript just for the framework.
 
