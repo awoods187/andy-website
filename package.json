@@ -10,7 +10,9 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:ui": "vitest --ui",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "lighthouse": "lighthouse https://andywoods.me/blog/setting-up-modern-static-site-2025 --output=json --output=html --output-path=./lighthouse-report --chrome-flags=\"--headless\" --only-categories=performance,accessibility,best-practices,seo",
+    "lighthouse:view": "open lighthouse-report.report.html"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.12",
@@ -22,6 +24,7 @@
   "devDependencies": {
     "@vitest/ui": "^3.2.4",
     "happy-dom": "^20.0.8",
+    "lighthouse": "^12.8.2",
     "vitest": "^3.2.4"
   }
 }
