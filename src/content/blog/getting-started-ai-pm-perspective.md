@@ -3,6 +3,7 @@ title: "Getting Started with AI: A PM's Perspective"
 date: 2024-10-01
 excerpt: "Practical advice for product managers exploring AI features, based on building production AI systems with GPT-4 and Claude at scale."
 tags: ["ai", "product-management", "llms"]
+draft: true
 ---
 
 Every PM is being asked: "What's our AI strategy?" After spending the last year building production AI systems analyzing 10,000+ monthly signals, here's what I've learned about integrating AI into products.

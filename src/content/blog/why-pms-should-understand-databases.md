@@ -3,6 +3,7 @@ title: "Why Product Managers Should Understand Database Fundamentals"
 date: 2024-10-10
 excerpt: "Database architecture decisions have profound product implications. Here's what every PM should know about databases, even if they're not technical."
 tags: ["product-management", "databases", "technical-pm"]
+draft: true
 ---
 
 Most product managers treat databases as infrastructure—something the engineering team worries about. But database decisions profoundly impact product capabilities, user experience, and business outcomes.

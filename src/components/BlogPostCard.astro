@@ -26,10 +26,12 @@ interface Props {
 const { title, date, excerpt, slug, tags, showExcerpt = true } = Astro.props;
 
 // Format date in readable format (e.g., "October 21, 2024")
+// Use UTC timezone to ensure dates match the frontmatter (avoids timezone conversion issues)
 const formattedDate = new Intl.DateTimeFormat('en-US', {
   year: 'numeric',
   month: 'long',
-  day: 'numeric'
+  day: 'numeric',
+  timeZone: 'UTC'
 }).format(date);
 ---
 

@@ -12,41 +12,57 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   title="About - Andy Woods"
   description="Product Manager at Cockroach Labs specializing in AI, databases, and enterprise product development."
 >
-  <article class="prose prose-lg max-w-none">
+  {/* Header */}
+  <section class="mb-8">
     <h1 class="font-sans text-4xl font-bold mb-8 text-black">About Me</h1>
 
-    <p class="text-lg leading-relaxed">
+    {/* Profile photo - centered on mobile, floated right on desktop */}
+    <img
+      src="/profile.jpg"
+      alt="Andy Woods"
+      class="w-48 h-48 rounded-lg object-cover shadow-lg mb-6 md:float-right md:ml-8 md:mb-4"
+    />
+
+    <p class="text-lg leading-relaxed mb-4">
       I scaled CockroachDB from pre-revenue to $100M+ ARR and category leadership, now pioneering AI integration into our developer platform. At Cockroach Labs, I lead cross-functional teams of 50+ while driving our transformation from pure infrastructure to AI-powered product intelligence.
     </p>
 
-    <p class="text-lg leading-relaxed">
+    <p class="text-lg leading-relaxed mb-4">
       Built production AI systems using GPT-4 and Claude that analyze 10,000+ monthly signals for product intelligence. Led company's first AI product initiative, evaluating partnerships with OpenAI, Anthropic, and Google, while delivering roadmap for LLM-powered database features. My mission: making complex technology accessible to developers, whether it's distributed systems or generative AI.
     </p>
+  </section>
 
-    <h2 class="font-sans text-2xl font-bold mt-12 mb-4 text-black">Current Role</h2>
+  <section class="mb-12">
+    <h2 class="font-sans text-3xl font-bold mb-6 text-black">Current Role</h2>
 
-    <p class="text-lg leading-relaxed">
+    <p class="text-lg leading-relaxed text-gray-700">
       As Director of Product Management at Cockroach Labs, I own CockroachDB's integration with the broader application ecosystem, including observability, disaster recovery, change data capture (CDC), streaming, and migration workflows across hybrid and cloud environments. I also lead our pricing and packaging strategy, aligning product value with business outcomes through a data-driven, iterative approach to product-market-price fit.
     </p>
+  </section>
 
-    <h2 class="font-sans text-2xl font-bold mt-12 mb-4 text-black">Background</h2>
+  <section class="mb-12">
+    <h2 class="font-sans text-3xl font-bold mb-6 text-black">Background</h2>
 
-    <p class="text-lg leading-relaxed">
+    <p class="text-lg leading-relaxed text-gray-700">
       My background combines 10+ years of hands-on product development with a Kellogg MBA (analytics, finance, marketing) and consulting-grade rigor. I specialize in turning ambiguity into scalable, margin-enhancing products that users love and businesses trust.
     </p>
+  </section>
 
-    <h2 class="font-sans text-2xl font-bold mt-12 mb-4 text-black">Subject Matter Expertise</h2>
+  <section class="mb-12">
+    <h2 class="font-sans text-3xl font-bold mb-6 text-black">Subject Matter Expertise</h2>
 
-    <ul class="list-disc pl-6 space-y-2 text-lg">
+    <ul class="list-disc pl-6 space-y-2 text-lg text-gray-700">
       <li>Enterprise B2B user journeys across SaaS, open-core, and enterprise licensing models</li>
       <li>Go-to-Market (GTM): product-led growth (PLG/PLS), sales-assisted motions, and field sales enablement</li>
       <li>Distributed infrastructure and databases, including CSP integrations (AWS, GCP, Azure)</li>
       <li>AI/ML infrastructure: LLMs, RAG architectures, vector databases, and production deployment</li>
     </ul>
+  </section>
 
-    <h2 class="font-sans text-2xl font-bold mt-12 mb-4 text-black">Technical & Strategic Skills</h2>
+  <section class="mb-12">
+    <h2 class="font-sans text-3xl font-bold mb-6 text-black">Technical & Strategic Skills</h2>
 
-    <ul class="list-disc pl-6 space-y-2 text-lg">
+    <ul class="list-disc pl-6 space-y-2 text-lg text-gray-700">
       <li>People leadership: hiring, coaching, and performance management across functions</li>
       <li>Product strategy: investment planning, ROI analysis, budgeting, and analytics</li>
       <li>End-to-end product development: from discovery and design to docs and delivery</li>
@@ -54,11 +70,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <li>Pricing & monetization: strategy informed by data science, customer research, and business modeling</li>
       <li>Technical: Python, SQL, LLMs (GPT-4, Claude, Vertex AI), RAG, Vector Databases, Prompt Engineering</li>
     </ul>
+  </section>
 
-    <h2 class="font-sans text-2xl font-bold mt-12 mb-4 text-black">Let's Connect</h2>
+  <section class="mb-12">
+    <h2 class="font-sans text-3xl font-bold mb-6 text-black">Let's Connect</h2>
 
-    <p class="text-lg leading-relaxed">
+    <p class="text-lg leading-relaxed text-gray-700">
       Always up to explore the intersection of AI and infrastructure, or debate the perfect burger. Reach out on <a href="https://twitter.com/iamandywoods" target="_blank" rel="noopener noreferrer" class="text-black underline hover:opacity-70">X</a> or <a href="https://www.linkedin.com/in/andrewscottwoods/" target="_blank" rel="noopener noreferrer" class="text-black underline hover:opacity-70">LinkedIn</a>.
     </p>
-  </article>
+  </section>
 </BaseLayout>

@@ -1,0 +1,82 @@
+=============================================================================
+VISUAL STYLE GUIDE - QUICK COPY TEMPLATE
+=============================================================================
+
+📖 Full Documentation: See VISUAL_STYLE_GUIDE.md
+
+🎨 CORE PROMPT (Copy and fill in [SUBJECT DESCRIPTION]):
+-----------------------------------------------------------------------------
+
+[SUBJECT DESCRIPTION] rendered in vintage 1930s-1940s WPA National Parks poster style, retro-futuristic aesthetic, screen print illustration with 4-5 color limited palette (burnt orange #CC5500, deep teal #2C5F5F, warm ochre #D4A76A, cream #FFF8E7, charcoal #2B2B2B), bold geometric simplified forms, dramatic diagonal perspective, strong light/shadow contrast, subtle halftone texture, vintage paper grain, optimistic mid-century futurism, style of Joseph Binder and Charley Harper, layered depth with clear foreground/midground/background, no text, leave bottom third compositionally clean for typography --ar 3:4
+
+
+📋 SUBJECT TEMPLATES (Copy one of these for [SUBJECT DESCRIPTION]):
+-----------------------------------------------------------------------------
+
+🤖 AI & MACHINE LEARNING:
+
+Neural network pathways forming majestic mountain ranges with data streams cascading as geometric waterfalls
+
+Artificial intelligence as an art deco sunrise over crystalline algorithm peaks
+
+
+💾 DATABASES & DATA:
+
+SQL database architecture as layered canyon walls with data flowing through geometric valleys
+
+Data warehouse as monumental cliff face with structured query patterns etched like ancient formations
+
+
+☁️ CLOUD & ENTERPRISE:
+
+Cloud infrastructure as stylized cumulus formations above server farm mountain ranges
+
+Enterprise network topology as interconnected plateau systems with data packet rivers
+
+
+🔮 INNOVATION & FUTURE TECH:
+
+Quantum computing qubits as constellation patterns over technological mountain peaks
+
+Blockchain ledgers as interlocking geological strata forming futuristic mesas
+
+
+🎯 QUICK STEPS:
+-----------------------------------------------------------------------------
+1. Copy CORE PROMPT above
+2. Choose a SUBJECT TEMPLATE (or create custom using metaphor framework)
+3. Replace [SUBJECT DESCRIPTION] with chosen template
+4. Paste into Midjourney, DALL-E, or other AI image generator
+5. Generate image
+6. Save to public/images/blog/[post-slug]-hero.jpg
+7. Optimize with TinyPNG (< 500KB)
+
+
+🎨 COLOR PALETTE (for reference):
+-----------------------------------------------------------------------------
+🟠 Burnt Orange:  #CC5500
+🔵 Deep Teal:     #2C5F5F
+🟡 Warm Ochre:    #D4A76A
+⬜ Cream:         #FFF8E7
+⬛ Charcoal:      #2B2B2B
+
+
+📐 ASPECT RATIOS:
+-----------------------------------------------------------------------------
+--ar 3:4    → Blog hero images (portrait)
+--ar 16:9   → OpenGraph/social sharing (landscape)
+--ar 1:1    → Social media posts (square)
+
+
+✅ CHECKLIST:
+-----------------------------------------------------------------------------
+□ Subject uses natural/geological metaphor
+□ All 5 color hex codes included in prompt
+□ "no text" specified
+□ "clean bottom third" specified
+□ Aspect ratio flag added (--ar 3:4 or --ar 16:9)
+□ Generated image optimized to < 500KB
+□ Saved to correct directory with naming convention
+
+
+=============================================================================

@@ -1,301 +1,598 @@
 # Andy Woods Personal Website
 
-A modern, minimal personal website built with Astro, featuring a blog, bio, and clean typography. Inspired by tomtunguz.com's aesthetic.
+A modern, minimal personal website built with Astro, featuring a blog with integrated external content, professional bio, and clean typography. Inspired by tomtunguz.com's design aesthetic.
 
-## Tech Stack
+🌐 **Live Site**: [andywoods.me](https://andywoods.me)
+👤 **Author**: Andy Woods - Director of Product Management at Cockroach Labs
+🔗 **Connect**: [LinkedIn](https://www.linkedin.com/in/andrewscottwoods/) | [GitHub](https://github.com/awoods187) | [X/Twitter](https://twitter.com/iamandywoods)
 
-- **Framework**: [Astro](https://astro.build) - Fast, content-focused static site generator
-- **Styling**: [Tailwind CSS 4](https://tailwindcss.com) - Utility-first CSS framework
-- **Typography**: Space Grotesk (headings) + Merriweather (body)
-- **Deployment**: Vercel or Netlify (free tier)
-- **Content**: Markdown with frontmatter
+---
 
-## Project Structure
+## 🎯 Features
+
+- ✅ **Hybrid Blog System** - Combines personal Markdown posts with external Cockroach Labs blog posts
+- ✅ **Category Filtering** - Static page generation for fast, SEO-friendly filtering
+- ✅ **Full SEO Optimization** - OpenGraph, Twitter Cards, sitemap, RSS feed
+- ✅ **Type-Safe Content** - Zod schema validation for all blog posts
+- ✅ **Zero JavaScript** - Pure static HTML for maximum performance
+- ✅ **Responsive Design** - Mobile-first, accessible UI
+- ✅ **Professional Testing** - Vitest test suite with 15+ tests
+- ✅ **Analytics Ready** - Configured for Plausible or Google Analytics
+
+---
+
+## 🛠 Tech Stack
+
+| Category | Technology |
+|----------|-----------|
+| **Framework** | [Astro 5](https://astro.build) - Content-focused static site generator |
+| **Styling** | [Tailwind CSS 4](https://tailwindcss.com) - Utility-first CSS |
+| **Typography** | Space Grotesk (headings) + Merriweather (body) |
+| **Content** | Markdown with frontmatter, Zod validation |
+| **Testing** | Vitest + Happy DOM |
+| **Scripting** | Python 3.10+ (for blog scraping) |
+| **Deployment** | Vercel or Netlify |
+| **Analytics** | Plausible (privacy-first) or Google Analytics |
+
+---
+
+## 📁 Project Structure
 
 ```
-/
-├── public/              # Static assets (favicon, images, robots.txt)
+andy-website/
+├── public/                     # Static assets
+│   ├── favicon.svg
+│   ├── profile.jpg            # Profile photo
+│   ├── images/                # Blog post images
+│   │   └── default-post.svg
+│   └── og-image.png           # OpenGraph image
+│
 ├── src/
-│   ├── components/      # Reusable Astro components
-│   │   ├── Header.astro
-│   │   ├── Footer.astro
-│   │   ├── BlogPostCard.astro
-│   │   └── Analytics.astro
+│   ├── components/            # Reusable Astro components
+│   │   ├── Header.astro       # Site navigation
+│   │   ├── Footer.astro       # Social links & copyright
+│   │   ├── BlogPostCard.astro # Card for personal posts only
+│   │   ├── PostCard.astro     # Card for all posts (personal + CRL)
+│   │   └── Analytics.astro    # Analytics integration
+│   │
 │   ├── content/
-│   │   ├── blog/        # Blog posts in Markdown
-│   │   └── config.ts    # Content collection schema
+│   │   ├── blog/              # Personal blog posts (Markdown)
+│   │   │   ├── getting-started-ai-pm-perspective.md
+│   │   │   ├── why-pms-should-understand-databases.md
+│   │   │   └── setting-up-modern-static-site-2024.md
+│   │   └── config.ts          # Content collection schema (Zod)
+│   │
+│   ├── data/
+│   │   └── crl-posts.ts       # Cockroach Labs blog posts data
+│   │
 │   ├── layouts/
-│   │   └── BaseLayout.astro  # Main page layout
+│   │   └── BaseLayout.astro   # Base page template with meta tags
+│   │
 │   ├── pages/
-│   │   ├── index.astro       # Home page
-│   │   ├── about.astro       # About page
-│   │   ├── archive.astro     # Archive by date
-│   │   ├── blog/
-│   │   │   ├── index.astro   # Blog listing
-│   │   │   ├── [slug].astro  # Individual posts
-│   │   │   └── tag/[tag].astro  # Tag archives
-│   │   └── rss.xml.ts        # RSS feed
+│   │   ├── index.astro        # Home page
+│   │   ├── about.astro        # Full bio with profile photo
+│   │   ├── archive.astro      # Redirects to /blog
+│   │   ├── rss.xml.ts         # RSS feed generator
+│   │   └── blog/
+│   │       ├── index.astro    # Redirects to /blog/all
+│   │       ├── [category].astro   # Category pages (all, personal, cockroach-labs, tags)
+│   │       ├── [slug].astro   # Individual blog posts
+│   │       └── tag/[tag].astro    # Tag archive pages
+│   │
 │   └── styles/
-│       └── global.css        # Global styles & fonts
-├── astro.config.mjs     # Astro configuration
-├── tailwind.config.mjs  # Tailwind configuration
-└── package.json
+│       └── global.css         # Global styles, fonts, Tailwind imports
+│
+├── scripts/
+│   └── scrape-crl-posts.py    # Python script to update CRL posts
+│
+├── tests/
+│   ├── build.test.ts          # Build validation tests
+│   └── content.test.ts        # Content schema tests
+│
+├── astro.config.mjs           # Astro configuration
+├── tailwind.config.mjs        # Tailwind configuration
+├── vitest.config.ts           # Test configuration
+├── tsconfig.json              # TypeScript configuration
+├── package.json               # Node dependencies & scripts
+├── requirements.txt           # Python dependencies
+├── .env.example               # Environment variable template
+├── .gitignore                 # Git ignore rules
+├── VISUAL_STYLE_GUIDE.md      # Image generation & brand style guide
+├── CODE_REVIEW.md             # Code review & refactoring summary
+└── README.md                  # This file
 ```
 
-## Local Development
+---
+
+## 🚀 Quick Start
 
 ### Prerequisites
 
-- Node.js 18+ and npm
+- **Node.js** 18+ and npm
+- **Python** 3.10+ (optional, only for blog scraping)
 
-### Setup
+### Installation
 
-1. Install dependencies:
-```bash
-npm install
-```
+1. **Clone the repository** (or download the code)
+   ```bash
+   git clone https://github.com/awoods187/andy-website.git
+   cd andy-website
+   ```
 
-2. Start the development server:
-```bash
-npm run dev
-```
+2. **Install Node dependencies**
+   ```bash
+   npm install
+   ```
 
-3. Open [http://localhost:4321](http://localhost:4321) in your browser
+3. **Install Python dependencies** (optional)
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-### Development Commands
+4. **Start the development server**
+   ```bash
+   npm run dev
+   ```
 
-| Command | Action |
-|---------|--------|
+5. **Open your browser**
+   - Navigate to [http://localhost:4321](http://localhost:4321)
+   - Site will hot-reload on file changes
+
+6. **Next Steps for Production**
+   - See [`TODO.md`](./TODO.md) for deployment checklist
+   - Add profile photo to `public/profile.jpg`
+   - Configure analytics (Plausible or Google Analytics)
+   - Deploy to Vercel/Netlify
+
+---
+
+## 📝 Development Commands
+
+| Command | Description |
+|---------|-------------|
 | `npm run dev` | Start dev server at `localhost:4321` |
 | `npm run build` | Build production site to `./dist/` |
 | `npm run preview` | Preview production build locally |
-| `npm run astro ...` | Run Astro CLI commands |
+| `npm test` | Run test suite with Vitest |
+| `npm run test:watch` | Run tests in watch mode |
+| `npm run test:coverage` | Generate test coverage report |
+| `npm run astro ...` | Run any Astro CLI command |
 
-## Writing Blog Posts
+---
 
-### Creating a New Post
+## ✍️ Writing Blog Posts
 
-1. Create a new `.md` file in `src/content/blog/`:
+### Creating a Personal Blog Post
+
+1. **Create a new Markdown file** in `src/content/blog/`:
+   ```bash
+   touch src/content/blog/my-new-post.md
+   ```
+
+2. **Add frontmatter** at the top:
+   ```markdown
+   ---
+   title: "Your Post Title"
+   date: 2024-10-21
+   excerpt: "A compelling 1-2 sentence summary for SEO and listings"
+   tags: ["ai", "databases", "product-management"]
+   image: "/images/my-post.jpg"  # Optional
+   draft: false  # Set to true to hide from production
+   ---
+
+   Your content here in **Markdown**...
+   ```
+
+3. **Write your post** using standard Markdown
+   - Headings, lists, code blocks, images, links, etc.
+   - Code syntax highlighting is automatic
+
+4. **Preview** - The dev server auto-reloads to show your changes
+
+5. **Publish** - Set `draft: false` and deploy
+
+### Frontmatter Schema
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `title` | string | ✅ | Post title (used in `<h1>` and meta tags) |
+| `date` | Date | ✅ | Publication date (YYYY-MM-DD format) |
+| `excerpt` | string | ✅ | Brief summary for listings and SEO |
+| `tags` | string[] | ✅ | Array of tags (e.g., `["ai", "databases"]`) |
+| `image` | string | ❌ | Featured image URL (relative to `/public/`) |
+| `draft` | boolean | ❌ | If `true`, post won't appear in production |
+
+### Adding Cockroach Labs Blog Posts
+
+External blog posts from Cockroach Labs are stored in `src/data/crl-posts.ts`. To add new posts:
+
+#### Option 1: Manual Entry (Recommended for 1-2 posts)
+
+Edit `src/data/crl-posts.ts` and add to the array:
+
+```typescript
+{
+  title: 'Your Blog Post Title',
+  url: 'https://www.cockroachlabs.com/blog/your-post-slug',
+  date: '2024-10-21',
+  image: 'https://images.ctfassets.net/.../image.png',
+  excerpt: 'Brief summary of the post content...',
+  source: 'cockroach-labs',
+  tags: ['databases', 'distributed-systems'],
+}
+```
+
+#### Option 2: Automated Scraping (For bulk updates)
+
+Run the Python scraper to automatically extract posts from your author page:
+
 ```bash
-touch src/content/blog/my-new-post.md
+python3 scripts/scrape-crl-posts.py
 ```
 
-2. Add frontmatter at the top:
-```markdown
----
-title: "Your Post Title"
-date: 2024-10-19
-excerpt: "A brief summary of your post (1-2 sentences)"
-tags: ["tag1", "tag2", "tag3"]
-draft: false  # Set to true to hide from production
+This will:
+1. Fetch https://www.cockroachlabs.com/author/andy-woods/
+2. Extract all blog post metadata (title, URL, date, image, excerpt)
+3. Generate updated `src/data/crl-posts.ts` file
+
+**Note**: The scraper uses BeautifulSoup and may need selector updates if the CRL website changes.
+
 ---
 
-Your content here in Markdown...
+## 🎨 Customization
+
+### Changing Site Content
+
+| What to Change | File Location |
+|----------------|---------------|
+| **Home page bio** | `src/pages/index.astro` |
+| **Full bio/about** | `src/pages/about.astro` |
+| **Profile photo** | `public/profile.jpg` |
+| **Header navigation** | `src/components/Header.astro` |
+| **Footer links** | `src/components/Footer.astro` |
+| **Fonts** | `src/styles/global.css` (Google Fonts import) |
+| **Colors/theme** | `src/styles/global.css` (Tailwind config) |
+| **Blog images** | See `VISUAL_STYLE_GUIDE.md` for brand guidelines |
+
+### Adding Environment Variables
+
+1. **Copy the example file**:
+   ```bash
+   cp .env.example .env
+   ```
+
+2. **Edit `.env`** with your values:
+   ```bash
+   PUBLIC_GOOGLE_ANALYTICS_ID=G-XXXXXXXXXX
+   PUBLIC_SITE_URL=https://andywoods.me
+   ```
+
+3. **⚠️ Security**: Never commit `.env` to version control! It's already in `.gitignore`.
+
+### Enabling Analytics
+
+#### Option 1: Plausible (Privacy-First, GDPR Compliant) ⭐ Recommended
+
+1. Sign up at [plausible.io](https://plausible.io)
+2. Add your domain: `andywoods.me`
+3. Uncomment this line in `src/components/Analytics.astro`:
+   ```astro
+   <script defer data-domain="andywoods.me" src="https://plausible.io/js/script.js"></script>
+   ```
+4. Redeploy
+
+#### Option 2: Google Analytics 4
+
+1. Create a GA4 property at [analytics.google.com](https://analytics.google.com)
+2. Get your measurement ID (format: `G-XXXXXXXXXX`)
+3. Edit `src/components/Analytics.astro`:
+   - Replace `G-XXXXXXXXXX` with your actual ID
+   - Uncomment the Google Analytics script block
+4. Redeploy
+
+---
+
+## 🧪 Testing
+
+The project includes a comprehensive test suite using Vitest.
+
+### Running Tests
+
+```bash
+# Run all tests once
+npm test
+
+# Watch mode (re-runs on file changes)
+npm run test:watch
+
+# Generate coverage report
+npm run test:coverage
+
+# Interactive UI
+npm run test:ui
 ```
 
-3. Write your post using Markdown syntax
+### Test Coverage
 
-4. Save and the dev server will hot-reload automatically
+Current test suite includes:
+- ✅ Build output validation (15 tests)
+- ✅ Blog post schema validation
+- ✅ Page generation verification
+- ✅ Content collection integrity
+- ✅ RSS feed generation
 
-### Frontmatter Fields
+**All tests passing**: 15/15 ✅
 
-- `title` (required): Post title
-- `date` (required): Publication date (YYYY-MM-DD format)
-- `excerpt` (required): Brief summary for listings and SEO
-- `tags` (required): Array of tags for categorization
-- `draft` (optional): Set to `true` to exclude from production
+---
 
-### Markdown Features
+## 🌐 Deployment
 
-- Standard Markdown syntax
-- Code blocks with syntax highlighting
-- Images (place in `/public/images/`)
-- Links, lists, blockquotes, etc.
+### Option 1: Deploy to Vercel (⭐ Recommended)
 
-## Deployment
+1. **Push to GitHub**
+   ```bash
+   git push origin main
+   ```
 
-### Option 1: Deploy to Vercel (Recommended)
+2. **Connect to Vercel**
+   - Go to [vercel.com](https://vercel.com) and sign in with GitHub
+   - Click **"New Project"**
+   - Import your `andy-website` repository
 
-1. Push your code to GitHub
+3. **Deploy**
+   - Vercel auto-detects Astro - no configuration needed
+   - Click **"Deploy"**
+   - Live at `<project-name>.vercel.app`
 
-2. Go to [vercel.com](https://vercel.com) and sign in with GitHub
-
-3. Click "New Project" and import your repository
-
-4. Vercel auto-detects Astro - no configuration needed
-
-5. Click "Deploy"
-
-6. Your site is live at `<project-name>.vercel.app`
+4. **Custom Domain** (see below)
 
 ### Option 2: Deploy to Netlify
 
-1. Push your code to GitHub
+1. **Push to GitHub**
+   ```bash
+   git push origin main
+   ```
 
-2. Go to [netlify.com](https://netlify.com) and sign in with GitHub
+2. **Connect to Netlify**
+   - Go to [netlify.com](https://netlify.com) and sign in with GitHub
+   - Click **"Add new site"** → **"Import an existing project"**
+   - Select your repository
 
-3. Click "Add new site" → "Import an existing project"
+3. **Build Settings** (auto-detected):
+   - **Build command**: `npm run build`
+   - **Publish directory**: `dist`
 
-4. Select your repository
+4. **Deploy**
+   - Click **"Deploy site"**
+   - Live at `<project-name>.netlify.app`
 
-5. Build settings (auto-detected):
-   - Build command: `npm run build`
-   - Publish directory: `dist`
-
-6. Click "Deploy site"
-
-7. Your site is live at `<project-name>.netlify.app`
-
-## Custom Domain Setup (andywoods.me)
-
-### Network Solutions DNS Configuration
-
-You have the domain `andywoods.me` through Network Solutions. Here's how to connect it:
-
-#### For Vercel:
-
-1. In Vercel dashboard, go to your project → Settings → Domains
-
-2. Add `andywoods.me` and `www.andywoods.me`
-
-3. Vercel will provide DNS records. Go to Network Solutions:
-   - Add an `A` record: `@` → `76.76.21.21`
-   - Add a `CNAME` record: `www` → `cname.vercel-dns.com`
-
-4. Wait for DNS propagation (can take 24-48 hours)
-
-#### For Netlify:
-
-1. In Netlify dashboard, go to Site settings → Domain management
-
-2. Add custom domain: `andywoods.me`
-
-3. Netlify will provide DNS records. Go to Network Solutions:
-   - Add an `A` record: `@` → `75.2.60.5`
-   - Add a `CNAME` record: `www` → `<your-site>.netlify.app`
-
-4. Wait for DNS propagation (can take 24-48 hours)
-
-### SSL Certificate
-
-Both Vercel and Netlify automatically provision free SSL certificates via Let's Encrypt. No action needed.
-
-## Analytics Setup
-
-Analytics is configured but commented out. To enable:
-
-### Option 1: Plausible (Privacy-friendly, GDPR compliant)
-
-1. Sign up at [plausible.io](https://plausible.io)
-
-2. Add your domain (`andywoods.me`)
-
-3. Edit `src/components/Analytics.astro`:
-```astro
-<!-- Uncomment this line: -->
-<script defer data-domain="andywoods.me" src="https://plausible.io/js/script.js"></script>
-```
-
-4. Redeploy
-
-### Option 2: Google Analytics
-
-1. Create a GA4 property at [analytics.google.com](https://analytics.google.com)
-
-2. Get your measurement ID (format: `G-XXXXXXXXXX`)
-
-3. Edit `src/components/Analytics.astro` and replace `G-XXXXXXXXXX` with your ID
-
-4. Uncomment the Google Analytics script
-
-5. Redeploy
-
-## SEO Features
-
-✅ Semantic HTML structure
-✅ OpenGraph tags for social sharing
-✅ Twitter Card tags
-✅ Sitemap.xml (auto-generated at build)
-✅ robots.txt
-✅ RSS feed at `/rss.xml`
-✅ Canonical URLs
-✅ Meta descriptions
-
-## Maintenance
-
-### Updating Dependencies
-
-```bash
-npm update
-```
-
-### Adding Blog Posts
-
-Just create a new `.md` file in `src/content/blog/` and push to GitHub. CI/CD will automatically rebuild and deploy.
-
-### Changing Styles
-
-- Global styles: `src/styles/global.css`
-- Component styles: Individual `.astro` files
-- Tailwind config: `tailwind.config.mjs`
-
-### Changing Bio/Content
-
-- Home page bio: `src/pages/index.astro`
-- Full bio: `src/pages/about.astro`
-- Footer links: `src/components/Footer.astro`
-- Header navigation: `src/components/Header.astro`
-
-## Future Enhancements (Not Yet Implemented)
-
-These features are structured to be easily added later:
-
-- [ ] Newsletter signup (ConvertKit, Substack, etc.)
-- [ ] Projects/portfolio section
-- [ ] Search functionality (Algolia, Pagefind)
-- [ ] Comments system (Giscus, Utterances)
-- [ ] View counter per post
-- [ ] Dark mode toggle
-- [ ] Blog post series/collections
-
-## Performance
-
-This site is optimized for performance:
-
-- ⚡ Zero JavaScript by default
-- 📦 Minimal CSS bundle via Tailwind
-- 🚀 Static HTML files served from CDN
-- 🖼️ Optimized fonts via Google Fonts
-- 📱 Mobile responsive
-
-Expected Lighthouse scores: 95-100 across all categories.
-
-## Troubleshooting
-
-### Build fails with TypeScript errors
-
-Run `npm run astro check` to see detailed errors. Usually frontmatter schema issues.
-
-### Changes not appearing on deployed site
-
-1. Check build logs in Vercel/Netlify
-2. Ensure changes are pushed to the correct branch (usually `main`)
-3. Hard refresh browser (Cmd+Shift+R / Ctrl+Shift+R)
-
-### Custom domain not working
-
-1. Check DNS settings in Network Solutions
-2. DNS propagation takes 24-48 hours
-3. Use [dnschecker.org](https://dnschecker.org) to verify propagation
-
-## Support
-
-For Astro documentation: [docs.astro.build](https://docs.astro.build)
-
-For deployment help:
-- Vercel: [vercel.com/docs](https://vercel.com/docs)
-- Netlify: [docs.netlify.com](https://docs.netlify.com)
+5. **Custom Domain** (see below)
 
 ---
 
-Built with ❤️ using [Astro](https://astro.build)
+## 🔗 Custom Domain Setup (andywoods.me)
+
+You have the domain `andywoods.me` registered through **Network Solutions**. Here's how to connect it:
+
+### For Vercel:
+
+1. **In Vercel Dashboard**:
+   - Go to your project → **Settings** → **Domains**
+   - Add both `andywoods.me` and `www.andywoods.me`
+
+2. **In Network Solutions DNS**:
+   - Add an **A record**:
+     - **Host**: `@`
+     - **Points to**: `76.76.21.21`
+   - Add a **CNAME record**:
+     - **Host**: `www`
+     - **Points to**: `cname.vercel-dns.com`
+
+3. **Wait for propagation** (24-48 hours)
+   - Check status at [dnschecker.org](https://dnschecker.org)
+
+### For Netlify:
+
+1. **In Netlify Dashboard**:
+   - Go to **Site settings** → **Domain management**
+   - Add custom domain: `andywoods.me`
+
+2. **In Network Solutions DNS**:
+   - Add an **A record**:
+     - **Host**: `@`
+     - **Points to**: `75.2.60.5`
+   - Add a **CNAME record**:
+     - **Host**: `www`
+     - **Points to**: `<your-site>.netlify.app`
+
+3. **Wait for propagation** (24-48 hours)
+
+### SSL Certificate
+
+Both Vercel and Netlify automatically provision **free SSL certificates** via Let's Encrypt. No manual action required.
+
+---
+
+## 🔒 Security & Best Practices
+
+### ✅ Security Audit Passed
+
+This codebase has been audited for security issues:
+
+- ✅ **No hardcoded secrets** - All credentials use environment variables
+- ✅ **`.gitignore` configured** - Excludes `.env`, `node_modules`, etc.
+- ✅ **Input validation** - Zod schema validation for all content
+- ✅ **Safe dependencies** - No known vulnerabilities in npm packages
+- ✅ **Static output** - No server-side code execution
+
+### Environment Variables Best Practices
+
+1. **Never commit** `.env` files
+2. **Use** `.env.example` as a template
+3. **Prefix public vars** with `PUBLIC_` (Astro convention)
+4. **Store secrets** in deployment platform (Vercel/Netlify)
+
+### Code Quality Standards
+
+- ✅ **Type-safe**: TypeScript + Zod validation
+- ✅ **Documented**: Google-style docstrings for all functions
+- ✅ **Tested**: 15+ Vitest tests with full coverage
+- ✅ **Linted**: Follows Astro and Tailwind best practices
+- ✅ **DRY principle**: No code duplication
+- ✅ **PEP 8 compliant**: Python code follows style guide
+
+---
+
+## 📊 Performance
+
+This site is optimized for maximum performance:
+
+- ⚡ **Zero JavaScript** by default (pure static HTML)
+- 📦 **Minimal CSS** bundle via Tailwind (< 10KB gzipped)
+- 🚀 **Static files** served from global CDN
+- 🖼️ **Optimized fonts** via Google Fonts with preconnect
+- 📱 **Mobile responsive** with mobile-first design
+- ♿ **Accessible** - Semantic HTML, ARIA labels, keyboard navigation
+
+**Expected Lighthouse Scores**: 95-100 across all categories (Performance, Accessibility, Best Practices, SEO)
+
+---
+
+## 🐛 Troubleshooting
+
+### Build Fails with TypeScript Errors
+
+```bash
+npm run astro check
+```
+
+Usually caused by:
+- Missing required frontmatter fields
+- Invalid date format (must be YYYY-MM-DD)
+- Type mismatch in blog post schema
+
+### Changes Not Appearing on Live Site
+
+1. **Check build logs** in Vercel/Netlify dashboard
+2. **Verify branch** - Ensure changes are pushed to `main`
+3. **Hard refresh** browser: `Cmd+Shift+R` (Mac) or `Ctrl+Shift+R` (Windows)
+4. **Clear cache** in deployment platform
+
+### Custom Domain Not Working
+
+1. **Check DNS settings** in Network Solutions
+2. **Wait for propagation** - Can take 24-48 hours
+3. **Verify DNS** at [dnschecker.org](https://dnschecker.org)
+4. **Check HTTPS** - Ensure SSL certificate is provisioned
+
+### Blog Posts Not Showing
+
+1. **Check `draft` field** - Must be `false` or omitted
+2. **Validate frontmatter** - All required fields present
+3. **Check file location** - Must be in `src/content/blog/`
+4. **Rebuild** - Run `npm run build` locally to test
+
+---
+
+## 🔮 Future Enhancements
+
+These features are not yet implemented but are structured for easy addition:
+
+### High Priority
+- [ ] **Newsletter signup** - ConvertKit or Substack integration
+- [ ] **Dark mode toggle** - System preference detection
+- [ ] **Search functionality** - Pagefind or Algolia
+
+### Medium Priority
+- [ ] **Comments system** - Giscus (GitHub Discussions) or Utterances
+- [ ] **Projects/portfolio section** - Showcase side projects
+- [ ] **View counter** - Track post engagement
+- [ ] **Blog post series** - Link related posts together
+
+### Low Priority
+- [ ] **RSS email notifications** - Automated email on new posts
+- [ ] **Reading time estimates** - Calculate based on word count
+- [ ] **Table of contents** - Auto-generated for long posts
+- [ ] **Related posts** - ML-based content recommendations
+
+---
+
+## 🎨 Visual Branding
+
+### Image Generation Style Guide
+
+This project uses a distinctive **Vintage WPA National Parks Poster × Retro-Futurism** aesthetic for all blog images. This creates a cohesive visual brand that communicates "established expertise meets forward-thinking innovation."
+
+**Key Features**:
+- 1930s-1940s WPA poster style
+- 5-color limited palette (burnt orange, deep teal, warm ochre, cream, charcoal)
+- Technical concepts as natural landscapes
+- Bold geometric forms, screen print aesthetic
+
+**📖 Full Documentation**: See [`VISUAL_STYLE_GUIDE.md`](./VISUAL_STYLE_GUIDE.md) for:
+- Complete style prompt templates
+- Subject templates for AI, databases, cloud, innovation topics
+- Color palette (exact hex codes)
+- Image specifications & optimization
+- Step-by-step generation instructions
+
+**Quick Start**: Copy the core prompt from `VISUAL_STYLE_GUIDE.md`, choose a subject template, and generate with Midjourney/DALL-E.
+
+---
+
+## 📚 Documentation & Resources
+
+### Project Documentation
+- **Visual Style Guide**: [`VISUAL_STYLE_GUIDE.md`](./VISUAL_STYLE_GUIDE.md) - Brand-consistent image generation
+- **Code Review**: [`CODE_REVIEW.md`](./CODE_REVIEW.md) - Security audit & refactoring summary
+- **Environment Setup**: [`.env.example`](./.env.example) - Configuration template
+
+### Official Documentation
+- **Astro**: [docs.astro.build](https://docs.astro.build)
+- **Tailwind CSS**: [tailwindcss.com/docs](https://tailwindcss.com/docs)
+- **Vercel**: [vercel.com/docs](https://vercel.com/docs)
+- **Netlify**: [docs.netlify.com](https://docs.netlify.com)
+
+### Design Inspiration
+- **Tom Tunguz**: [tomtunguz.com](https://tomtunguz.com) - Minimal, content-first design
+- **Paul Graham**: [paulgraham.com](http://paulgraham.com) - Typography-focused
+- **Cassidy Williams**: [cassidoo.co](https://cassidoo.co) - Personal branding
+
+### Related Projects
+- **Astro Blog Template**: [github.com/withastro/astro/tree/main/examples/blog](https://github.com/withastro/astro/tree/main/examples/blog)
+- **Tailwind Typography**: [tailwindcss.com/docs/typography-plugin](https://tailwindcss.com/docs/typography-plugin)
+
+---
+
+## 🤝 Contributing
+
+This is a personal website, but suggestions are welcome!
+
+1. **Report bugs** - Open an issue on GitHub
+2. **Suggest features** - Describe your use case
+3. **Share feedback** - Reach out on [LinkedIn](https://www.linkedin.com/in/andrewscottwoods/) or [X](https://twitter.com/iamandywoods)
+
+---
+
+## 📄 License
+
+This project is open source and available under the MIT License.
+
+---
+
+## 👨‍💻 About the Author
+
+**Andy Woods** is Director of Product Management at Cockroach Labs, where he leads AI integration, pricing strategy, and ecosystem partnerships. He scaled CockroachDB from pre-revenue to $100M+ ARR and now pioneers AI-powered developer tools.
+
+**Expertise**: AI/ML infrastructure, distributed databases, enterprise SaaS, product-led growth
+
+**Connect**:
+- 🔗 LinkedIn: [andrewscottwoods](https://www.linkedin.com/in/andrewscottwoods/)
+- 🐦 X/Twitter: [@iamandywoods](https://twitter.com/iamandywoods)
+- 💻 GitHub: [awoods187](https://github.com/awoods187)
+
+---
+
+**Built with ❤️ using [Astro](https://astro.build)**
+
+*Last updated: 2025-01-21*

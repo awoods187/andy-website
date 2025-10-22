@@ -12,7 +12,7 @@ Personal website and blog for Andy Woods, Product Manager at Cockroach Labs.
 
 ## About
 
-Product Manager specializing in AI, databases, and product management. Writing about the intersection of technology and product strategy.
+Product Manager specializing in AI, databases, and enterprises. Writing about the intersection of technology and product strategy.
 
 ---
 

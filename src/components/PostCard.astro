@@ -24,7 +24,7 @@ interface Props {
   url?: string;
   image?: string | null;
   tags: string[];
-  source?: 'personal' | 'cockroach-labs';
+  source?: 'personal' | 'cockroach-labs' | 'publications';
 }
 
 const { title, date, excerpt, slug, url, image, tags, source = 'personal' } = Astro.props;
@@ -34,18 +34,23 @@ const postUrl = url || `/blog/${slug}`;
 const isExternal = !!url;
 
 // Format date
+// Use UTC timezone to ensure dates match the frontmatter (avoids timezone conversion issues)
 const dateObj = typeof date === 'string' ? new Date(date) : date;
 const formattedDate = new Intl.DateTimeFormat('en-US', {
   year: 'numeric',
   month: 'long',
-  day: 'numeric'
+  day: 'numeric',
+  timeZone: 'UTC'
 }).format(dateObj);
 
 // Default placeholder image if none provided
 const imageUrl = image || '/images/default-post.svg';
 
 // Source badge text
-const sourceBadge = source === 'cockroach-labs' ? 'Cockroach Labs' : null;
+const sourceBadge =
+  source === 'cockroach-labs' ? 'Cockroach Labs' :
+  source === 'publications' ? 'Publication' :
+  null;
 ---
 
 <article class="mb-8 pb-8 border-b border-gray-200 last:border-b-0">
