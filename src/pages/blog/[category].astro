@@ -114,7 +114,7 @@ const { filteredPosts, selectedCategory, allTags } = Astro.props;
   <nav class="mb-8 pb-6 border-b border-gray-200">
     {/* Row 1: Sources */}
     <div class="mb-4">
-      <h2 class="text-sm font-medium text-gray-500 uppercase tracking-wide mb-2">Sources</h2>
+      <h2 class="text-sm font-medium text-gray-600 uppercase tracking-wide mb-2">Sources</h2>
       <ul class="flex gap-6 flex-wrap list-none m-0 p-0">
         {/* All */}
         <li>
@@ -180,7 +180,7 @@ const { filteredPosts, selectedCategory, allTags } = Astro.props;
 
     {/* Row 2: Categories */}
     <div>
-      <h2 class="text-sm font-medium text-gray-500 uppercase tracking-wide mb-2">Categories</h2>
+      <h2 class="text-sm font-medium text-gray-600 uppercase tracking-wide mb-2">Categories</h2>
       <ul class="flex gap-6 flex-wrap list-none m-0 p-0">
         {/* AI */}
         {allTags.includes('ai') && (
@@ -253,6 +253,6 @@ const { filteredPosts, selectedCategory, allTags } = Astro.props;
   </div>
 
   {filteredPosts.length === 0 && (
-    <p class="text-gray-500 italic">No posts in this category yet.</p>
+    <p class="text-gray-600 italic">No posts in this category yet.</p>
   )}
 </BaseLayout>

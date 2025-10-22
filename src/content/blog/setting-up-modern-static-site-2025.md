@@ -92,13 +92,16 @@ I use Zod for runtime validation of all content:
 
 ```typescript
 // src/content/config.ts
-const blogSchema = z.object({
-  title: z.string().min(1).max(100),
-  date: z.date(),
-  excerpt: z.string().min(50).max(200),
-  tags: z.array(z.string()).min(1).max(5),
-  image: z.string().url().optional(),
-  draft: z.boolean().default(false),
+const blog = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    date: z.date(),
+    excerpt: z.string(),
+    tags: z.array(z.string()),
+    image: z.string().optional(),
+    draft: z.boolean().optional().default(false),
+  }),
 });
 ```
 
@@ -281,21 +284,25 @@ The tests verify the build output rather than implementation details. They catch
 
 ## Performance Results
 
-The minimal JavaScript approach delivers measurable benefits:
+The minimal JavaScript approach delivers measurable benefits. Real Lighthouse scores from production deployment:
 
 ```bash
-# Production bundle size
-HTML: 8-12 KB per page (gzipped)
-CSS: 9.7 KB (shared, cached across pages)
-JS: 0 KB for blog pages, 2.3 KB for search page
-Fonts: 28 KB (subset, preloaded)
+# Lighthouse Performance Metrics (Mobile, Slow 4G)
+Performance Score: 95/100
+First Contentful Paint: 1.8s
+Largest Contentful Paint: 4.9s (optimized to ~2s after image compression)
+Total Blocking Time: 0ms (zero JavaScript!)
+Cumulative Layout Shift: 0.027 (excellent - < 0.1 threshold)
+Speed Index: 1.8s
 
-# Core Web Vitals (field data from Vercel deployment)
-LCP: 0.6s (p75)
-FID: 0ms (no JS = no input delay)
-CLS: 0.001 (static layout)
-TTFB: 45ms from CDN edge
+# Production Bundle Sizes
+HTML: 9-20 KB per page (uncompressed)
+CSS: 15 KB (4 KB gzipped, shared across all pages)
+JS: 0 KB for blog pages
+Images: Optimized to < 250 KB per hero image
 ```
+
+**Perfect scores**: Accessibility (100/100) and Best Practices (100/100).
 
 For comparison, a typical Next.js blog ships 70-100 KB of JavaScript just for the framework.
 
@@ -412,7 +419,7 @@ Create a Python scraper that:
 The author page uses <article> cards with varying structures.
 ```
 
-**Result**: Claude Code generated a 120-line scraper including:
+**Result**: Claude Code generated a ~500-line production-ready scraper including:
 - BeautifulSoup setup with proper error handling
 - Multiple fallback strategies for each field
 - TypeScript interface generation
@@ -449,11 +456,11 @@ Create professional bot and AI crawler controls that position me as LLM-friendly
 ```
 
 **Result**: Claude Code generated:
-- Comprehensive robots.txt (186 lines) allowing all major AI bots
-- Detailed ai.txt (253 lines) with training permissions
+- Comprehensive robots.txt (185 lines) allowing all major AI bots
+- Detailed ai.txt (252 lines) with training permissions
 - Creative humans.txt (266 lines) with ASCII art
 - Meta tags for OpenAI, Anthropic, Google AI
-- README-AI-POLICY.md (685 lines) with full policy
+- README-AI-POLICY.md with full policy
 
 ### Your Turn: Extend This Blog
 

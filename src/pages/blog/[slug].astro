@@ -51,7 +51,7 @@ const nextPost = currentIndex > 0 ? sortedPosts[currentIndex - 1] : null;
       <h1 class="font-sans text-4xl font-bold mb-4 text-black">
         {post.data.title}
       </h1>
-      <div class="flex items-center gap-4 text-sm text-gray-500 mb-4">
+      <div class="flex items-center gap-4 text-sm text-gray-600 mb-4">
         <time datetime={post.data.date.toISOString()}>
           {formattedDate}
         </time>
@@ -94,7 +94,7 @@ const nextPost = currentIndex > 0 ? sortedPosts[currentIndex - 1] : null;
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
           {prevPost && (
             <div>
-              <p class="text-sm text-gray-500 mb-2">← Previous</p>
+              <p class="text-sm text-gray-600 mb-2">← Previous</p>
               <a
                 href={`/blog/${prevPost.slug}`}
                 class="text-lg font-sans font-semibold text-black no-underline hover:opacity-70 transition-opacity"
@@ -105,7 +105,7 @@ const nextPost = currentIndex > 0 ? sortedPosts[currentIndex - 1] : null;
           )}
           {nextPost && (
             <div class={prevPost ? "text-right" : ""}>
-              <p class="text-sm text-gray-500 mb-2">Next →</p>
+              <p class="text-sm text-gray-600 mb-2">Next →</p>
               <a
                 href={`/blog/${nextPost.slug}`}
                 class="text-lg font-sans font-semibold text-black no-underline hover:opacity-70 transition-opacity"
