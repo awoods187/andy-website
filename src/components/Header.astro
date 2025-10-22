@@ -47,19 +47,6 @@ const currentPath = Astro.url.pathname;
         </a>
       </li>
 
-      {/* Archive link */}
-      <li>
-        <a
-          href="/archive"
-          class:list={[
-            "text-base no-underline hover:opacity-70 transition-opacity",
-            currentPath === "/archive" ? "text-black font-medium" : "text-gray-600"
-          ]}
-        >
-          Archive
-        </a>
-      </li>
-
       {/* About link */}
       <li>
         <a
