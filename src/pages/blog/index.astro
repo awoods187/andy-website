@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import BlogPostCard from '../../components/BlogPostCard.astro';
+import PostCard from '../../components/PostCard.astro';
 
 // Get all published blog posts and sort by date (newest first)
 const allPosts = await getCollection('blog');
@@ -23,12 +23,14 @@ const publishedPosts = allPosts
 
   <div>
     {publishedPosts.map(post => (
-      <BlogPostCard
+      <PostCard
         title={post.data.title}
         date={post.data.date}
         excerpt={post.data.excerpt}
         slug={post.slug}
         tags={post.data.tags}
+        image={post.data.image}
+        source="personal"
       />
     ))}
   </div>

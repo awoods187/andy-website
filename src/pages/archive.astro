@@ -1,83 +1,162 @@
 ---
+/**
+ * Archive Page
+ *
+ * Displays all blog posts (personal + Cockroach Labs) with category filters.
+ * Posts are shown chronologically with card-based design including images.
+ */
+
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from '../components/PostCard.astro';
+import { crlPosts } from '../data/crl-posts';
 
-// Get all published blog posts
-const allPosts = await getCollection('blog');
-const publishedPosts = allPosts
+// Get all published personal blog posts
+const personalPosts = await getCollection('blog');
+const publishedPersonalPosts = personalPosts
   .filter(post => !post.data.draft)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+  .map(post => ({
+    title: post.data.title,
+    date: post.data.date,
+    excerpt: post.data.excerpt,
+    tags: post.data.tags,
+    image: post.data.image || null,
+    slug: post.slug,
+    source: 'personal' as const,
+  }));
 
-// Group posts by year and month
-const postsByYear = publishedPosts.reduce((acc, post) => {
-  const year = post.data.date.getFullYear();
-  const month = post.data.date.toLocaleString('en-US', { month: 'long' });
+// Convert CRL posts to same format
+const crlPostsFormatted = crlPosts.map(post => ({
+  title: post.title,
+  date: new Date(post.date),
+  excerpt: post.excerpt,
+  tags: post.tags || [],
+  image: post.image,
+  url: post.url,
+  source: 'cockroach-labs' as const,
+}));
 
-  if (!acc[year]) {
-    acc[year] = {};
-  }
-  if (!acc[year][month]) {
-    acc[year][month] = [];
-  }
+// Combine and sort all posts by date (newest first)
+const allPosts = [...publishedPersonalPosts, ...crlPostsFormatted]
+  .sort((a, b) => b.date.valueOf() - a.date.valueOf());
 
-  acc[year][month].push(post);
-  return acc;
-}, {} as Record<number, Record<string, typeof publishedPosts>>);
+// Get all unique tags from both sources
+const allTags = Array.from(new Set(
+  allPosts.flatMap(post => post.tags)
+)).sort();
 
-// Sort years in descending order
-const sortedYears = Object.keys(postsByYear)
-  .map(Number)
-  .sort((a, b) => b - a);
+// Get category for URL parameter
+const urlParams = Astro.url.searchParams;
+const selectedCategory = urlParams.get('category') || 'all';
+
+// Filter posts by category
+let filteredPosts = allPosts;
+if (selectedCategory === 'personal') {
+  filteredPosts = allPosts.filter(p => p.source === 'personal');
+} else if (selectedCategory === 'cockroach-labs') {
+  filteredPosts = allPosts.filter(p => p.source === 'cockroach-labs');
+} else if (selectedCategory !== 'all' && allTags.includes(selectedCategory)) {
+  // Filter by tag
+  filteredPosts = allPosts.filter(p => p.tags.includes(selectedCategory));
+}
 ---
 
 <BaseLayout
   title="Archive - Andy Woods"
-  description="Complete archive of all blog posts organized by year and month"
+  description="Complete archive of all blog posts from personal blog and Cockroach Labs"
 >
-  <header class="mb-12">
+  {/* Header */}
+  <header class="mb-8">
     <h1 class="font-sans text-4xl font-bold mb-4 text-black">Archive</h1>
     <p class="text-lg text-gray-600">
-      All posts organized by year and month
+      All posts from personal blog and Cockroach Labs
     </p>
   </header>
 
-  {sortedYears.map(year => (
-    <section class="mb-12">
-      <h2 class="font-sans text-3xl font-bold mb-6 text-black">{year}</h2>
-      {Object.entries(postsByYear[year]).map(([month, posts]) => (
-        <div class="mb-8">
-          <h3 class="font-sans text-xl font-semibold mb-4 text-gray-700">{month}</h3>
-          <ul class="space-y-3 list-none m-0 p-0">
-            {posts.map(post => {
-              const formattedDate = new Intl.DateTimeFormat('en-US', {
-                month: 'short',
-                day: 'numeric'
-              }).format(post.data.date);
+  {/* Category Filters */}
+  <nav class="mb-8 pb-6 border-b border-gray-200">
+    <ul class="flex gap-6 flex-wrap list-none m-0 p-0">
+      {/* All categories */}
+      <li>
+        <a
+          href="/archive"
+          class:list={[
+            "text-base no-underline transition-colors pb-2",
+            selectedCategory === 'all'
+              ? "text-black font-medium border-b-2 border-black"
+              : "text-gray-600 hover:text-black"
+          ]}
+        >
+          All categories
+        </a>
+      </li>
 
-              return (
-                <li class="flex gap-4">
-                  <time
-                    datetime={post.data.date.toISOString()}
-                    class="text-sm text-gray-500 w-16 flex-shrink-0"
-                  >
-                    {formattedDate}
-                  </time>
-                  <a
-                    href={`/blog/${post.slug}`}
-                    class="text-base text-black no-underline hover:opacity-70 transition-opacity flex-1"
-                  >
-                    {post.data.title}
-                  </a>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
+      {/* Personal blog */}
+      <li>
+        <a
+          href="/archive?category=personal"
+          class:list={[
+            "text-base no-underline transition-colors pb-2",
+            selectedCategory === 'personal'
+              ? "text-black font-medium border-b-2 border-black"
+              : "text-gray-600 hover:text-black"
+          ]}
+        >
+          Personal Blog
+        </a>
+      </li>
+
+      {/* Cockroach Labs */}
+      <li>
+        <a
+          href="/archive?category=cockroach-labs"
+          class:list={[
+            "text-base no-underline transition-colors pb-2",
+            selectedCategory === 'cockroach-labs'
+              ? "text-black font-medium border-b-2 border-black"
+              : "text-gray-600 hover:text-black"
+          ]}
+        >
+          Cockroach Labs
+        </a>
+      </li>
+
+      {/* Popular tag categories */}
+      {['ai', 'databases', 'product-management'].filter(tag => allTags.includes(tag)).map(tag => (
+        <li>
+          <a
+            href={`/archive?category=${tag}`}
+            class:list={[
+              "text-base no-underline transition-colors pb-2 capitalize",
+              selectedCategory === tag
+                ? "text-black font-medium border-b-2 border-black"
+                : "text-gray-600 hover:text-black"
+            ]}
+          >
+            {tag.replace('-', ' ')}
+          </a>
+        </li>
       ))}
-    </section>
-  ))}
+    </ul>
+  </nav>
 
-  {publishedPosts.length === 0 && (
-    <p class="text-gray-500 italic">No posts yet. Check back soon!</p>
+  {/* Post Cards */}
+  <div class="space-y-0">
+    {filteredPosts.map(post => (
+      <PostCard
+        title={post.title}
+        date={post.date}
+        excerpt={post.excerpt}
+        tags={post.tags}
+        image={post.image}
+        slug={'slug' in post ? post.slug : undefined}
+        url={'url' in post ? post.url : undefined}
+        source={post.source}
+      />
+    ))}
+  </div>
+
+  {filteredPosts.length === 0 && (
+    <p class="text-gray-500 italic">No posts in this category yet.</p>
   )}
 </BaseLayout>

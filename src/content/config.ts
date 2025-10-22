@@ -20,6 +20,7 @@ const blog = defineCollection({
     date: z.date(),                                       // Publication date (required)
     excerpt: z.string(),                                  // Brief summary for previews (required)
     tags: z.array(z.string()),                            // Array of tag strings (required)
+    image: z.string().optional(),                         // Featured image URL (optional)
     draft: z.boolean().optional().default(false),         // Draft status (optional, defaults to false)
   }),
 });

@@ -1,0 +1,6 @@
+<svg width="800" height="400" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="400" fill="#f3f4f6"/>
+  <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="24" fill="#9ca3af">
+    Blog Post
+  </text>
+</svg>
