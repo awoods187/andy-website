@@ -1,0 +1,31 @@
+Dual License
+
+This project uses dual licensing:
+
+- Code (MIT License): See LICENSE-CODE.md
+- Content (CC BY-NC 4.0): See LICENSE-CONTENT.md
+
+For a comprehensive guide with examples and use cases, see LICENSE.md
+
+---
+
+Quick Summary:
+
+CODE (MIT) - src/, scripts/, configurations
+- Use freely in any project, including commercial
+- No attribution required (but appreciated)
+
+CONTENT (CC BY-NC 4.0) - blog posts, articles, media
+- Quote with attribution
+- Non-commercial use
+- Commercial republishing requires permission
+
+---
+
+Full license texts:
+- MIT License: LICENSE-CODE.md
+- CC BY-NC 4.0: LICENSE-CONTENT.md
+- Detailed Guide: LICENSE.md
+- AI Training Policy: README-AI-POLICY.md
+
+For questions: https://github.com/awoods187/andy-website
