@@ -1,7 +1,5 @@
 # Andy Woods Personal Website
 
-> A minimal personal website with integrated blog, showcasing product management insights, distributed systems expertise, and AI innovation.
-
 A modern, minimal personal website built with Astro, featuring a blog with integrated external content, professional bio, and clean typography. Inspired by tomtunguz.com's design aesthetic.
 
 🌐 **Live Site**: [andywoods.me](https://andywoods.me)
