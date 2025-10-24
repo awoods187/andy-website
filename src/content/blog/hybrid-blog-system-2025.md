@@ -14,7 +14,7 @@ attribution: "If you quote or translate this post, please provide attribution wi
 
 As a Director of Product Management at Cockroach Labs, I work on evangelizing distributed database architecture. I also maintain my coding skills through side projects focused on AI fluency. When rebuilding my personal site, I faced a common problem: how to showcase both personal writing and company blog posts without duplicating content or fragmenting my portfolio.
 
-Here's the solution I built, the trade-offs I made, and what I learned.
+Here's the solution I built, the trade-offs I considered, and what I learned.
 
 ## The Problem: Aggregating Distributed Content
 
@@ -577,7 +577,7 @@ Try these prompts with Claude Code to add features:
    "Add ConvertKit newsletter signup form with inline validation and privacy compliance"
    ```
 
-Each feature takes 10-30 minutes with Claude Code vs. hours (or days) of manual implementation, research, and debugging.
+Each feature takes 10-30 minutes with Claude Code vs. hours or even days of manual implementation, research, and debugging.
 
 ## Open Source
 
