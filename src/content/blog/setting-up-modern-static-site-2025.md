@@ -32,20 +32,81 @@ The standard approaches all have downsides:
 
 I built a fourth option: an automated aggregation system that pulls content from multiple sources while maintaining clear attribution.
 
+## Development Workflow: Separating Planning from Implementation
+
+One pattern I found particularly effective while building this site was using two separate Claude sessions for different phases of development: Claude Opus as my architect and Claude Code as my pair programmer.
+
+**Window 1: Design & Planning (Claude Opus via chat)**
+- Collaborative design discussions
+- Requirements gathering through questions
+- Architecture recommendations
+- Review and iteration cycles
+
+**Window 2: Implementation (Claude Code)**
+- Takes the finalized design as input
+- Executes the implementation
+- Handles file creation and code generation
+
+This separation isn't just about using different tools—it's about intentional separation of concerns.
+
+### Why This Approach Works
+
+**Design deserves deliberation**: Complex design decisions benefit from back-and-forth dialogue, clarifying questions, and thoughtful consideration. Claude Opus excels at this collaborative exploration.
+
+**Implementation needs focus**: Once the design is finalized, you want clean execution without revisiting fundamental decisions. Claude Code handles this efficiently.
+
+**Clear handoff points**: The transition from "what should we build?" to "build this" becomes explicit and documented.
+
+**Prevents scope creep**: Implementation stays focused on executing the agreed design rather than re-debating decisions.
+
+### How I Used It For This Site
+
+**Phase 1: Design in Claude Opus**
+1. Started with open-ended prompt: "Help me design this website's architecture"
+2. Claude asked clarifying questions about my goals, technical preferences, constraints
+3. I answered questions and provided context
+4. Claude provided recommendations with rationales
+5. We iterated on the design together
+6. Finalized a complete specification
+
+**Phase 2: Implementation in Claude Code**
+1. Took the finalized design document
+2. Provided it to Claude Code with clear implementation instructions
+3. Claude Code generated all files, configured tooling, set up structure
+4. Minimal back-and-forth—just execution
+
+### Benefits I Experienced
+
+- **Better design quality**: Dedicated time for design discussion led to more thoughtful architecture decisions
+- **Cleaner implementation**: Claude Code stayed focused on execution rather than questioning design choices
+- **Traceable decisions**: The design conversation serves as documentation for why things are built a certain way
+- **Appropriate tool usage**: Used each Claude interface for what it does best
+
+### When to Use This Pattern
+
+This separation works particularly well for:
+
+- Complex projects with non-trivial architectural decisions
+- When you're exploring multiple approaches
+- Projects where you want clear documentation of design rationale
+- Situations where you need to review and approve before implementation
+
+For simpler tasks, going straight to Claude Code is perfectly fine. But for substantial work, this two-phase approach has been invaluable.
+
 ## Built with Claude Code: AI-Native Development in Practice
 
-This entire site was built using Claude Code as my pair programmer. Here's how AI transformed the development process:
+Here's how AI transformed the development process:
 
 ### Instant Architecture Decisions
 
-Instead of spending hours researching build tools, I described my requirements to Claude Code:
+Instead of spending hours researching build tools, I described my requirements to Claude Opus:
 
 ```
 "I need a static site that aggregates content from multiple sources,
 has < 50ms load times, and costs < $5/month to host"
 ```
 
-Claude Code immediately suggested Astro + TypeScript + Zod, explaining the trade-offs:
+Claude Opus immediately suggested Astro + TypeScript + Zod, explaining the trade-offs:
 - **Why Astro over Next.js**: Zero JS by default, better for content sites
 - **Why Zod over plain TypeScript**: Runtime validation catches content errors at build time
 - **Why static over SSR**: Your update frequency doesn't justify server costs
@@ -62,7 +123,7 @@ This conversation took 2 minutes. Researching and evaluating these options manua
 - Performance optimization: 3-4 hours
 - **Total**: ~30-35 hours over 1-2 weeks
 
-**With Claude Code** (actual):
+**With Claude Opus + Claude Code** (actual):
 - Architecture decisions: 15 minutes
 - Site structure + components: 2 hours
 - Content scraping system: 30 minutes
