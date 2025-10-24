@@ -319,33 +319,45 @@ The test suite focuses on build output validation and content integrity. But her
 Claude Code didn't just test the happy path—it immediately identified edge cases I hadn't considered:
 
 ```typescript
-describe('Build Validation', () => {
-  test('generates expected pages', async () => {
-    const pages = await glob('dist/**/*.html');
-
-    // Verify critical pages exist
-    expect(pages).toContainEqual(expect.stringMatching(/index\.html$/));
-    expect(pages).toContainEqual(expect.stringMatching(/blog\/all/));
-    expect(pages).toContainEqual(expect.stringMatching(/rss\.xml$/));
+// tests/build.test.ts - Validates build output
+describe('Build Output', () => {
+  it('should generate index.html (home page)', () => {
+    const indexPath = join(distPath, 'index.html');
+    expect(existsSync(indexPath)).toBe(true);
   });
 
-  test('blog posts have required metadata', async () => {
-    const posts = await getCollection('blog');
+  it('should generate RSS feed', () => {
+    const rssPath = join(distPath, 'rss.xml');
+    expect(existsSync(rssPath)).toBe(true);
+  });
+});
 
-    posts.forEach(post => {
-      // These would throw if schema validation failed
-      expect(post.data.title.length).toBeGreaterThan(0);
-      expect(post.data.date).toBeInstanceOf(Date);
-      expect(post.data.tags.length).toBeGreaterThan(0);
+// tests/content.test.ts - Validates blog post metadata
+describe('Blog Content Validation', () => {
+  it('all blog posts should have required frontmatter fields', () => {
+    const files = readdirSync(contentPath);
+    const mdFiles = files.filter(f => f.endsWith('.md'));
+
+    mdFiles.forEach(file => {
+      const content = readFileSync(join(contentPath, file), 'utf-8');
+
+      // Check for required fields
+      expect(content).toMatch(/title:/);
+      expect(content).toMatch(/date:/);
+      expect(content).toMatch(/excerpt:/);
+      expect(content).toMatch(/tags:/);
     });
   });
+});
 
-  test('external posts maintain source attribution', () => {
-    const { crlPosts } = require('../src/data/crl-posts');
+// tests/external-posts.test.ts - Validates external posts
+import { crlPosts } from '../src/data/crl-posts';
 
+describe('Cockroach Labs Posts', () => {
+  it('should have valid Cockroach Labs URLs', () => {
     crlPosts.forEach(post => {
-      expect(post.source).toBe('cockroach-labs');
       expect(post.url).toMatch(/^https:\/\/www\.cockroachlabs\.com/);
+      expect(post.source).toBe('cockroach-labs');
     });
   });
 });
