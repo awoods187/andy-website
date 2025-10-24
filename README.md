@@ -499,7 +499,7 @@ Usually caused by:
 These features are not yet implemented but are structured for easy addition:
 
 ### High Priority
-- [ ] **Newsletter signup** - ConvertKit or Substack integration
+- [x] **Newsletter signup** - Buttondown email integration ✅
 - [ ] **Dark mode toggle** - System preference detection
 - [ ] **Search functionality** - Pagefind or Algolia
 
@@ -510,10 +510,93 @@ These features are not yet implemented but are structured for easy addition:
 - [ ] **Blog post series** - Link related posts together
 
 ### Low Priority
-- [ ] **RSS email notifications** - Automated email on new posts
+- [x] **RSS email notifications** - Automated via Buttondown ✅
 - [ ] **Reading time estimates** - Calculate based on word count
 - [ ] **Table of contents** - Auto-generated for long posts
 - [ ] **Related posts** - ML-based content recommendations
+
+---
+
+## 📧 Newsletter & Subscriptions
+
+This site includes a privacy-focused subscription system for readers to stay updated with new content.
+
+### Email Newsletter
+- **Provider**: [Buttondown](https://buttondown.email)
+- **Form submits directly** to Buttondown API (zero JavaScript)
+- **RSS-to-email automated** via Buttondown's RSS import
+- **Privacy-focused**: No tracking pixels, GDPR compliant
+
+### RSS Feed
+- **Auto-generated** by Astro at `/rss.xml`
+- **Includes all content sources**: Personal posts, CRL posts, and publications
+- **Supports all standard RSS readers**: Feedly, NetNewsWire, Reeder, Inoreader
+
+### Setup Instructions
+
+#### 1. Create Buttondown Account
+1. Go to [buttondown.email](https://buttondown.email) and create an account
+2. Choose your username (e.g., `andywoods`)
+
+#### 2. Connect RSS Feed
+1. In Buttondown Dashboard → **Settings** → **Import** → **RSS Feed**
+2. Add feed URL: `https://andywoods.me/rss.xml`
+3. Set check frequency: **Daily at 9am**
+4. Enable **"Auto-send new posts"**
+
+#### 3. Customize Email Template
+In Buttondown's email settings, customize the template:
+
+```markdown
+{{ email_body }}
+
+---
+You're receiving this because you subscribed to Andy Woods' blog.
+Unsubscribe: {{ unsubscribe_url }}
+```
+
+#### 4. Update Code
+1. Copy your Buttondown username
+2. Edit `src/components/SubscribeForm.astro`:
+   ```typescript
+   const buttondownUsername = 'your-username-here';
+   ```
+3. Commit and deploy
+
+### Testing the Subscription System
+
+```bash
+# 1. Verify RSS feed works
+curl https://andywoods.me/rss.xml
+
+# 2. Test email subscription
+# - Visit /subscribe page
+# - Enter test email
+# - Verify confirmation email arrives
+# - Confirm subscription
+
+# 3. Test RSS-to-email flow
+# - Publish new blog post
+# - Wait for Buttondown to check RSS (or trigger manually)
+# - Verify email arrives with post content
+
+# 4. Test unsubscribe
+# - Click unsubscribe link in email
+# - Verify immediate unsubscribe confirmation
+
+# 5. Accessibility
+# - Test form with keyboard only
+# - Test with screen reader
+# - Verify ARIA labels present
+```
+
+### Success Metrics
+
+After launch, track:
+- **Subscriber growth rate** (target: 5-10/month to start)
+- **Email open rates** (Buttondown provides this)
+- **RSS subscriber count** (Buttondown + RSS reader analytics)
+- **Conversion rate**: Blog visitors → subscribers
 
 ---
 

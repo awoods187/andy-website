@@ -59,6 +59,19 @@ const currentPath = Astro.url.pathname;
           About
         </a>
       </li>
+
+      {/* Subscribe link */}
+      <li>
+        <a
+          href="/subscribe"
+          class:list={[
+            "text-base no-underline hover:opacity-70 transition-opacity",
+            currentPath === "/subscribe" ? "text-black font-medium" : "text-gray-600"
+          ]}
+        >
+          Subscribe
+        </a>
+      </li>
     </ul>
   </nav>
 </header>

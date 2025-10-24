@@ -1,0 +1,226 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SubscribeForm from '../components/SubscribeForm.astro';
+
+const title = 'Subscribe - Andy Woods';
+const description = 'Get new posts about AI, databases, and product management delivered to your inbox.';
+---
+
+<BaseLayout title={title} description={description}>
+  <main class="subscribe-page">
+    <h1>Stay Updated</h1>
+
+    <div class="intro">
+      <p>
+        I write about building products at the intersection of databases and AI,
+        lessons from scaling Cockroach Labs from pre-revenue to $100M+ ARR,
+        and hands-on explorations of AI tools and infrastructure.
+      </p>
+      <p>
+        New posts typically weekly. No spam, no tracking, unsubscribe anytime.
+      </p>
+    </div>
+
+    <div class="subscription-options">
+      <section class="option email-option">
+        <h2>📧 Email Newsletter</h2>
+        <p>Get posts delivered to your inbox automatically.</p>
+        <SubscribeForm />
+      </section>
+
+      <section class="option rss-option">
+        <h2>📰 RSS Feed</h2>
+        <p>Maximum privacy, read on your terms with any RSS reader.</p>
+
+        <div class="rss-info">
+          <code class="rss-url">https://andywoods.me/rss.xml</code>
+
+          <div class="rss-buttons">
+            <a
+              href="https://feedly.com/i/subscription/feed/https://andywoods.me/rss.xml"
+              target="_blank"
+              rel="noopener"
+              class="rss-button"
+            >
+              Subscribe via Feedly
+            </a>
+            <a
+              href="/rss.xml"
+              class="rss-button secondary"
+            >
+              View RSS Feed
+            </a>
+          </div>
+
+          <details class="rss-explainer">
+            <summary>What's RSS?</summary>
+            <p>
+              RSS (Really Simple Syndication) lets you follow blogs without
+              giving away your email. You use an RSS reader app to collect
+              posts from all your favorite sites in one place.
+            </p>
+            <p><strong>Popular RSS readers:</strong></p>
+            <ul>
+              <li><a href="https://feedly.com" target="_blank" rel="noopener">Feedly</a> - Web & mobile, free</li>
+              <li><a href="https://netnewswire.com" target="_blank" rel="noopener">NetNewsWire</a> - Mac & iOS, free & open-source</li>
+              <li><a href="https://reederapp.com" target="_blank" rel="noopener">Reeder</a> - iOS & Mac, premium</li>
+              <li><a href="https://www.inoreader.com" target="_blank" rel="noopener">Inoreader</a> - Cross-platform</li>
+            </ul>
+          </details>
+        </div>
+      </section>
+    </div>
+
+    <section class="privacy-section">
+      <h2>Privacy Commitment</h2>
+      <ul>
+        <li><strong>Email:</strong> Managed by Buttondown. No tracking pixels, no analytics, no third-party sharing.</li>
+        <li><strong>RSS:</strong> No data collection. Your reader fetches posts directly.</li>
+        <li><strong>No spam:</strong> Only new blog posts, typically 1-2 per week.</li>
+        <li><strong>Easy unsubscribe:</strong> One-click unsubscribe link in every email.</li>
+      </ul>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .subscribe-page {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+
+  h1 {
+    font-family: var(--font-sans);
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #1a1a1a;
+  }
+
+  .intro {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #333;
+    margin-bottom: 3rem;
+  }
+
+  .subscription-options {
+    display: grid;
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .option {
+    padding: 2rem;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    background: white;
+  }
+
+  .option h2 {
+    margin: 0 0 0.5rem 0;
+    font-family: var(--font-sans);
+    font-size: 1.5rem;
+    color: #1a1a1a;
+  }
+
+  .option > p {
+    margin: 0 0 1.5rem 0;
+    color: #666;
+  }
+
+  .rss-url {
+    display: block;
+    padding: 0.75rem 1rem;
+    background: #f5f5f5;
+    border-radius: 4px;
+    font-family: 'Monaco', 'Courier New', monospace;
+    font-size: 0.9rem;
+    word-break: break-all;
+    margin-bottom: 1rem;
+  }
+
+  .rss-buttons {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+  }
+
+  .rss-button {
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+  }
+
+  .rss-button:not(.secondary) {
+    background: #1a1a1a;
+    color: white;
+  }
+
+  .rss-button:not(.secondary):hover {
+    background: #333;
+  }
+
+  .rss-button.secondary {
+    background: transparent;
+    color: #1a1a1a;
+    border: 2px solid #1a1a1a;
+  }
+
+  .rss-button.secondary:hover {
+    background: #1a1a1a;
+    color: white;
+  }
+
+  .rss-explainer {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+  }
+
+  .rss-explainer summary {
+    cursor: pointer;
+    color: #1a1a1a;
+    text-decoration: underline;
+  }
+
+  .rss-explainer ul {
+    margin: 0.5rem 0;
+    padding-left: 1.5rem;
+  }
+
+  .rss-explainer li {
+    margin: 0.25rem 0;
+  }
+
+  .privacy-section {
+    padding: 2rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+  }
+
+  .privacy-section h2 {
+    margin: 0 0 1rem 0;
+    font-family: var(--font-sans);
+    font-size: 1.25rem;
+    color: #1a1a1a;
+  }
+
+  .privacy-section ul {
+    margin: 0;
+    padding-left: 1.5rem;
+  }
+
+  .privacy-section li {
+    margin: 0.75rem 0;
+    line-height: 1.6;
+  }
+
+  @media (min-width: 768px) {
+    .subscription-options {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>
