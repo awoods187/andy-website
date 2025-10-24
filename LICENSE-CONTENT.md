@@ -51,7 +51,7 @@ You may quote portions of my blog posts in your own work, provided you:
 
 **Example**:
 ```markdown
-As Andy Woods explains in ["Building a Hybrid Blog System"](https://andywoods.me/blog/setting-up-modern-static-site-2025):
+As Andy Woods explains in ["Building a Hybrid Blog System"](https://andywoods.me/blog/hybrid-blog-system-2025):
 
 > "Modern static sites can combine personal content with aggregated external posts..."
 
@@ -69,7 +69,7 @@ You may translate my content into other languages, provided you:
 ```markdown
 # Construyendo un Sistema de Blog Híbrido
 
-*Traducido del inglés. Original por [Andy Woods](https://andywoods.me/blog/setting-up-modern-static-site-2025)*
+*Traducido del inglés. Original por [Andy Woods](https://andywoods.me/blog/hybrid-blog-system-2025)*
 
 [Your translation...]
 ```
@@ -161,13 +161,13 @@ Source: Andy Woods, "Article Title" (andywoods.me)
 **Full Attribution**:
 ```
 From "Building a Hybrid Blog System" by Andy Woods
-https://andywoods.me/blog/setting-up-modern-static-site-2025
+https://andywoods.me/blog/hybrid-blog-system-2025
 Licensed under CC BY-NC 4.0
 ```
 
 **In Blog Post**:
 ```markdown
-As [Andy Woods](https://andywoods.me/blog/setting-up-modern-static-site-2025)
+As [Andy Woods](https://andywoods.me/blog/hybrid-blog-system-2025)
 writes in his article on hybrid blog systems...
 ```
 
@@ -175,7 +175,7 @@ writes in his article on hybrid blog systems...
 ```
 Woods, A. (2024). "Building a Hybrid Blog System: Merging Personal and
 Company Content". andywoods.me. Retrieved from
-https://andywoods.me/blog/setting-up-modern-static-site-2025
+https://andywoods.me/blog/hybrid-blog-system-2025
 ```
 
 ---

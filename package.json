@@ -11,7 +11,7 @@
     "test:watch": "vitest",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest run --coverage",
-    "lighthouse": "lighthouse https://andywoods.me/blog/setting-up-modern-static-site-2025 --output=json --output=html --output-path=./lighthouse-report --chrome-flags=\"--headless\" --only-categories=performance,accessibility,best-practices,seo",
+    "lighthouse": "lighthouse https://andywoods.me/blog/hybrid-blog-system-2025 --output=json --output=html --output-path=./lighthouse-report --chrome-flags=\"--headless\" --only-categories=performance,accessibility,best-practices,seo",
     "lighthouse:view": "open lighthouse-report.report.html"
   },
   "dependencies": {

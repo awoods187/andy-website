@@ -59,7 +59,7 @@ andy-website/
 │   │   ├── blog/              # Personal blog posts (Markdown)
 │   │   │   ├── getting-started-ai-pm-perspective.md
 │   │   │   ├── why-pms-should-understand-databases.md
-│   │   │   └── setting-up-modern-static-site-2025.md
+│   │   │   └── hybrid-blog-system-2025.md
 │   │   └── config.ts          # Content collection schema (Zod)
 │   │
 │   ├── data/
