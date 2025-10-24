@@ -12,9 +12,7 @@ copyright: "© 2025 Andy Woods"
 attribution: "If you quote or translate this post, please provide attribution with a link back to the original at andywoods.me"
 ---
 
-As a Director of Product Management at Cockroach Labs, I work on evangelizing distributed database architecture. I also maintain my coding skills through side projects focused on AI fluency. When rebuilding my personal site, I faced a common problem: how to showcase both personal writing and company blog posts without duplicating content or fragmenting my portfolio.
-
-Here's the solution I built, the trade-offs I considered, and what I learned.
+As a Director of Product Management at Cockroach Labs, I work on evangelizing distributed database architecture. I also maintain my coding skills through side projects focused on AI fluency. When rebuilding my personal site, I faced a common problem: how to showcase both personal writing and company blog posts without duplicating content or fragmenting my portfolio. Here's the solution I built, the trade-offs I considered, and what I learned.
 
 ## The Problem: Aggregating Distributed Content
 
