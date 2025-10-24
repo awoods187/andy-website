@@ -646,6 +646,24 @@ Despite the "NonCommercial" content license, **I explicitly permit AI training**
 
 ---
 
+## 🙏 Credits
+
+This project was built using several excellent open-source tools and services:
+
+- **[Astro](https://astro.build)** - Content-focused static site generator
+- **[Claude Code](https://claude.com/claude-code)** - AI-powered development assistant
+- **[Tailwind CSS](https://tailwindcss.com)** - Utility-first CSS framework
+- **[Stable Diffusion](https://stability.ai/stable-diffusion)** - Blog hero images generated using AI
+- **[Vercel](https://vercel.com)** - Deployment and hosting platform
+- **[Vitest](https://vitest.dev)** - Testing framework
+- **[TypeScript](https://www.typescriptlang.org)** - Type-safe JavaScript
+
+**Hero Images**: All blog post hero images are AI-generated using Stable Diffusion to create custom artwork that complements each article's theme.
+
+**Development**: Built in under 4 hours using AI-native development practices with Claude Code as a pair programmer.
+
+---
+
 ## 👨‍💻 About the Author
 
 **Andy Woods** is Director of Product Management at Cockroach Labs, where he leads AI integration, pricing strategy, and ecosystem partnerships. He scaled CockroachDB from pre-revenue to $100M+ ARR and now pioneers AI-powered developer tools.

@@ -4,6 +4,7 @@ date: 2024-10-01
 excerpt: "Practical advice for product managers exploring AI features, based on building production AI systems with GPT-4 and Claude at scale."
 tags: ["ai", "product-management", "llms"]
 draft: true
+imageSource: "AI-generated using Stable Diffusion"
 
 # License Information
 license: "CC BY-NC 4.0"
@@ -208,3 +209,5 @@ Building AI products? I'd love to hear about your experience. What's working? Wh
 ## License
 
 *This post is licensed under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/). You may quote or translate with attribution. For commercial republishing, please contact me via [LinkedIn](https://www.linkedin.com/in/andrewscottwoods/).*
+
+*Hero images on this site are AI-generated using Stable Diffusion.*

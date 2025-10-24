@@ -4,6 +4,7 @@ date: 2025-10-21
 excerpt: "A technical deep-dive into building a static site that automatically aggregates content from multiple sources, with type safety, comprehensive testing, and sub-second load times."
 tags: ["web-development", "astro", "architecture", "static-sites", "python", "testing", "claude-code", "ai"]
 image: "/images/blog/setting-up-modern-static-site-2025-hero.jpg"
+imageSource: "AI-generated using Stable Diffusion"
 
 # License Information
 license: "CC BY-NC 4.0"
@@ -523,3 +524,5 @@ Have thoughts on static site architecture or content aggregation patterns? I'm a
 ## License
 
 *This post is licensed under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/). You may quote or translate with attribution. For commercial republishing, please contact me via [LinkedIn](https://www.linkedin.com/in/andrewscottwoods/).*
+
+*Hero images on this site are AI-generated using Stable Diffusion.*

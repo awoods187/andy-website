@@ -4,6 +4,7 @@ date: 2024-10-10
 excerpt: "Database architecture decisions have profound product implications. Here's what every PM should know about databases, even if they're not technical."
 tags: ["product-management", "databases", "technical-pm"]
 draft: true
+imageSource: "AI-generated using Stable Diffusion"
 
 # License Information
 license: "CC BY-NC 4.0"
@@ -135,3 +136,5 @@ What database concepts have you found most useful as a PM? [Message me on X](htt
 ## License
 
 *This post is licensed under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/). You may quote or translate with attribution. For commercial republishing, please contact me via [LinkedIn](https://www.linkedin.com/in/andrewscottwoods/).*
+
+*Hero images on this site are AI-generated using Stable Diffusion.*
