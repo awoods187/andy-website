@@ -63,9 +63,9 @@ This separation isn't just about using different tools—it's about intentional 
 
 **Phase 1: Design in Claude Opus**
 1. Started with open-ended prompt: "Help me design this website's architecture"
-2. Claude asked clarifying questions about my goals, technical preferences, constraints
+2. Claude Opus asked clarifying questions about my goals, technical preferences, constraints
 3. I answered questions and provided context
-4. Claude provided recommendations with rationales
+4. Claude Opus provided recommendations with rationales
 5. We iterated on the design together
 6. Finalized a complete specification
 
@@ -80,7 +80,7 @@ This separation isn't just about using different tools—it's about intentional 
 - **Better design quality**: Dedicated time for design discussion led to more thoughtful architecture decisions
 - **Cleaner implementation**: Claude Code stayed focused on execution rather than questioning design choices
 - **Traceable decisions**: The design conversation serves as documentation for why things are built a certain way
-- **Appropriate tool usage**: Used each Claude interface for what it does best
+- **Appropriate tool usage**: Used Claude Opus for architecture and Claude Code for implementation, each doing what it does best
 
 ### When to Use This Pattern
 
@@ -432,7 +432,7 @@ Claude Code helped enforce this by suggesting solutions that matched the constra
 
 ### 2. AI transforms "automate the tedious parts" into "automate everything"
 
-The scraper took 5 minutes to build with Claude Code but saves 30 minutes per external post. More importantly, AI handled edge cases I wouldn't have thought of:
+The scraper took 5 minutes to build with Claude Code but saves 30 minutes per external post. More importantly, Claude Code handled edge cases I wouldn't have thought of:
 - Timezone parsing for dates
 - Malformed HTML recovery
 - Defensive fallbacks for missing elements
@@ -448,7 +448,7 @@ Claude Code knew this instinctively—it suggested integration tests over unit t
 
 ### 4. AI makes "good enough" actually good
 
-With Claude Code, "MVP" doesn't mean "barely functional." The AI helped implement robust features from day one:
+With Claude Code, "MVP" doesn't mean "barely functional." Claude Code helped implement robust features from day one:
 - Error handling with retry logic
 - Accessibility features (semantic HTML, ARIA labels)
 - Performance optimizations (font subsetting, critical CSS)
