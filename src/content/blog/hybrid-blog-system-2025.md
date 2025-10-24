@@ -60,18 +60,18 @@ This separation isn't just about using different tools—it's about intentional 
 ### How I Used It For This Site
 
 **Phase 1: Design in Claude Opus**
-1. Started with open-ended prompt: "Help me design this website's architecture"
-2. Claude Opus asked clarifying questions about my goals, technical preferences, constraints
-3. I answered questions and provided context
-4. Claude Opus provided recommendations with rationales
-5. We iterated on the design together
-6. Finalized a complete specification
+- Started with open-ended prompt: "Help me design this website's architecture"
+- Claude Opus asked clarifying questions about my goals, technical preferences, constraints
+- I answered questions and provided context
+- Claude Opus provided recommendations with rationales
+- We iterated on the design together
+- Finalized a complete specification
 
 **Phase 2: Implementation in Claude Code**
-1. Took the finalized design document
-2. Provided it to Claude Code with clear implementation instructions
-3. Claude Code generated all files, configured tooling, set up structure
-4. Minimal back-and-forth—just execution
+- Took the finalized design document
+- Provided it to Claude Code with clear implementation instructions
+- Claude Code generated all files, configured tooling, set up structure
+- Minimal back-and-forth—just execution
 
 ### Benefits I Experienced
 
@@ -399,10 +399,10 @@ For comparison, a typical Next.js blog ships 70-100 KB of JavaScript just for th
 
 Deploying to Vercel was remarkably simple:
 
-1. **Connect GitHub repository** - Vercel auto-detected Astro
-2. **Deploy** - No configuration needed, worked on first try
-3. **Custom domain** - Added andywoods.me in Vercel dashboard
-4. **SSL** - Automatic HTTPS certificate via Let's Encrypt
+- **Connect GitHub repository** - Vercel auto-detected Astro
+- **Deploy** - No configuration needed, worked on first try
+- **Custom domain** - Added andywoods.me in Vercel dashboard
+- **SSL** - Automatic HTTPS certificate via Let's Encrypt
 
 **Total deployment time**: 5 minutes from commit to live site.
 
@@ -555,22 +555,22 @@ Create professional bot and AI crawler controls that position me as LLM-friendly
 
 Try these prompts with Claude Code to add features:
 
-1. **Generate social media images**:
+- **Generate social media images**:
    ```
    "Build a script that generates Open Graph images for each blog post using the WPA poster style"
    ```
 
-2. **Implement search**:
+- **Implement search**:
    ```
    "Add static search using Pagefind that loads on-demand and works offline"
    ```
 
-3. **Add view counters**:
+- **Add view counters**:
    ```
    "Add view count tracking without a database, using Vercel Analytics API at build time"
    ```
 
-4. **Newsletter integration**:
+- **Newsletter integration**:
    ```
    "Add ConvertKit newsletter signup form with inline validation and privacy compliance"
    ```
