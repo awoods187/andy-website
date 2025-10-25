@@ -319,7 +319,7 @@ This generates ~10 static HTML pages at build time (sources + tag-based categori
 
 ### AI-Generated Comprehensive Test Coverage
 
-The test suite focuses on build output validation and content integrity. But here's the remarkable part: Claude Code generated the entire test suite from a single prompt.
+The test suite focuses on build output validation and content integrity. Claude Code generated the entire test suite from a single prompt.
 
 **My prompt**:
 ```
