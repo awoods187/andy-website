@@ -268,7 +268,7 @@ def extract_date(article):
     return None  # Graceful fallback
 ```
 
-**What Claude Code knew that I didn't**:
+**Claude Code handled edge cases I hadn't considered**:
 - Blogs use inconsistent date selectors (`<time>`, `.post-date`, `.meta-date`)
 - Dates appear in multiple formats (ISO, "January 15, 2024", "1/15/2024")
 - Elements can be missing—return `None` rather than crash
@@ -411,7 +411,7 @@ For comparison, a typical Next.js blog ships 70-100 KB of JavaScript just for th
 
 ### Deployment: Zero-Config Vercel
 
-Deploying to Vercel was remarkably simple:
+Deploying to Vercel was straightforward:
 
 - **Connect GitHub repository** - Vercel auto-detected Astro
 - **Deploy** - No configuration needed, worked on first try
@@ -468,7 +468,7 @@ The scraper took 5 minutes to build with Claude Code but saves 30 minutes per ex
 
 Testing that pages exist and have correct metadata is more valuable than testing internal functions. The build process is the real integration test.
 
-Claude Code knew this instinctively—it suggested integration tests over unit tests because static sites need output validation, not function mocking.
+Claude Code knew this instinctively: it suggested integration tests over unit tests because static sites need output validation, not function mocking.
 
 ### 4. AI makes "good enough" actually good
 
