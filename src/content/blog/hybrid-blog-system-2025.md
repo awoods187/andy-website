@@ -169,6 +169,18 @@ const blog = defineCollection({
 
 This catches errors at build time rather than runtime. Common issues like malformed dates or missing fields fail fast during development.
 
+### Security Considerations
+
+Aggregating content from external sources introduces security risks. Here's how this site mitigates them:
+
+**Content Sanitization**: The scraper uses Python's `bleach` library to sanitize all extracted HTML before writing it to the codebase. This strips `<script>` tags, event handlers (`onclick`, `onerror`), iframes, and tracking pixels while preserving basic formatting. The sanitization happens at build time, so malicious content never reaches the deployed site.
+
+**Security Headers**: The site uses Vercel's header configuration to enforce a strict Content Security Policy (CSP) that prevents inline scripts, restricts image sources to trusted domains, and blocks framing attacks. Headers include `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, and `Strict-Transport-Security` with HSTS preload.
+
+**Attack Surface**: Static sites have inherently smaller attack surfaces than dynamic applications. There's no database to inject into, no server-side code to exploit, and no user sessions to hijack. The only external content comes from the Cockroach Labs blog (a trusted source), and it's sanitized before being committed to the repository.
+
+**Trade-off**: The CSP includes `'unsafe-inline'` for styles because Astro generates scoped styles inline. This is an acceptable trade-off for a static site with no user-generated content. For applications handling sensitive data, you'd want to eliminate inline styles entirely.
+
 ### Hybrid Content System
 
 The interesting part is how external content integrates. Instead of manual copying, I built a scraper that extracts my posts from the Cockroach Labs blog. Here's the core pattern (simplified for clarity—actual implementation has more robust error handling):

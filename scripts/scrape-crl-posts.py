@@ -17,6 +17,7 @@ Usage:
 Requirements:
     - requests>=2.31.0
     - beautifulsoup4>=4.12.0
+    - bleach>=6.1.0
 
 Output:
     Generates src/data/crl-posts.ts with blog post metadata
@@ -37,6 +38,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Optional, Set
 
+import bleach
 import requests
 from bs4 import BeautifulSoup, Tag
 from requests.adapters import HTTPAdapter
@@ -71,6 +73,30 @@ USER_AGENT = (
 
 # Default tags for database-related posts
 DEFAULT_TAGS: Set[str] = {"databases"}
+
+# Security: Allowed HTML tags and attributes for sanitization
+# We only allow basic formatting tags, no scripts/iframes/event handlers
+ALLOWED_TAGS = [
+    'p', 'br', 'strong', 'em', 'b', 'i', 'u',
+    'a', 'ul', 'ol', 'li', 'blockquote', 'code',
+    'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+    'pre', 'span', 'div'
+]
+
+ALLOWED_ATTRIBUTES = {
+    'a': ['href', 'title'],
+    'code': ['class'],
+    'span': ['class'],
+    'div': ['class']
+}
+
+# Strip all potentially dangerous elements
+STRIP_TAGS = [
+    'script', 'style', 'iframe', 'object', 'embed',
+    'applet', 'meta', 'link', 'base', 'form', 'input',
+    'button', 'select', 'textarea', 'img', 'video',
+    'audio', 'track', 'canvas', 'svg'
+]
 
 
 class BlogPost:
@@ -197,6 +223,71 @@ def parse_date(date_str: str) -> Optional[str]:
     return None
 
 
+def sanitize_html(html_content: str) -> str:
+    """Sanitize HTML content to prevent XSS and malicious code injection.
+
+    Removes:
+    - <script> tags and JavaScript
+    - Event handlers (onclick, onerror, etc.)
+    - <iframe>, <object>, <embed> tags
+    - <img> tags (we don't want tracking pixels)
+    - <style> tags and inline styles
+    - All other potentially dangerous HTML
+
+    Preserves:
+    - Basic formatting (p, strong, em, a, ul, ol, li)
+    - Safe attributes (href, title on links)
+
+    Args:
+        html_content: Raw HTML string from external source
+
+    Returns:
+        Sanitized HTML string safe for rendering
+
+    Security:
+        Uses bleach library with whitelist approach
+        Strips all tags not explicitly allowed
+        Removes all event handler attributes
+    """
+    if not html_content:
+        return ""
+
+    # Use bleach to sanitize with strict whitelist
+    cleaned = bleach.clean(
+        html_content,
+        tags=ALLOWED_TAGS,
+        attributes=ALLOWED_ATTRIBUTES,
+        strip=True  # Strip tags instead of escaping
+    )
+
+    # Additional cleanup: remove any remaining event handlers
+    # (defensive in case bleach misses something)
+    event_handlers = [
+        'onclick', 'onload', 'onerror', 'onmouseover',
+        'onmouseout', 'onfocus', 'onblur', 'onchange',
+        'onsubmit', 'onkeydown', 'onkeyup', 'onkeypress'
+    ]
+
+    for handler in event_handlers:
+        # Case-insensitive removal
+        cleaned = re.sub(
+            f'{handler}\\s*=\\s*["\'][^"\']*["\']',
+            '',
+            cleaned,
+            flags=re.IGNORECASE
+        )
+
+    # Remove any javascript: protocol links
+    cleaned = re.sub(
+        r'href\\s*=\\s*["\']javascript:[^"\']*["\']',
+        '',
+        cleaned,
+        flags=re.IGNORECASE
+    )
+
+    return cleaned.strip()
+
+
 def extract_tags(card: Tag, title: str, excerpt: str) -> List[str]:
     """Extract relevant tags from post content.
 
@@ -286,7 +377,12 @@ def extract_post_data(card: Tag) -> Optional[BlogPost]:
         excerpt_elem = card.find("p") or card.find(
             "div", class_=re.compile("excerpt|description|summary")
         )
-        excerpt = excerpt_elem.get_text(strip=True) if excerpt_elem else ""
+        raw_excerpt = excerpt_elem.get_text(strip=True) if excerpt_elem else ""
+
+        # Security: Sanitize excerpt HTML to prevent XSS
+        # Even though we're using .get_text() which strips HTML,
+        # we sanitize as defense-in-depth in case the extraction changes
+        excerpt = sanitize_html(raw_excerpt)
 
         # Extract and parse date (optional)
         date_elem = card.find("time") or card.find("span", class_=re.compile("date"))
