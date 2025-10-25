@@ -3,9 +3,11 @@
  * Archive Page - Redirect
  *
  * Archive functionality has been merged into the Blog page.
- * This page redirects to /blog to maintain old links.
+ * This page redirects to /blog/all to maintain old links.
+ *
+ * Note: Redirects directly to /blog/all (not /blog) to avoid double redirect.
  */
 
-// Redirect to blog page
-return Astro.redirect('/blog', 301);
+// Redirect to blog page (direct to /blog/all to avoid redirect flash)
+return Astro.redirect('/blog/all', 301);
 ---
