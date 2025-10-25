@@ -236,11 +236,9 @@ def extract_date(article):
     return None
 ```
 
-The scraper is defensive - it handles missing elements, various date formats, and malformed HTML. It generates a TypeScript file that's type-checked at build time.
+The scraper handles missing elements, various date formats, and malformed HTML gracefully, then generates a TypeScript file that's type-checked at build time.
 
 ### How Claude Code Built the Scraper
-
-Claude Code anticipated edge cases I wouldn't have thought of, going beyond just generating working code.
 
 **My initial prompt**:
 ```
