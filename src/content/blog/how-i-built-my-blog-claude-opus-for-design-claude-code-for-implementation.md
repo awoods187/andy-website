@@ -22,11 +22,17 @@ Most tech professionals publish in multiple places:
 - **Company blog** for product announcements and technical deep-dives
 - **External publications** for broader reach
 
-The standard approaches all have downsides:
+The standard approaches all failed:
 
-- **Manual cross-posting**: Duplicate content hurts SEO and creates maintenance overhead
+**Platform limitations:**
+- **Ghost/WordPress**: Too heavy for a simple blog, requires database/server maintenance
+- **GitHub Pages**: Manual HTML or limited theming, no content aggregation features
+- **Medium/Substack**: Don't own your URLs, can't customize design, vendor lock-in
+
+**Content strategy problems:**
+- **Manual cross-posting**: Duplicate content penalties hurt SEO, maintenance nightmare as posts multiply
 - **External links only**: Loses context and makes it hard to showcase your full body of work
-- **Ignore external content**: Wastes your best writing
+- **Ignore external content**: Wastes your best writing that lives elsewhere
 
 I built a fourth option: an automated aggregation system that pulls content from multiple sources while maintaining clear attribution.
 
