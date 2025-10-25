@@ -45,7 +45,7 @@ One pattern I found particularly effective while building this site was using tw
 - Executes the implementation
 - Handles file creation and code generation
 
-This separation isn't just about using different tools—it's about intentional separation of concerns.
+This separation creates intentional boundaries between design discussions and implementation.
 
 ### Why This Approach Works
 
@@ -129,7 +129,7 @@ This conversation took 2 minutes. Researching and evaluating these options manua
 - Performance optimization: 30 minutes
 - **Total**: ~4 hours in one afternoon
 
-The 8x speedup wasn't just about typing faster—Claude Code brought best practices, edge case handling, and deployable patterns from the start.
+The 8x speedup came from Claude Code providing best practices, edge case handling, and deployable patterns from the start.
 
 ## Architecture Overview
 
@@ -240,7 +240,7 @@ The scraper is defensive - it handles missing elements, various date formats, an
 
 ### How Claude Code Built the Scraper
 
-The most impressive part wasn't the code itself—it was how Claude Code anticipated edge cases I wouldn't have thought of.
+Claude Code anticipated edge cases I wouldn't have thought of, going beyond just generating working code.
 
 **My initial prompt**:
 ```
