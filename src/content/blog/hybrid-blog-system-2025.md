@@ -269,7 +269,7 @@ def extract_date(article):
 **Claude Code handled edge cases I hadn't considered**:
 - Blogs use inconsistent date selectors (`<time>`, `.post-date`, `.meta-date`)
 - Dates appear in multiple formats (ISO, "January 15, 2024", "1/15/2024")
-- Elements can be missing—return `None` rather than crash
+- If elements are missing, the code returns `None` to avoid crashes
 - Multiple retry strategies beat trying to get it perfect the first time
 
 This defensive programming pattern would have taken me hours to discover through trial and error. Claude Code built it in from the start.
