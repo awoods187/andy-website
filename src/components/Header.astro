@@ -37,7 +37,7 @@ const currentPath = Astro.url.pathname;
       {/* Blog link - matches any path starting with /blog */}
       <li>
         <a
-          href="/blog"
+          href="/blog/all"
           class:list={[
             "text-base no-underline hover:opacity-70 transition-opacity",
             currentPath.startsWith("/blog") ? "text-black font-medium" : "text-gray-600"
