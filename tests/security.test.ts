@@ -294,9 +294,9 @@ describe('Security Hardening', () => {
   });
 
   describe('Blog Post Security Documentation', () => {
-    const blogPostPath = join(process.cwd(), 'src/content/blog/hybrid-blog-system-2025.md');
+    const blogPostPath = join(process.cwd(), 'src/content/blog/how-i-built-my-blog-claude-opus-for-design-claude-code-for-implementation.md');
 
-    it('hybrid blog post should exist', () => {
+    it('blog post should exist', () => {
       expect(existsSync(blogPostPath)).toBe(true);
     });
 

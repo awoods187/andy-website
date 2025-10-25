@@ -1,9 +1,9 @@
 ---
-title: "Building a Hybrid Blog System: Merging Personal and Company Content"
+title: "How I Built My Blog: Claude Opus for Design, Claude Code for Implementation"
 date: 2025-10-21
 excerpt: "A technical deep-dive into building a static site that automatically aggregates content from multiple sources, with type safety, comprehensive testing, and sub-second load times."
 tags: ["web-development", "astro", "architecture", "static-sites", "python", "testing", "claude-code", "ai"]
-image: "/images/blog/hybrid-blog-system-2025-hero.jpg"
+image: "/images/blog/how-i-built-my-blog-claude-opus-for-design-claude-code-for-implementation-hero.jpg"
 imageSource: "AI-generated using Stable Diffusion"
 
 # License Information
