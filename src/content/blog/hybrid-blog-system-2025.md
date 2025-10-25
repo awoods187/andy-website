@@ -71,7 +71,7 @@ This separation creates intentional boundaries between design discussions and im
 - Took the finalized design document
 - Provided it to Claude Code with clear implementation instructions
 - Claude Code generated all files, configured tooling, set up structure
-- Minimal back-and-forth—just execution
+- Streamlined execution with minimal back-and-forth
 
 ### Benefits I Experienced
 
