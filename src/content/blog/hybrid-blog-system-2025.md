@@ -183,7 +183,7 @@ Aggregating content from external sources introduces security risks. Here's how 
 
 ### Hybrid Content System
 
-The interesting part is how external content integrates. Instead of manual copying, I built a scraper that extracts my posts from the Cockroach Labs blog. Here's the core pattern (simplified for clarity—actual implementation has more robust error handling):
+I built a scraper to extract my posts from the Cockroach Labs blog rather than manually copying them. The core pattern, simplified:
 
 ```python
 # scripts/scrape-crl-posts.py (simplified)
