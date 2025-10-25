@@ -448,7 +448,7 @@ These trade-offs make sense for a personal blog. They wouldn't for an e-commerce
 
 ### 1. Start with constraints
 
-The "minimal JavaScript" constraint wasn't dogma - it was a forcing function for simplicity. It prevented scope creep and feature bloat.
+The "minimal JavaScript" constraint served as a forcing function for simplicity, preventing scope creep and feature bloat.
 
 Claude Code helped enforce this by suggesting solutions that matched the constraint rather than fighting it.
 
