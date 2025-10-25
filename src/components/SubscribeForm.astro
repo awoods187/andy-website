@@ -20,20 +20,22 @@ const buttondownUsername = 'awoods187';
       class="subscribe-form"
     >
       <div class="form-group">
-        <label for="bd-email" class="visually-hidden">Email address</label>
-        <input
-          type="email"
-          name="email"
-          id="bd-email"
-          placeholder="you@example.com"
-          required
-          autocomplete="email"
-          aria-label="Email address for newsletter subscription"
-          class="email-input"
-        />
-        <button type="submit" class="subscribe-button">
-          Subscribe
-        </button>
+        <label for="bd-email" class="email-label">Email address</label>
+        <div class="input-button-group">
+          <input
+            type="email"
+            name="email"
+            id="bd-email"
+            placeholder="you@example.com"
+            required
+            autocomplete="email"
+            aria-label="Email address for newsletter subscription"
+            class="email-input"
+          />
+          <button type="submit" class="subscribe-button">
+            Subscribe
+          </button>
+        </div>
       </div>
 
       <!-- Anti-spam hidden field -->
@@ -92,6 +94,19 @@ const buttondownUsername = 'awoods187';
   }
 
   .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .email-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 0.25rem;
+  }
+
+  .input-button-group {
     display: flex;
     gap: 0.5rem;
     flex-wrap: wrap;
@@ -196,7 +211,7 @@ const buttondownUsername = 'awoods187';
       border-radius: 0;
     }
 
-    .form-group {
+    .input-button-group {
       flex-direction: column;
     }
 
