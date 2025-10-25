@@ -133,7 +133,9 @@ The 8x speedup wasn't just about typing faster—Claude Code brought best practi
 
 ## Architecture Overview
 
-The site uses Astro, a static site generator that pre-renders everything at build time. Here are the key architectural decisions:
+The site runs as a static build pipeline that pulls in content from multiple sources (personal blog posts, Cockroach Labs articles, external publications), normalizes it into a unified format, and outputs plain HTML. There's no runtime backend or database—everything is generated ahead of time and served from a CDN.
+
+I chose Astro as the static site generator to handle this build process. Here are the key architectural decisions:
 
 ### Static-First Approach
 
