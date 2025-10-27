@@ -1,14 +1,15 @@
 /**
  * Subscribe Form Accessibility Tests
  *
- * These tests ensure the subscribe form has proper labels and accessibility features.
- * This prevents UX issues where users can't tell what fields are for.
+ * These tests ensure the subscribe form modal has proper accessibility features.
+ * Updated for modal dialog approach with Buttondown iframe embed.
  *
  * Key validations:
- * 1. Email input has a visible label
- * 2. Label is properly associated with input (for attribute)
- * 3. Form has required attributes for accessibility
- * 4. No reliance only on placeholders for field identification
+ * 1. Modal dialog has proper ARIA attributes
+ * 2. Subscribe button is accessible
+ * 3. Close button has proper labels
+ * 4. Iframe has proper title attribute
+ * 5. Keyboard navigation works (focus management)
  */
 
 import { describe, it, expect } from 'vitest';
@@ -17,158 +18,164 @@ import { join } from 'path';
 
 describe('Subscribe Form Accessibility', () => {
   const subscribeFormPath = join(process.cwd(), 'src/components/SubscribeForm.astro');
+  const content = readFileSync(subscribeFormPath, 'utf-8');
 
   it('SubscribeForm component should exist', () => {
-    const content = readFileSync(subscribeFormPath, 'utf-8');
     expect(content).toBeTruthy();
   });
 
-  describe('Email Input Label', () => {
-    it('should have a visible label for the email input', () => {
-      const content = readFileSync(subscribeFormPath, 'utf-8');
+  describe('Modal Dialog Accessibility', () => {
+    it('dialog should have aria-labelledby attribute', () => {
+      expect(content).toMatch(/<dialog[^>]*aria-labelledby="dialog-title"[^>]*>/);
+    });
 
-      // Should have a label element
-      expect(content).toMatch(/<label[^>]*for="bd-email"[^>]*>/);
+    it('dialog should have id="subscribe-modal"', () => {
+      expect(content).toMatch(/<dialog[^>]*id="subscribe-modal"[^>]*>/);
+    });
 
-      // Label should NOT be visually hidden (this was the bug)
-      const labelMatch = content.match(/<label[^>]*for="bd-email"[^>]*class="([^"]*)"[^>]*>/);
-      if (labelMatch) {
-        const classes = labelMatch[1];
-        expect(classes).not.toContain('visually-hidden');
-        expect(classes).not.toContain('sr-only');
-        expect(classes).not.toContain('hidden');
+    it('dialog header should have h2 with id="dialog-title"', () => {
+      expect(content).toMatch(/<h2[^>]*id="dialog-title"[^>]*>/);
+    });
+
+    it('dialog title should describe the modal purpose', () => {
+      const titleMatch = content.match(/<h2[^>]*id="dialog-title"[^>]*>([^<]+)<\/h2>/);
+      expect(titleMatch).toBeTruthy();
+      if (titleMatch) {
+        const titleText = titleMatch[1].trim();
+        expect(titleText.length).toBeGreaterThan(0);
+        expect(titleText.toLowerCase()).toContain('subscribe');
       }
-    });
-
-    it('label should contain "Email address" text', () => {
-      const content = readFileSync(subscribeFormPath, 'utf-8');
-
-      // Extract the label content
-      const labelMatch = content.match(/<label[^>]*for="bd-email"[^>]*>([^<]+)<\/label>/);
-      expect(labelMatch).toBeTruthy();
-
-      if (labelMatch) {
-        const labelText = labelMatch[1].trim();
-        expect(labelText).toBe('Email address');
-      }
-    });
-
-    it('label should have email-label class for styling', () => {
-      const content = readFileSync(subscribeFormPath, 'utf-8');
-
-      // Should have the email-label class
-      expect(content).toMatch(/<label[^>]*class="email-label"[^>]*>/);
-    });
-
-    it('email input should have proper id matching label for attribute', () => {
-      const content = readFileSync(subscribeFormPath, 'utf-8');
-
-      // Label should have for="bd-email"
-      expect(content).toMatch(/<label[^>]*for="bd-email"[^>]*>/);
-
-      // Input should have id="bd-email"
-      expect(content).toMatch(/<input[^>]*id="bd-email"[^>]*>/);
     });
   });
 
-  describe('Form Structure', () => {
-    it('should wrap input and button in input-button-group', () => {
-      const content = readFileSync(subscribeFormPath, 'utf-8');
-
-      // Should have input-button-group div
-      expect(content).toMatch(/<div class="input-button-group">/);
+  describe('Subscribe Button Accessibility', () => {
+    it('subscribe button should have type="button"', () => {
+      expect(content).toMatch(/<button[^>]*type="button"[^>]*class="subscribe-button"[^>]*>/);
     });
 
-    it('form-group should use flexbox column layout', () => {
-      const content = readFileSync(subscribeFormPath, 'utf-8');
-
-      // CSS should set form-group to flex-direction: column
-      expect(content).toMatch(/\.form-group\s*{[^}]*flex-direction:\s*column/s);
+    it('subscribe button should have aria-haspopup attribute', () => {
+      expect(content).toMatch(/<button[^>]*aria-haspopup="dialog"[^>]*>/);
     });
 
-    it('should have email-label CSS styling', () => {
-      const content = readFileSync(subscribeFormPath, 'utf-8');
-
-      // Should have CSS for .email-label
-      expect(content).toMatch(/\.email-label\s*{/);
-
-      // Should have font-weight and color
-      expect(content).toMatch(/\.email-label\s*{[^}]*font-weight:/s);
-      expect(content).toMatch(/\.email-label\s*{[^}]*color:/s);
+    it('subscribe button should have descriptive text', () => {
+      const buttonMatch = content.match(/<button[^>]*class="subscribe-button"[^>]*>\s*([^<]+)\s*<\/button>/);
+      expect(buttonMatch).toBeTruthy();
+      if (buttonMatch) {
+        const buttonText = buttonMatch[1].trim();
+        expect(buttonText).toBe('Subscribe');
+      }
     });
   });
 
-  describe('Accessibility Attributes', () => {
-    it('email input should have type="email"', () => {
-      const content = readFileSync(subscribeFormPath, 'utf-8');
-      expect(content).toMatch(/<input[^>]*type="email"[^>]*>/);
+  describe('Close Button Accessibility', () => {
+    it('close button should have aria-label', () => {
+      expect(content).toMatch(/<button[^>]*aria-label="Close subscription dialog"[^>]*>/);
     });
 
-    it('email input should have required attribute', () => {
-      const content = readFileSync(subscribeFormPath, 'utf-8');
-      expect(content).toMatch(/<input[^>]*required[^>]*>/);
+    it('close button should have type="button"', () => {
+      const closeButtonMatch = content.match(/<button[^>]*class="close-button"[^>]*>/);
+      expect(closeButtonMatch).toBeTruthy();
+      if (closeButtonMatch) {
+        expect(closeButtonMatch[0]).toContain('type="button"');
+      }
     });
 
-    it('email input should have autocomplete="email"', () => {
-      const content = readFileSync(subscribeFormPath, 'utf-8');
-      expect(content).toMatch(/<input[^>]*autocomplete="email"[^>]*>/);
+    it('cancel button should exist for keyboard users', () => {
+      expect(content).toMatch(/<button[^>]*class="cancel-button"[^>]*>/);
+    });
+  });
+
+  describe('Iframe Accessibility', () => {
+    it('iframe should have title attribute', () => {
+      expect(content).toMatch(/<iframe[^>]*title="[^"]*"[^>]*>/);
     });
 
-    it('email input should have aria-label for screen readers', () => {
-      const content = readFileSync(subscribeFormPath, 'utf-8');
-      expect(content).toMatch(/<input[^>]*aria-label="[^"]*"[^>]*>/);
+    it('iframe title should be descriptive', () => {
+      const iframeMatch = content.match(/<iframe[^>]*title="([^"]*)"[^>]*>/);
+      expect(iframeMatch).toBeTruthy();
+      if (iframeMatch) {
+        const titleText = iframeMatch[1];
+        expect(titleText.length).toBeGreaterThan(0);
+        expect(titleText.toLowerCase()).toMatch(/newsletter|subscription|subscribe/);
+      }
+    });
+
+    it('iframe should have scrolling="no" for better UX', () => {
+      expect(content).toMatch(/<iframe[^>]*scrolling="no"[^>]*>/);
+    });
+  });
+
+  describe('Focus Management', () => {
+    it('close button should have focus-visible styling', () => {
+      expect(content).toMatch(/\.close-button:focus-visible\s*{/);
+    });
+
+    it('subscribe button should have focus-visible styling', () => {
+      expect(content).toMatch(/\.subscribe-button:focus-visible\s*{/);
+    });
+
+    it('cancel button should have focus-visible styling', () => {
+      expect(content).toMatch(/\.cancel-button:focus-visible\s*{/);
+    });
+  });
+
+  describe('Modal CSS Accessibility', () => {
+    it('should have dialog backdrop styling', () => {
+      expect(content).toMatch(/\.subscribe-dialog::backdrop\s*{/);
+    });
+
+    it('dialog should have proper visual styling', () => {
+      expect(content).toMatch(/\.subscribe-dialog\s*{/);
+    });
+
+    it('should have dialog content wrapper', () => {
+      expect(content).toMatch(/<div class="dialog-content">/);
     });
   });
 
   describe('Regression Prevention', () => {
-    it('should fail if label is made visually-hidden again', () => {
-      const content = readFileSync(subscribeFormPath, 'utf-8');
-
-      // This test ensures we don't accidentally hide the label again
-      const labelMatch = content.match(/<label[^>]*for="bd-email"[^>]*>/);
-      expect(labelMatch).toBeTruthy();
-
-      if (labelMatch) {
-        const labelTag = labelMatch[0];
-        // Should NOT contain visually-hidden class
-        expect(labelTag).not.toContain('class="visually-hidden"');
-        expect(labelTag).not.toContain('sr-only');
+    it('should fail if dialog loses aria-labelledby', () => {
+      const dialogMatch = content.match(/<dialog[^>]*id="subscribe-modal"[^>]*>/);
+      expect(dialogMatch).toBeTruthy();
+      if (dialogMatch) {
+        const dialogTag = dialogMatch[0];
+        expect(dialogTag).toContain('aria-labelledby');
       }
     });
 
-    it('should fail if label is removed entirely', () => {
-      const content = readFileSync(subscribeFormPath, 'utf-8');
-
-      // Count label elements for bd-email
-      const labelMatches = content.match(/<label[^>]*for="bd-email"[^>]*>/g);
-
-      expect(labelMatches).toBeTruthy();
-      expect(labelMatches!.length).toBeGreaterThan(0);
+    it('should fail if iframe loses title attribute', () => {
+      const iframeMatch = content.match(/<iframe[^>]*class="buttondown-iframe"[^>]*>/);
+      expect(iframeMatch).toBeTruthy();
+      if (iframeMatch) {
+        const iframeTag = iframeMatch[0];
+        expect(iframeTag).toContain('title=');
+      }
     });
 
-    it('should have visible label text (not empty)', () => {
-      const content = readFileSync(subscribeFormPath, 'utf-8');
-
-      const labelMatch = content.match(/<label[^>]*for="bd-email"[^>]*>([^<]+)<\/label>/);
-      expect(labelMatch).toBeTruthy();
-
-      if (labelMatch) {
-        const labelText = labelMatch[1].trim();
-        expect(labelText.length).toBeGreaterThan(0);
-        expect(labelText).not.toBe('');
+    it('should fail if close button loses aria-label', () => {
+      const closeButtonMatch = content.match(/<button[^>]*class="close-button"[^>]*>/);
+      expect(closeButtonMatch).toBeTruthy();
+      if (closeButtonMatch) {
+        const buttonTag = closeButtonMatch[0];
+        expect(buttonTag).toContain('aria-label');
       }
     });
   });
 
   describe('Mobile Responsiveness', () => {
     it('should have responsive styles for mobile', () => {
-      const content = readFileSync(subscribeFormPath, 'utf-8');
-
       // Should have mobile media query
       expect(content).toMatch(/@media\s*\(max-width:\s*640px\)/);
+    });
 
-      // Should have input-button-group with flex-direction column in responsive section
-      expect(content).toMatch(/\.input-button-group\s*{[^}]*flex-direction:\s*column/s);
+    it('dialog should have mobile-specific width', () => {
+      // Mobile dialog should be wider (95vw)
+      expect(content).toMatch(/\.subscribe-dialog\s*{[^}]*width:\s*95vw/s);
+    });
+
+    it('iframe should adjust height on mobile', () => {
+      // Iframe height should be adjustable for mobile
+      expect(content).toMatch(/\.buttondown-iframe\s*{[^}]*height:/s);
     });
   });
 });
