@@ -7,12 +7,12 @@
  * Background:
  * - Buttondown migrated from buttondown.email to buttondown.com
  * - This test catches domain changes that would break subscriptions
+ * - Updated to use iframe modal approach (no popup window)
  *
  * Key validations:
- * 1. Form action uses correct Buttondown domain
- * 2. Popup window URL uses correct domain
- * 3. Privacy policy link uses correct domain
- * 4. API endpoint is accessible
+ * 1. Iframe uses correct Buttondown domain and API endpoint
+ * 2. Privacy policy link uses correct domain
+ * 3. No popup window blockers (uses modal dialog)
  */
 
 import { describe, it, expect } from 'vitest';
@@ -32,18 +32,17 @@ describe('Buttondown Integration', () => {
       expect(subscribeForm).not.toContain('buttondown.email');
     });
 
-    it('form action should use buttondown.com API endpoint', () => {
-      // Check for the correct API endpoint
+    it('iframe src should use buttondown.com API endpoint', () => {
+      // Check for the correct iframe API endpoint
       expect(subscribeForm).toMatch(
-        /action=\{`https:\/\/buttondown\.com\/api\/emails\/embed-subscribe\/\$\{buttondownUsername\}`\}/
+        /src=\{`https:\/\/buttondown\.com\/api\/emails\/embed-subscribe\/\$\{buttondownUsername\}`\}/
       );
     });
 
-    it('popup window should open buttondown.com URL', () => {
-      // Check the onsubmit popup URL
-      expect(subscribeForm).toMatch(
-        /window\.open\('https:\/\/buttondown\.com\/\$\{buttondownUsername\}'/
-      );
+    it('should NOT use popup window (window.open)', () => {
+      // We replaced popup window with modal dialog to avoid popup blockers
+      expect(subscribeForm).not.toContain('window.open');
+      expect(subscribeForm).not.toContain('popupwindow');
     });
 
     it('privacy policy link should use buttondown.com', () => {
@@ -58,22 +57,28 @@ describe('Buttondown Integration', () => {
     });
   });
 
-  describe('Form Configuration', () => {
-    it('should have correct form method (POST)', () => {
-      expect(subscribeForm).toMatch(/method="post"/);
+  describe('Modal Dialog Configuration', () => {
+    it('should use dialog element for modal', () => {
+      expect(subscribeForm).toMatch(/<dialog[^>]*id="subscribe-modal"[^>]*>/);
     });
 
-    it('should target popupwindow', () => {
-      expect(subscribeForm).toMatch(/target="popupwindow"/);
+    it('should have iframe element with Buttondown embed', () => {
+      expect(subscribeForm).toMatch(/<iframe[^>]*class="buttondown-iframe"[^>]*>/);
     });
 
-    it('should have embed hidden field', () => {
-      expect(subscribeForm).toMatch(/<input type="hidden" name="embed" value="1"/);
+    it('should have button to open modal dialog', () => {
+      // Button should trigger showModal()
+      expect(subscribeForm).toMatch(/onclick="[^"]*showModal\(\)"/);
+    });
+
+    it('should have close button functionality', () => {
+      // Close button should trigger close()
+      expect(subscribeForm).toMatch(/onclick="[^"]*close\(\)"/);
     });
   });
 
   describe('API Endpoint Format', () => {
-    it('should use the correct API path structure', () => {
+    it('should use the correct API path structure in iframe', () => {
       // The API endpoint should be:
       // https://buttondown.com/api/emails/embed-subscribe/{username}
       const apiPattern = /https:\/\/buttondown\.com\/api\/emails\/embed-subscribe\/\$\{buttondownUsername\}/;
@@ -88,13 +93,18 @@ describe('Buttondown Integration', () => {
       expect(subscribeForm).not.toContain(oldDomain);
     });
 
-    it('should have exactly 3 references to buttondown.com', () => {
-      // 1. Form action URL
-      // 2. Popup window URL
-      // 3. Privacy policy link
+    it('should have at least 2 references to buttondown.com', () => {
+      // 1. Iframe src URL
+      // 2. Privacy policy link
       const matches = subscribeForm.match(/buttondown\.com/g);
       expect(matches).toBeTruthy();
-      expect(matches!.length).toBeGreaterThanOrEqual(3);
+      expect(matches!.length).toBeGreaterThanOrEqual(2);
+    });
+
+    it('should fail if popup window approach is reintroduced', () => {
+      // Ensure we don't accidentally go back to popup windows
+      expect(subscribeForm).not.toContain('target="popupwindow"');
+      expect(subscribeForm).not.toContain('window.open');
     });
   });
 });

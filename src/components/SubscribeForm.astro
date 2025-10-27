@@ -1,6 +1,6 @@
 ---
-// Zero-JavaScript subscription component
-// Posts directly to Buttondown API
+// Buttondown iframe embed subscription component
+// Uses modal dialog to avoid popup blockers
 const buttondownUsername = 'awoods187';
 ---
 
@@ -12,35 +12,52 @@ const buttondownUsername = 'awoods187';
       No spam, no tracking. Unsubscribe anytime.
     </p>
 
-    <form
-      action={`https://buttondown.com/api/emails/embed-subscribe/${buttondownUsername}`}
-      method="post"
-      target="popupwindow"
-      onsubmit={`window.open('https://buttondown.com/${buttondownUsername}', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true`}
-      class="subscribe-form"
-    >
-      <div class="form-group">
-        <label for="bd-email" class="email-label">Email address</label>
-        <div class="input-button-group">
-          <input
-            type="email"
-            name="email"
-            id="bd-email"
-            placeholder="you@example.com"
-            required
-            autocomplete="email"
-            aria-label="Email address for newsletter subscription"
-            class="email-input"
-          />
-          <button type="submit" class="subscribe-button">
-            Subscribe
+    <div class="subscribe-form">
+      <button
+        type="button"
+        class="subscribe-button"
+        onclick="document.getElementById('subscribe-modal').showModal()"
+        aria-haspopup="dialog"
+      >
+        Subscribe
+      </button>
+    </div>
+
+    <!-- Modal Dialog with Buttondown iframe -->
+    <dialog id="subscribe-modal" class="subscribe-dialog" aria-labelledby="dialog-title">
+      <div class="dialog-content">
+        <div class="dialog-header">
+          <h2 id="dialog-title">Subscribe to Newsletter</h2>
+          <button
+            type="button"
+            class="close-button"
+            onclick="document.getElementById('subscribe-modal').close()"
+            aria-label="Close subscription dialog"
+          >
+            ✕
+          </button>
+        </div>
+
+        <div class="iframe-container">
+          <iframe
+            src={`https://buttondown.com/api/emails/embed-subscribe/${buttondownUsername}`}
+            title="Newsletter subscription form"
+            scrolling="no"
+            class="buttondown-iframe"
+          ></iframe>
+        </div>
+
+        <div class="dialog-footer">
+          <button
+            type="button"
+            class="cancel-button"
+            onclick="document.getElementById('subscribe-modal').close()"
+          >
+            Cancel
           </button>
         </div>
       </div>
-
-      <!-- Anti-spam hidden field -->
-      <input type="hidden" name="embed" value="1" />
-    </form>
+    </dialog>
 
     <details class="subscribe-details">
       <summary>Privacy &amp; RSS</summary>
@@ -93,42 +110,6 @@ const buttondownUsername = 'awoods187';
     margin: 1.5rem 0;
   }
 
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .email-label {
-    font-size: 0.875rem;
-    font-weight: 600;
-    color: #1a1a1a;
-    margin-bottom: 0.25rem;
-  }
-
-  .input-button-group {
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-  }
-
-  .email-input {
-    flex: 1;
-    min-width: 200px;
-    padding: 0.75rem 1rem;
-    font-size: 1rem;
-    border: 2px solid #ddd;
-    border-radius: 6px;
-    background: white;
-    transition: border-color 0.2s ease;
-  }
-
-  .email-input:focus {
-    outline: none;
-    border-color: #1a1a1a;
-    box-shadow: 0 0 0 3px rgba(26, 26, 26, 0.1);
-  }
-
   .subscribe-button {
     padding: 0.75rem 2rem;
     font-size: 1rem;
@@ -147,6 +128,111 @@ const buttondownUsername = 'awoods187';
 
   .subscribe-button:active {
     transform: translateY(1px);
+  }
+
+  .subscribe-button:focus-visible {
+    outline: 2px solid #1a1a1a;
+    outline-offset: 2px;
+  }
+
+  /* Modal Dialog Styles */
+  .subscribe-dialog {
+    border: none;
+    border-radius: 12px;
+    padding: 0;
+    max-width: 90vw;
+    width: 540px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+                0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+
+  .subscribe-dialog::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+  }
+
+  .dialog-content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .dialog-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .dialog-header h2 {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1a1a1a;
+  }
+
+  .close-button {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #666;
+    cursor: pointer;
+    padding: 0.25rem 0.5rem;
+    line-height: 1;
+    border-radius: 4px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  .close-button:hover {
+    background: #f3f4f6;
+    color: #1a1a1a;
+  }
+
+  .close-button:focus-visible {
+    outline: 2px solid #1a1a1a;
+    outline-offset: 2px;
+  }
+
+  .iframe-container {
+    padding: 1.5rem;
+    min-height: 250px;
+  }
+
+  .buttondown-iframe {
+    width: 100%;
+    height: 250px;
+    border: none;
+    background: white;
+  }
+
+  .dialog-footer {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid #e5e7eb;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .cancel-button {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #666;
+    background: transparent;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .cancel-button:hover {
+    background: #f3f4f6;
+    border-color: #999;
+  }
+
+  .cancel-button:focus-visible {
+    outline: 2px solid #1a1a1a;
+    outline-offset: 2px;
   }
 
   .subscribe-details {
@@ -211,13 +297,41 @@ const buttondownUsername = 'awoods187';
       border-radius: 0;
     }
 
-    .input-button-group {
-      flex-direction: column;
-    }
-
-    .email-input,
     .subscribe-button {
       width: 100%;
+    }
+
+    .subscribe-dialog {
+      max-width: 95vw;
+      width: 95vw;
+      margin: auto;
+    }
+
+    .dialog-header {
+      padding: 1rem;
+    }
+
+    .dialog-header h2 {
+      font-size: 1.125rem;
+    }
+
+    .iframe-container {
+      padding: 1rem;
+    }
+
+    .buttondown-iframe {
+      height: 280px;
+    }
+
+    .dialog-footer {
+      padding: 0.75rem 1rem;
+    }
+  }
+
+  /* Tablet and small desktop */
+  @media (min-width: 641px) and (max-width: 1024px) {
+    .subscribe-dialog {
+      width: 480px;
     }
   }
 </style>
