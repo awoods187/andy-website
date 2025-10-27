@@ -192,6 +192,8 @@ const blog = defineCollection({
 });
 ```
 
+[📄 View full implementation](https://github.com/awoods187/andy-website/blob/main/src/content/config.ts)
+
 This catches errors at build time rather than runtime. Common issues like malformed dates or missing fields fail fast during development.
 
 ### Security Considerations
@@ -200,7 +202,7 @@ Aggregating content from external sources introduces security risks. Here's how 
 
 **Content Sanitization**: The scraper uses Python's `bleach` library to sanitize all extracted HTML before writing it to the codebase. This strips `<script>` tags, event handlers (`onclick`, `onerror`), iframes, and tracking pixels while preserving basic formatting. The sanitization happens at build time, so malicious content never reaches the deployed site.
 
-**Security Headers**: The site uses Vercel's header configuration to enforce a strict Content Security Policy (CSP) that prevents inline scripts, restricts image sources to trusted domains, and blocks framing attacks. Headers include `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, and `Strict-Transport-Security` with HSTS preload.
+**Security Headers**: The site uses Vercel's header configuration to enforce a strict Content Security Policy (CSP) that prevents inline scripts, restricts image sources to trusted domains, and blocks framing attacks. Headers include `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, and `Strict-Transport-Security` with HSTS preload. [📄 View security headers configuration](https://github.com/awoods187/andy-website/blob/main/vercel.json)
 
 **Attribution Enforcement**: External posts include clear source attribution in both metadata and rendered HTML. This is enforced at the type level—TypeScript won't compile if source information is missing.
 
@@ -234,7 +236,9 @@ def scrape_author_posts(author_url):
     return posts
 ```
 
-The scraper outputs a TypeScript file that gets imported during the Astro build. This means:
+[📄 View full scraper implementation](https://github.com/awoods187/andy-website/blob/main/scripts/scrape-crl-posts.py) (594 lines with comprehensive error handling, security sanitization, and logging)
+
+The scraper outputs a TypeScript file ([`src/data/crl-posts.ts`](https://github.com/awoods187/andy-website/blob/main/src/data/crl-posts.ts)) that gets imported during the Astro build. This means:
 
 - Content is versioned in Git
 - Builds are reproducible
@@ -265,6 +269,8 @@ def extract_post_data(card):
 
     return BlogPost(title=title, url=url, excerpt=excerpt)
 ```
+
+[📄 See actual extract_post_data() implementation](https://github.com/awoods187/andy-website/blob/main/scripts/scrape-crl-posts.py#L331-L406) with complete error handling and sanitization
 
 This defensive approach prevents build failures when external sites change their HTML structure. Missing optional fields default to empty values, while missing required fields skip the post entirely.
 
@@ -318,6 +324,12 @@ describe('Cockroach Labs Posts', () => {
   });
 });
 ```
+
+**View test implementations:**
+- [📄 Build tests](https://github.com/awoods187/andy-website/blob/main/tests/build.test.ts) - Validates generated pages and assets
+- [📄 Content tests](https://github.com/awoods187/andy-website/blob/main/tests/content.test.ts) - Validates frontmatter and metadata
+- [📄 External posts tests](https://github.com/awoods187/andy-website/blob/main/tests/external-posts.test.ts) - Validates scraped content
+- [📁 All tests](https://github.com/awoods187/andy-website/tree/main/tests) - Complete test suite (135 test cases)
 
 The tests verify the build output rather than implementation details. They catch common issues like broken links, missing pages, and malformed data.
 
@@ -444,9 +456,9 @@ Set up dual licensing for my blog:
 ```
 
 **Result**: Claude Code created:
-- LICENSE-CODE.md with MIT license and examples
-- LICENSE-CONTENT.md with CC BY-NC 4.0 and attribution guide
-- LICENSE.md explaining the dual structure
+- [LICENSE-CODE.md](https://github.com/awoods187/andy-website/blob/main/LICENSE-CODE.md) with MIT license and examples
+- [LICENSE-CONTENT.md](https://github.com/awoods187/andy-website/blob/main/LICENSE-CONTENT.md) with CC BY-NC 4.0 and attribution guide
+- [LICENSE.md](https://github.com/awoods187/andy-website/blob/main/LICENSE.md) explaining the dual structure
 - Updated README with license section
 - License metadata templates for blog posts
 
@@ -462,11 +474,11 @@ Create professional bot and AI crawler controls that position me as LLM-friendly
 ```
 
 **Result**: Claude Code generated:
-- Comprehensive robots.txt (185 lines) allowing all major AI bots
-- Detailed ai.txt (252 lines) with training permissions
-- Creative humans.txt (245 lines) with ASCII art
+- [robots.txt](https://github.com/awoods187/andy-website/blob/main/public/robots.txt) (185 lines) allowing all major AI bots
+- [ai.txt](https://github.com/awoods187/andy-website/blob/main/public/ai.txt) (252 lines) with training permissions
+- [humans.txt](https://github.com/awoods187/andy-website/blob/main/public/humans.txt) (245 lines) with ASCII art
 - Meta tags for OpenAI, Anthropic, Google AI
-- README-AI-POLICY.md with full policy
+- [README-AI-POLICY.md](https://github.com/awoods187/andy-website/blob/main/README-AI-POLICY.md) with full policy
 
 ## Open Source
 
