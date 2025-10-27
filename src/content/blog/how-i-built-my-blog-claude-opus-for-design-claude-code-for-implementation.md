@@ -206,7 +206,7 @@ Aggregating content from external sources introduces security risks. Here's how 
 
 **Attribution Enforcement**: External posts include clear source attribution in both metadata and rendered HTML. This is enforced at the type level—TypeScript won't compile if source information is missing.
 
-**Dependency Management**: The build pipeline uses Dependabot for automated security updates. Any vulnerability in dependencies triggers a failing build until addressed.
+**Trade-off**: The CSP includes `'unsafe-inline'` for styles because Astro generates scoped styles inline. This is an acceptable trade-off for a static site with no user-generated content. For applications handling sensitive data, you'd want to eliminate inline styles entirely.
 
 ### Why This Matters
 
