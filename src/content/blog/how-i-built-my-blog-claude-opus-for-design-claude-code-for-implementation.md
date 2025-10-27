@@ -484,7 +484,7 @@ Create professional bot and AI crawler controls that position me as LLM-friendly
 
 The complete code is available on GitHub, including the scraper, tests, and deployment configuration:
 
-🔗 **GitHub**: [github.com/awoods187/andy-website](https://github.com/awoods187/andy-website)
+**GitHub**: [github.com/awoods187/andy-website](https://github.com/awoods187/andy-website)
 
 Feel free to adapt it for your own use. The architecture should work for any static content site.
 
