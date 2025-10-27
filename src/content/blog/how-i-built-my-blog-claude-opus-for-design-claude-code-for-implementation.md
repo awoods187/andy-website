@@ -490,6 +490,7 @@ Feel free to adapt it for your own use. The architecture should work for any sta
 
 ---
 
+
 I'm building more AI-native development patterns and always interested in production use cases. If you're using AI for production software (not just demos), I'd love to compare notes—especially around multi-model orchestration, prompt engineering at scale, or cost optimization. Find me on [LinkedIn](https://www.linkedin.com/in/andrewscottwoods/) or check out my v1 PM prompt patterns library on [GitHub](https://github.com/awoods187).
 
 ---
