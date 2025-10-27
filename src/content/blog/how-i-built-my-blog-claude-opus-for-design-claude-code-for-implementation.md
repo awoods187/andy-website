@@ -73,7 +73,7 @@ I orchestrated three models based on empirical performance data:
 - Token cost: $0.00025/1K (98% cheaper than Opus)
 - Latency: <500ms
 - Use case: Syntax validation, linting, simple refactors
-- Example: Validated 131 test cases for edge conditions
+- Example: Validated 135 test cases for edge conditions
 
 **Total AI cost for entire project: $0.47**
 **Manual development estimated cost: $4,500 (30 hours @ $150/hr)**
@@ -136,7 +136,7 @@ Claude Code generated the entire project in **2 hours**, including edge case han
 - Boilerplate setup: 5 minutes (vs 2 hours)
 - Content schema + validation: 15 minutes (vs 3 hours)
 - Scraper with error handling: 30 minutes (vs 6 hours)
-- Test suite (131 tests): 45 minutes (vs 6 hours)
+- Test suite (135 tests): 45 minutes (vs 6 hours)
 - Performance optimization: 25 minutes (vs 3 hours)
 
 **The Non-Obvious Insight:** AI didn't just code faster—it eliminated entire categories of work:
@@ -215,7 +215,7 @@ Static sites are inherently more secure than dynamic backends (no SQL injection,
 The scraper runs during the build process, not at runtime:
 
 ```python
-# scripts/scrape_crl.py
+# scripts/scrape-crl-posts.py
 def scrape_author_posts(author_url):
     response = requests.get(author_url)
     soup = BeautifulSoup(response.text, 'html.parser')
@@ -243,26 +243,37 @@ The scraper outputs a TypeScript file that gets imported during the Astro build.
 
 ### Handling Missing Data
 
-Real-world HTML is messy. The scraper handles common issues:
+Real-world HTML is messy. The scraper uses defensive extraction patterns:
 
 ```python
-def safe_extract(element, selector, fallback=''):
-    """Extract text from element with fallback"""
-    try:
-        result = element.select_one(selector)
-        return result.text.strip() if result else fallback
-    except Exception:
-        return fallback
+# Conceptual example - actual implementation is more comprehensive
+def extract_post_data(card):
+    """Extract with fallbacks for missing elements"""
+    # Title (required)
+    title_elem = card.find("h2") or card.find("h3") or card.find("a")
+    if not title_elem:
+        return None  # Skip if no title
+
+    # URL (required)
+    link_elem = card.find("a", href=True)
+    if not link_elem:
+        return None  # Skip if no URL
+
+    # Optional fields with defaults
+    excerpt_elem = card.find("p") or card.find("div", class_="excerpt")
+    excerpt = excerpt_elem.get_text(strip=True) if excerpt_elem else ""
+
+    return BlogPost(title=title, url=url, excerpt=excerpt)
 ```
 
-This defensive approach prevents build failures when external sites change their HTML structure. Missing fields get logged for manual review rather than breaking the entire build.
+This defensive approach prevents build failures when external sites change their HTML structure. Missing optional fields default to empty values, while missing required fields skip the post entirely.
 
 ## Testing Strategy
 
 The test suite focuses on build outputs rather than implementation:
 
 ```typescript
-// tests/build-output.test.ts
+// tests/build.test.ts
 describe('Build Output', () => {
   it('should generate all expected pages', () => {
     const paths = [
@@ -278,7 +289,7 @@ describe('Build Output', () => {
   });
 });
 
-// tests/content-validation.test.ts
+// tests/content.test.ts
 describe('Content Files', () => {
   it('should have valid frontmatter', () => {
     const mdFiles = readdirSync(contentPath);
@@ -453,7 +464,7 @@ Create professional bot and AI crawler controls that position me as LLM-friendly
 **Result**: Claude Code generated:
 - Comprehensive robots.txt (185 lines) allowing all major AI bots
 - Detailed ai.txt (252 lines) with training permissions
-- Creative humans.txt (266 lines) with ASCII art
+- Creative humans.txt (245 lines) with ASCII art
 - Meta tags for OpenAI, Anthropic, Google AI
 - README-AI-POLICY.md with full policy
 
