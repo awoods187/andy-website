@@ -12,7 +12,7 @@ copyright: "© 2025 Andy Woods"
 attribution: "If you quote or translate this post, please provide attribution with a link back to the original at andywoods.me"
 ---
 
-When building my personal site, I faced a common problem: how to showcase both personal writing and company blog posts without duplicating content or fragmenting my portfolio. Here's the solution I built, the trade-offs I considered, and what I learned.
+When building my personal site, I faced a common problem: how to showcase both personal writing and company blog posts without duplicating content or fragmenting my portfolio. I built an automated aggregation system, made specific trade-offs, and learned valuable lessons about AI-native development.
 
 ## The Problem: Aggregating Distributed Content
 
@@ -51,7 +51,7 @@ Strategic tool selection mattered more than any technical choice: Claude Opus as
 - Executes the implementation
 - Handles file creation and code generation
 
-This separation creates intentional boundaries between design discussions and implementation.
+This separation creates clear boundaries between design discussions and implementation.
 
 ## Multi-Model Orchestration: Beyond Single-Tool Thinking
 
@@ -81,9 +81,9 @@ I orchestrated three models based on empirical performance data:
 
 ### Why This Separation Matters
 
-**Different models excel at different tasks.** Opus excels at reasoning through ambiguity and exploring solution spaces. Code excels at execution, generating working files in minutes. Using both strategically gave me the best of each.
+**Different models excel at different tasks.** Opus handles ambiguous requirements and exploring solution spaces. Code excels at execution, generating working files in minutes. Using both strategically gave me the best of each.
 
-**It prevents architectural churn during implementation.** Once you're in "build mode," revisiting fundamental design decisions kills momentum. The handoff from Opus to Code made the transition explicit: design is frozen, now execute.
+**It prevents architectural churn during implementation.** Once you're in "build mode," revisiting design decisions kills momentum. The handoff from Opus to Code made the transition explicit: design is frozen, now execute.
 
 **It creates documentation.** The Opus conversation becomes a record of why decisions were made. When I revisit this project in 6 months, I'll have the full context.
 
@@ -139,7 +139,7 @@ Claude Code generated the entire project in **2 hours**, including edge case han
 - Test suite (135 tests): 45 minutes (vs 6 hours)
 - Performance optimization: 25 minutes (vs 3 hours)
 
-**The Non-Obvious Insight:** AI didn't just code faster—it eliminated entire categories of work:
+**The Insight:** AI didn't just code faster. It also eliminated entire categories of work:
 - No Stack Overflow diving for edge cases
 - No debugging cycles for typos
 - No refactoring for missed requirements
@@ -149,7 +149,7 @@ The **12x speedup** came from Claude Code providing best practices, edge case ha
 
 ### When to Use This Pattern
 
-This separation works particularly well for:
+This separation works best for:
 
 - Complex projects with non-trivial architectural decisions
 - When you're exploring multiple approaches
@@ -160,7 +160,7 @@ For simpler tasks, going straight to Claude Code is perfectly fine. But for subs
 
 ## Architecture Overview
 
-The site is a static build pipeline. It pulls content from multiple sources (personal Markdown posts, Cockroach Labs blog, publications), normalizes everything into a unified format, and generates plain HTML. There's no runtime backend, no database—just pre-rendered files served from a CDN.
+The site is a static build pipeline. It pulls content from multiple sources (personal Markdown posts, Cockroach Labs blog, publications), normalizes everything into a unified format, and generates plain HTML. There's no runtime backend, no database. It's just pre-rendered files served from a CDN.
 
 ### Static-First Approach
 
@@ -335,7 +335,7 @@ The tests verify the build output rather than implementation details. They catch
 
 ## Performance Results
 
-The minimal JavaScript approach delivers measurable benefits. Real Lighthouse scores from production deployment after optimization:
+The minimal JavaScript approach delivers these benefits. Real Lighthouse scores from production deployment after optimization:
 
 ```bash
 # Lighthouse Performance Metrics (Mobile, Slow 4G)
@@ -384,7 +384,7 @@ This architecture makes deliberate trade-offs:
 
 These trade-offs make sense for a personal blog. They wouldn't for an e-commerce site or social platform.
 
-## Where AI Failed (And What I Learned)
+## Where AI Failed
 
 **Failure 1: CSS Animation Performance**
 
@@ -406,7 +406,7 @@ Even on static hosting, adding a simple Content Security Policy, HSTS, and Refer
 
 ## What This Means for Product Development
 
-AI changes the build vs. buy calculus. Tasks that used to require third-party tools (blog platforms, CMS systems) can now be custom-built faster than integrating external services. This gives you full control without the time penalty.
+AI changes the build vs. buy calculus. Tasks that used to require third-party tools can now be custom-built faster than integrating external services, giving you full control without the time penalty.
 
 Edge cases get handled upfront. Traditional development discovers edge cases in production. AI-generated code anticipates them from training on thousands of similar implementations.
 
@@ -421,7 +421,7 @@ Edge cases get handled upfront. Traditional development discovers edge cases in 
 
 ## Try Claude Code Yourself
 
-Want to see AI-native development in action? Here are simplified prompts I used to build key features of this site.
+Want to see AI-native development in action? These simplified prompts built key features of this site.
 
 ### Example 1: Content Scraper (5 minutes)
 
@@ -491,6 +491,6 @@ Feel free to adapt it for your own use. The architecture should work for any sta
 ---
 
 
-I'm building more AI-native development patterns and always interested in production use cases. If you're using AI for production software (not just demos), I'd love to compare notes—especially around multi-model orchestration, prompt engineering at scale, or cost optimization. Find me on [LinkedIn](https://www.linkedin.com/in/andrewscottwoods/) or check out my v1 PM prompt patterns library on [GitHub](https://github.com/awoods187).
+I'm building more AI-native development patterns and always interested in production use cases. If you're using AI for production software (not just demos), I'd love to compare notes on multi-model orchestration, prompt engineering at scale, or cost optimization. Find me on [LinkedIn](https://www.linkedin.com/in/andrewscottwoods/) or check out my v1 PM prompt patterns library on [GitHub](https://github.com/awoods187).
 
 ---
