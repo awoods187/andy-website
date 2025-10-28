@@ -15,7 +15,7 @@
     "lint:fix": "eslint . --ext .js,.ts,.astro --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "type-check": "tsc --noEmit",
+    "type-check": "astro sync && tsc --noEmit",
     "validate:yaml": "node scripts/validate-yaml-frontmatter.mjs",
     "validate": "npm run format:check && npm run lint && npm run type-check && npm run validate:yaml && npm run test",
     "lighthouse": "lighthouse https://andywoods.me/blog/hybrid-blog-system-2025 --output=json --output=html --output-path=./lighthouse-report --chrome-flags=\"--headless\" --only-categories=performance,accessibility,best-practices,seo",

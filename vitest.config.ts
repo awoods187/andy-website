@@ -47,9 +47,6 @@ export default defineConfig({
         statements: 0,
       },
 
-      // Report uncovered lines
-      all: true,
-
       // Clean coverage directory before running tests
       clean: true,
     },
