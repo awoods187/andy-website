@@ -1,6 +1,7 @@
 # Python Build Scripts
 
-This directory contains Python scripts used during the build process to generate static content for the website.
+This directory contains Python scripts used during the build process to generate
+static content for the website.
 
 ## Table of Contents
 
@@ -19,7 +20,9 @@ This directory contains Python scripts used during the build process to generate
 
 ## Overview
 
-These scripts automate the extraction of blog post metadata from external sources and generate type-safe TypeScript data files for use in the Astro static site generator.
+These scripts automate the extraction of blog post metadata from external
+sources and generate type-safe TypeScript data files for use in the Astro static
+site generator.
 
 ### Key Features
 
@@ -84,7 +87,8 @@ python3 scripts/scrape-crl-posts.py --help
 
 ### `scrape-crl-posts.py`
 
-Scrapes blog posts from Andy Woods' author page on cockroachlabs.com and generates a TypeScript data file.
+Scrapes blog posts from Andy Woods' author page on cockroachlabs.com and
+generates a TypeScript data file.
 
 #### Features
 
@@ -99,6 +103,7 @@ Scrapes blog posts from Andy Woods' author page on cockroachlabs.com and generat
 **File**: `src/data/crl-posts.ts`
 
 **Structure**:
+
 ```typescript
 export interface ExternalPost {
   title: string;
@@ -119,19 +124,19 @@ export const crlPosts: ExternalPost[] = [
 
 Posts are automatically tagged based on content analysis:
 
-| Tag | Keywords |
-|-----|----------|
-| `databases` | Always included (default) |
+| Tag                   | Keywords                                                |
+| --------------------- | ------------------------------------------------------- |
+| `databases`           | Always included (default)                               |
 | `distributed-systems` | distributed, multi-region, geo-distributed, replication |
-| `reliability` | reliability, resilience, failover, uptime |
-| `disaster-recovery` | disaster recovery, backup, restore, recovery |
-| `product-management` | product, pricing, packaging, strategy |
-| `pricing` | pricing, cost, billing |
-| `cloud` | cloud, aws, gcp, azure |
-| `security` | security, authentication, encryption |
-| `performance` | performance, optimization, latency |
-| `migration` | migration, migrate, migrating |
-| `architecture` | architecture, design, pattern |
+| `reliability`         | reliability, resilience, failover, uptime               |
+| `disaster-recovery`   | disaster recovery, backup, restore, recovery            |
+| `product-management`  | product, pricing, packaging, strategy                   |
+| `pricing`             | pricing, cost, billing                                  |
+| `cloud`               | cloud, aws, gcp, azure                                  |
+| `security`            | security, authentication, encryption                    |
+| `performance`         | performance, optimization, latency                      |
+| `migration`           | migration, migrate, migrating                           |
+| `architecture`        | architecture, design, pattern                           |
 
 ---
 
@@ -231,11 +236,13 @@ logging.basicConfig(
 **Symptom**: "No posts found!" error
 
 **Causes**:
+
 - Website structure changed
 - Network connectivity issues
 - Bot detection blocking request
 
 **Solutions**:
+
 ```bash
 # Check network connectivity
 curl -I https://www.cockroachlabs.com/author/andy-woods/
@@ -250,6 +257,7 @@ python3 scripts/scrape-crl-posts.py
 **Symptom**: `ModuleNotFoundError: No module named 'requests'`
 
 **Solution**:
+
 ```bash
 # Ensure virtual environment is activated
 source venv/bin/activate  # macOS/Linux
@@ -264,6 +272,7 @@ pip install -r requirements.txt
 **Symptom**: `IOError: [Errno 13] Permission denied`
 
 **Solution**:
+
 ```bash
 # Check file permissions
 ls -la src/data/
@@ -277,6 +286,7 @@ chmod 755 src/data/
 **Symptom**: `requests.exceptions.Timeout`
 
 **Solution**:
+
 - Increase `REQUEST_TIMEOUT` constant
 - Check internet connection
 - Try again later (site may be temporarily down)
@@ -353,6 +363,7 @@ To add a new scraper following the same pattern:
 ### Security Considerations
 
 ✅ **Safe Practices Implemented**:
+
 - No authentication credentials required
 - Public URL scraping only
 - Timeout configured to prevent hanging
@@ -361,6 +372,7 @@ To add a new scraper following the same pattern:
 - Error handling prevents information leakage
 
 ⚠️ **Recommendations**:
+
 - Run in isolated environment (virtual env)
 - Review generated TypeScript before committing
 - Monitor for unusual network activity
@@ -438,6 +450,7 @@ For questions or issues:
 **Major Refactor - Production Ready**
 
 Added:
+
 - Retry logic with exponential backoff
 - User-Agent header to avoid bot detection
 - Comprehensive logging with timestamps
@@ -447,16 +460,17 @@ Added:
 - Progress tracking during extraction
 
 Improved:
+
 - Error handling with specific exceptions
 - Code organization and readability
 - Documentation and comments
 - Security practices
 
 Removed:
+
 - Print statements (replaced with logging)
 - Legacy code and TODOs
 
 ---
 
-**Last Updated**: 2024-10-21
-**Maintained By**: Andy Woods
+**Last Updated**: 2024-10-21 **Maintained By**: Andy Woods

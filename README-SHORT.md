@@ -7,13 +7,16 @@ Personal website and blog for Andy Woods, Product Manager at Cockroach Labs.
 ## Connect
 
 - **X (Twitter)**: [@iamandywoods](https://twitter.com/iamandywoods)
-- **LinkedIn**: [andrewscottwoods](https://www.linkedin.com/in/andrewscottwoods/)
+- **LinkedIn**:
+  [andrewscottwoods](https://www.linkedin.com/in/andrewscottwoods/)
 - **GitHub**: [awoods187](https://github.com/awoods187)
 
 ## About
 
-Product Manager specializing in AI, databases, and enterprises. Writing about the intersection of technology and product strategy.
+Product Manager specializing in AI, databases, and enterprises. Writing about
+the intersection of technology and product strategy.
 
 ---
 
-For full documentation on running and deploying this site, see the [complete README](./README.md).
+For full documentation on running and deploying this site, see the
+[complete README](./README.md).

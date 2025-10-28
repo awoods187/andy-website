@@ -58,7 +58,9 @@ describe('Subscribe Form Accessibility', () => {
     });
 
     it('subscribe button should have descriptive text', () => {
-      const buttonMatch = content.match(/<button[^>]*class="subscribe-button"[^>]*>\s*([^<]+)\s*<\/button>/);
+      const buttonMatch = content.match(
+        /<button[^>]*class="subscribe-button"[^>]*>\s*([^<]+)\s*<\/button>/
+      );
       expect(buttonMatch).toBeTruthy();
       if (buttonMatch) {
         const buttonText = buttonMatch[1].trim();

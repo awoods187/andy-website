@@ -1,0 +1,293 @@
+# CI/CD Pipeline for Andy's Personal Website
+#
+# This workflow provides comprehensive quality gates including:
+# - Code formatting and linting
+# - YAML frontmatter validation (prevents Astro build errors)
+# - TypeScript type checking
+# - Unit and integration tests with coverage enforcement
+# - Security vulnerability scanning
+# - Build verification
+#
+# All jobs run in parallel for fast feedback (typically 1-2 minutes with cache)
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+    # Skip CI for documentation-only changes
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+      - '.github/**/*.md'
+      - 'LICENSE*'
+  pull_request:
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+      - '.github/**/*.md'
+      - 'LICENSE*'
+  workflow_dispatch:
+
+# Cancel in-progress runs when a new run is triggered
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+# Minimal permissions for security
+permissions:
+  contents: read
+  pull-requests: write # For PR comments (coverage, test results)
+  checks: write # For test result annotations
+
+jobs:
+  # Job 1: Code formatting check with Prettier
+  format:
+    name: Format Check (Prettier)
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check code formatting
+        run: npm run format:check
+
+  # Job 2: YAML frontmatter validation
+  yaml-validation:
+    name: YAML Frontmatter Validation
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate YAML frontmatter
+        run: npm run validate:yaml
+
+  # Job 3: Linting and type checking
+  lint:
+    name: Lint & Type Check
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ESLint
+        run: npm run lint
+
+      - name: Run TypeScript type checking
+        run: npm run type-check
+
+  # Job 4: Test suite with matrix for multiple Node versions
+  test:
+    name: Test (Node ${{ matrix.node-version }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    strategy:
+      fail-fast: false # Continue testing all versions even if one fails
+      matrix:
+        node-version: ['18', '20', '22']
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests with coverage
+        run: npm run test:coverage
+
+      - name: Check coverage thresholds
+        run: |
+          echo "Coverage thresholds are enforced in vitest.config.ts"
+          echo "Minimum required: 80% for all metrics"
+
+      - name: Upload coverage reports
+        if: matrix.node-version == '20' # Only upload once
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-reports
+          path: coverage/
+          retention-days: 30
+
+      - name: Upload coverage to artifact for PR comment
+        if: matrix.node-version == '20' && github.event_name == 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-summary
+          path: coverage/coverage-summary.json
+          retention-days: 1
+
+  # Job 5: Security vulnerability scanning
+  security:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run npm audit
+        run: npm audit --audit-level=moderate
+        continue-on-error: true # Don't fail build, but report issues
+
+      - name: Run npm audit (production only)
+        run: npm audit --production --audit-level=high
+
+      - name: Check for known vulnerabilities in dependencies
+        run: |
+          echo "Checking for high/critical vulnerabilities in production dependencies..."
+          npm audit --production --audit-level=high || echo "::warning::Security vulnerabilities found. Review npm audit output."
+
+      - name: Upload security scan results
+        if: always()
+        run: npm audit --json > npm-audit-results.json || true
+
+      - name: Upload audit results as artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: security-audit-results
+          path: npm-audit-results.json
+          retention-days: 30
+
+  # Job 6: Build verification
+  build:
+    name: Build Verification
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build for production
+        run: npm run build
+
+      - name: Verify build output
+        run: |
+          echo "Checking that dist/ directory was created..."
+          if [ ! -d "dist" ]; then
+            echo "::error::Build failed - dist/ directory not found"
+            exit 1
+          fi
+          echo "Build successful! Listing output:"
+          ls -lh dist/
+
+      - name: Check bundle size
+        run: |
+          echo "Build output size:"
+          du -sh dist/
+          echo ""
+          echo "Detailed breakdown:"
+          du -h dist/ | sort -h | tail -20
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-output
+          path: dist/
+          retention-days: 7
+
+  # Job 7: Astro check (Astro-specific validation)
+  astro-check:
+    name: Astro Check
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Astro check
+        run: npx astro check
+
+  # Job 8: All checks passed (required status check)
+  all-checks-passed:
+    name: All Checks Passed
+    runs-on: ubuntu-latest
+    needs: [format, yaml-validation, lint, test, security, build, astro-check]
+    if: always()
+
+    steps:
+      - name: Check if all jobs succeeded
+        run: |
+          if [ "${{ needs.format.result }}" != "success" ] || \
+             [ "${{ needs.yaml-validation.result }}" != "success" ] || \
+             [ "${{ needs.lint.result }}" != "success" ] || \
+             [ "${{ needs.test.result }}" != "success" ] || \
+             [ "${{ needs.security.result }}" != "success" ] || \
+             [ "${{ needs.build.result }}" != "success" ] || \
+             [ "${{ needs.astro-check.result }}" != "success" ]; then
+            echo "::error::One or more checks failed"
+            exit 1
+          fi
+          echo "✅ All checks passed successfully!"

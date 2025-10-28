@@ -10,8 +10,9 @@ export default defineConfig({
   site: 'https://andywoods.me',
 
   vite: {
-    plugins: [tailwindcss()]
+    // @ts-ignore - Vite plugin type incompatibility
+    plugins: [tailwindcss()],
   },
 
-  integrations: [sitemap()]
+  integrations: [sitemap()],
 });

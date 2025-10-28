@@ -152,9 +152,18 @@ describe('Security Hardening', () => {
       const content = readFileSync(crlPostsPath, 'utf-8');
 
       const eventHandlers = [
-        'onclick', 'onload', 'onerror', 'onmouseover',
-        'onmouseout', 'onfocus', 'onblur', 'onchange',
-        'onsubmit', 'onkeydown', 'onkeyup', 'onkeypress'
+        'onclick',
+        'onload',
+        'onerror',
+        'onmouseover',
+        'onmouseout',
+        'onfocus',
+        'onblur',
+        'onchange',
+        'onsubmit',
+        'onkeydown',
+        'onkeyup',
+        'onkeypress',
       ];
 
       for (const handler of eventHandlers) {
@@ -294,7 +303,10 @@ describe('Security Hardening', () => {
   });
 
   describe('Blog Post Security Documentation', () => {
-    const blogPostPath = join(process.cwd(), 'src/content/blog/how-i-built-my-blog-claude-opus-for-design-claude-code-for-implementation.md');
+    const blogPostPath = join(
+      process.cwd(),
+      'src/content/blog/how-i-built-my-blog-why-i-use-different-ai-models-for-architecture-vs-implementation.md'
+    );
 
     it('blog post should exist', () => {
       expect(existsSync(blogPostPath)).toBe(true);

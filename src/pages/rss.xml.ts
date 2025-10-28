@@ -6,10 +6,12 @@
  */
 
 import rss from '@astrojs/rss';
-import { getCollection } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
 import type { APIContext } from 'astro';
 import { crlPosts } from '../data/crl-posts';
 import { publications } from '../data/publications';
+
+type BlogPost = CollectionEntry<'blog'>;
 
 /**
  * GET handler for RSS feed
@@ -17,17 +19,17 @@ import { publications } from '../data/publications';
  * Fetches all content from multiple sources and generates an RSS XML feed.
  * Posts are sorted by date (newest first) and drafts are excluded.
  */
-export async function GET(context: APIContext) {
+export async function GET(context: APIContext): Promise<Response> {
   // Get all blog posts from the content collection
-  const blog = await getCollection('blog');
+  const blog: BlogPost[] = await getCollection('blog');
 
   // Filter out drafts from personal posts
-  const publishedPosts = blog.filter(post => !post.data.draft);
+  const publishedPosts: BlogPost[] = blog.filter((post: BlogPost) => !post.data.draft);
 
   // Combine all content sources
   const allPosts = [
     // Personal blog posts
-    ...publishedPosts.map(post => ({
+    ...publishedPosts.map((post: BlogPost) => ({
       title: post.data.title,
       description: post.data.excerpt,
       pubDate: post.data.date,
@@ -36,7 +38,7 @@ export async function GET(context: APIContext) {
       author: 'Andy Woods',
     })),
     // Cockroach Labs posts (external URLs)
-    ...crlPosts.map(post => ({
+    ...crlPosts.map((post) => ({
       title: post.title,
       description: post.excerpt,
       pubDate: new Date(post.date),
@@ -45,7 +47,7 @@ export async function GET(context: APIContext) {
       author: 'Andy Woods',
     })),
     // Publications
-    ...publications.map(pub => ({
+    ...publications.map((pub) => ({
       title: pub.title,
       description: pub.excerpt || `Published at ${pub.venue}`,
       pubDate: new Date(pub.date),
@@ -58,7 +60,8 @@ export async function GET(context: APIContext) {
   // Generate RSS feed
   return rss({
     title: 'Andy Woods - Product & AI Engineering',
-    description: 'Building at the intersection of databases, AI, and product management. Director of PM at Cockroach Labs.',
+    description:
+      'Building at the intersection of databases, AI, and product management. Director of PM at Cockroach Labs.',
     site: context.site || 'https://andywoods.me',
     items: allPosts,
     customData: `

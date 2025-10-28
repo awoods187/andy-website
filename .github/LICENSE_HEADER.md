@@ -1,6 +1,7 @@
 # Blog Post License Header Template
 
-Use this template in the frontmatter of all new blog posts to clearly indicate licensing.
+Use this template in the frontmatter of all new blog posts to clearly indicate
+licensing.
 
 ---
 
@@ -10,17 +11,19 @@ Add this to the frontmatter (YAML front matter) of your blog posts:
 
 ```yaml
 ---
-title: "Your Post Title"
+title: 'Your Post Title'
 date: 2025-10-22
-excerpt: "Brief summary of your post"
-tags: ["ai", "databases", "product-management"]
-image: "/images/your-image.jpg"
+excerpt: 'Brief summary of your post'
+tags: ['ai', 'databases', 'product-management']
+image: '/images/your-image.jpg'
 draft: false
 
 # License Information
-license: "CC BY-NC 4.0"
-copyright: "© 2025 Andy Woods"
-attribution: "If you quote or translate this post, please provide attribution with a link back to the original at andywoods.me"
+license: 'CC BY-NC 4.0'
+copyright: '© 2025 Andy Woods'
+attribution:
+  'If you quote or translate this post, please provide attribution with a link
+  back to the original at andywoods.me'
 ---
 ```
 
@@ -28,11 +31,11 @@ attribution: "If you quote or translate this post, please provide attribution wi
 
 ## Field Descriptions
 
-| Field | Value | Purpose |
-|-------|-------|---------|
-| `license` | `"CC BY-NC 4.0"` | Indicates Creative Commons Attribution-NonCommercial 4.0 International License |
-| `copyright` | `"© YYYY Andy Woods"` | Copyright notice (update YYYY to current year) |
-| `attribution` | Instruction text | Tells readers how to properly attribute when quoting |
+| Field         | Value                  | Purpose                                                                        |
+| ------------- | ---------------------- | ------------------------------------------------------------------------------ |
+| `license`     | `"CC BY-NC 4.0"`       | Indicates Creative Commons Attribution-NonCommercial 4.0 International License |
+| `copyright`   | `"© YYYY Andy Woods"` | Copyright notice (update YYYY to current year)                                 |
+| `attribution` | Instruction text       | Tells readers how to properly attribute when quoting                           |
 
 ---
 
@@ -42,22 +45,28 @@ Here's a full example of a blog post with proper licensing:
 
 ```markdown
 ---
-title: "Building Resilient Distributed Systems"
+title: 'Building Resilient Distributed Systems'
 date: 2025-10-22
-excerpt: "A deep dive into designing systems that survive failures, with lessons from scaling CockroachDB to enterprise production."
-tags: ["databases", "distributed-systems", "reliability", "architecture"]
-image: "/images/blog/distributed-systems.png"
+excerpt:
+  'A deep dive into designing systems that survive failures, with lessons from
+  scaling CockroachDB to enterprise production.'
+tags: ['databases', 'distributed-systems', 'reliability', 'architecture']
+image: '/images/blog/distributed-systems.png'
 draft: false
 
 # License Information
-license: "CC BY-NC 4.0"
-copyright: "© 2025 Andy Woods"
-attribution: "If you quote or translate this post, please provide attribution with a link back to the original at andywoods.me"
+license: 'CC BY-NC 4.0'
+copyright: '© 2025 Andy Woods'
+attribution:
+  'If you quote or translate this post, please provide attribution with a link
+  back to the original at andywoods.me'
 ---
 
 # Building Resilient Distributed Systems
 
-Distributed systems are notoriously difficult to build correctly. After helping scale CockroachDB to handle mission-critical workloads at enterprises worldwide, I've learned a few hard-won lessons...
+Distributed systems are notoriously difficult to build correctly. After helping
+scale CockroachDB to handle mission-critical workloads at enterprises worldwide,
+I've learned a few hard-won lessons...
 
 [Your content here...]
 
@@ -65,7 +74,10 @@ Distributed systems are notoriously difficult to build correctly. After helping 
 
 ## License
 
-*This post is licensed under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/). You may quote or translate with attribution. For commercial republishing, please contact me via [LinkedIn](https://www.linkedin.com/in/andrewscottwoods/).*
+_This post is licensed under
+[CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/). You may quote
+or translate with attribution. For commercial republishing, please contact me
+via [LinkedIn](https://www.linkedin.com/in/andrewscottwoods/)._
 ```
 
 ---
@@ -79,7 +91,10 @@ Add this license footer at the end of every blog post:
 
 ## License
 
-*This post is licensed under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/). You may quote or translate with attribution. For commercial republishing, please contact me via [LinkedIn](https://www.linkedin.com/in/andrewscottwoods/).*
+_This post is licensed under
+[CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/). You may quote
+or translate with attribution. For commercial republishing, please contact me
+via [LinkedIn](https://www.linkedin.com/in/andrewscottwoods/)._
 ```
 
 ---
@@ -88,10 +103,13 @@ Add this license footer at the end of every blog post:
 
 ### Frontmatter License Metadata
 
-The frontmatter fields (`license`, `copyright`, `attribution`) serve multiple purposes:
+The frontmatter fields (`license`, `copyright`, `attribution`) serve multiple
+purposes:
 
-1. **Machine-Readable**: Can be parsed by scripts, AI crawlers, and content management systems
-2. **Discoverable**: Shows up in metadata, making licensing clear to automated systems
+1. **Machine-Readable**: Can be parsed by scripts, AI crawlers, and content
+   management systems
+2. **Discoverable**: Shows up in metadata, making licensing clear to automated
+   systems
 3. **Type-Safe**: Can be validated by Astro's content collection schema (Zod)
 4. **Programmatic**: Can be displayed automatically in post templates
 
@@ -163,21 +181,29 @@ const { title, date, license, copyright, attribution } = data;
 
   <Content />
 
-  {license && (
-    <footer class="license-notice">
-      <h2>License</h2>
-      <p>
-        This post is licensed under
-        <a href="https://creativecommons.org/licenses/by-nc/4.0/">{license}</a>.
-        {copyright && <span>{copyright}</span>}
-      </p>
-      {attribution && <p><em>{attribution}</em></p>}
-      <p>
-        For commercial republishing, please contact me via
-        <a href="https://www.linkedin.com/in/andrewscottwoods/">LinkedIn</a>.
-      </p>
-    </footer>
-  )}
+  {
+    license && (
+      <footer class="license-notice">
+        <h2>License</h2>
+        <p>
+          This post is licensed under
+          <a href="https://creativecommons.org/licenses/by-nc/4.0/">
+            {license}
+          </a>
+          .{copyright && <span>{copyright}</span>}
+        </p>
+        {attribution && (
+          <p>
+            <em>{attribution}</em>
+          </p>
+        )}
+        <p>
+          For commercial republishing, please contact me via
+          <a href="https://www.linkedin.com/in/andrewscottwoods/">LinkedIn</a>.
+        </p>
+      </footer>
+    )
+  }
 </article>
 ```
 
@@ -187,7 +213,9 @@ const { title, date, license, copyright, attribution } = data;
 
 ### Q: Do I need to add this to every post?
 
-**A**: Yes, for clarity. While the repository LICENSE-CONTENT.md covers all content, individual posts should have explicit licensing for:
+**A**: Yes, for clarity. While the repository LICENSE-CONTENT.md covers all
+content, individual posts should have explicit licensing for:
+
 - Clarity for readers
 - Machine-readable metadata
 - Syndication/republishing clarity
@@ -195,17 +223,21 @@ const { title, date, license, copyright, attribution } = data;
 
 ### Q: What year should I use in copyright?
 
-**A**: Use the year the post was **originally published**, not the current year. For example:
+**A**: Use the year the post was **originally published**, not the current year.
+For example:
+
 - Post published in 2024: `© 2024 Andy Woods`
 - Post published in 2025: `© 2025 Andy Woods`
 
 ### Q: Can I use a different license for some posts?
 
-**A**: Yes, but be explicit. If you want to use a different license (e.g., MIT for a code-heavy tutorial), clearly state it in both frontmatter and footer.
+**A**: Yes, but be explicit. If you want to use a different license (e.g., MIT
+for a code-heavy tutorial), clearly state it in both frontmatter and footer.
 
 ### Q: What about posts written for other companies?
 
 **A**: If you wrote a post for Cockroach Labs or another company:
+
 - That post is **© Company Name**
 - Do NOT add CC BY-NC 4.0 license to their posts
 - Link to the original source and note their copyright
@@ -239,10 +271,10 @@ python3 scripts/add_license_footers.py
 
 ---
 
-**Last Updated**: October 22, 2025
-**Maintained By**: Andy Woods
+**Last Updated**: October 22, 2025 **Maintained By**: Andy Woods
 
 For questions about licensing, see:
+
 - [LICENSE-CONTENT.md](../LICENSE-CONTENT.md) - Full content license
 - [LICENSE.md](../LICENSE.md) - Dual licensing guide
 - [README.md](../README.md) - Project documentation

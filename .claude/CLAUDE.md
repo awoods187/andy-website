@@ -2,13 +2,15 @@
 
 **Last Updated:** 2025-10-26
 
-> Inherits from workspace (`~/claude-andyw/.claude/CLAUDE.md`) and global (`~/.claude/CLAUDE.md`)
+> Inherits from workspace (`~/claude-andyw/.claude/CLAUDE.md`) and global
+> (`~/.claude/CLAUDE.md`)
 
 ---
 
 ## Project-Specific Context
 
-Portfolio and blog website showcasing professional work, technical writing, and side projects.
+Portfolio and blog website showcasing professional work, technical writing, and
+side projects.
 
 ---
 
@@ -25,12 +27,14 @@ Portfolio and blog website showcasing professional work, technical writing, and 
 ## Key Requirements
 
 ### Performance
+
 - Target Lighthouse score: 95+ across all metrics
 - Core Web Vitals: All "Good" ratings
 - Image optimization: WebP with fallbacks
 - Code splitting for optimal bundle size
 
 ### SEO
+
 - OpenGraph meta tags for all pages
 - Twitter Card support
 - Structured data (JSON-LD)
@@ -38,12 +42,14 @@ Portfolio and blog website showcasing professional work, technical writing, and 
 - robots.txt configured
 
 ### Accessibility
+
 - WCAG AA minimum (AAA for text content)
 - Tested with VoiceOver and NVDA
 - Focus indicators on all interactive elements
 - Skip navigation links
 
 ### Content
+
 - Blog posts in `/content/blog/`
 - Project showcases in `/content/projects/`
 - Markdown with frontmatter
@@ -71,4 +77,5 @@ npm run lint       # Lint and format
 
 ---
 
-**All workspace and global standards apply. This file contains only project-unique configurations.**
+**All workspace and global standards apply. This file contains only
+project-unique configurations.**

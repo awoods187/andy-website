@@ -16,10 +16,7 @@ import { join } from 'path';
 
 describe('Subscribe Page Links', () => {
   // Read the subscribe page content
-  const subscribePage = readFileSync(
-    join(process.cwd(), 'src/pages/subscribe.astro'),
-    'utf-8'
-  );
+  const subscribePage = readFileSync(join(process.cwd(), 'src/pages/subscribe.astro'), 'utf-8');
 
   describe('RSS Feed URLs', () => {
     it('should have correct RSS feed URL in code block', () => {
@@ -36,9 +33,7 @@ describe('Subscribe Page Links', () => {
     });
 
     it('should have internal RSS link in View RSS Feed button', () => {
-      const viewRssButton = subscribePage.match(
-        /href="\/rss\.xml"[\s\S]*?View RSS Feed/
-      );
+      const viewRssButton = subscribePage.match(/href="\/rss\.xml"[\s\S]*?View RSS Feed/);
       expect(viewRssButton).toBeTruthy();
     });
   });
@@ -100,7 +95,9 @@ describe('Subscribe Page Links', () => {
 
   describe('Subscribe Form Integration', () => {
     it('should import SubscribeForm component', () => {
-      expect(subscribePage).toContain("import SubscribeForm from '../components/SubscribeForm.astro'");
+      expect(subscribePage).toContain(
+        "import SubscribeForm from '../components/SubscribeForm.astro'"
+      );
     });
 
     it('should render SubscribeForm component', () => {
@@ -133,7 +130,8 @@ describe('Subscribe Page Links', () => {
   describe('Security Attributes', () => {
     it('should have rel="noopener" on all external links', () => {
       const externalLinks = subscribePage.match(/href="https:\/\/[^"]+"/g) || [];
-      const linksWithNoopener = subscribePage.match(/href="https:\/\/[^"]+"\s+[^>]*rel="noopener"/g) || [];
+      const linksWithNoopener =
+        subscribePage.match(/href="https:\/\/[^"]+"\s+[^>]*rel="noopener"/g) || [];
 
       // All external links should have noopener
       expect(linksWithNoopener.length).toBe(externalLinks.length);
@@ -141,7 +139,8 @@ describe('Subscribe Page Links', () => {
 
     it('should open all external links in new tab', () => {
       const externalLinks = subscribePage.match(/href="https:\/\/[^"]+"/g) || [];
-      const linksWithTargetBlank = subscribePage.match(/href="https:\/\/[^"]+"\s+[^>]*target="_blank"/g) || [];
+      const linksWithTargetBlank =
+        subscribePage.match(/href="https:\/\/[^"]+"\s+[^>]*target="_blank"/g) || [];
 
       // All external links should open in new tab
       expect(linksWithTargetBlank.length).toBe(externalLinks.length);

@@ -1,0 +1,74 @@
+# Dependabot Configuration
+#
+# Automatically checks for dependency updates and creates PRs
+# Configured for npm packages with weekly checks
+#
+# Learn more: https://docs.github.com/en/code-security/dependabot
+
+version: 2
+updates:
+  # Monitor npm dependencies
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+      day: 'monday'
+      time: '09:00'
+      timezone: 'America/New_York'
+
+    # Limit number of open PRs to avoid overwhelming the repo
+    open-pull-requests-limit: 5
+
+    # Group updates by type for easier review
+    groups:
+      # Group all development dependencies together
+      development-dependencies:
+        dependency-type: 'development'
+        update-types:
+          - 'minor'
+          - 'patch'
+
+      # Group production dependencies by update type
+      production-minor-patch:
+        dependency-type: 'production'
+        update-types:
+          - 'minor'
+          - 'patch'
+
+    # Customize PR settings
+    commit-message:
+      prefix: 'chore(deps)'
+      include: 'scope'
+
+    labels:
+      - 'dependencies'
+      - 'automated'
+
+    reviewers:
+      - 'awoods187' # Replace with your GitHub username
+
+    # Security updates have higher priority
+    # Dependabot will always create separate PRs for security updates
+
+  # Monitor GitHub Actions versions
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+      day: 'monday'
+      time: '09:00'
+      timezone: 'America/New_York'
+
+    open-pull-requests-limit: 3
+
+    commit-message:
+      prefix: 'chore(ci)'
+      include: 'scope'
+
+    labels:
+      - 'ci'
+      - 'dependencies'
+      - 'automated'
+
+    reviewers:
+      - 'awoods187' # Replace with your GitHub username

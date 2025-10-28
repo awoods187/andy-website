@@ -16,7 +16,7 @@ describe('Dependency Health', () => {
       // Run npm outdated --json (exits with code 1 if outdated packages exist)
       const output = execSync('npm outdated --json', {
         encoding: 'utf-8',
-        stdio: ['pipe', 'pipe', 'pipe']
+        stdio: ['pipe', 'pipe', 'pipe'],
       });
       outdated = JSON.parse(output || '{}');
     } catch (error: any) {
@@ -31,7 +31,7 @@ describe('Dependency Health', () => {
     }
 
     const outdatedPackages = Object.keys(outdated);
-    const criticallyOutdated = outdatedPackages.filter(pkg => {
+    const criticallyOutdated = outdatedPackages.filter((pkg) => {
       const info = outdated[pkg];
       // Check if we're more than 1 major version behind
       const currentMajor = parseInt(info.current.split('.')[0]);
@@ -42,7 +42,7 @@ describe('Dependency Health', () => {
     // Log outdated packages for visibility
     if (outdatedPackages.length > 0) {
       console.log('\n📦 Outdated Dependencies:');
-      outdatedPackages.forEach(pkg => {
+      outdatedPackages.forEach((pkg) => {
         const info = outdated[pkg];
         console.log(`  - ${pkg}: ${info.current} → ${info.latest}`);
       });

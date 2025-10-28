@@ -16,12 +16,12 @@ import { defineCollection, z } from 'astro:content';
 const blog = defineCollection({
   type: 'content', // Content collection (Markdown/MDX files)
   schema: z.object({
-    title: z.string(),                                    // Post title (required)
-    date: z.date(),                                       // Publication date (required)
-    excerpt: z.string(),                                  // Brief summary for previews (required)
-    tags: z.array(z.string()),                            // Array of tag strings (required)
-    image: z.string().optional(),                         // Featured image URL (optional)
-    draft: z.boolean().optional().default(false),         // Draft status (optional, defaults to false)
+    title: z.string(), // Post title (required)
+    date: z.date(), // Publication date (required)
+    excerpt: z.string(), // Brief summary for previews (required)
+    tags: z.array(z.string()), // Array of tag strings (required)
+    image: z.string().optional(), // Featured image URL (optional)
+    draft: z.boolean().optional().default(false), // Draft status (optional, defaults to false)
   }),
 });
 

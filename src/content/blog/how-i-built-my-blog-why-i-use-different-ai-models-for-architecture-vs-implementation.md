@@ -1,18 +1,19 @@
 ---
 title: "How I Built My Blog: Why I Use Different AI Models for Architecture vs Implementation"
 date: 2025-10-21
-excerpt: "Strategic AI model selection for modern development: using Claude Opus for architecture, Claude Code for implementation, and Claude Haiku for validation. Learn how multi-model orchestration achieved a $0.47 build cost with 9,574x ROI."
-tags: ["web-development", "astro", "architecture", "static-sites", "python", "testing", "claude-code", "ai", "multi-model-orchestration"]
-image: "/images/blog/how-i-built-my-blog-claude-opus-for-design-claude-code-for-implementation-hero.jpg"
+excerpt: "Strategic AI model selection: using Claude Opus for architecture, Claude Code for implementation, and Claude Haiku for validation. Multi-model orchestration with 9,574x ROI."
+tags: [web-development, astro, architecture, static-sites, python, testing, claude-code, ai, multi-model-orchestration]
+image: /images/blog/how-i-built-my-blog-why-i-use-different-ai-models-for-architecture-vs-implementation-hero.jpg
 imageSource: "AI-generated using Stable Diffusion"
-
-# License Information
 license: "CC BY-NC 4.0"
 copyright: "© 2025 Andy Woods"
 attribution: "If you quote or translate this post, please provide attribution with a link back to the original at andywoods.me"
 ---
 
-When building my personal site, I faced a common problem: how to showcase both personal writing and company blog posts without duplicating content or fragmenting my portfolio. I built an automated aggregation system, made specific trade-offs, and learned valuable lessons about AI-native development.
+When building my personal site, I faced a common problem: how to showcase both
+personal writing and company blog posts without duplicating content or
+fragmenting my portfolio. I built an automated aggregation system, made specific
+trade-offs, and learned valuable lessons about AI-native development.
 
 ## The Problem: Aggregating Distributed Content
 
@@ -25,67 +26,85 @@ Most tech professionals publish in multiple places:
 The standard approaches all failed:
 
 **Platform limitations:**
-- Ghost/WordPress: Too heavy for a simple blog, requires database/server maintenance
+
+- Ghost/WordPress: Too heavy for a simple blog, requires database/server
+  maintenance
 - GitHub Pages: Manual HTML or limited theming, no content aggregation features
 - Medium/Substack: Don't own your URLs, can't customize design, vendor lock-in
 
 **Content strategy problems:**
-- Manual cross-posting: Duplicate content penalties hurt SEO, maintenance nightmare as posts multiply
-- External links only: Loses context and makes it hard to showcase your full body of work
+
+- Manual cross-posting: Duplicate content penalties hurt SEO, maintenance
+  nightmare as posts multiply
+- External links only: Loses context and makes it hard to showcase your full
+  body of work
 - Ignore external content: Wastes your best writing that lives elsewhere
 
-I built a fourth option: an automated aggregation system that pulls content from multiple sources while maintaining clear attribution.
+I built a fourth option: an automated aggregation system that pulls content from
+multiple sources while maintaining clear attribution.
 
 ## Development Workflow: Separating Planning from Implementation
 
-Strategic tool selection mattered more than any technical choice: Claude Opus as my architect and Claude Code as my pair programmer.
+Strategic tool selection mattered more than any technical choice: Claude Opus as
+my architect and Claude Code as my pair programmer.
 
 **Window 1: Design & Planning (Claude Opus via chat)**
+
 - Collaborative design discussions
 - Requirements gathering through questions
 - Architecture recommendations
 - Review and iteration cycles
 
 **Window 2: Implementation (Claude Code)**
+
 - Takes the finalized design as input
 - Executes the implementation
 - Handles file creation and code generation
 
-This separation creates clear boundaries between design discussions and implementation.
+This separation creates clear boundaries between design discussions and
+implementation.
 
 ## Multi-Model Orchestration: Beyond Single-Tool Thinking
 
 I orchestrated three models based on empirical performance data:
 
 **Claude Opus 4.1 (Architecture & Strategy)**
+
 - Token cost: $0.015/1K input
 - Latency: 2-3s for complex reasoning
 - Use case: System design requiring 10+ constraint evaluation
 - Example: Evaluated 15 static site generators against 8 criteria in one pass
 
 **Claude Code (Implementation)**
+
 - Token cost: $0.003/1K (80% cheaper than Opus)
 - Latency: <1s for code generation
 - Use case: Deterministic implementation from specs
 - Example: Generated 2,500 lines of production code with tests
 
 **Claude Haiku (Validation & Testing)**
+
 - Token cost: $0.00025/1K (98% cheaper than Opus)
 - Latency: <500ms
 - Use case: Syntax validation, linting, simple refactors
 - Example: Validated 135 test cases for edge conditions
 
-**Total AI cost for entire project: $0.47**
-**Manual development estimated cost: $4,500 (30 hours @ $150/hr)**
-**ROI: 9,574x**
+**Total AI cost for entire project: $0.47** **Manual development estimated cost:
+$4,500 (30 hours @ $150/hr)** **ROI: 9,574x**
 
 ### Why This Separation Matters
 
-**Different models excel at different tasks.** Opus handles ambiguous requirements and exploring solution spaces. Code excels at execution, generating working files in minutes. Using both strategically gave me the best of each.
+**Different models excel at different tasks.** Opus handles ambiguous
+requirements and exploring solution spaces. Code excels at execution, generating
+working files in minutes. Using both strategically gave me the best of each.
 
-**It prevents architectural churn during implementation.** Once you're in "build mode," revisiting design decisions kills momentum. The handoff from Opus to Code made the transition explicit: design is frozen, now execute.
+**It prevents architectural churn during implementation.** Once you're in "build
+mode," revisiting design decisions kills momentum. The handoff from Opus to Code
+made the transition explicit: design is frozen, now execute.
 
-**It creates documentation.** The Opus conversation becomes a record of why decisions were made. When I revisit this project in 6 months, I'll have the full context.
+**It creates documentation.** The Opus conversation becomes a record of why
+decisions were made. When I revisit this project in 6 months, I'll have the full
+context.
 
 ### How I Used It For This Site
 
@@ -97,20 +116,25 @@ loads fast, and costs almost nothing to host. What approach would you recommend?
 ```
 
 Opus asked clarifying questions:
+
 - How often does content update? (Weekly)
 - What's your comfort with JavaScript frameworks? (Prefer minimal JS)
 - Do you need server-side features? (No)
 - What's your deployment preference? (Vercel/Netlify)
 
-Based on my answers, Opus recommended **Astro + TypeScript + Python scraper** with rationale:
+Based on my answers, Opus recommended **Astro + TypeScript + Python scraper**
+with rationale:
+
 - **Astro**: Zero JS by default, perfect for content-first sites
 - **TypeScript**: Type safety catches errors at build time
 - **Python scraper**: Familiar language, great HTML parsing libraries
 - **Static generation**: No server costs, 50ms loads from CDN
 
-This conversation took **15 minutes**. Researching frameworks manually would have taken **days**.
+This conversation took **15 minutes**. Researching frameworks manually would
+have taken **days**.
 
-**In Claude Code**, I provided the finalized architecture via a prompt written by Opus:
+**In Claude Code**, I provided the finalized architecture via a prompt written
+by Opus:
 
 ```
 "Build an Astro site with:
@@ -121,11 +145,13 @@ This conversation took **15 minutes**. Researching frameworks manually would hav
 - Comprehensive test suite"
 ```
 
-Claude Code generated the entire project in **2 hours**, including edge case handling I hadn't specified.
+Claude Code generated the entire project in **2 hours**, including edge case
+handling I hadn't specified.
 
 ### AI-Accelerated Development Timeline
 
 **Architecture Phase (15 minutes with Opus vs 4 hours manual)**
+
 - Framework evaluation: 2 minutes (vs 2 hours researching)
 - Performance requirement mapping: 3 minutes (vs 1 hour benchmarking)
 - Security architecture: 5 minutes (vs 30 minutes threat modeling)
@@ -133,19 +159,23 @@ Claude Code generated the entire project in **2 hours**, including edge case han
 - Decision documentation: 3 minutes (auto-generated)
 
 **Implementation Phase (2 hours with Code vs 20 hours manual)**
+
 - Boilerplate setup: 5 minutes (vs 2 hours)
 - Content schema + validation: 15 minutes (vs 3 hours)
 - Scraper with error handling: 30 minutes (vs 6 hours)
 - Test suite (135 tests): 45 minutes (vs 6 hours)
 - Performance optimization: 25 minutes (vs 3 hours)
 
-**The Insight:** AI didn't just code faster. It also eliminated entire categories of work:
+**The Insight:** AI didn't just code faster. It also eliminated entire
+categories of work:
+
 - No Stack Overflow diving for edge cases
 - No debugging cycles for typos
 - No refactoring for missed requirements
 - No performance regression hunting
 
-The **12x speedup** came from Claude Code providing best practices, edge case handling, and deployable patterns from the start.
+The **12x speedup** came from Claude Code providing best practices, edge case
+handling, and deployable patterns from the start.
 
 ### When to Use This Pattern
 
@@ -156,11 +186,15 @@ This separation works best for:
 - Projects where you want clear documentation of design rationale
 - Situations where you need to review and approve before implementation
 
-For simpler tasks, going straight to Claude Code is perfectly fine. But for substantial work, this two-phase approach has been invaluable.
+For simpler tasks, going straight to Claude Code is perfectly fine. But for
+substantial work, this two-phase approach has been invaluable.
 
 ## Architecture Overview
 
-The site is a static build pipeline. It pulls content from multiple sources (personal Markdown posts, Cockroach Labs blog, publications), normalizes everything into a unified format, and generates plain HTML. There's no runtime backend, no database. It's just pre-rendered files served from a CDN.
+The site is a static build pipeline. It pulls content from multiple sources
+(personal Markdown posts, Cockroach Labs blog, publications), normalizes
+everything into a unified format, and generates plain HTML. There's no runtime
+backend, no database. It's just pre-rendered files served from a CDN.
 
 ### Static-First Approach
 
@@ -171,7 +205,8 @@ Everything is pre-rendered to HTML at build time. This means:
 - Response times under 50ms from CDN edges
 - No database queries or API calls during page loads
 
-**Trade-off**: Content updates require rebuilds. For a personal blog updating weekly, this is acceptable. For a news site, it wouldn't be.
+**Trade-off**: Content updates require rebuilds. For a personal blog updating
+weekly, this is acceptable. For a news site, it wouldn't be.
 
 ### Type-Safe Content Schema
 
@@ -194,23 +229,42 @@ const blog = defineCollection({
 
 [📄 View full implementation](https://github.com/awoods187/andy-website/blob/main/src/content/config.ts)
 
-This catches errors at build time rather than runtime. Common issues like malformed dates or missing fields fail fast during development.
+This catches errors at build time rather than runtime. Common issues like
+malformed dates or missing fields fail fast during development.
 
 ### Security Considerations
 
-Aggregating content from external sources introduces security risks. Here's how this site mitigates them:
+Aggregating content from external sources introduces security risks. Here's how
+this site mitigates them:
 
-**Content Sanitization**: The scraper uses Python's `bleach` library to sanitize all extracted HTML before writing it to the codebase. This strips `<script>` tags, event handlers (`onclick`, `onerror`), iframes, and tracking pixels while preserving basic formatting. The sanitization happens at build time, so malicious content never reaches the deployed site.
+**Content Sanitization**: The scraper uses Python's `bleach` library to sanitize
+all extracted HTML before writing it to the codebase. This strips `<script>`
+tags, event handlers (`onclick`, `onerror`), iframes, and tracking pixels while
+preserving basic formatting. The sanitization happens at build time, so
+malicious content never reaches the deployed site.
 
-**Security Headers**: The site uses Vercel's header configuration to enforce a strict Content Security Policy (CSP) that prevents inline scripts, restricts image sources to trusted domains, and blocks framing attacks. Headers include `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, and `Strict-Transport-Security` with HSTS preload. [📄 View security headers configuration](https://github.com/awoods187/andy-website/blob/main/vercel.json)
+**Security Headers**: The site uses Vercel's header configuration to enforce a
+strict Content Security Policy (CSP) that prevents inline scripts, restricts
+image sources to trusted domains, and blocks framing attacks. Headers include
+`X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, and
+`Strict-Transport-Security` with HSTS preload.
+[📄 View security headers configuration](https://github.com/awoods187/andy-website/blob/main/vercel.json)
 
-**Attribution Enforcement**: External posts include clear source attribution in both metadata and rendered HTML. This is enforced at the type level—TypeScript won't compile if source information is missing.
+**Attribution Enforcement**: External posts include clear source attribution in
+both metadata and rendered HTML. This is enforced at the type level—TypeScript
+won't compile if source information is missing.
 
-**Trade-off**: The CSP includes `'unsafe-inline'` for styles because Astro generates scoped styles inline. This is an acceptable trade-off for a static site with no user-generated content. For applications handling sensitive data, you'd want to eliminate inline styles entirely.
+**Trade-off**: The CSP includes `'unsafe-inline'` for styles because Astro
+generates scoped styles inline. This is an acceptable trade-off for a static
+site with no user-generated content. For applications handling sensitive data,
+you'd want to eliminate inline styles entirely.
 
 ### Why This Matters
 
-Static sites are inherently more secure than dynamic backends (no SQL injection, no authentication vulnerabilities), but aggregating external content creates new attack surfaces. These mitigations ensure scraped content can't compromise the site or visitors.
+Static sites are inherently more secure than dynamic backends (no SQL injection,
+no authentication vulnerabilities), but aggregating external content creates new
+attack surfaces. These mitigations ensure scraped content can't compromise the
+site or visitors.
 
 ### Content Aggregation Details
 
@@ -236,9 +290,13 @@ def scrape_author_posts(author_url):
     return posts
 ```
 
-[📄 View full scraper implementation](https://github.com/awoods187/andy-website/blob/main/scripts/scrape-crl-posts.py) (594 lines with comprehensive error handling, security sanitization, and logging)
+[📄 View full scraper implementation](https://github.com/awoods187/andy-website/blob/main/scripts/scrape-crl-posts.py)
+(594 lines with comprehensive error handling, security sanitization, and
+logging)
 
-The scraper outputs a TypeScript file ([`src/data/crl-posts.ts`](https://github.com/awoods187/andy-website/blob/main/src/data/crl-posts.ts)) that gets imported during the Astro build. This means:
+The scraper outputs a TypeScript file
+([`src/data/crl-posts.ts`](https://github.com/awoods187/andy-website/blob/main/src/data/crl-posts.ts))
+that gets imported during the Astro build. This means:
 
 - Content is versioned in Git
 - Builds are reproducible
@@ -270,9 +328,12 @@ def extract_post_data(card):
     return BlogPost(title=title, url=url, excerpt=excerpt)
 ```
 
-[📄 See actual extract_post_data() implementation](https://github.com/awoods187/andy-website/blob/main/scripts/scrape-crl-posts.py#L331-L406) with complete error handling and sanitization
+[📄 See actual extract_post_data() implementation](https://github.com/awoods187/andy-website/blob/main/scripts/scrape-crl-posts.py#L331-L406)
+with complete error handling and sanitization
 
-This defensive approach prevents build failures when external sites change their HTML structure. Missing optional fields default to empty values, while missing required fields skip the post entirely.
+This defensive approach prevents build failures when external sites change their
+HTML structure. Missing optional fields default to empty values, while missing
+required fields skip the post entirely.
 
 ## Testing Strategy
 
@@ -282,13 +343,9 @@ The test suite focuses on build outputs rather than implementation:
 // tests/build.test.ts
 describe('Build Output', () => {
   it('should generate all expected pages', () => {
-    const paths = [
-      '/blog',
-      '/blog/post-1',
-      '/about',
-    ];
+    const paths = ['/blog', '/blog/post-1', '/about'];
 
-    paths.forEach(path => {
+    paths.forEach((path) => {
       const file = join(distPath, `${path}.html`);
       expect(existsSync(file)).toBe(true);
     });
@@ -300,7 +357,7 @@ describe('Content Files', () => {
   it('should have valid frontmatter', () => {
     const mdFiles = readdirSync(contentPath);
 
-    mdFiles.forEach(file => {
+    mdFiles.forEach((file) => {
       const content = readFileSync(join(contentPath, file), 'utf-8');
 
       // Check for required fields
@@ -317,7 +374,7 @@ import { crlPosts } from '../src/data/crl-posts';
 
 describe('Cockroach Labs Posts', () => {
   it('should have valid Cockroach Labs URLs', () => {
-    crlPosts.forEach(post => {
+    crlPosts.forEach((post) => {
       expect(post.url).toMatch(/^https:\/\/www\.cockroachlabs\.com/);
       expect(post.source).toBe('cockroach-labs');
     });
@@ -326,16 +383,23 @@ describe('Cockroach Labs Posts', () => {
 ```
 
 **View test implementations:**
-- [📄 Build tests](https://github.com/awoods187/andy-website/blob/main/tests/build.test.ts) - Validates generated pages and assets
-- [📄 Content tests](https://github.com/awoods187/andy-website/blob/main/tests/content.test.ts) - Validates frontmatter and metadata
-- [📄 External posts tests](https://github.com/awoods187/andy-website/blob/main/tests/external-posts.test.ts) - Validates scraped content
-- [📁 All tests](https://github.com/awoods187/andy-website/tree/main/tests) - Complete test suite (135 test cases)
 
-The tests verify the build output rather than implementation details. They catch common issues like broken links, missing pages, and malformed data.
+- [📄 Build tests](https://github.com/awoods187/andy-website/blob/main/tests/build.test.ts) -
+  Validates generated pages and assets
+- [📄 Content tests](https://github.com/awoods187/andy-website/blob/main/tests/content.test.ts) -
+  Validates frontmatter and metadata
+- [📄 External posts tests](https://github.com/awoods187/andy-website/blob/main/tests/external-posts.test.ts) -
+  Validates scraped content
+- [📁 All tests](https://github.com/awoods187/andy-website/tree/main/tests) -
+  Complete test suite (135 test cases)
+
+The tests verify the build output rather than implementation details. They catch
+common issues like broken links, missing pages, and malformed data.
 
 ## Performance Results
 
-The minimal JavaScript approach delivers these benefits. Real Lighthouse scores from production deployment after optimization:
+The minimal JavaScript approach delivers these benefits. Real Lighthouse scores
+from production deployment after optimization:
 
 ```bash
 # Lighthouse Performance Metrics (Mobile, Slow 4G)
@@ -359,17 +423,20 @@ Images: 88-219 KB (responsive srcset for mobile/desktop)
 ```
 
 Key optimizations that moved the needle:
+
 - Async font loading eliminated 1.7s of render blocking
 - Responsive images (400w/800w/1200w) save 60% bandwidth on mobile
 - Zero JavaScript = 0ms Total Blocking Time
 
-For comparison, a typical Next.js blog ships 70-100 KB of JavaScript just for the framework.
+For comparison, a typical Next.js blog ships 70-100 KB of JavaScript just for
+the framework.
 
 ## Trade-offs and Limitations
 
 This architecture makes deliberate trade-offs:
 
 **Pros:**
+
 - Extremely fast page loads (< 50ms from CDN)
 - Minimal hosting costs ($5/month on Vercel)
 - No security vulnerabilities from dependencies
@@ -377,55 +444,80 @@ This architecture makes deliberate trade-offs:
 - Simple mental model
 
 **Cons:**
+
 - No real-time features (comments require rebuild)
 - Search requires a separate service or JS
 - Dynamic content needs API endpoints
 - Rebuilds needed for content updates
 
-These trade-offs make sense for a personal blog. They wouldn't for an e-commerce site or social platform.
+These trade-offs make sense for a personal blog. They wouldn't for an e-commerce
+site or social platform.
 
 ## Where AI Failed
 
 **Failure 1: CSS Animation Performance**
 
-The initial blog had an issue with Flash of Unstyled Content (FOUC) when clicking on Blog from the home page. The CSS should have loaded first to avoid this. https://en.wikipedia.org/wiki/Flash_of_unstyled_content
+The initial blog had an issue with Flash of Unstyled Content (FOUC) when
+clicking on Blog from the home page. The CSS should have loaded first to avoid
+this. https://en.wikipedia.org/wiki/Flash_of_unstyled_content
 
 **Fix**: Claude Code one-shotted this fix after describing the problem.
 
 **Failure 2: Security**
 
-Because I didn't know to prompt for it, the initial version of the website had several security concerns:
+Because I didn't know to prompt for it, the initial version of the website had
+several security concerns:
 
-Initially, the scraped content was vulnerable to cross-site scripting attacks as any data that's rendered directly into pages could carry scripts, event handlers, or malicious embeds.
+Initially, the scraped content was vulnerable to cross-site scripting attacks as
+any data that's rendered directly into pages could carry scripts, event
+handlers, or malicious embeds.
 
-Similarly, we loaded remote images directly which can leak visitor IPs and referrers or break if the source changes paths. It's easy to forget that copied articles can include hidden tracking pixels, inline scripts, or analytics IDs.
+Similarly, we loaded remote images directly which can leak visitor IPs and
+referrers or break if the source changes paths. It's easy to forget that copied
+articles can include hidden tracking pixels, inline scripts, or analytics IDs.
 
-Even on static hosting, adding a simple Content Security Policy, HSTS, and Referrer-Policy headers for defense-in-depth are necessary.
+Even on static hosting, adding a simple Content Security Policy, HSTS, and
+Referrer-Policy headers for defense-in-depth are necessary.
 
-**Fix**: I paired with Claude Opus to critique the security posture of the site after being tipped off by a friend and handled each of these individually to avoid complications.
+**Fix**: I paired with Claude Opus to critique the security posture of the site
+after being tipped off by a friend and handled each of these individually to
+avoid complications.
 
 ## What This Means for Product Development
 
-AI changes the build vs. buy calculus. Tasks that used to require third-party tools can now be custom-built faster than integrating external services, giving you full control without the time penalty.
+AI changes the build vs. buy calculus. Tasks that used to require third-party
+tools can now be custom-built faster than integrating external services, giving
+you full control without the time penalty.
 
-Edge cases get handled upfront. Traditional development discovers edge cases in production. AI-generated code anticipates them from training on thousands of similar implementations.
+Edge cases get handled upfront. Traditional development discovers edge cases in
+production. AI-generated code anticipates them from training on thousands of
+similar implementations.
 
-"Good enough" is now actually good. Features that would typically be "v2 nice-to-haves" (comprehensive tests, accessibility, performance optimization) got included in the initial build because they took minutes, not hours.
+"Good enough" is now actually good. Features that would typically be "v2
+nice-to-haves" (comprehensive tests, accessibility, performance optimization)
+got included in the initial build because they took minutes, not hours.
 
 ## Key Patterns for AI-Native Development
 
-- **Strategic model selection**: Use Opus for architecture, Code for implementation. Different tools for different phases.
-- **Design freeze before implementation**: Finalize the architecture completely before writing code. Prevents churn.
-- **Test the output, not the implementation**: Static sites need output validation (pages exist, metadata correct), not unit tests of internal functions.
-- **Constraints as forcing functions**: The "minimal JavaScript" constraint prevented scope creep and kept the architecture simple.
+- **Strategic model selection**: Use Opus for architecture, Code for
+  implementation. Different tools for different phases.
+- **Design freeze before implementation**: Finalize the architecture completely
+  before writing code. Prevents churn.
+- **Test the output, not the implementation**: Static sites need output
+  validation (pages exist, metadata correct), not unit tests of internal
+  functions.
+- **Constraints as forcing functions**: The "minimal JavaScript" constraint
+  prevented scope creep and kept the architecture simple.
 
 ## Try Claude Code Yourself
 
-Want to see AI-native development in action? These simplified prompts built key features of this site.
+Want to see AI-native development in action? These simplified prompts built key
+features of this site.
 
 ### Example 1: Content Scraper (5 minutes)
 
 **Prompt**:
+
 ```
 Create a Python scraper that:
 1. Extracts blog posts from an author page
@@ -438,6 +530,7 @@ The author page uses <article> cards with varying structures.
 ```
 
 **Result**: Claude Code generated a ~500-line comprehensive scraper including:
+
 - BeautifulSoup setup with proper error handling
 - Multiple fallback strategies for each field
 - TypeScript interface generation
@@ -447,6 +540,7 @@ The author page uses <article> cards with varying structures.
 ### Example 2: Dual Licensing Structure (10 minutes)
 
 **Prompt**:
+
 ```
 Set up dual licensing for my blog:
 - Code: MIT License (maximum reusability)
@@ -456,15 +550,20 @@ Set up dual licensing for my blog:
 ```
 
 **Result**: Claude Code created:
-- [LICENSE-CODE.md](https://github.com/awoods187/andy-website/blob/main/LICENSE-CODE.md) with MIT license and examples
-- [LICENSE-CONTENT.md](https://github.com/awoods187/andy-website/blob/main/LICENSE-CONTENT.md) with CC BY-NC 4.0 and attribution guide
-- [LICENSE.md](https://github.com/awoods187/andy-website/blob/main/LICENSE.md) explaining the dual structure
+
+- [LICENSE-CODE.md](https://github.com/awoods187/andy-website/blob/main/LICENSE-CODE.md)
+  with MIT license and examples
+- [LICENSE-CONTENT.md](https://github.com/awoods187/andy-website/blob/main/LICENSE-CONTENT.md)
+  with CC BY-NC 4.0 and attribution guide
+- [LICENSE.md](https://github.com/awoods187/andy-website/blob/main/LICENSE.md)
+  explaining the dual structure
 - Updated README with license section
 - License metadata templates for blog posts
 
 ### Example 3: AI-Friendly Bot Controls (15 minutes)
 
 **Prompt**:
+
 ```
 Create professional bot and AI crawler controls that position me as LLM-friendly:
 - robots.txt that explicitly allows AI crawlers
@@ -474,23 +573,35 @@ Create professional bot and AI crawler controls that position me as LLM-friendly
 ```
 
 **Result**: Claude Code generated:
-- [robots.txt](https://github.com/awoods187/andy-website/blob/main/public/robots.txt) (185 lines) allowing all major AI bots
-- [ai.txt](https://github.com/awoods187/andy-website/blob/main/public/ai.txt) (252 lines) with training permissions
-- [humans.txt](https://github.com/awoods187/andy-website/blob/main/public/humans.txt) (245 lines) with ASCII art
+
+- [robots.txt](https://github.com/awoods187/andy-website/blob/main/public/robots.txt)
+  (185 lines) allowing all major AI bots
+- [ai.txt](https://github.com/awoods187/andy-website/blob/main/public/ai.txt)
+  (252 lines) with training permissions
+- [humans.txt](https://github.com/awoods187/andy-website/blob/main/public/humans.txt)
+  (245 lines) with ASCII art
 - Meta tags for OpenAI, Anthropic, Google AI
-- [README-AI-POLICY.md](https://github.com/awoods187/andy-website/blob/main/README-AI-POLICY.md) with full policy
+- [README-AI-POLICY.md](https://github.com/awoods187/andy-website/blob/main/README-AI-POLICY.md)
+  with full policy
 
 ## Open Source
 
-The complete code is available on GitHub, including the scraper, tests, and deployment configuration:
+The complete code is available on GitHub, including the scraper, tests, and
+deployment configuration:
 
-**GitHub**: [github.com/awoods187/andy-website](https://github.com/awoods187/andy-website)
+**GitHub**:
+[github.com/awoods187/andy-website](https://github.com/awoods187/andy-website)
 
-Feel free to adapt it for your own use. The architecture should work for any static content site.
+Feel free to adapt it for your own use. The architecture should work for any
+static content site.
 
 ---
 
-
-I'm building more AI-native development patterns and always interested in production use cases. If you're using AI for production software (not just demos), I'd love to compare notes on multi-model orchestration, prompt engineering at scale, or cost optimization. Find me on [LinkedIn](https://www.linkedin.com/in/andrewscottwoods/) or check out my v1 PM prompt patterns library on [GitHub](https://github.com/awoods187).
+I'm building more AI-native development patterns and always interested in
+production use cases. If you're using AI for production software (not just
+demos), I'd love to compare notes on multi-model orchestration, prompt
+engineering at scale, or cost optimization. Find me on
+[LinkedIn](https://www.linkedin.com/in/andrewscottwoods/) or check out my v1 PM
+prompt patterns library on [GitHub](https://github.com/awoods187).
 
 ---

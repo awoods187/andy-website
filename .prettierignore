@@ -1,0 +1,38 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Build outputs
+dist/
+.astro/
+
+# Coverage
+coverage/
+.nyc_output/
+
+# Cache
+.cache/
+.temp/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Reports
+lighthouse-report.*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Blog posts with complex YAML frontmatter that breaks test parser
+src/content/blog/how-i-built-my-blog-why-i-use-different-ai-models-for-architecture-vs-implementation.md

@@ -1,6 +1,7 @@
 # Subscription System Testing Guide
 
-Complete testing checklist to verify your subscription system is working correctly.
+Complete testing checklist to verify your subscription system is working
+correctly.
 
 ---
 
@@ -9,6 +10,7 @@ Complete testing checklist to verify your subscription system is working correct
 **Dev Server**: http://localhost:4322/
 
 ### Test 1: Subscribe Page
+
 - [ ] Visit: http://localhost:4322/subscribe
 - [ ] Email form visible and styled correctly
 - [ ] RSS section shows RSS URL and Feedly link
@@ -16,6 +18,7 @@ Complete testing checklist to verify your subscription system is working correct
 - [ ] All links work (RSS readers, privacy policy)
 
 ### Test 2: Blog Post Subscribe Form
+
 - [ ] Visit: http://localhost:4322/blog/hybrid-blog-system-2025
 - [ ] Scroll to bottom
 - [ ] Subscribe form appears after content
@@ -23,15 +26,18 @@ Complete testing checklist to verify your subscription system is working correct
 - [ ] Form is responsive on mobile (resize browser)
 
 ### Test 3: Navigation
+
 - [ ] "Subscribe" link in header
 - [ ] Clicking it goes to /subscribe
 - [ ] Link highlights when on /subscribe page
 
 ### Test 4: Footer
+
 - [ ] RSS icon appears next to social icons
 - [ ] Clicking RSS icon opens /rss.xml
 
 ### Test 5: RSS Feed
+
 - [ ] Visit: http://localhost:4322/rss.xml
 - [ ] Shows XML with all your posts
 - [ ] Includes personal + CRL + publications
@@ -75,6 +81,7 @@ Once deployed, visit: https://andywoods.me
 **Visit**: https://andywoods.me/rss.xml
 
 **Verify**:
+
 - [ ] RSS feed loads (shows XML)
 - [ ] Contains all your blog posts
 - [ ] Each post has proper data:
@@ -85,12 +92,14 @@ Once deployed, visit: https://andywoods.me
   - `<author>` - Andy Woods
 
 **Validate the feed**:
+
 1. Go to: https://validator.w3.org/feed/
 2. Enter: https://andywoods.me/rss.xml
 3. Click "Check"
 4. Should show: "This is a valid RSS feed"
 
 **If validation fails**, common issues:
+
 - Deployment not complete (wait 2 minutes, try again)
 - Build error (check Vercel logs)
 - Syntax error in rss.xml.ts (check console)
@@ -102,6 +111,7 @@ Once deployed, visit: https://andywoods.me
 **Visit**: https://andywoods.me/subscribe
 
 **Visual Check**:
+
 - [ ] Page loads without errors
 - [ ] Email form displays correctly
 - [ ] RSS section visible
@@ -110,6 +120,7 @@ Once deployed, visit: https://andywoods.me
 - [ ] Mobile responsive (test on phone or resize browser)
 
 **Functionality Check**:
+
 - [ ] Email input accepts text
 - [ ] Clicking Subscribe button opens Buttondown confirmation
 - [ ] RSS links work:
@@ -151,7 +162,8 @@ This is the most important test - verify the whole flow works.
 
 #### 3.4: Check Subscriber Count
 
-- **Dashboard home** should show: "1 subscriber" (or more if you tested multiple)
+- **Dashboard home** should show: "1 subscriber" (or more if you tested
+  multiple)
 - **Graph** should show the subscription event
 
 ---
@@ -180,25 +192,27 @@ This tests if new blog posts automatically email subscribers.
 #### Option B: Full Test With New Post (Complete Test)
 
 1. **Write a new blog post** or update an existing one:
+
    ```bash
    # Edit a blog post
    nano src/content/blog/test-subscription.md
    ```
 
 2. **Add test frontmatter**:
+
    ```yaml
    ---
-   title: "Test Subscription Email"
+   title: 'Test Subscription Email'
    date: 2025-01-24
-   excerpt: "Testing if subscribers receive this automatically"
-   tags: ["test"]
+   excerpt: 'Testing if subscribers receive this automatically'
+   tags: ['test']
    draft: false
    ---
-
    This is a test post to verify the email subscription system works!
    ```
 
 3. **Commit and deploy**:
+
    ```bash
    git add .
    git commit -m "Test post for subscription system"
@@ -236,6 +250,7 @@ This tests if new blog posts automatically email subscribers.
 **Visit any blog post**: https://andywoods.me/blog/hybrid-blog-system-2025
 
 **Scroll to bottom**:
+
 - [ ] Subscribe form appears after content, before navigation
 - [ ] Form has gray background with left border
 - [ ] "Get New Posts via Email" heading visible
@@ -244,6 +259,7 @@ This tests if new blog posts automatically email subscribers.
 - [ ] Links in details work (RSS feed, Buttondown privacy, RSS readers)
 
 **Test submission**:
+
 - [ ] Enter email (different from first test)
 - [ ] Click Subscribe
 - [ ] Popup opens to Buttondown
@@ -254,12 +270,14 @@ This tests if new blog posts automatically email subscribers.
 ### Test 6: Navigation Integration
 
 **Header**:
+
 - [ ] "Subscribe" link appears in header nav
 - [ ] Works on all pages (home, blog, about, subscribe)
 - [ ] Highlights when on /subscribe page
 - [ ] Mobile menu includes Subscribe link
 
 **Footer**:
+
 - [ ] RSS icon appears (next to LinkedIn, GitHub, Twitter)
 - [ ] Clicking opens /rss.xml
 - [ ] Icon styled correctly (gray, hovers to black)
@@ -271,17 +289,22 @@ This tests if new blog posts automatically email subscribers.
 This lets RSS readers automatically find your feed.
 
 **Test in browser**:
+
 1. Visit: https://andywoods.me
 2. **View page source** (Ctrl+U or Cmd+Option+U)
 3. **Search for**: `type="application/rss+xml"`
 4. **Should find**:
    ```html
-   <link rel="alternate" type="application/rss+xml"
-         title="Andy Woods - Product & AI Engineering"
-         href="/rss.xml" />
+   <link
+     rel="alternate"
+     type="application/rss+xml"
+     title="Andy Woods - Product & AI Engineering"
+     href="/rss.xml"
+   />
    ```
 
 **Test with RSS reader**:
+
 1. Open any RSS reader (Feedly, NetNewsWire, etc.)
 2. Add feed by website URL: `andywoods.me` (not the full RSS URL)
 3. Reader should auto-discover: https://andywoods.me/rss.xml
@@ -294,11 +317,14 @@ This lets RSS readers automatically find your feed.
 ### Issue: Subscribe button does nothing
 
 **Check**:
+
 1. Browser console (F12) for JavaScript errors
 2. Buttondown username in SubscribeForm.astro is: `awoods187`
-3. Form action URL is: `https://buttondown.email/api/emails/embed-subscribe/awoods187`
+3. Form action URL is:
+   `https://buttondown.email/api/emails/embed-subscribe/awoods187`
 
 **Fix**:
+
 ```bash
 # Verify username
 grep buttondownUsername src/components/SubscribeForm.astro
@@ -308,11 +334,13 @@ grep buttondownUsername src/components/SubscribeForm.astro
 ### Issue: RSS feed is empty
 
 **Check**:
+
 1. Are there published posts? (draft: false)
 2. Did the site rebuild after adding posts?
 3. Check Vercel deployment logs
 
 **Fix**:
+
 ```bash
 # Rebuild and redeploy
 npm run build
@@ -322,6 +350,7 @@ git push origin main
 ### Issue: Emails not sending from Buttondown
 
 **Check**:
+
 1. Buttondown → Settings → Imports
    - RSS feed shows as "Active"
    - Auto-send is enabled ✅
@@ -331,6 +360,7 @@ git push origin main
    - Check for drafts or sent emails
 
 **Fix**:
+
 1. Manually click "Check Now" in RSS settings
 2. Check if drafts appear in Emails tab
 3. If drafts exist but didn't send, check auto-send toggle
@@ -339,11 +369,13 @@ git push origin main
 ### Issue: Confirmation emails not arriving
 
 **Check**:
+
 1. Spam folder
 2. Buttondown → Subscribers → Look for "Unconfirmed" status
 3. Email address typed correctly
 
 **Fix**:
+
 1. Resend confirmation from Buttondown dashboard
 2. Try different email provider (Gmail, Outlook, etc.)
 3. Check Buttondown email sending status
@@ -355,6 +387,7 @@ git push origin main
 Your subscription system is fully working when:
 
 ### ✅ Technical
+
 - [ ] RSS feed validates at validator.w3.org/feed
 - [ ] RSS feed includes all content sources (personal, CRL, publications)
 - [ ] Subscribe page loads on production
@@ -363,12 +396,14 @@ Your subscription system is fully working when:
 - [ ] Footer RSS icon works
 
 ### ✅ Buttondown Integration
+
 - [ ] RSS feed connected in Buttondown
 - [ ] Auto-send enabled
 - [ ] Daily check scheduled (9am or your preferred time)
 - [ ] Email template configured
 
 ### ✅ End-to-End Flow
+
 - [ ] Can subscribe with email → receive confirmation
 - [ ] Confirmed subscribers appear in dashboard
 - [ ] Publishing new post → email sends automatically
@@ -376,6 +411,7 @@ Your subscription system is fully working when:
 - [ ] Unsubscribe flow works
 
 ### ✅ User Experience
+
 - [ ] Forms are accessible (keyboard navigation works)
 - [ ] Mobile responsive design
 - [ ] Privacy information visible
@@ -388,15 +424,18 @@ Your subscription system is fully working when:
 After launch, track in Buttondown dashboard:
 
 ### Daily
+
 - [ ] Check subscriber count growth
 - [ ] Review any unsubscribes (keep below 1%)
 
 ### Weekly
+
 - [ ] Email open rates (target: 30-40%)
 - [ ] Click-through rates (target: 5-10%)
 - [ ] RSS feed check success rate (should be 100%)
 
 ### Monthly
+
 - [ ] Subscriber growth trend
 - [ ] Most popular posts (by clicks)
 - [ ] Adjust send time if open rates are low

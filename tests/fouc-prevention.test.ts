@@ -18,10 +18,7 @@ import { readFileSync } from 'fs';
 import { join } from 'path';
 
 describe('FOUC Prevention', () => {
-  const baseLayout = readFileSync(
-    join(process.cwd(), 'src/layouts/BaseLayout.astro'),
-    'utf-8'
-  );
+  const baseLayout = readFileSync(join(process.cwd(), 'src/layouts/BaseLayout.astro'), 'utf-8');
 
   describe('Font Loading Strategy', () => {
     it('should NOT use async font loading (media="print" trick)', () => {
@@ -32,7 +29,8 @@ describe('FOUC Prevention', () => {
 
     it('should load fonts synchronously to prevent FOUC', () => {
       // Fonts should be loaded with a regular stylesheet link
-      const fontLinkPattern = /<link[^>]*rel="stylesheet"[^>]*href="https:\/\/fonts\.googleapis\.com/;
+      const fontLinkPattern =
+        /<link[^>]*rel="stylesheet"[^>]*href="https:\/\/fonts\.googleapis\.com/;
       expect(baseLayout).toMatch(fontLinkPattern);
 
       // Ensure it's NOT wrapped in async loading
@@ -114,9 +112,10 @@ describe('FOUC Prevention', () => {
   describe('Performance vs FOUC Trade-offs', () => {
     it('should document why synchronous loading is chosen', () => {
       // The comment should explain the trade-off
-      const hasFoucComment = baseLayout.includes('FOUC') ||
-                            baseLayout.includes('prevent') ||
-                            baseLayout.includes('synchronously');
+      const hasFoucComment =
+        baseLayout.includes('FOUC') ||
+        baseLayout.includes('prevent') ||
+        baseLayout.includes('synchronously');
       expect(hasFoucComment).toBe(true);
     });
 

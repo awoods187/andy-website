@@ -14,7 +14,10 @@ const currentPath = Astro.url.pathname;
 <header class="mb-12">
   <nav class="flex items-center justify-between">
     {/* Site logo/name - links to home */}
-    <a href="/" class="text-2xl font-sans font-bold text-black no-underline hover:opacity-70 transition-opacity">
+    <a
+      href="/"
+      class="text-2xl font-sans font-bold text-black no-underline hover:opacity-70 transition-opacity"
+    >
       Andy Woods
     </a>
 
@@ -25,9 +28,9 @@ const currentPath = Astro.url.pathname;
         <a
           href="/"
           class:list={[
-            "text-base no-underline hover:opacity-70 transition-opacity",
+            'text-base no-underline hover:opacity-70 transition-opacity',
             // Active page gets darker color and medium font weight
-            currentPath === "/" ? "text-black font-medium" : "text-gray-600"
+            currentPath === '/' ? 'text-black font-medium' : 'text-gray-600',
           ]}
         >
           Home
@@ -39,8 +42,8 @@ const currentPath = Astro.url.pathname;
         <a
           href="/blog/all"
           class:list={[
-            "text-base no-underline hover:opacity-70 transition-opacity",
-            currentPath.startsWith("/blog") ? "text-black font-medium" : "text-gray-600"
+            'text-base no-underline hover:opacity-70 transition-opacity',
+            currentPath.startsWith('/blog') ? 'text-black font-medium' : 'text-gray-600',
           ]}
         >
           Blog
@@ -52,8 +55,8 @@ const currentPath = Astro.url.pathname;
         <a
           href="/about"
           class:list={[
-            "text-base no-underline hover:opacity-70 transition-opacity",
-            currentPath === "/about" ? "text-black font-medium" : "text-gray-600"
+            'text-base no-underline hover:opacity-70 transition-opacity',
+            currentPath === '/about' ? 'text-black font-medium' : 'text-gray-600',
           ]}
         >
           About
@@ -65,8 +68,8 @@ const currentPath = Astro.url.pathname;
         <a
           href="/subscribe"
           class:list={[
-            "text-base no-underline hover:opacity-70 transition-opacity",
-            currentPath === "/subscribe" ? "text-black font-medium" : "text-gray-600"
+            'text-base no-underline hover:opacity-70 transition-opacity',
+            currentPath === '/subscribe' ? 'text-black font-medium' : 'text-gray-600',
           ]}
         >
           Subscribe

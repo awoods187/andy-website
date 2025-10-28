@@ -1,16 +1,18 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PostCard from '../components/PostCard.astro';
 
+type BlogPost = CollectionEntry<'blog'>;
+
 // Get all blog posts and sort by date (newest first)
-const allPosts = await getCollection('blog');
-const publishedPosts = allPosts
-  .filter(post => !post.data.draft)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const allPosts: BlogPost[] = await getCollection('blog');
+const publishedPosts: BlogPost[] = allPosts
+  .filter((post: BlogPost) => !post.data.draft)
+  .sort((a: BlogPost, b: BlogPost) => b.data.date.valueOf() - a.data.date.valueOf());
 
 // Get the 8 most recent posts for the home page
-const recentPosts = publishedPosts.slice(0, 8);
+const recentPosts: BlogPost[] = publishedPosts.slice(0, 8);
 ---
 
 <BaseLayout title="Andy Woods - Product Manager, AI & Database Infrastructure">
@@ -18,10 +20,20 @@ const recentPosts = publishedPosts.slice(0, 8);
     <h1 class="font-sans text-4xl font-bold mb-6 text-black">Hi, I'm Andy Woods</h1>
     <div class="prose prose-lg">
       <p class="text-lg leading-relaxed text-gray-700 mb-4">
-        I'm a Product Manager at <a href="https://www.cockroachlabs.com" target="_blank" rel="noopener noreferrer" class="text-black underline hover:opacity-70">Cockroach Labs</a>, where I scaled CockroachDB from pre-revenue to $100M+ ARR and category leadership. Now I'm pioneering AI integration into our developer platform and connecting CockroachDB to the broader application ecosystem.
+        I'm a Product Manager at <a
+          href="https://www.cockroachlabs.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-black underline hover:opacity-70">Cockroach Labs</a
+        >, where I scaled CockroachDB from pre-revenue to $100M+ ARR and category leadership. Now
+        I'm pioneering AI integration into our developer platform and connecting CockroachDB to the
+        broader application ecosystem.
       </p>
       <p class="text-lg leading-relaxed text-gray-700">
-        I write about the intersection of AI, databases, and product management—making complex technology accessible to developers. I've built production AI systems using GPT-4 and Claude, led AI product initiatives, and specialize in turning ambiguity into scalable products that users love.
+        I write about the intersection of AI, databases, and product management—making complex
+        technology accessible to developers. I've built production AI systems using GPT-4 and
+        Claude, led AI product initiatives, and specialize in turning ambiguity into scalable
+        products that users love.
       </p>
     </div>
   </section>
@@ -29,22 +41,29 @@ const recentPosts = publishedPosts.slice(0, 8);
   <section>
     <div class="flex items-center justify-between mb-8">
       <h2 class="font-sans text-3xl font-bold text-black">Recent Posts</h2>
-      <a href="/blog" class="text-base text-gray-600 hover:text-black no-underline transition-colors">
+      <a
+        href="/blog"
+        class="text-base text-gray-600 hover:text-black no-underline transition-colors"
+      >
         View all →
       </a>
     </div>
     <div>
-      {recentPosts.map(post => (
-        <PostCard
-          title={post.data.title}
-          date={post.data.date}
-          excerpt={post.data.excerpt}
-          slug={post.slug}
-          tags={post.data.tags}
-          image={post.data.image}
-          source="personal"
-        />
-      ))}
+      {
+        recentPosts.map((post: BlogPost) => {
+          return (
+            <PostCard
+              title={post.data.title}
+              date={post.data.date}
+              excerpt={post.data.excerpt}
+              slug={post.slug}
+              tags={post.data.tags}
+              image={post.data.image}
+              source="personal"
+            />
+          );
+        })
+      }
     </div>
   </section>
 </BaseLayout>

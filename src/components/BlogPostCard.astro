@@ -31,7 +31,7 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
   year: 'numeric',
   month: 'long',
   day: 'numeric',
-  timeZone: 'UTC'
+  timeZone: 'UTC',
 }).format(date);
 ---
 
@@ -44,21 +44,21 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
   <time datetime={date.toISOString()} class="text-sm text-gray-600 block mb-3">
     {formattedDate}
   </time>
-  {showExcerpt && (
-    <p class="text-base leading-relaxed mb-3 text-gray-700">
-      {excerpt}
-    </p>
-  )}
-  {tags.length > 0 && (
-    <div class="flex gap-2 flex-wrap">
-      {tags.map(tag => (
-        <a
-          href={`/blog/tag/${tag}`}
-          class="text-xs px-2 py-1 bg-gray-100 text-gray-700 rounded no-underline hover:bg-gray-200 transition-colors"
-        >
-          {tag}
-        </a>
-      ))}
-    </div>
-  )}
+  {showExcerpt && <p class="text-base leading-relaxed mb-3 text-gray-700">{excerpt}</p>}
+  {
+    tags.length > 0 && (
+      <div class="flex gap-2 flex-wrap">
+        {tags.map((tag: string) => {
+          return (
+            <a
+              href={`/blog/tag/${tag}`}
+              class="text-xs px-2 py-1 bg-gray-100 text-gray-700 rounded no-underline hover:bg-gray-200 transition-colors"
+            >
+              {tag}
+            </a>
+          );
+        })}
+      </div>
+    )
+  }
 </article>
