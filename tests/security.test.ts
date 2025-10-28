@@ -305,7 +305,7 @@ describe('Security Hardening', () => {
   describe('Blog Post Security Documentation', () => {
     const blogPostPath = join(
       process.cwd(),
-      'src/content/blog/how-i-built-my-blog-claude-opus-for-design-claude-code-for-implementation.md'
+      'src/content/blog/how-i-built-my-blog-why-i-use-different-ai-models-for-architecture-vs-implementation.md'
     );
 
     it('blog post should exist', () => {

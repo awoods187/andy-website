@@ -112,9 +112,9 @@ describe('Blog Title/Filename Matching', () => {
   describe('Specific Post Validations', () => {
     it('should have the correct title and filename for the main blog post', () => {
       const expectedFilename =
-        'how-i-built-my-blog-claude-opus-for-design-claude-code-for-implementation.md';
+        'how-i-built-my-blog-why-i-use-different-ai-models-for-architecture-vs-implementation.md';
       const expectedTitle =
-        'How I Built My Blog: Claude Opus for Design, Claude Code for Implementation';
+        'How I Built My Blog: Why I Use Different AI Models for Architecture vs Implementation';
 
       expect(blogFiles).toContain(expectedFilename);
 
@@ -127,9 +127,9 @@ describe('Blog Title/Filename Matching', () => {
 
     it('should have matching image path for the main blog post', () => {
       const filename =
-        'how-i-built-my-blog-claude-opus-for-design-claude-code-for-implementation.md';
+        'how-i-built-my-blog-why-i-use-different-ai-models-for-architecture-vs-implementation.md';
       const expectedImagePath =
-        '/images/blog/how-i-built-my-blog-claude-opus-for-design-claude-code-for-implementation-hero.jpg';
+        '/images/blog/how-i-built-my-blog-why-i-use-different-ai-models-for-architecture-vs-implementation-hero.jpg';
 
       const filepath = join(blogDir, filename);
       const content = readFileSync(filepath, 'utf-8');

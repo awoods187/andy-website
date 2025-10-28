@@ -98,6 +98,7 @@
         // Relax some rules for Astro components
         "@typescript-eslint/explicit-function-return-type": "off",
         "@typescript-eslint/no-unsafe-return": "off",
+        "@typescript-eslint/no-misused-promises": "off",
         "arrow-body-style": "off",
         "no-console": "off"
       }
@@ -114,7 +115,16 @@
         "@typescript-eslint/no-unsafe-return": "off",
         "@typescript-eslint/no-unsafe-argument": "off",
         "@typescript-eslint/no-var-requires": "off",
+        "@typescript-eslint/no-require-imports": "off",
         "@typescript-eslint/no-non-null-assertion": "off",
+        "@typescript-eslint/no-unused-vars": [
+          "error",
+          {
+            "argsIgnorePattern": "^_",
+            "varsIgnorePattern": "^_",
+            "caughtErrorsIgnorePattern": "^_|error"
+          }
+        ],
         "no-console": "off",
         "max-lines-per-function": "off",
         "max-lines": "off",
