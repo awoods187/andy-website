@@ -40,7 +40,8 @@ const sortedPosts: BlogPost[] = allPosts
   .sort((a: BlogPost, b: BlogPost) => b.data.date.valueOf() - a.data.date.valueOf());
 
 const currentIndex: number = sortedPosts.findIndex((p: BlogPost) => p.slug === post.slug);
-const prevPost: BlogPost | null = currentIndex < sortedPosts.length - 1 ? sortedPosts[currentIndex + 1] : null;
+const prevPost: BlogPost | null =
+  currentIndex < sortedPosts.length - 1 ? sortedPosts[currentIndex + 1] : null;
 const nextPost: BlogPost | null = currentIndex > 0 ? sortedPosts[currentIndex - 1] : null;
 ---
 
