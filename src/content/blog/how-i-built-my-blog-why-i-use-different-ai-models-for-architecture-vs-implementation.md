@@ -1,7 +1,7 @@
 ---
-title: How I Built My Blog: Why I Use Different AI Models for Architecture vs Implementation
+title: "How I Built My Blog: Why I Use Different AI Models for Architecture vs Implementation"
 date: 2025-10-21
-excerpt: Strategic AI model selection: using Claude Opus for architecture, Claude Code for implementation, and Claude Haiku for validation. Multi-model orchestration with 9,574x ROI.
+excerpt: "Strategic AI model selection: using Claude Opus for architecture, Claude Code for implementation, and Claude Haiku for validation. Multi-model orchestration with 9,574x ROI."
 tags: [web-development, astro, architecture, static-sites, python, testing, claude-code, ai, multi-model-orchestration]
 image: /images/blog/how-i-built-my-blog-why-i-use-different-ai-models-for-architecture-vs-implementation-hero.jpg
 imageSource: 'AI-generated using Stable Diffusion'
