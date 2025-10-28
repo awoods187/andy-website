@@ -1,0 +1,45 @@
+# CODEOWNERS File
+#
+# This file defines code ownership for automatic review assignment.
+# When a PR is created that modifies files matching these patterns,
+# the specified users/teams will automatically be requested as reviewers.
+#
+# Format: <file-pattern> <owner1> <owner2> ...
+# Learn more: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Default owner for everything in the repo
+# This is a fallback and will be overridden by more specific rules below
+* @awoods187
+
+# Configuration files (require careful review)
+*.config.js @awoods187
+*.config.mjs @awoods187
+*.config.ts @awoods187
+package.json @awoods187
+package-lock.json @awoods187
+tsconfig.json @awoods187
+
+# CI/CD and automation
+.github/ @awoods187
+.github/workflows/ @awoods187
+
+# Build and deployment
+vercel.json @awoods187
+astro.config.mjs @awoods187
+
+# Testing configuration
+vitest.config.ts @awoods187
+tests/ @awoods187
+
+# Documentation (can be reviewed more liberally)
+*.md @awoods187
+docs/ @awoods187
+
+# Source code
+src/ @awoods187
+
+# Scripts (require security review)
+scripts/ @awoods187
+
+# Environment and secrets (critical security)
+.env.example @awoods187

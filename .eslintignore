@@ -1,0 +1,33 @@
+# ESLint Ignore File
+# Files and directories that should not be linted
+
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+.astro/
+
+# Coverage
+coverage/
+.nyc_output/
+
+# Cache
+.cache/
+.temp/
+
+# Reports
+lighthouse-report.*
+
+# Lock files
+package-lock.json
+
+# Environment
+.env
+.env.*
+
+# Configuration (handled by special rules in .eslintrc.json)
+# Uncomment if you want to skip linting config files entirely
+# *.config.js
+# *.config.mjs
+# *.config.ts

@@ -1,0 +1,35 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Build outputs
+dist/
+.astro/
+
+# Coverage
+coverage/
+.nyc_output/
+
+# Cache
+.cache/
+.temp/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Reports
+lighthouse-report.*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Environment
+.env
+.env.*
+!.env.example
