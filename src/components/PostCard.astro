@@ -96,9 +96,9 @@ const sourceBadge =
       {
         tags.length > 0 && (
           <div class="flex gap-2 flex-wrap">
-            {tags.slice(0, 4).map((tag) => (
-              <span class="text-xs px-2 py-1 bg-gray-100 text-gray-700 rounded">{tag}</span>
-            ))}
+            {tags.slice(0, 4).map((tag: string) => {
+              return <span class="text-xs px-2 py-1 bg-gray-100 text-gray-700 rounded">{tag}</span>;
+            })}
           </div>
         )
       }

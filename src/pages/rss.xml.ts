@@ -17,7 +17,7 @@ import { publications } from '../data/publications';
  * Fetches all content from multiple sources and generates an RSS XML feed.
  * Posts are sorted by date (newest first) and drafts are excluded.
  */
-export async function GET(context: APIContext) {
+export async function GET(context: APIContext): Promise<Response> {
   // Get all blog posts from the content collection
   const blog = await getCollection('blog');
 

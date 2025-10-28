@@ -1,7 +1,5 @@
 ---
-import { getCollection } from 'astro:content';
-import type { CollectionEntry } from 'astro:content';
-import { Image } from 'astro:assets';
+import { getCollection, type CollectionEntry } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import SubscribeForm from '../../components/SubscribeForm.astro';
 
@@ -60,14 +58,16 @@ const nextPost = currentIndex > 0 ? sortedPosts[currentIndex - 1] : null;
       {
         post.data.tags.length > 0 && (
           <div class="flex gap-2 flex-wrap">
-            {post.data.tags.map((tag) => (
-              <a
-                href={`/blog/tag/${tag}`}
-                class="text-xs px-2 py-1 bg-gray-100 text-gray-700 rounded no-underline hover:bg-gray-200 transition-colors"
-              >
-                {tag}
-              </a>
-            ))}
+            {post.data.tags.map((tag: string) => {
+              return (
+                <a
+                  href={`/blog/tag/${tag}`}
+                  class="text-xs px-2 py-1 bg-gray-100 text-gray-700 rounded no-underline hover:bg-gray-200 transition-colors"
+                >
+                  {tag}
+                </a>
+              );
+            })}
           </div>
         )
       }
@@ -78,14 +78,7 @@ const nextPost = currentIndex > 0 ? sortedPosts[currentIndex - 1] : null;
         <div class="mb-8">
           <img
             src={post.data.image}
-            srcset={
-              post.data.image.replace('.jpg', '-400w.jpg') +
-              ' 400w, ' +
-              post.data.image.replace('.jpg', '-800w.jpg') +
-              ' 800w, ' +
-              post.data.image +
-              ' 1200w'
-            }
+            srcset={`${post.data.image.replace('.jpg', '-400w.jpg')} 400w, ${post.data.image.replace('.jpg', '-800w.jpg')} 800w, ${post.data.image} 1200w`}
             sizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, 1200px"
             alt={post.data.title}
             class="w-full max-w-xl h-auto rounded-lg mx-auto"

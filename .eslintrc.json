@@ -97,6 +97,8 @@
       "rules": {
         // Relax some rules for Astro components
         "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/no-unsafe-return": "off",
+        "arrow-body-style": "off",
         "no-console": "off"
       }
     },
@@ -106,9 +108,17 @@
       "rules": {
         // Allow more flexibility in tests
         "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/no-unsafe-assignment": "off",
+        "@typescript-eslint/no-unsafe-member-access": "off",
+        "@typescript-eslint/no-unsafe-call": "off",
+        "@typescript-eslint/no-unsafe-return": "off",
+        "@typescript-eslint/no-unsafe-argument": "off",
+        "@typescript-eslint/no-var-requires": "off",
         "@typescript-eslint/no-non-null-assertion": "off",
+        "no-console": "off",
         "max-lines-per-function": "off",
-        "max-lines": "off"
+        "max-lines": "off",
+        "max-depth": "off"
       }
     },
     // Config files

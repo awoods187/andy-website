@@ -1,5 +1,5 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PostCard from '../components/PostCard.astro';
 
@@ -11,6 +11,7 @@ const publishedPosts = allPosts
 
 // Get the 8 most recent posts for the home page
 const recentPosts = publishedPosts.slice(0, 8);
+type BlogPost = CollectionEntry<'blog'>;
 ---
 
 <BaseLayout title="Andy Woods - Product Manager, AI & Database Infrastructure">
@@ -48,17 +49,19 @@ const recentPosts = publishedPosts.slice(0, 8);
     </div>
     <div>
       {
-        recentPosts.map((post) => (
-          <PostCard
-            title={post.data.title}
-            date={post.data.date}
-            excerpt={post.data.excerpt}
-            slug={post.slug}
-            tags={post.data.tags}
-            image={post.data.image}
-            source="personal"
-          />
-        ))
+        recentPosts.map((post: BlogPost) => {
+          return (
+            <PostCard
+              title={post.data.title}
+              date={post.data.date}
+              excerpt={post.data.excerpt}
+              slug={post.slug}
+              tags={post.data.tags}
+              image={post.data.image}
+              source="personal"
+            />
+          );
+        })
       }
     </div>
   </section>

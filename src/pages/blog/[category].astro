@@ -6,18 +6,48 @@
  * /blog/all/, /blog/personal/, /blog/cockroach-labs/, etc.
  */
 
-import { getCollection } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PostCard from '../../components/PostCard.astro';
 import { crlPosts } from '../../data/crl-posts';
 import { publications } from '../../data/publications';
 
+// Define post types
+type PersonalPost = {
+  title: string;
+  date: Date;
+  excerpt: string;
+  tags: string[];
+  image: string | null;
+  slug: string;
+  source: 'personal';
+};
+
+type ExternalPost = {
+  title: string;
+  date: Date;
+  excerpt: string;
+  tags: string[];
+  image: string | null;
+  url: string;
+  source: 'cockroach-labs' | 'publications';
+};
+
+type Post = PersonalPost | ExternalPost;
+
+interface Props {
+  filteredPosts: Post[];
+  selectedCategory: string;
+  allTags: string[];
+  allPosts: Post[];
+}
+
 export async function getStaticPaths() {
   // Get all published personal blog posts
   const personalPosts = await getCollection('blog');
-  const publishedPersonalPosts = personalPosts
+  const publishedPersonalPosts: PersonalPost[] = personalPosts
     .filter((post) => !post.data.draft)
-    .map((post) => ({
+    .map((post: CollectionEntry<'blog'>): PersonalPost => ({
       title: post.data.title,
       date: post.data.date,
       excerpt: post.data.excerpt,
@@ -28,34 +58,42 @@ export async function getStaticPaths() {
     }));
 
   // Convert CRL posts to same format
-  const crlPostsFormatted = crlPosts.map((post) => ({
-    title: post.title,
-    date: new Date(post.date),
-    excerpt: post.excerpt,
-    tags: post.tags || [],
-    image: post.image,
-    url: post.url,
-    source: 'cockroach-labs' as const,
-  }));
-
-  // Convert publications to same format
-  const publicationsFormatted = publications.map((pub) => ({
-    title: pub.title,
-    date: new Date(pub.date),
-    excerpt: `${pub.venue} - ${pub.excerpt}`,
-    tags: pub.tags || [],
-    image: pub.image || null,
-    url: pub.url,
-    source: 'publications' as const,
-  }));
-
-  // Combine and sort all posts
-  const allPosts = [...publishedPersonalPosts, ...crlPostsFormatted, ...publicationsFormatted].sort(
-    (a, b) => b.date.valueOf() - a.date.valueOf()
+  const crlPostsFormatted: ExternalPost[] = crlPosts.map(
+    (post): ExternalPost => ({
+      title: post.title,
+      date: new Date(post.date),
+      excerpt: post.excerpt,
+      tags: post.tags || [],
+      image: post.image,
+      url: post.url,
+      source: 'cockroach-labs' as const,
+    })
   );
 
+  // Convert publications to same format
+  const publicationsFormatted: ExternalPost[] = publications.map(
+    (pub): ExternalPost => ({
+      title: pub.title,
+      date: new Date(pub.date),
+      excerpt: `${pub.venue} - ${pub.excerpt}`,
+      tags: pub.tags || [],
+      image: pub.image || null,
+      url: pub.url,
+      source: 'publications' as const,
+    })
+  );
+
+  // Combine and sort all posts
+  const allPosts: Post[] = [
+    ...publishedPersonalPosts,
+    ...crlPostsFormatted,
+    ...publicationsFormatted,
+  ].sort((a, b) => b.date.valueOf() - a.date.valueOf());
+
   // Get all unique tags
-  const allTags = Array.from(new Set(allPosts.flatMap((post) => post.tags))).sort();
+  const allTags: string[] = Array.from(
+    new Set(allPosts.flatMap((post: Post) => post.tags))
+  ).sort();
 
   // Define categories to generate
   const categories = [
@@ -244,18 +282,20 @@ const { filteredPosts, selectedCategory, allTags } = Astro.props;
   {/* Post Cards */}
   <div class="space-y-0">
     {
-      filteredPosts.map((post) => (
-        <PostCard
-          title={post.title}
-          date={post.date}
-          excerpt={post.excerpt}
-          tags={post.tags}
-          image={post.image}
-          slug={'slug' in post ? post.slug : undefined}
-          url={'url' in post ? post.url : undefined}
-          source={post.source}
-        />
-      ))
+      filteredPosts.map((post: Post) => {
+        return (
+          <PostCard
+            title={post.title}
+            date={post.date}
+            excerpt={post.excerpt}
+            tags={post.tags}
+            image={post.image}
+            slug={'slug' in post ? post.slug : undefined}
+            url={'url' in post ? post.url : undefined}
+            source={post.source}
+          />
+        );
+      })
     }
   </div>
 

@@ -48,14 +48,16 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
   {
     tags.length > 0 && (
       <div class="flex gap-2 flex-wrap">
-        {tags.map((tag) => (
-          <a
-            href={`/blog/tag/${tag}`}
-            class="text-xs px-2 py-1 bg-gray-100 text-gray-700 rounded no-underline hover:bg-gray-200 transition-colors"
-          >
-            {tag}
-          </a>
-        ))}
+        {tags.map((tag: string) => {
+          return (
+            <a
+              href={`/blog/tag/${tag}`}
+              class="text-xs px-2 py-1 bg-gray-100 text-gray-700 rounded no-underline hover:bg-gray-200 transition-colors"
+            >
+              {tag}
+            </a>
+          );
+        })}
       </div>
     )
   }
