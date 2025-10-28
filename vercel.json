@@ -5,7 +5,7 @@
       "headers": [
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://plausible.io https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://www.cockroachlabs.com https://i.imgur.com https://images.unsplash.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://buttondown.email; object-src 'none'; media-src 'none';"
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://plausible.io https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://www.cockroachlabs.com https://images.ctfassets.net https://i.imgur.com https://images.unsplash.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://buttondown.email; object-src 'none'; media-src 'none';"
         },
         {
           "key": "X-Frame-Options",
