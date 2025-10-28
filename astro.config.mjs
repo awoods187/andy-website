@@ -10,6 +10,7 @@ export default defineConfig({
   site: 'https://andywoods.me',
 
   vite: {
+    // @ts-ignore - Vite plugin type incompatibility
     plugins: [tailwindcss()],
   },
 

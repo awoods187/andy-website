@@ -33,3 +33,6 @@ Thumbs.db
 .env
 .env.*
 !.env.example
+
+# Blog posts with complex YAML frontmatter that breaks test parser
+src/content/blog/how-i-built-my-blog-why-i-use-different-ai-models-for-architecture-vs-implementation.md
