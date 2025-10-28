@@ -2,7 +2,9 @@
 
 ## Overview
 
-This guide will help you set up and activate the comprehensive CI/CD pipeline for your Astro website. The pipeline includes code quality checks, testing, security scanning, and automated dependency management.
+This guide will help you set up and activate the comprehensive CI/CD pipeline
+for your Astro website. The pipeline includes code quality checks, testing,
+security scanning, and automated dependency management.
 
 ## Table of Contents
 
@@ -66,18 +68,18 @@ The CI pipeline will automatically run when you push or create a PR!
 
 ### Files Created
 
-| File | Purpose |
-|------|---------|
-| `.github/workflows/ci.yml` | Main CI pipeline (format, lint, test, security, build) |
-| `.github/dependabot.yml` | Automated dependency updates |
-| `.github/pull_request_template.md` | Standardized PR template with checklist |
-| `.github/CODEOWNERS` | Automatic review assignment |
-| `.pre-commit-config.yaml` | Git hooks for local quality checks |
-| `.eslintrc.json` | ESLint configuration for TypeScript/Astro |
-| `.prettierrc.json` | Code formatting rules |
-| `.prettierignore` | Files to exclude from formatting |
-| `vitest.config.ts` | Updated with coverage thresholds (80%) |
-| `package.json` | Updated with new scripts and dev dependencies |
+| File                               | Purpose                                                |
+| ---------------------------------- | ------------------------------------------------------ |
+| `.github/workflows/ci.yml`         | Main CI pipeline (format, lint, test, security, build) |
+| `.github/dependabot.yml`           | Automated dependency updates                           |
+| `.github/pull_request_template.md` | Standardized PR template with checklist                |
+| `.github/CODEOWNERS`               | Automatic review assignment                            |
+| `.pre-commit-config.yaml`          | Git hooks for local quality checks                     |
+| `.eslintrc.json`                   | ESLint configuration for TypeScript/Astro              |
+| `.prettierrc.json`                 | Code formatting rules                                  |
+| `.prettierignore`                  | Files to exclude from formatting                       |
+| `vitest.config.ts`                 | Updated with coverage thresholds (80%)                 |
+| `package.json`                     | Updated with new scripts and dev dependencies          |
 
 ---
 
@@ -172,7 +174,8 @@ Enable format on save in `.vscode/settings.json`:
 
 ### Secrets Configuration
 
-No secrets are required for the basic CI pipeline. If you add deployment or external services later:
+No secrets are required for the basic CI pipeline. If you add deployment or
+external services later:
 
 1. Go to **Settings** → **Secrets and variables** → **Actions**
 2. Add secrets as needed (e.g., `VERCEL_TOKEN`, `NPM_TOKEN`)
@@ -203,6 +206,7 @@ npm run validate
 ```
 
 This runs:
+
 1. Format check (Prettier)
 2. Lint (ESLint)
 3. Type check (TypeScript)
@@ -222,6 +226,7 @@ open coverage/index.html
 ### Workflow: `.github/workflows/ci.yml`
 
 **Triggers:**
+
 - Push to `main` branch
 - All pull requests
 - Manual dispatch (via GitHub UI)
@@ -269,11 +274,13 @@ open coverage/index.html
 **Schedule:** Weekly on Monday at 9 AM ET
 
 **Grouping:**
+
 - Development dependencies: Minor + Patch updates grouped
 - Production dependencies: Minor + Patch updates grouped
 - Security updates: Always separate, immediate
 
 **Limits:**
+
 - Max 5 open PRs for npm dependencies
 - Max 3 open PRs for GitHub Actions
 
@@ -286,6 +293,7 @@ open coverage/index.html
 **Issue:** Hooks fail with "command not found"
 
 **Solution:**
+
 ```bash
 # Ensure pre-commit is installed
 pip install pre-commit
@@ -302,6 +310,7 @@ pre-commit install
 **Issue:** ESLint reports errors that aren't in your editor
 
 **Solution:**
+
 ```bash
 # Ensure VS Code is using the right ESLint config
 # Install the ESLint extension
@@ -319,6 +328,7 @@ npm run lint:fix
 **Issue:** Tests pass but coverage is below 80%
 
 **Solution:**
+
 ```bash
 # View detailed coverage report
 npm run test:coverage
@@ -334,7 +344,9 @@ open coverage/index.html
 **Issue:** CI fails but all checks pass locally
 
 **Common causes:**
+
 1. **Node version mismatch:** CI tests Node 18, 20, 22
+
    ```bash
    # Test with different Node versions using nvm
    nvm install 18
@@ -344,6 +356,7 @@ open coverage/index.html
    ```
 
 2. **Outdated dependencies:** Local uses `package-lock.json`, CI uses `npm ci`
+
    ```bash
    # Clean install
    rm -rf node_modules package-lock.json
@@ -360,6 +373,7 @@ open coverage/index.html
 **Issue:** Pre-commit hooks take too long
 
 **Solution:**
+
 ```bash
 # Run hooks only on staged files (default behavior)
 git add <files>
@@ -377,6 +391,7 @@ pre-commit autoupdate
 **Issue:** `type-check` script fails
 
 **Solution:**
+
 ```bash
 # Run TypeScript compiler directly
 npx tsc --noEmit
@@ -415,15 +430,18 @@ npx tsc --noEmit
 ### Maintenance
 
 **Weekly:**
+
 - Review Dependabot PRs
 - Merge automated dependency updates
 
 **Monthly:**
+
 - Review coverage trends
 - Update CI dependencies
 - Check for new ESLint/Prettier rules
 
 **Quarterly:**
+
 - Audit security settings
 - Review and update branch protection rules
 - Evaluate CI performance and optimization

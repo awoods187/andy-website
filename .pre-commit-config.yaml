@@ -30,7 +30,7 @@ repos:
 
       - id: check-json
         name: Check JSON syntax
-        exclude: 'tsconfig\.json$'  # tsconfig allows comments
+        exclude: 'tsconfig\.json$' # tsconfig allows comments
 
       - id: check-added-large-files
         name: Check for large files

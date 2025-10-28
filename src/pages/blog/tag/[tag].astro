@@ -5,14 +5,14 @@ import BlogPostCard from '../../../components/BlogPostCard.astro';
 
 export async function getStaticPaths() {
   const allPosts = await getCollection('blog');
-  const publishedPosts = allPosts.filter(post => !post.data.draft);
+  const publishedPosts = allPosts.filter((post) => !post.data.draft);
 
   // Get all unique tags
-  const uniqueTags = [...new Set(publishedPosts.flatMap(post => post.data.tags))];
+  const uniqueTags = [...new Set(publishedPosts.flatMap((post) => post.data.tags))];
 
-  return uniqueTags.map(tag => {
+  return uniqueTags.map((tag) => {
     const filteredPosts = publishedPosts
-      .filter(post => post.data.tags.includes(tag))
+      .filter((post) => post.data.tags.includes(tag))
       .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
     return {
@@ -38,19 +38,22 @@ const capitalizedTag = tag.charAt(0).toUpperCase() + tag.slice(1);
       Posts tagged "{capitalizedTag}"
     </h1>
     <p class="text-lg text-gray-600">
-      {posts.length} {posts.length === 1 ? 'post' : 'posts'}
+      {posts.length}
+      {posts.length === 1 ? 'post' : 'posts'}
     </p>
   </header>
 
   <div>
-    {posts.map(post => (
-      <BlogPostCard
-        title={post.data.title}
-        date={post.data.date}
-        excerpt={post.data.excerpt}
-        slug={post.slug}
-        tags={post.data.tags}
-      />
-    ))}
+    {
+      posts.map((post) => (
+        <BlogPostCard
+          title={post.data.title}
+          date={post.data.date}
+          excerpt={post.data.excerpt}
+          slug={post.slug}
+          tags={post.data.tags}
+        />
+      ))
+    }
   </div>
 </BaseLayout>

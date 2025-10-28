@@ -14,15 +14,15 @@ describe('Blog Content Validation', () => {
 
   it('should have blog post files', () => {
     const files = readdirSync(contentPath);
-    const mdFiles = files.filter(f => f.endsWith('.md'));
+    const mdFiles = files.filter((f) => f.endsWith('.md'));
     expect(mdFiles.length).toBeGreaterThanOrEqual(3);
   });
 
   it('all blog posts should have required frontmatter fields', () => {
     const files = readdirSync(contentPath);
-    const mdFiles = files.filter(f => f.endsWith('.md'));
+    const mdFiles = files.filter((f) => f.endsWith('.md'));
 
-    mdFiles.forEach(file => {
+    mdFiles.forEach((file) => {
       const content = readFileSync(join(contentPath, file), 'utf-8');
 
       // Check for frontmatter block
@@ -38,9 +38,9 @@ describe('Blog Content Validation', () => {
 
   it('all blog posts should have valid dates', () => {
     const files = readdirSync(contentPath);
-    const mdFiles = files.filter(f => f.endsWith('.md'));
+    const mdFiles = files.filter((f) => f.endsWith('.md'));
 
-    mdFiles.forEach(file => {
+    mdFiles.forEach((file) => {
       const content = readFileSync(join(contentPath, file), 'utf-8');
       const dateMatch = content.match(/date:\s*(\d{4}-\d{2}-\d{2})/);
 
@@ -53,9 +53,9 @@ describe('Blog Content Validation', () => {
 
   it('all blog posts should have at least one tag', () => {
     const files = readdirSync(contentPath);
-    const mdFiles = files.filter(f => f.endsWith('.md'));
+    const mdFiles = files.filter((f) => f.endsWith('.md'));
 
-    mdFiles.forEach(file => {
+    mdFiles.forEach((file) => {
       const content = readFileSync(join(contentPath, file), 'utf-8');
 
       // Tags should be an array with at least one item
@@ -63,7 +63,7 @@ describe('Blog Content Validation', () => {
       expect(tagsMatch).toBeTruthy();
 
       if (tagsMatch && tagsMatch[1]) {
-        const tags = tagsMatch[1].split(',').map(t => t.trim());
+        const tags = tagsMatch[1].split(',').map((t) => t.trim());
         expect(tags.length).toBeGreaterThan(0);
       }
     });
@@ -75,9 +75,9 @@ describe('SEO and Metadata', () => {
 
   it('all excerpts should be under 200 characters', () => {
     const files = readdirSync(contentPath);
-    const mdFiles = files.filter(f => f.endsWith('.md'));
+    const mdFiles = files.filter((f) => f.endsWith('.md'));
 
-    mdFiles.forEach(file => {
+    mdFiles.forEach((file) => {
       const content = readFileSync(join(contentPath, file), 'utf-8');
       const excerptMatch = content.match(/excerpt:\s*"(.+?)"/);
 
@@ -89,9 +89,9 @@ describe('SEO and Metadata', () => {
 
   it('all titles should be under 100 characters', () => {
     const files = readdirSync(contentPath);
-    const mdFiles = files.filter(f => f.endsWith('.md'));
+    const mdFiles = files.filter((f) => f.endsWith('.md'));
 
-    mdFiles.forEach(file => {
+    mdFiles.forEach((file) => {
       const content = readFileSync(join(contentPath, file), 'utf-8');
       const titleMatch = content.match(/title:\s*"(.+?)"/);
 

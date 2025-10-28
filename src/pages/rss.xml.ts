@@ -22,12 +22,12 @@ export async function GET(context: APIContext) {
   const blog = await getCollection('blog');
 
   // Filter out drafts from personal posts
-  const publishedPosts = blog.filter(post => !post.data.draft);
+  const publishedPosts = blog.filter((post) => !post.data.draft);
 
   // Combine all content sources
   const allPosts = [
     // Personal blog posts
-    ...publishedPosts.map(post => ({
+    ...publishedPosts.map((post) => ({
       title: post.data.title,
       description: post.data.excerpt,
       pubDate: post.data.date,
@@ -36,7 +36,7 @@ export async function GET(context: APIContext) {
       author: 'Andy Woods',
     })),
     // Cockroach Labs posts (external URLs)
-    ...crlPosts.map(post => ({
+    ...crlPosts.map((post) => ({
       title: post.title,
       description: post.excerpt,
       pubDate: new Date(post.date),
@@ -45,7 +45,7 @@ export async function GET(context: APIContext) {
       author: 'Andy Woods',
     })),
     // Publications
-    ...publications.map(pub => ({
+    ...publications.map((pub) => ({
       title: pub.title,
       description: pub.excerpt || `Published at ${pub.venue}`,
       pubDate: new Date(pub.date),
@@ -58,7 +58,8 @@ export async function GET(context: APIContext) {
   // Generate RSS feed
   return rss({
     title: 'Andy Woods - Product & AI Engineering',
-    description: 'Building at the intersection of databases, AI, and product management. Director of PM at Cockroach Labs.',
+    description:
+      'Building at the intersection of databases, AI, and product management. Director of PM at Cockroach Labs.',
     site: context.site || 'https://andywoods.me',
     items: allPosts,
     customData: `

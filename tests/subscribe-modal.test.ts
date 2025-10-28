@@ -58,7 +58,9 @@ describe('Subscribe Modal Dialog', () => {
 
   describe('Modal Open Mechanism', () => {
     it('subscribe button should trigger showModal()', () => {
-      const buttonMatch = subscribeForm.match(/<button[^>]*class="subscribe-button"[^>]*onclick="([^"]*)"[^>]*>/);
+      const buttonMatch = subscribeForm.match(
+        /<button[^>]*class="subscribe-button"[^>]*onclick="([^"]*)"[^>]*>/
+      );
       expect(buttonMatch).toBeTruthy();
       if (buttonMatch) {
         const onclick = buttonMatch[1];
@@ -69,7 +71,9 @@ describe('Subscribe Modal Dialog', () => {
 
     it('button should use correct DOM method', () => {
       // Should use document.getElementById('subscribe-modal').showModal()
-      expect(subscribeForm).toMatch(/document\.getElementById\(['"]subscribe-modal['"]\)\.showModal\(\)/);
+      expect(subscribeForm).toMatch(
+        /document\.getElementById\(['"]subscribe-modal['"]\)\.showModal\(\)/
+      );
     });
 
     it('subscribe button should be type="button" not submit', () => {
@@ -79,7 +83,9 @@ describe('Subscribe Modal Dialog', () => {
 
   describe('Modal Close Mechanisms', () => {
     it('should have close button with X symbol', () => {
-      const closeButtonMatch = subscribeForm.match(/<button[^>]*class="close-button"[^>]*>([^<]*)<\/button>/);
+      const closeButtonMatch = subscribeForm.match(
+        /<button[^>]*class="close-button"[^>]*>([^<]*)<\/button>/
+      );
       expect(closeButtonMatch).toBeTruthy();
       if (closeButtonMatch) {
         const buttonText = closeButtonMatch[1].trim();
@@ -88,7 +94,9 @@ describe('Subscribe Modal Dialog', () => {
     });
 
     it('close button should trigger close()', () => {
-      const closeButtonMatch = subscribeForm.match(/<button[^>]*class="close-button"[^>]*onclick="([^"]*)"[^>]*>/);
+      const closeButtonMatch = subscribeForm.match(
+        /<button[^>]*class="close-button"[^>]*onclick="([^"]*)"[^>]*>/
+      );
       expect(closeButtonMatch).toBeTruthy();
       if (closeButtonMatch) {
         const onclick = closeButtonMatch[1];
@@ -102,7 +110,9 @@ describe('Subscribe Modal Dialog', () => {
     });
 
     it('cancel button should trigger close()', () => {
-      const cancelButtonMatch = subscribeForm.match(/<button[^>]*class="cancel-button"[^>]*onclick="([^"]*)"[^>]*>/);
+      const cancelButtonMatch = subscribeForm.match(
+        /<button[^>]*class="cancel-button"[^>]*onclick="([^"]*)"[^>]*>/
+      );
       expect(cancelButtonMatch).toBeTruthy();
       if (cancelButtonMatch) {
         const onclick = cancelButtonMatch[1];
@@ -111,7 +121,9 @@ describe('Subscribe Modal Dialog', () => {
     });
 
     it('cancel button should have descriptive text', () => {
-      const cancelButtonMatch = subscribeForm.match(/<button[^>]*class="cancel-button"[^>]*>\s*([^<\s]+)\s*<\/button>/);
+      const cancelButtonMatch = subscribeForm.match(
+        /<button[^>]*class="cancel-button"[^>]*>\s*([^<\s]+)\s*<\/button>/
+      );
       expect(cancelButtonMatch).toBeTruthy();
       if (cancelButtonMatch) {
         const buttonText = cancelButtonMatch[1].trim();
@@ -191,13 +203,17 @@ describe('Subscribe Modal Dialog', () => {
       expect(subscribeForm).toMatch(/@media\s*\(max-width:\s*640px\)/);
 
       // Check that mobile section contains subscribe-dialog styling
-      const mediaSectionMatch = subscribeForm.match(/@media\s*\(max-width:\s*640px\)\s*{([\s\S]*?)(?=@media|\/\*\s*Tablet|<\/style>)/);
+      const mediaSectionMatch = subscribeForm.match(
+        /@media\s*\(max-width:\s*640px\)\s*{([\s\S]*?)(?=@media|\/\*\s*Tablet|<\/style>)/
+      );
       expect(mediaSectionMatch).toBeTruthy();
     });
 
     it('mobile dialog should be wider (95vw)', () => {
       // Check if mobile responsive section exists
-      const mediaSectionMatch = subscribeForm.match(/@media\s*\(max-width:\s*640px\)\s*{([\s\S]*?)(?=@media|<\/style>)/);
+      const mediaSectionMatch = subscribeForm.match(
+        /@media\s*\(max-width:\s*640px\)\s*{([\s\S]*?)(?=@media|<\/style>)/
+      );
       expect(mediaSectionMatch).toBeTruthy();
 
       if (mediaSectionMatch) {
@@ -208,7 +224,9 @@ describe('Subscribe Modal Dialog', () => {
 
     it('iframe height should adjust on mobile', () => {
       // Check for mobile-specific iframe height
-      const mediaSectionMatch = subscribeForm.match(/@media\s*\(max-width:\s*640px\)\s*{([\s\S]*?)(?=@media|<\/style>)/);
+      const mediaSectionMatch = subscribeForm.match(
+        /@media\s*\(max-width:\s*640px\)\s*{([\s\S]*?)(?=@media|<\/style>)/
+      );
       expect(mediaSectionMatch).toBeTruthy();
 
       if (mediaSectionMatch) {
@@ -233,7 +251,9 @@ describe('Subscribe Modal Dialog', () => {
 
     it('should NOT use deprecated popup approach', () => {
       // Ensure no form with method="post" and target="popupwindow"
-      const formMatch = subscribeForm.match(/<form[^>]*method="post"[^>]*target="popupwindow"[^>]*>/);
+      const formMatch = subscribeForm.match(
+        /<form[^>]*method="post"[^>]*target="popupwindow"[^>]*>/
+      );
       expect(formMatch).toBeFalsy();
     });
   });

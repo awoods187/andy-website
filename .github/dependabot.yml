@@ -8,13 +8,13 @@
 version: 2
 updates:
   # Monitor npm dependencies
-  - package-ecosystem: "npm"
-    directory: "/"
+  - package-ecosystem: 'npm'
+    directory: '/'
     schedule:
-      interval: "weekly"
-      day: "monday"
-      time: "09:00"
-      timezone: "America/New_York"
+      interval: 'weekly'
+      day: 'monday'
+      time: '09:00'
+      timezone: 'America/New_York'
 
     # Limit number of open PRs to avoid overwhelming the repo
     open-pull-requests-limit: 5
@@ -23,52 +23,52 @@ updates:
     groups:
       # Group all development dependencies together
       development-dependencies:
-        dependency-type: "development"
+        dependency-type: 'development'
         update-types:
-          - "minor"
-          - "patch"
+          - 'minor'
+          - 'patch'
 
       # Group production dependencies by update type
       production-minor-patch:
-        dependency-type: "production"
+        dependency-type: 'production'
         update-types:
-          - "minor"
-          - "patch"
+          - 'minor'
+          - 'patch'
 
     # Customize PR settings
     commit-message:
-      prefix: "chore(deps)"
-      include: "scope"
+      prefix: 'chore(deps)'
+      include: 'scope'
 
     labels:
-      - "dependencies"
-      - "automated"
+      - 'dependencies'
+      - 'automated'
 
     reviewers:
-      - "awoods187"  # Replace with your GitHub username
+      - 'awoods187' # Replace with your GitHub username
 
     # Security updates have higher priority
     # Dependabot will always create separate PRs for security updates
 
   # Monitor GitHub Actions versions
-  - package-ecosystem: "github-actions"
-    directory: "/"
+  - package-ecosystem: 'github-actions'
+    directory: '/'
     schedule:
-      interval: "weekly"
-      day: "monday"
-      time: "09:00"
-      timezone: "America/New_York"
+      interval: 'weekly'
+      day: 'monday'
+      time: '09:00'
+      timezone: 'America/New_York'
 
     open-pull-requests-limit: 3
 
     commit-message:
-      prefix: "chore(ci)"
-      include: "scope"
+      prefix: 'chore(ci)'
+      include: 'scope'
 
     labels:
-      - "ci"
-      - "dependencies"
-      - "automated"
+      - 'ci'
+      - 'dependencies'
+      - 'automated'
 
     reviewers:
-      - "awoods187"  # Replace with your GitHub username
+      - 'awoods187' # Replace with your GitHub username

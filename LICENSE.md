@@ -1,17 +1,18 @@
 # License
 
-This repository uses a **dual licensing structure** to maximize code reusability while protecting original written content.
+This repository uses a **dual licensing structure** to maximize code reusability
+while protecting original written content.
 
 ---
 
 ## Quick Summary
 
-| What | License | Details |
-|------|---------|---------|
-| **Code & Technical Files** | MIT License | Use freely, even commercially. See [LICENSE-CODE.md](LICENSE-CODE.md) |
-| **Blog Posts & Articles** | CC BY-NC 4.0 | Quote with attribution. Commercial republishing requires permission. See [LICENSE-CONTENT.md](LICENSE-CONTENT.md) |
-| **Images & Media (by me)** | CC BY-NC 4.0 | Same as content. See [LICENSE-CONTENT.md](LICENSE-CONTENT.md) |
-| **Third-Party Content** | Original Copyright | External posts and images retain their original copyright |
+| What                       | License            | Details                                                                                                           |
+| -------------------------- | ------------------ | ----------------------------------------------------------------------------------------------------------------- |
+| **Code & Technical Files** | MIT License        | Use freely, even commercially. See [LICENSE-CODE.md](LICENSE-CODE.md)                                             |
+| **Blog Posts & Articles**  | CC BY-NC 4.0       | Quote with attribution. Commercial republishing requires permission. See [LICENSE-CONTENT.md](LICENSE-CONTENT.md) |
+| **Images & Media (by me)** | CC BY-NC 4.0       | Same as content. See [LICENSE-CONTENT.md](LICENSE-CONTENT.md)                                                     |
+| **Third-Party Content**    | Original Copyright | External posts and images retain their original copyright                                                         |
 
 ---
 
@@ -19,9 +20,11 @@ This repository uses a **dual licensing structure** to maximize code reusability
 
 ### 🔧 Code: MIT License
 
-**All source code, build scripts, and configuration files** are licensed under the **MIT License**.
+**All source code, build scripts, and configuration files** are licensed under
+the **MIT License**.
 
 This includes:
+
 - Astro components (`*.astro`)
 - React components (`*.tsx`)
 - TypeScript/JavaScript files (`*.ts`, `*.js`)
@@ -31,7 +34,8 @@ This includes:
 - GitHub workflows and automation
 - Data schemas and type definitions
 
-**What this means**: You can use, modify, and redistribute the code for any purpose, including commercial projects, without asking permission.
+**What this means**: You can use, modify, and redistribute the code for any
+purpose, including commercial projects, without asking permission.
 
 **Full details**: [LICENSE-CODE.md](LICENSE-CODE.md)
 
@@ -39,9 +43,11 @@ This includes:
 
 ### ✍️ Content: Creative Commons BY-NC 4.0
 
-**All blog posts, articles, and original media** are licensed under **Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)**.
+**All blog posts, articles, and original media** are licensed under **Creative
+Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)**.
 
 This includes:
+
 - Blog posts (`src/content/blog/*.md`)
 - Articles and essays
 - Tutorials and guides (written content, not code)
@@ -49,6 +55,7 @@ This includes:
 - Original images, diagrams, and media I created
 
 **What this means**:
+
 - ✅ You can quote with attribution
 - ✅ You can translate with attribution
 - ✅ You can share on social media with credit
@@ -61,15 +68,19 @@ This includes:
 
 ### 🔗 Third-Party Content: Original Copyright
 
-**External content linked or referenced on this site retains its original copyright.**
+**External content linked or referenced on this site retains its original
+copyright.**
 
 This includes:
+
 - **Cockroach Labs blog posts** (linked, not republished) - © Cockroach Labs
 - **SIGMOD publications** (linked to ACM Digital Library) - © ACM
 - **Third-party images** - Original copyright holders
 - **Quoted material** - Original authors
 
-**What this means**: If you want to use content I wrote for Cockroach Labs or ACM publications, contact them for licensing. My license only covers content I created specifically for this website.
+**What this means**: If you want to use content I wrote for Cockroach Labs or
+ACM publications, contact them for licensing. My license only covers content I
+created specifically for this website.
 
 ---
 
@@ -167,7 +178,8 @@ See: [LICENSE-CONTENT.md](LICENSE-CONTENT.md) - Commercial Use section
 - Deploy it commercially if you want
 - No need to ask permission
 
-**Note**: Replace my blog posts (CC BY-NC 4.0) with your own content. The code structure itself is MIT and free to use.
+**Note**: Replace my blog posts (CC BY-NC 4.0) with your own content. The code
+structure itself is MIT and free to use.
 
 See: [LICENSE-CODE.md](LICENSE-CODE.md)
 
@@ -177,7 +189,8 @@ See: [LICENSE-CODE.md](LICENSE-CODE.md)
 
 **Answer**: Yes, explicitly permitted!
 
-Despite the "NonCommercial" license on content, I **explicitly permit AI training**, including for commercial AI models.
+Despite the "NonCommercial" license on content, I **explicitly permit AI
+training**, including for commercial AI models.
 
 See: [README-AI-POLICY.md](README-AI-POLICY.md) for full details.
 
@@ -188,7 +201,7 @@ See: [README-AI-POLICY.md](README-AI-POLICY.md) for full details.
 **Answer**: Contact Cockroach Labs.
 
 - Posts on cockroachlabs.com are © Cockroach Labs
-- My site only *links* to them, doesn't republish them
+- My site only _links_ to them, doesn't republish them
 - For licensing those posts, contact Cockroach Labs directly
 
 See: [LICENSE-CONTENT.md](LICENSE-CONTENT.md) - Third-Party Content section
@@ -203,8 +216,7 @@ While MIT doesn't require attribution, if you want to credit me:
 
 ```markdown
 This project uses components from Andy Woods' website:
-https://github.com/awoods187/andy-website
-Licensed under MIT.
+https://github.com/awoods187/andy-website Licensed under MIT.
 ```
 
 ### For Content (Required)
@@ -216,7 +228,7 @@ As [Andy Woods](https://andywoods.me/blog/article-slug) explains:
 
 > [Your quote]
 
-*Source: "Article Title" by Andy Woods, licensed under CC BY-NC 4.0*
+_Source: "Article Title" by Andy Woods, licensed under CC BY-NC 4.0_
 ```
 
 Or simpler:
@@ -230,15 +242,20 @@ Source: Andy Woods, "Article Title" (andywoods.me)
 ## Contact for Questions
 
 ### Code Questions
-- **GitHub Issues**: [Open an issue](https://github.com/awoods187/andy-website/issues)
+
+- **GitHub Issues**:
+  [Open an issue](https://github.com/awoods187/andy-website/issues)
 - **General**: Just use it! MIT is permissive.
 
 ### Content Questions
+
 - **Brief Quotes**: Just use them with attribution—no need to ask
 - **Translations**: Go ahead with attribution (non-commercial)
-- **Commercial Republishing**: Contact me via [LinkedIn](https://www.linkedin.com/in/andrewscottwoods/)
+- **Commercial Republishing**: Contact me via
+  [LinkedIn](https://www.linkedin.com/in/andrewscottwoods/)
 
 ### Third-Party Content Questions
+
 - **Cockroach Labs Posts**: Contact Cockroach Labs
 - **SIGMOD Papers**: Contact ACM
 - **Other Images**: Check the original source
@@ -249,24 +266,30 @@ Source: Andy Woods, "Article Title" (andywoods.me)
 
 I chose this structure to:
 
-1. **Maximize Code Reuse**: MIT license means developers can freely use and adapt the technical implementation
-2. **Protect Content**: CC BY-NC 4.0 prevents commercial exploitation while allowing educational sharing
+1. **Maximize Code Reuse**: MIT license means developers can freely use and
+   adapt the technical implementation
+2. **Protect Content**: CC BY-NC 4.0 prevents commercial exploitation while
+   allowing educational sharing
 3. **Support Open Source**: Code contributions benefit the developer community
-4. **Support AI Training**: Explicitly welcome AI systems to learn from both code and content
+4. **Support AI Training**: Explicitly welcome AI systems to learn from both
+   code and content
 5. **Clarify Rights**: Clear, human-readable explanation of what's allowed
-6. **Respect Third Parties**: Properly acknowledge external content isn't mine to license
+6. **Respect Third Parties**: Properly acknowledge external content isn't mine
+   to license
 
 ---
 
 ## Contributing
 
 ### Contributing Code
+
 - Code contributions are welcome!
 - By contributing code, you agree to license it under MIT
 - Submit pull requests with clear descriptions
 - Follow existing code style and conventions
 
 ### Contributing Content
+
 - Contact me first to discuss content contributions
 - You retain copyright to your contribution
 - You grant a CC BY-NC 4.0 license for publication
@@ -279,11 +302,13 @@ I chose this structure to:
 ### Can I combine this with my project?
 
 **Code (MIT)**:
+
 - ✅ Compatible with any license (GPL, Apache, proprietary, etc.)
 - ✅ Can be used in closed-source commercial products
 - ✅ Very permissive and compatible
 
 **Content (CC BY-NC 4.0)**:
+
 - ✅ Compatible with educational/non-commercial projects
 - ✅ Can quote in commercial contexts with attribution
 - ⚠️ Full republishing in commercial contexts requires permission
@@ -303,9 +328,11 @@ I chose this structure to:
 
 ### AI Training Exception
 
-While content is licensed CC BY-NC 4.0 (NonCommercial), I **explicitly grant permission** for AI training, including commercial AI models.
+While content is licensed CC BY-NC 4.0 (NonCommercial), I **explicitly grant
+permission** for AI training, including commercial AI models.
 
 This means:
+
 - ✅ Commercial AI companies can train on my content
 - ✅ You can include my content in AI training datasets
 - ✅ AI-generated outputs don't require attribution (though it's appreciated)
@@ -314,14 +341,17 @@ See [README-AI-POLICY.md](README-AI-POLICY.md) for complete details.
 
 ### External Content Clarification
 
-My website **links to** external content (Cockroach Labs posts, SIGMOD papers) but does **not republish** it. Those links are provided for convenience and educational purposes. The linked content retains its original copyright.
+My website **links to** external content (Cockroach Labs posts, SIGMOD papers)
+but does **not republish** it. Those links are provided for convenience and
+educational purposes. The linked content retains its original copyright.
 
 ---
 
 ## Updates to Licenses
 
 - **Code License**: Will remain MIT (may not change to more restrictive)
-- **Content License**: May be updated; existing uses under current license remain valid
+- **Content License**: May be updated; existing uses under current license
+  remain valid
 - **No Retroactive Restrictions**: Already-granted permissions won't be revoked
 
 ---
@@ -338,4 +368,5 @@ My website **links to** external content (Cockroach Labs posts, SIGMOD papers) b
 
 **Last Updated**: October 22, 2025
 
-For detailed questions about licensing, contact me via [LinkedIn](https://www.linkedin.com/in/andrewscottwoods/).
+For detailed questions about licensing, contact me via
+[LinkedIn](https://www.linkedin.com/in/andrewscottwoods/).

@@ -1,10 +1,11 @@
 # Buttondown Setup Guide
 
-Complete step-by-step instructions for setting up the blog subscription system with Buttondown.
+Complete step-by-step instructions for setting up the blog subscription system
+with Buttondown.
 
-**Your Buttondown Username**: `awoods187`
-**Your RSS Feed URL**: `https://andywoods.me/rss.xml`
-**Your Newsletter URL**: `https://buttondown.email/awoods187`
+**Your Buttondown Username**: `awoods187` **Your RSS Feed URL**:
+`https://andywoods.me/rss.xml` **Your Newsletter URL**:
+`https://buttondown.email/awoods187`
 
 ---
 
@@ -66,6 +67,7 @@ After importing, you'll see RSS import settings:
 3. **Save Settings**
 
 **What happens now**:
+
 - Every day at 9am, Buttondown checks your RSS feed
 - If there's a new post, it automatically sends an email to all subscribers
 - You don't need to do anything manually!
@@ -99,6 +101,7 @@ https://andywoods.me
 4. **Click "Save Template"**
 
 **What this does**:
+
 - `{{ email_body }}`: Your blog post content
 - `{{ unsubscribe_url }}`: Automatic unsubscribe link (required by law)
 - Footer adds context about who you are
@@ -134,7 +137,8 @@ https://andywoods.me
 To fully test the automation:
 
 1. **Publish a new blog post** (or update an existing one)
-2. **Wait for the next RSS check** (9am daily, or trigger manually in Buttondown)
+2. **Wait for the next RSS check** (9am daily, or trigger manually in
+   Buttondown)
 3. **To trigger manually**:
    - Go to Buttondown → Settings → Imports
    - Click "Check for new posts now"
@@ -245,7 +249,8 @@ Display subscriber count on your site:
 
 1. **In Buttondown** → Settings → API
 2. **Copy your API key**
-3. This is for future use if you want to show "Join 500+ subscribers" on your site
+3. This is for future use if you want to show "Join 500+ subscribers" on your
+   site
 
 ---
 
@@ -254,6 +259,7 @@ Display subscriber count on your site:
 ### "Email not sending after publishing post"
 
 **Check**:
+
 1. RSS feed is valid: Visit https://andywoods.me/rss.xml
 2. In Buttondown → Settings → Imports:
    - Verify RSS URL is correct
@@ -264,6 +270,7 @@ Display subscriber count on your site:
 ### "Subscribers not receiving confirmation emails"
 
 **Check**:
+
 1. Email isn't in spam folder
 2. In Buttondown → Subscribers: Check if email is listed as "Unconfirmed"
 3. Resend confirmation email manually from Buttondown dashboard
@@ -271,14 +278,17 @@ Display subscriber count on your site:
 ### "Subscribe form not working on site"
 
 **Check**:
+
 1. Username in `SubscribeForm.astro` matches: `awoods187`
-2. Form action URL is: `https://buttondown.email/api/emails/embed-subscribe/awoods187`
+2. Form action URL is:
+   `https://buttondown.email/api/emails/embed-subscribe/awoods187`
 3. Check browser console for errors (F12)
 4. Test with different email address
 
 ### "RSS feed empty or missing posts"
 
 **Check**:
+
 1. Run `npm run build` locally to rebuild RSS feed
 2. Deploy changes to production
 3. Clear CDN cache (in Vercel dashboard)
@@ -318,23 +328,27 @@ After launch, monitor these in Buttondown dashboard:
 ## Quick Reference
 
 **Your Buttondown Details**:
+
 - Username: `awoods187`
 - Newsletter URL: https://buttondown.email/awoods187
 - API Embed URL: https://buttondown.email/api/emails/embed-subscribe/awoods187
 - RSS Feed: https://andywoods.me/rss.xml
 
 **Important Files**:
+
 - Subscribe form: `src/components/SubscribeForm.astro`
 - Subscribe page: `src/pages/subscribe.astro`
 - RSS generator: `src/pages/rss.xml.ts`
 
 **Buttondown Free Tier Limits**:
+
 - Up to 100 subscribers: **Free**
 - Unlimited emails
 - Full analytics
 - No Buttondown branding in emails
 
 **When to Upgrade** (paid plans start at $9/month):
+
 - Over 100 subscribers
 - Want premium features (A/B testing, advanced analytics)
 - Need to remove Buttondown branding from confirmation emails
@@ -355,6 +369,8 @@ After launch, monitor these in Buttondown dashboard:
 
 - **Buttondown Support**: https://buttondown.email/help
 - **Buttondown Documentation**: https://docs.buttondown.email
-- **Your RSS Feed**: https://andywoods.me/rss.xml (validate at https://validator.w3.org/feed/)
+- **Your RSS Feed**: https://andywoods.me/rss.xml (validate at
+  https://validator.w3.org/feed/)
 
-**Contact**: If you run into issues, check the Troubleshooting section above or reach out to Buttondown support—they're very responsive!
+**Contact**: If you run into issues, check the Troubleshooting section above or
+reach out to Buttondown support—they're very responsive!

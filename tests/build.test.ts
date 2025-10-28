@@ -60,7 +60,7 @@ describe('Blog Posts', () => {
   it('should generate blog post pages', () => {
     if (existsSync(blogPath)) {
       const files = readdirSync(blogPath, { withFileTypes: true });
-      const postDirs = files.filter(f => f.isDirectory());
+      const postDirs = files.filter((f) => f.isDirectory());
 
       // Should have at least the 3 sample posts
       expect(postDirs.length).toBeGreaterThanOrEqual(3);

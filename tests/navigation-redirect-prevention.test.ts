@@ -24,10 +24,7 @@ import { readFileSync, existsSync, readdirSync, statSync } from 'fs';
 import { join } from 'path';
 
 describe('Navigation Redirect Prevention', () => {
-  const headerContent = readFileSync(
-    join(process.cwd(), 'src/components/Header.astro'),
-    'utf-8'
-  );
+  const headerContent = readFileSync(join(process.cwd(), 'src/components/Header.astro'), 'utf-8');
 
   /**
    * Recursively get all .astro files in a directory
@@ -101,10 +98,7 @@ describe('Navigation Redirect Prevention', () => {
 
     if (!cleanPath) {
       // Root path
-      return [
-        join(basePath, 'index.astro'),
-        join(basePath, 'index.md'),
-      ];
+      return [join(basePath, 'index.astro'), join(basePath, 'index.md')];
     }
 
     return [
@@ -121,7 +115,7 @@ describe('Navigation Redirect Prevention', () => {
 
       expect(links.length).toBeGreaterThan(0);
       expect(links).toContain('/');
-      expect(links.some(link => link.includes('blog'))).toBe(true);
+      expect(links.some((link) => link.includes('blog'))).toBe(true);
     });
 
     it('should not link to /blog (redirects to /blog/all)', () => {
@@ -177,9 +171,8 @@ describe('Navigation Redirect Prevention', () => {
         }
 
         // Check if it's a dynamic route
-        const isDynamicRoute = link.includes('/all') ||
-                              link.includes('/personal') ||
-                              link.includes('/cockroach-labs');
+        const isDynamicRoute =
+          link.includes('/all') || link.includes('/personal') || link.includes('/cockroach-labs');
 
         if (!hasValidDestination && !isDynamicRoute) {
           problematicLinks.push(link);
@@ -187,9 +180,7 @@ describe('Navigation Redirect Prevention', () => {
       }
 
       // Only expect problems for non-dynamic routes
-      const nonDynamicProblems = problematicLinks.filter(
-        link => !link.includes('/blog/')
-      );
+      const nonDynamicProblems = problematicLinks.filter((link) => !link.includes('/blog/'));
 
       expect(nonDynamicProblems).toEqual([]);
     });
@@ -224,7 +215,7 @@ describe('Navigation Redirect Prevention', () => {
       // Document known redirect pages
       const knownRedirects = [
         '/src/pages/blog/index.astro', // Redirects /blog → /blog/all
-        '/src/pages/archive.astro',    // Redirects /archive → /blog/all (legacy URL)
+        '/src/pages/archive.astro', // Redirects /archive → /blog/all (legacy URL)
       ];
 
       // All redirect pages should be known and documented
@@ -284,7 +275,9 @@ describe('Navigation Redirect Prevention', () => {
         const redirectMatch = content.match(/Astro\.redirect\(['"]([^'"]+)['"]/);
 
         if (redirectMatch) {
-          const source = pagePath.replace(pagesPath, '').replace('/index.astro', '').replace('.astro', '') || '/';
+          const source =
+            pagePath.replace(pagesPath, '').replace('/index.astro', '').replace('.astro', '') ||
+            '/';
           const target = redirectMatch[1];
           redirectMap.set(source, target);
         }
@@ -297,7 +290,9 @@ describe('Navigation Redirect Prevention', () => {
 
         while (redirectMap.has(current)) {
           if (visited.has(current)) {
-            throw new Error(`Redirect loop detected: ${source} → ${Array.from(visited).join(' → ')} → ${current}`);
+            throw new Error(
+              `Redirect loop detected: ${source} → ${Array.from(visited).join(' → ')} → ${current}`
+            );
           }
           visited.add(current);
           current = redirectMap.get(current)!;
@@ -316,7 +311,7 @@ describe('Navigation Redirect Prevention', () => {
 
       const footerContent = readFileSync(footerPath, 'utf-8');
       const links = extractNavigationLinks(footerContent);
-      const internalLinks = links.filter(link => !link.startsWith('http'));
+      const internalLinks = links.filter((link) => !link.startsWith('http'));
 
       for (const link of internalLinks) {
         const possiblePaths = getPageFilePaths(link);
@@ -340,7 +335,7 @@ describe('Navigation Redirect Prevention', () => {
       // If someone changes /blog/all back to /blog, this will fail
 
       const links = extractNavigationLinks(headerContent);
-      const blogLink = links.find(link => link.includes('blog'));
+      const blogLink = links.find((link) => link.includes('blog'));
 
       expect(blogLink).toBeDefined();
       expect(blogLink).toBe('/blog/all'); // NOT /blog

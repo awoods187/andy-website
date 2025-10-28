@@ -14,7 +14,7 @@ describe('External Posts Validation', () => {
     it('should have valid post structure', () => {
       expect(crlPosts.length).toBeGreaterThan(0);
 
-      crlPosts.forEach(post => {
+      crlPosts.forEach((post) => {
         expect(post.title).toBeTruthy();
         expect(post.url).toBeTruthy();
         expect(post.date).toBeTruthy();
@@ -23,7 +23,7 @@ describe('External Posts Validation', () => {
     });
 
     it('should have valid Cockroach Labs URLs', () => {
-      crlPosts.forEach(post => {
+      crlPosts.forEach((post) => {
         expect(post.url).toMatch(/^https:\/\/www\.cockroachlabs\.com/);
       });
     });
@@ -33,7 +33,7 @@ describe('External Posts Validation', () => {
     it('should have valid publication structure', () => {
       expect(publications.length).toBeGreaterThan(0);
 
-      publications.forEach(pub => {
+      publications.forEach((pub) => {
         expect(pub.title).toBeTruthy();
         expect(pub.url).toBeTruthy();
         expect(pub.date).toBeTruthy();
@@ -42,7 +42,7 @@ describe('External Posts Validation', () => {
     });
 
     it('should have valid publication URLs', () => {
-      publications.forEach(pub => {
+      publications.forEach((pub) => {
         expect(pub.url).toMatch(/^https?:\/\//);
       });
     });

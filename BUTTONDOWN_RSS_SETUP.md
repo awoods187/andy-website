@@ -1,6 +1,7 @@
 # Buttondown RSS Feed Setup - Detailed Walkthrough
 
-**Detailed step-by-step guide for connecting your RSS feed and enabling auto-send emails.**
+**Detailed step-by-step guide for connecting your RSS feed and enabling
+auto-send emails.**
 
 ---
 
@@ -27,7 +28,8 @@
 
 ### 4.3: Locate the RSS Import Section
 
-On the Imports page, you'll see different import options. Scroll down until you find:
+On the Imports page, you'll see different import options. Scroll down until you
+find:
 
 ```
 ┌─────────────────────────────────────────┐
@@ -80,7 +82,8 @@ After clicking "Add RSS feed", you should see:
 
 ### 5.1: Open RSS Feed Settings
 
-After clicking "Settings" on your RSS feed (from step 4.5), a modal or new section opens showing RSS feed configuration options.
+After clicking "Settings" on your RSS feed (from step 4.5), a modal or new
+section opens showing RSS feed configuration options.
 
 ### 5.2: Configure Check Frequency
 
@@ -106,19 +109,22 @@ You'll see a section labeled **"Check Frequency"** or **"Polling Frequency"**:
 ```
 
 **What to do**:
+
 1. **Click the dropdown menu**
 2. **Select "Daily at 9:00 AM"** (or whichever time works best for you)
    - This means Buttondown checks your RSS feed every day at 9am
    - If there's a new post, it will send it to subscribers
 
 **Why daily?**
+
 - You probably don't post multiple times per day
 - Daily checks are frequent enough without being wasteful
 - 9am is a good time - people check email in the morning
 
 ### 5.3: Enable Auto-Send (This is the Critical Step!)
 
-Scroll down to find the **"Auto-send new posts"** or **"Automatically send new posts to subscribers"** option:
+Scroll down to find the **"Auto-send new posts"** or **"Automatically send new
+posts to subscribers"** option:
 
 ```
 ┌─────────────────────────────────────────┐
@@ -134,7 +140,9 @@ Scroll down to find the **"Auto-send new posts"** or **"Automatically send new p
 ```
 
 **What to do**:
-1. **Check the checkbox** ✅ next to "Automatically send new posts to subscribers"
+
+1. **Check the checkbox** ✅ next to "Automatically send new posts to
+   subscribers"
 2. The checkbox should turn blue/filled when enabled
 
 ### 5.4: Configure Email Template (Optional but Recommended)
@@ -162,11 +170,13 @@ Below the auto-send toggle, you may see template options:
 **Recommended template**:
 
 **Subject line**:
+
 ```
 {{ post_title }}
 ```
 
 **Body**:
+
 ```
 {{ post_content }}
 
@@ -180,7 +190,8 @@ You're receiving this because you subscribed to Andy Woods' newsletter.
 
 ### 5.5: Save Your Settings
 
-1. **Look for a "Save" or "Save Settings" button** at the bottom of the modal/section
+1. **Look for a "Save" or "Save Settings" button** at the bottom of the
+   modal/section
 2. **Click it**
 3. **Look for confirmation**: You should see "Settings saved" or similar message
 
@@ -201,6 +212,7 @@ Back on the main RSS settings page, you should now see:
 ```
 
 **Important indicators**:
+
 - ✅ **Status: Active** - RSS feed is working
 - ✅ **Auto-send: Enabled** - New posts will email automatically
 - ✅ **Next check: [time]** - Shows when Buttondown will check again
@@ -216,6 +228,7 @@ Don't want to wait until 9am tomorrow? You can test it right now:
 1. **On the RSS feed settings page**, find the **"Check Now"** button
 2. **Click it**
 3. **Watch what happens**:
+
    ```
    Checking feed... ⏳
    Found 3 new posts ✓
@@ -247,11 +260,13 @@ Don't want to wait until 9am tomorrow? You can test it right now:
 ### Issue 1: "Feed URL is invalid"
 
 **Possible causes**:
+
 - Typo in the URL
 - RSS feed isn't accessible yet (site not deployed)
 - RSS feed has errors
 
 **Solution**:
+
 1. Test your RSS feed first: https://andywoods.me/rss.xml
    - Open it in a browser
    - Should show XML with your blog posts
@@ -264,11 +279,13 @@ Don't want to wait until 9am tomorrow? You can test it right now:
 ### Issue 2: "No posts found in feed"
 
 **Possible causes**:
+
 - RSS feed is empty
 - Blog posts are marked as drafts
 - RSS feed isn't regenerated yet
 
 **Solution**:
+
 1. Check RSS feed manually: https://andywoods.me/rss.xml
 2. Verify you have published posts (not drafts)
 3. Rebuild and redeploy your site:
@@ -282,11 +299,13 @@ Don't want to wait until 9am tomorrow? You can test it right now:
 ### Issue 3: Auto-send checkbox is grayed out
 
 **Possible causes**:
+
 - You need to verify your email first
 - Free tier limitation (shouldn't be)
 - Account setup incomplete
 
 **Solution**:
+
 1. Check your email for Buttondown verification link
 2. Complete account setup in Buttondown
 3. Try refreshing the page
@@ -295,12 +314,14 @@ Don't want to wait until 9am tomorrow? You can test it right now:
 ### Issue 4: RSS feed checks but doesn't send emails
 
 **Checklist**:
+
 - ✅ Auto-send checkbox is enabled
 - ✅ You have at least 1 confirmed subscriber (even if it's just you)
 - ✅ Email sending is not paused in Settings → Email
 - ✅ The post is actually "new" (published after the last check)
 
 **To verify**:
+
 1. Go to Buttondown → "Emails" tab
 2. Check "Drafts" section
 3. You should see drafts for new posts
@@ -436,4 +457,5 @@ RSS Feed: andywoods.me/rss.xml
 
 ---
 
-**Questions?** Check the main setup guide in `BUTTONDOWN_SETUP.md` or contact Buttondown support at support@buttondown.email
+**Questions?** Check the main setup guide in `BUTTONDOWN_SETUP.md` or contact
+Buttondown support at support@buttondown.email

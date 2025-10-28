@@ -3,7 +3,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import SubscribeForm from '../components/SubscribeForm.astro';
 
 const title = 'Subscribe - Andy Woods';
-const description = 'Get new posts about AI, databases, and product management delivered to your inbox.';
+const description =
+  'Get new posts about AI, databases, and product management delivered to your inbox.';
 ---
 
 <BaseLayout title={title} description={description}>
@@ -12,13 +13,11 @@ const description = 'Get new posts about AI, databases, and product management d
 
     <div class="intro">
       <p>
-        I write about building products at the intersection of databases and AI,
-        lessons from scaling Cockroach Labs from pre-revenue to $100M+ ARR,
-        and hands-on explorations of AI tools and infrastructure.
+        I write about building products at the intersection of databases and AI, lessons from
+        scaling Cockroach Labs from pre-revenue to $100M+ ARR, and hands-on explorations of AI tools
+        and infrastructure.
       </p>
-      <p>
-        New posts typically weekly. No spam, no tracking, unsubscribe anytime.
-      </p>
+      <p>New posts typically weekly. No spam, no tracking, unsubscribe anytime.</p>
     </div>
 
     <div class="subscription-options">
@@ -44,27 +43,32 @@ const description = 'Get new posts about AI, databases, and product management d
             >
               Subscribe via Feedly
             </a>
-            <a
-              href="/rss.xml"
-              class="rss-button secondary"
-            >
-              View RSS Feed
-            </a>
+            <a href="/rss.xml" class="rss-button secondary"> View RSS Feed</a>
           </div>
 
           <details class="rss-explainer">
             <summary>What's RSS?</summary>
             <p>
-              RSS (Really Simple Syndication) lets you follow blogs without
-              giving away your email. You use an RSS reader app to collect
-              posts from all your favorite sites in one place.
+              RSS (Really Simple Syndication) lets you follow blogs without giving away your email.
+              You use an RSS reader app to collect posts from all your favorite sites in one place.
             </p>
             <p><strong>Popular RSS readers:</strong></p>
             <ul>
-              <li><a href="https://feedly.com" target="_blank" rel="noopener">Feedly</a> - Web & mobile, free</li>
-              <li><a href="https://netnewswire.com" target="_blank" rel="noopener">NetNewsWire</a> - Mac & iOS, free & open-source</li>
-              <li><a href="https://reederapp.com" target="_blank" rel="noopener">Reeder</a> - iOS & Mac, premium</li>
-              <li><a href="https://www.inoreader.com" target="_blank" rel="noopener">Inoreader</a> - Cross-platform</li>
+              <li>
+                <a href="https://feedly.com" target="_blank" rel="noopener">Feedly</a> - Web & mobile,
+                free
+              </li>
+              <li>
+                <a href="https://netnewswire.com" target="_blank" rel="noopener">NetNewsWire</a> - Mac
+                & iOS, free & open-source
+              </li>
+              <li>
+                <a href="https://reederapp.com" target="_blank" rel="noopener">Reeder</a> - iOS & Mac,
+                premium
+              </li>
+              <li>
+                <a href="https://www.inoreader.com" target="_blank" rel="noopener">Inoreader</a> - Cross-platform
+              </li>
             </ul>
           </details>
         </div>
@@ -74,7 +78,10 @@ const description = 'Get new posts about AI, databases, and product management d
     <section class="privacy-section">
       <h2>Privacy Commitment</h2>
       <ul>
-        <li><strong>Email:</strong> Managed by Buttondown. No tracking pixels, no analytics, no third-party sharing.</li>
+        <li>
+          <strong>Email:</strong> Managed by Buttondown. No tracking pixels, no analytics, no third-party
+          sharing.
+        </li>
         <li><strong>RSS:</strong> No data collection. Your reader fetches posts directly.</li>
         <li><strong>No spam:</strong> Only new blog posts, typically 1-2 per week.</li>
         <li><strong>Easy unsubscribe:</strong> One-click unsubscribe link in every email.</li>

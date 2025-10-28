@@ -81,7 +81,8 @@ describe('Buttondown Integration', () => {
     it('should use the correct API path structure in iframe', () => {
       // The API endpoint should be:
       // https://buttondown.com/api/emails/embed-subscribe/{username}
-      const apiPattern = /https:\/\/buttondown\.com\/api\/emails\/embed-subscribe\/\$\{buttondownUsername\}/;
+      const apiPattern =
+        /https:\/\/buttondown\.com\/api\/emails\/embed-subscribe\/\$\{buttondownUsername\}/;
       expect(subscribeForm).toMatch(apiPattern);
     });
   });

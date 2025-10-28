@@ -1,14 +1,16 @@
 # Visual Style Guide
 
-**Project**: Andy Woods Personal Website
-**Style**: Vintage WPA National Parks Poster × Retro-Futurism
-**Purpose**: Create cohesive, brand-consistent images for blog posts and marketing materials
+**Project**: Andy Woods Personal Website **Style**: Vintage WPA National Parks
+Poster × Retro-Futurism **Purpose**: Create cohesive, brand-consistent images
+for blog posts and marketing materials
 
 ---
 
 ## 🎨 Brand Visual Identity
 
-This style guide ensures all generated images maintain a consistent aesthetic that communicates:
+This style guide ensures all generated images maintain a consistent aesthetic
+that communicates:
+
 - **Established Expertise** - Vintage, trustworthy design language
 - **Forward-Thinking Innovation** - Retro-futuristic subject matter
 - **Technical Authority** - Clean, geometric precision
@@ -35,13 +37,13 @@ no text, leave bottom third compositionally clean for typography
 
 **IMPORTANT**: Use these EXACT hex codes for consistency across all images.
 
-| Color | Hex Code | Usage |
-|-------|----------|-------|
+| Color            | Hex Code  | Usage                               |
+| ---------------- | --------- | ----------------------------------- |
 | **Burnt Orange** | `#CC5500` | Primary accent, highlights, sunsets |
-| **Deep Teal** | `#2C5F5F` | Shadows, depth, water, sky |
-| **Warm Ochre** | `#D4A76A` | Mid-tones, earth, warmth |
-| **Cream** | `#FFF8E7` | Highlights, sky, paper base |
-| **Charcoal** | `#2B2B2B` | Deep shadows, outlines, contrast |
+| **Deep Teal**    | `#2C5F5F` | Shadows, depth, water, sky          |
+| **Warm Ochre**   | `#D4A76A` | Mid-tones, earth, warmth            |
+| **Cream**        | `#FFF8E7` | Highlights, sky, paper base         |
+| **Charcoal**     | `#2B2B2B` | Deep shadows, outlines, contrast    |
 
 ### Color Palette Preview
 
@@ -92,6 +94,7 @@ no text, leave bottom third compositionally clean for typography
 ### AI & Machine Learning
 
 #### Template 1: Neural Networks as Natural Landscapes
+
 ```
 Neural network pathways forming majestic mountain ranges with data streams cascading
 as geometric waterfalls
@@ -100,6 +103,7 @@ as geometric waterfalls
 **Use for**: AI/ML blog posts, data science topics, neural network explainers
 
 #### Template 2: AI as Sunrise
+
 ```
 Artificial intelligence as an art deco sunrise over crystalline algorithm peaks
 ```
@@ -111,6 +115,7 @@ Artificial intelligence as an art deco sunrise over crystalline algorithm peaks
 ### Databases & Data Infrastructure
 
 #### Template 1: SQL as Canyon Architecture
+
 ```
 SQL database architecture as layered canyon walls with data flowing through
 geometric valleys
@@ -119,6 +124,7 @@ geometric valleys
 **Use for**: Database fundamentals, SQL tutorials, architecture posts
 
 #### Template 2: Data Warehouse as Monument
+
 ```
 Data warehouse as monumental cliff face with structured query patterns etched
 like ancient formations
@@ -131,6 +137,7 @@ like ancient formations
 ### Cloud & Enterprise Technology
 
 #### Template 1: Cloud Infrastructure
+
 ```
 Cloud infrastructure as stylized cumulus formations above server farm mountain ranges
 ```
@@ -138,6 +145,7 @@ Cloud infrastructure as stylized cumulus formations above server farm mountain r
 **Use for**: Cloud architecture, infrastructure posts, DevOps topics
 
 #### Template 2: Enterprise Networks
+
 ```
 Enterprise network topology as interconnected plateau systems with data packet rivers
 ```
@@ -149,6 +157,7 @@ Enterprise network topology as interconnected plateau systems with data packet r
 ### Innovation & Future Technology
 
 #### Template 1: Quantum Computing
+
 ```
 Quantum computing qubits as constellation patterns over technological mountain peaks
 ```
@@ -156,6 +165,7 @@ Quantum computing qubits as constellation patterns over technological mountain p
 **Use for**: Emerging tech, quantum computing, advanced topics
 
 #### Template 2: Blockchain & Distributed Systems
+
 ```
 Blockchain ledgers as interlocking geological strata forming futuristic mesas
 ```
@@ -170,7 +180,8 @@ Blockchain ledgers as interlocking geological strata forming futuristic mesas
 
 1. **Choose Subject Template**
    - Select from templates above
-   - Or create custom using same metaphor pattern: `[Tech Concept] as [Natural Formation]`
+   - Or create custom using same metaphor pattern:
+     `[Tech Concept] as [Natural Formation]`
 
 2. **Copy Core Style Prompt**
    - Use the complete prompt verbatim
@@ -205,12 +216,12 @@ no text, leave bottom third compositionally clean for typography --ar 3:4
 
 ### File Requirements
 
-| Use Case | Dimensions | Aspect Ratio | Format | Max Size |
-|----------|-----------|--------------|--------|----------|
-| **Blog Hero Image** | 1200×1600px | 3:4 | JPG/PNG | 500KB |
-| **OpenGraph (OG) Image** | 1200×630px | 16:9 | JPG/PNG | 300KB |
-| **Social Media** | 1080×1080px | 1:1 | JPG/PNG | 400KB |
-| **Thumbnail** | 600×800px | 3:4 | JPG | 200KB |
+| Use Case                 | Dimensions  | Aspect Ratio | Format  | Max Size |
+| ------------------------ | ----------- | ------------ | ------- | -------- |
+| **Blog Hero Image**      | 1200×1600px | 3:4          | JPG/PNG | 500KB    |
+| **OpenGraph (OG) Image** | 1200×630px  | 16:9         | JPG/PNG | 300KB    |
+| **Social Media**         | 1080×1080px | 1:1          | JPG/PNG | 400KB    |
+| **Thumbnail**            | 600×800px   | 3:4          | JPG     | 200KB    |
 
 ### Optimization
 
@@ -221,6 +232,7 @@ no text, leave bottom third compositionally clean for typography --ar 3:4
    - Save to `public/images/blog/` directory
 
 2. **File Naming Convention**:
+
    ```
    [post-slug]-hero.jpg       # Main blog image
    [post-slug]-og.jpg         # OpenGraph image
@@ -250,11 +262,13 @@ Follow this pattern to create new subjects:
 **Examples**:
 
 ✅ **Good**:
+
 - "API endpoints as mountain trail networks with request flows as hiking paths"
 - "Microservices architecture as archipelago islands with communication bridges"
 - "Cache layers as sedimentary rock strata with data retrieval shafts"
 
 ❌ **Avoid**:
+
 - Too literal: "Database servers in a data center"
 - Too abstract: "Technology innovation concepts"
 - Mixed metaphors: "Cloud networks as underwater coral reefs"
@@ -262,6 +276,7 @@ Follow this pattern to create new subjects:
 ### Consistency Checklist
 
 Before generating, verify:
+
 - [ ] Uses natural/geological metaphor
 - [ ] Includes exact color hex codes
 - [ ] Specifies "no text"
@@ -277,6 +292,7 @@ Before generating, verify:
 ### Historical Inspiration
 
 **WPA National Parks Posters (1930s-1940s)**:
+
 - Bold, flat color blocks
 - Geometric simplification of nature
 - Screen print aesthetic
@@ -284,6 +300,7 @@ Before generating, verify:
 - Limited color palettes (3-5 colors)
 
 **Key Artists Referenced**:
+
 - **Joseph Binder** - Austrian-American poster designer, geometric modernism
 - **Charley Harper** - Wildlife artist, extreme geometric simplification
 - **Doug Leen** - Modern WPA-style National Parks posters
@@ -291,6 +308,7 @@ Before generating, verify:
 ### Modern Retro-Futurism
 
 **Mid-Century Modern Elements**:
+
 - Streamlined, aerodynamic forms
 - Optimistic vision of technology
 - Space-age aesthetics
@@ -302,21 +320,20 @@ Before generating, verify:
 
 ### What This Style Communicates
 
-| Visual Element | Brand Message |
-|----------------|---------------|
-| **Vintage WPA Style** | "Established, trustworthy, timeless" |
-| **Geometric Precision** | "Technical expertise, attention to detail" |
-| **Natural Metaphors** | "Technology that feels organic and accessible" |
-| **Retro-Futurism** | "Innovation rooted in proven principles" |
-| **Limited Palette** | "Clarity, focus, professional restraint" |
-| **Heroic Perspective** | "Ambitious vision, leadership" |
+| Visual Element          | Brand Message                                  |
+| ----------------------- | ---------------------------------------------- |
+| **Vintage WPA Style**   | "Established, trustworthy, timeless"           |
+| **Geometric Precision** | "Technical expertise, attention to detail"     |
+| **Natural Metaphors**   | "Technology that feels organic and accessible" |
+| **Retro-Futurism**      | "Innovation rooted in proven principles"       |
+| **Limited Palette**     | "Clarity, focus, professional restraint"       |
+| **Heroic Perspective**  | "Ambitious vision, leadership"                 |
 
 ### Target Audience Perception
 
-**Product Managers**: "Visionary yet practical"
-**Engineers**: "Technically sound with design sensibility"
-**Executives**: "Strategic thinker with creative approach"
-**General Tech Community**: "Unique voice in crowded space"
+**Product Managers**: "Visionary yet practical" **Engineers**: "Technically
+sound with design sensibility" **Executives**: "Strategic thinker with creative
+approach" **General Tech Community**: "Unique voice in crowded space"
 
 ---
 
@@ -343,6 +360,7 @@ Keep a log of generated images:
 ## Image Generation Log
 
 ### 2025-01-21: AI Database Integration
+
 - **Subject**: Neural networks as mountain ranges
 - **Aspect Ratio**: 3:4
 - **Generator**: Midjourney v6
@@ -350,6 +368,7 @@ Keep a log of generated images:
 - **Status**: Published
 
 ### 2025-01-21: Cloud Architecture Post
+
 - **Subject**: Cloud infrastructure as cumulus formations
 - **Aspect Ratio**: 16:9
 - **Generator**: DALL-E 3
@@ -382,14 +401,17 @@ Keep a log of generated images:
 
 ### If WPA Style Doesn't Fit
 
-For certain topics, consider these alternative approaches while maintaining brand consistency:
+For certain topics, consider these alternative approaches while maintaining
+brand consistency:
 
 **Technical Diagrams**:
+
 - Isometric blueprint style
 - Same color palette
 - Clean, geometric forms
 
 **Data Visualization**:
+
 - Vintage infographic style
 - 1960s information design
 - Same limited color palette
@@ -415,18 +437,26 @@ For certain topics, consider these alternative approaches while maintaining bran
 ### Common Issues & Solutions
 
 **Problem**: Generated image too busy in bottom third
-- **Solution**: Re-prompt with emphasis on "clean bottom third" and "leave space for typography"
+
+- **Solution**: Re-prompt with emphasis on "clean bottom third" and "leave space
+  for typography"
 
 **Problem**: Colors don't match brand palette
+
 - **Solution**: Ensure hex codes are in prompt, or adjust in post-processing
 
 **Problem**: Too photorealistic
-- **Solution**: Add "screen print illustration" and "bold geometric simplified forms" earlier in prompt
+
+- **Solution**: Add "screen print illustration" and "bold geometric simplified
+  forms" earlier in prompt
 
 **Problem**: Image too dark/low contrast
-- **Solution**: Emphasize "strong light/shadow contrast" and use cream (#FFF8E7) for highlights
+
+- **Solution**: Emphasize "strong light/shadow contrast" and use cream (#FFF8E7)
+  for highlights
 
 **Problem**: Wrong aspect ratio delivered
+
 - **Solution**: Verify `--ar` flag is at end of prompt, regenerate
 
 ---
@@ -447,17 +477,19 @@ For certain topics, consider these alternative approaches while maintaining bran
 
 ### Historical Reference Collections
 
-- **Library of Congress WPA Posters**: https://www.loc.gov/collections/works-progress-administration-posters/
-- **Vintage National Parks Posters**: https://www.nps.gov/museum/exhibits/npgallery/
+- **Library of Congress WPA Posters**:
+  https://www.loc.gov/collections/works-progress-administration-posters/
+- **Vintage National Parks Posters**:
+  https://www.nps.gov/museum/exhibits/npgallery/
 - **Joseph Binder Archive**: Search design archives for reference
 
 ---
 
 ## 📝 Version History
 
-| Version | Date | Changes |
-|---------|------|---------|
-| 1.0 | 2025-01-21 | Initial style guide created |
+| Version | Date       | Changes                     |
+| ------- | ---------- | --------------------------- |
+| 1.0     | 2025-01-21 | Initial style guide created |
 
 ---
 
@@ -466,10 +498,13 @@ For certain topics, consider these alternative approaches while maintaining bran
 For questions about this visual style guide or to suggest new subject templates:
 
 - **GitHub Issues**: Open an issue in this repository
-- **Contact**: Andy Woods via [LinkedIn](https://www.linkedin.com/in/andrewscottwoods/) or [X](https://twitter.com/iamandywoods)
+- **Contact**: Andy Woods via
+  [LinkedIn](https://www.linkedin.com/in/andrewscottwoods/) or
+  [X](https://twitter.com/iamandywoods)
 
 ---
 
 **Built with ❤️ for consistent, memorable visual branding**
 
-*This style guide is part of the andy-website project. See `README.md` for full project documentation.*
+_This style guide is part of the andy-website project. See `README.md` for full
+project documentation._

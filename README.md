@@ -1,17 +1,23 @@
 # Andy Woods Personal Website
 
-A modern, minimal personal website built with Astro, featuring a blog with integrated external content, professional bio, and clean typography. Inspired by tomtunguz.com's design aesthetic.
+A modern, minimal personal website built with Astro, featuring a blog with
+integrated external content, professional bio, and clean typography. Inspired by
+tomtunguz.com's design aesthetic.
 
-🌐 **Live Site**: [andywoods.me](https://andywoods.me)
-👤 **Author**: Andy Woods - Director of Product Management at Cockroach Labs
-🔗 **Connect**: [LinkedIn](https://www.linkedin.com/in/andrewscottwoods/) | [GitHub](https://github.com/awoods187) | [X/Twitter](https://twitter.com/iamandywoods)
+🌐 **Live Site**: [andywoods.me](https://andywoods.me) 👤 **Author**: Andy
+Woods - Director of Product Management at Cockroach Labs 🔗 **Connect**:
+[LinkedIn](https://www.linkedin.com/in/andrewscottwoods/) |
+[GitHub](https://github.com/awoods187) |
+[X/Twitter](https://twitter.com/iamandywoods)
 
 ---
 
 ## 🎯 Features
 
-- ✅ **Hybrid Blog System** - Combines personal Markdown posts with external Cockroach Labs blog posts
-- ✅ **Category Filtering** - Static page generation for fast, SEO-friendly filtering
+- ✅ **Hybrid Blog System** - Combines personal Markdown posts with external
+  Cockroach Labs blog posts
+- ✅ **Category Filtering** - Static page generation for fast, SEO-friendly
+  filtering
 - ✅ **Full SEO Optimization** - OpenGraph, Twitter Cards, sitemap, RSS feed
 - ✅ **Type-Safe Content** - Zod schema validation for all blog posts
 - ✅ **Zero JavaScript** - Pure static HTML for maximum performance
@@ -23,16 +29,16 @@ A modern, minimal personal website built with Astro, featuring a blog with integ
 
 ## 🛠 Tech Stack
 
-| Category | Technology |
-|----------|-----------|
-| **Framework** | [Astro 5](https://astro.build) - Content-focused static site generator |
-| **Styling** | [Tailwind CSS 4](https://tailwindcss.com) - Utility-first CSS |
-| **Typography** | Space Grotesk (headings) + Merriweather (body) |
-| **Content** | Markdown with frontmatter, Zod validation |
-| **Testing** | Vitest + Happy DOM |
-| **Scripting** | Python 3.10+ (for blog scraping) |
-| **Deployment** | Vercel or Netlify |
-| **Analytics** | Plausible (privacy-first) or Google Analytics |
+| Category       | Technology                                                             |
+| -------------- | ---------------------------------------------------------------------- |
+| **Framework**  | [Astro 5](https://astro.build) - Content-focused static site generator |
+| **Styling**    | [Tailwind CSS 4](https://tailwindcss.com) - Utility-first CSS          |
+| **Typography** | Space Grotesk (headings) + Merriweather (body)                         |
+| **Content**    | Markdown with frontmatter, Zod validation                              |
+| **Testing**    | Vitest + Happy DOM                                                     |
+| **Scripting**  | Python 3.10+ (for blog scraping)                                       |
+| **Deployment** | Vercel or Netlify                                                      |
+| **Analytics**  | Plausible (privacy-first) or Google Analytics                          |
 
 ---
 
@@ -114,22 +120,26 @@ andy-website/
 ### Installation
 
 1. **Clone the repository** (or download the code)
+
    ```bash
    git clone https://github.com/awoods187/andy-website.git
    cd andy-website
    ```
 
 2. **Install Node dependencies**
+
    ```bash
    npm install
    ```
 
 3. **Install Python dependencies** (optional)
+
    ```bash
    pip install -r requirements.txt
    ```
 
 4. **Start the development server**
+
    ```bash
    npm run dev
    ```
@@ -148,15 +158,15 @@ andy-website/
 
 ## 📝 Development Commands
 
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Start dev server at `localhost:4321` |
-| `npm run build` | Build production site to `./dist/` |
-| `npm run preview` | Preview production build locally |
-| `npm test` | Run test suite with Vitest |
-| `npm run test:watch` | Run tests in watch mode |
-| `npm run test:coverage` | Generate test coverage report |
-| `npm run astro ...` | Run any Astro CLI command |
+| Command                 | Description                          |
+| ----------------------- | ------------------------------------ |
+| `npm run dev`           | Start dev server at `localhost:4321` |
+| `npm run build`         | Build production site to `./dist/`   |
+| `npm run preview`       | Preview production build locally     |
+| `npm test`              | Run test suite with Vitest           |
+| `npm run test:watch`    | Run tests in watch mode              |
+| `npm run test:coverage` | Generate test coverage report        |
+| `npm run astro ...`     | Run any Astro CLI command            |
 
 ---
 
@@ -165,19 +175,21 @@ andy-website/
 ### Creating a Personal Blog Post
 
 1. **Create a new Markdown file** in `src/content/blog/`:
+
    ```bash
    touch src/content/blog/my-new-post.md
    ```
 
 2. **Add frontmatter** at the top:
+
    ```markdown
    ---
-   title: "Your Post Title"
+   title: 'Your Post Title'
    date: 2024-10-21
-   excerpt: "A compelling 1-2 sentence summary for SEO and listings"
-   tags: ["ai", "databases", "product-management"]
-   image: "/images/my-post.jpg"  # Optional
-   draft: false  # Set to true to hide from production
+   excerpt: 'A compelling 1-2 sentence summary for SEO and listings'
+   tags: ['ai', 'databases', 'product-management']
+   image: '/images/my-post.jpg' # Optional
+   draft: false # Set to true to hide from production
    ---
 
    Your content here in **Markdown**...
@@ -193,18 +205,19 @@ andy-website/
 
 ### Frontmatter Schema
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `title` | string | ✅ | Post title (used in `<h1>` and meta tags) |
-| `date` | Date | ✅ | Publication date (YYYY-MM-DD format) |
-| `excerpt` | string | ✅ | Brief summary for listings and SEO |
-| `tags` | string[] | ✅ | Array of tags (e.g., `["ai", "databases"]`) |
-| `image` | string | ❌ | Featured image URL (relative to `/public/`) |
-| `draft` | boolean | ❌ | If `true`, post won't appear in production |
+| Field     | Type     | Required | Description                                 |
+| --------- | -------- | -------- | ------------------------------------------- |
+| `title`   | string   | ✅       | Post title (used in `<h1>` and meta tags)   |
+| `date`    | Date     | ✅       | Publication date (YYYY-MM-DD format)        |
+| `excerpt` | string   | ✅       | Brief summary for listings and SEO          |
+| `tags`    | string[] | ✅       | Array of tags (e.g., `["ai", "databases"]`) |
+| `image`   | string   | ❌       | Featured image URL (relative to `/public/`) |
+| `draft`   | boolean  | ❌       | If `true`, post won't appear in production  |
 
 ### Adding Cockroach Labs Blog Posts
 
-External blog posts from Cockroach Labs are stored in `src/data/crl-posts.ts`. To add new posts:
+External blog posts from Cockroach Labs are stored in `src/data/crl-posts.ts`.
+To add new posts:
 
 #### Option 1: Manual Entry (Recommended for 1-2 posts)
 
@@ -231,11 +244,13 @@ python3 scripts/scrape-crl-posts.py
 ```
 
 This will:
+
 1. Fetch https://www.cockroachlabs.com/author/andy-woods/
 2. Extract all blog post metadata (title, URL, date, image, excerpt)
 3. Generate updated `src/data/crl-posts.ts` file
 
-**Note**: The scraper uses BeautifulSoup and may need selector updates if the CRL website changes.
+**Note**: The scraper uses BeautifulSoup and may need selector updates if the
+CRL website changes.
 
 ---
 
@@ -243,31 +258,34 @@ This will:
 
 ### Changing Site Content
 
-| What to Change | File Location |
-|----------------|---------------|
-| **Home page bio** | `src/pages/index.astro` |
-| **Full bio/about** | `src/pages/about.astro` |
-| **Profile photo** | `public/profile.jpg` |
-| **Header navigation** | `src/components/Header.astro` |
-| **Footer links** | `src/components/Footer.astro` |
-| **Fonts** | `src/styles/global.css` (Google Fonts import) |
-| **Colors/theme** | `src/styles/global.css` (Tailwind config) |
-| **Blog images** | See `VISUAL_STYLE_GUIDE.md` for brand guidelines |
+| What to Change        | File Location                                    |
+| --------------------- | ------------------------------------------------ |
+| **Home page bio**     | `src/pages/index.astro`                          |
+| **Full bio/about**    | `src/pages/about.astro`                          |
+| **Profile photo**     | `public/profile.jpg`                             |
+| **Header navigation** | `src/components/Header.astro`                    |
+| **Footer links**      | `src/components/Footer.astro`                    |
+| **Fonts**             | `src/styles/global.css` (Google Fonts import)    |
+| **Colors/theme**      | `src/styles/global.css` (Tailwind config)        |
+| **Blog images**       | See `VISUAL_STYLE_GUIDE.md` for brand guidelines |
 
 ### Adding Environment Variables
 
 1. **Copy the example file**:
+
    ```bash
    cp .env.example .env
    ```
 
 2. **Edit `.env`** with your values:
+
    ```bash
    PUBLIC_GOOGLE_ANALYTICS_ID=G-XXXXXXXXXX
    PUBLIC_SITE_URL=https://andywoods.me
    ```
 
-3. **⚠️ Security**: Never commit `.env` to version control! It's already in `.gitignore`.
+3. **⚠️ Security**: Never commit `.env` to version control! It's already in
+   `.gitignore`.
 
 ### Enabling Analytics
 
@@ -277,7 +295,10 @@ This will:
 2. Add your domain: `andywoods.me`
 3. Uncomment this line in `src/components/Analytics.astro`:
    ```astro
-   <script defer data-domain="andywoods.me" src="https://plausible.io/js/script.js"></script>
+   <script
+     defer
+     data-domain="andywoods.me"
+     src="https://plausible.io/js/script.js"></script>
    ```
 4. Redeploy
 
@@ -315,6 +336,7 @@ npm run test:ui
 ### Test Coverage
 
 Current test suite includes:
+
 - ✅ Build output validation (15 tests)
 - ✅ Blog post schema validation
 - ✅ Page generation verification
@@ -330,6 +352,7 @@ Current test suite includes:
 ### Option 1: Deploy to Vercel (⭐ Recommended)
 
 1. **Push to GitHub**
+
    ```bash
    git push origin main
    ```
@@ -349,6 +372,7 @@ Current test suite includes:
 ### Option 2: Deploy to Netlify
 
 1. **Push to GitHub**
+
    ```bash
    git push origin main
    ```
@@ -372,7 +396,8 @@ Current test suite includes:
 
 ## 🔗 Custom Domain Setup (andywoods.me)
 
-You have the domain `andywoods.me` registered through **Network Solutions**. Here's how to connect it:
+You have the domain `andywoods.me` registered through **Network Solutions**.
+Here's how to connect it:
 
 ### For Vercel:
 
@@ -409,7 +434,8 @@ You have the domain `andywoods.me` registered through **Network Solutions**. Her
 
 ### SSL Certificate
 
-Both Vercel and Netlify automatically provision **free SSL certificates** via Let's Encrypt. No manual action required.
+Both Vercel and Netlify automatically provision **free SSL certificates** via
+Let's Encrypt. No manual action required.
 
 ---
 
@@ -454,7 +480,8 @@ This site is optimized for maximum performance:
 - 📱 **Mobile responsive** with mobile-first design
 - ♿ **Accessible** - Semantic HTML, ARIA labels, keyboard navigation
 
-**Expected Lighthouse Scores**: 95-100 across all categories (Performance, Accessibility, Best Practices, SEO)
+**Expected Lighthouse Scores**: 95-100 across all categories (Performance,
+Accessibility, Best Practices, SEO)
 
 ---
 
@@ -467,6 +494,7 @@ npm run astro check
 ```
 
 Usually caused by:
+
 - Missing required frontmatter fields
 - Invalid date format (must be YYYY-MM-DD)
 - Type mismatch in blog post schema
@@ -499,17 +527,20 @@ Usually caused by:
 These features are not yet implemented but are structured for easy addition:
 
 ### High Priority
+
 - [x] **Newsletter signup** - Buttondown email integration ✅
 - [ ] **Dark mode toggle** - System preference detection
 - [ ] **Search functionality** - Pagefind or Algolia
 
 ### Medium Priority
+
 - [ ] **Comments system** - Giscus (GitHub Discussions) or Utterances
 - [ ] **Projects/portfolio section** - Showcase side projects
 - [ ] **View counter** - Track post engagement
 - [ ] **Blog post series** - Link related posts together
 
 ### Low Priority
+
 - [x] **RSS email notifications** - Automated via Buttondown ✅
 - [ ] **Reading time estimates** - Calculate based on word count
 - [ ] **Table of contents** - Auto-generated for long posts
@@ -519,15 +550,18 @@ These features are not yet implemented but are structured for easy addition:
 
 ## 📧 Newsletter & Subscriptions
 
-This site includes a privacy-focused subscription system for readers to stay updated with new content.
+This site includes a privacy-focused subscription system for readers to stay
+updated with new content.
 
 ### Email Newsletter
+
 - **Provider**: [Buttondown](https://buttondown.email)
 - **Form submits directly** to Buttondown API (zero JavaScript)
 - **RSS-to-email automated** via Buttondown's RSS import
 - **Privacy-focused**: No tracking pixels, GDPR compliant
 
 ### RSS Feed
+
 - **Auto-generated** by Astro at `/rss.xml`
 - **Includes all content sources**: Personal posts, CRL posts, and publications
 - **Supports all standard RSS readers**: Feedly, NetNewsWire, Reeder, Inoreader
@@ -535,27 +569,32 @@ This site includes a privacy-focused subscription system for readers to stay upd
 ### Setup Instructions
 
 #### 1. Create Buttondown Account
+
 1. Go to [buttondown.email](https://buttondown.email) and create an account
 2. Choose your username (e.g., `andywoods`)
 
 #### 2. Connect RSS Feed
+
 1. In Buttondown Dashboard → **Settings** → **Import** → **RSS Feed**
 2. Add feed URL: `https://andywoods.me/rss.xml`
 3. Set check frequency: **Daily at 9am**
 4. Enable **"Auto-send new posts"**
 
 #### 3. Customize Email Template
+
 In Buttondown's email settings, customize the template:
 
 ```markdown
 {{ email_body }}
 
 ---
-You're receiving this because you subscribed to Andy Woods' blog.
-Unsubscribe: {{ unsubscribe_url }}
+
+You're receiving this because you subscribed to Andy Woods' blog. Unsubscribe:
+{{ unsubscribe_url }}
 ```
 
 #### 4. Update Code
+
 1. Copy your Buttondown username
 2. Edit `src/components/SubscribeForm.astro`:
    ```typescript
@@ -593,6 +632,7 @@ curl https://andywoods.me/rss.xml
 ### Success Metrics
 
 After launch, track:
+
 - **Subscriber growth rate** (target: 5-10/month to start)
 - **Email open rates** (Buttondown provides this)
 - **RSS subscriber count** (Buttondown + RSS reader analytics)
@@ -604,46 +644,63 @@ After launch, track:
 
 ### Image Generation Style Guide
 
-This project uses a distinctive **Vintage WPA National Parks Poster × Retro-Futurism** aesthetic for all blog images. This creates a cohesive visual brand that communicates "established expertise meets forward-thinking innovation."
+This project uses a distinctive **Vintage WPA National Parks Poster ×
+Retro-Futurism** aesthetic for all blog images. This creates a cohesive visual
+brand that communicates "established expertise meets forward-thinking
+innovation."
 
 **Key Features**:
+
 - 1930s-1940s WPA poster style
 - 5-color limited palette (burnt orange, deep teal, warm ochre, cream, charcoal)
 - Technical concepts as natural landscapes
 - Bold geometric forms, screen print aesthetic
 
-**📖 Full Documentation**: See [`VISUAL_STYLE_GUIDE.md`](./VISUAL_STYLE_GUIDE.md) for:
+**📖 Full Documentation**: See
+[`VISUAL_STYLE_GUIDE.md`](./VISUAL_STYLE_GUIDE.md) for:
+
 - Complete style prompt templates
 - Subject templates for AI, databases, cloud, innovation topics
 - Color palette (exact hex codes)
 - Image specifications & optimization
 - Step-by-step generation instructions
 
-**Quick Start**: Copy the core prompt from `VISUAL_STYLE_GUIDE.md`, choose a subject template, and generate with Midjourney/DALL-E.
+**Quick Start**: Copy the core prompt from `VISUAL_STYLE_GUIDE.md`, choose a
+subject template, and generate with Midjourney/DALL-E.
 
 ---
 
 ## 📚 Documentation & Resources
 
 ### Project Documentation
-- **Visual Style Guide**: [`VISUAL_STYLE_GUIDE.md`](./VISUAL_STYLE_GUIDE.md) - Brand-consistent image generation
-- **Code Review**: [`CODE_REVIEW.md`](./CODE_REVIEW.md) - Security audit & refactoring summary
-- **Environment Setup**: [`.env.example`](./.env.example) - Configuration template
+
+- **Visual Style Guide**: [`VISUAL_STYLE_GUIDE.md`](./VISUAL_STYLE_GUIDE.md) -
+  Brand-consistent image generation
+- **Code Review**: [`CODE_REVIEW.md`](./CODE_REVIEW.md) - Security audit &
+  refactoring summary
+- **Environment Setup**: [`.env.example`](./.env.example) - Configuration
+  template
 
 ### Official Documentation
+
 - **Astro**: [docs.astro.build](https://docs.astro.build)
 - **Tailwind CSS**: [tailwindcss.com/docs](https://tailwindcss.com/docs)
 - **Vercel**: [vercel.com/docs](https://vercel.com/docs)
 - **Netlify**: [docs.netlify.com](https://docs.netlify.com)
 
 ### Design Inspiration
-- **Tom Tunguz**: [tomtunguz.com](https://tomtunguz.com) - Minimal, content-first design
+
+- **Tom Tunguz**: [tomtunguz.com](https://tomtunguz.com) - Minimal,
+  content-first design
 - **Paul Graham**: [paulgraham.com](http://paulgraham.com) - Typography-focused
 - **Cassidy Williams**: [cassidoo.co](https://cassidoo.co) - Personal branding
 
 ### Related Projects
-- **Astro Blog Template**: [github.com/withastro/astro/tree/main/examples/blog](https://github.com/withastro/astro/tree/main/examples/blog)
-- **Tailwind Typography**: [tailwindcss.com/docs/typography-plugin](https://tailwindcss.com/docs/typography-plugin)
+
+- **Astro Blog Template**:
+  [github.com/withastro/astro/tree/main/examples/blog](https://github.com/withastro/astro/tree/main/examples/blog)
+- **Tailwind Typography**:
+  [tailwindcss.com/docs/typography-plugin](https://tailwindcss.com/docs/typography-plugin)
 
 ---
 
@@ -653,7 +710,9 @@ This is a personal website, but suggestions are welcome!
 
 1. **Report bugs** - Open an issue on GitHub
 2. **Suggest features** - Describe your use case
-3. **Share feedback** - Reach out on [LinkedIn](https://www.linkedin.com/in/andrewscottwoods/) or [X](https://twitter.com/iamandywoods)
+3. **Share feedback** - Reach out on
+   [LinkedIn](https://www.linkedin.com/in/andrewscottwoods/) or
+   [X](https://twitter.com/iamandywoods)
 
 ---
 
@@ -662,9 +721,12 @@ This is a personal website, but suggestions are welcome!
 This project uses a **dual licensing structure**:
 
 ### 🔧 Code: MIT License
-All source code, build scripts, and configuration files are licensed under the **MIT License**.
+
+All source code, build scripts, and configuration files are licensed under the
+**MIT License**.
 
 **You can**:
+
 - ✅ Use the code in personal or commercial projects
 - ✅ Modify and redistribute freely
 - ✅ Build your own blog using this codebase
@@ -673,38 +735,50 @@ All source code, build scripts, and configuration files are licensed under the *
 **See**: [LICENSE-CODE.md](LICENSE-CODE.md) for full details.
 
 ### ✍️ Content: Creative Commons BY-NC 4.0
-All blog posts, articles, and original media are licensed under **CC BY-NC 4.0**.
+
+All blog posts, articles, and original media are licensed under **CC BY-NC
+4.0**.
 
 **You can**:
+
 - ✅ Quote with attribution (include my name and link back)
 - ✅ Translate with attribution (non-commercial)
 - ✅ Share on social media with credit
 - ✅ Use in educational settings
 
 **You need permission for**:
+
 - ⚠️ Commercial republishing (full articles in paid publications)
 - ⚠️ Including in commercial courses or paid products
 
-**Contact for permission**: [LinkedIn](https://www.linkedin.com/in/andrewscottwoods/)
+**Contact for permission**:
+[LinkedIn](https://www.linkedin.com/in/andrewscottwoods/)
 
 **See**: [LICENSE-CONTENT.md](LICENSE-CONTENT.md) for full details.
 
 ### 🔗 Third-Party Content
-External content (Cockroach Labs posts, SIGMOD papers) retains its original copyright. These are linked, not republished. See their respective sources for licensing.
+
+External content (Cockroach Labs posts, SIGMOD papers) retains its original
+copyright. These are linked, not republished. See their respective sources for
+licensing.
 
 ### 📋 Full Licensing Guide
-**See**: [LICENSE.md](LICENSE.md) for complete dual licensing explanation, directory structure guide, and FAQs.
+
+**See**: [LICENSE.md](LICENSE.md) for complete dual licensing explanation,
+directory structure guide, and FAQs.
 
 ### How to Properly Attribute Content
 
 When quoting blog posts:
 
 **Simple attribution**:
+
 ```markdown
 Source: Andy Woods, "Article Title" (andywoods.me)
 ```
 
 **With link**:
+
 ```markdown
 As [Andy Woods](https://andywoods.me/blog/article-slug) explains:
 
@@ -712,6 +786,7 @@ As [Andy Woods](https://andywoods.me/blog/article-slug) explains:
 ```
 
 **In academic papers**:
+
 ```
 Woods, A. (2024). "Article Title". andywoods.me.
 Retrieved from https://andywoods.me/blog/article-slug
@@ -719,13 +794,18 @@ Retrieved from https://andywoods.me/blog/article-slug
 
 ### Special Note: AI Training
 
-Despite the "NonCommercial" content license, **I explicitly permit AI training** on both code and content, including for commercial AI models.
+Despite the "NonCommercial" content license, **I explicitly permit AI training**
+on both code and content, including for commercial AI models.
 
-**See**: [README-AI-POLICY.md](README-AI-POLICY.md) for complete AI training policy.
+**See**: [README-AI-POLICY.md](README-AI-POLICY.md) for complete AI training
+policy.
 
 ### External Blog Posts
 
-**Important**: Blog posts I wrote for Cockroach Labs that are linked on this site retain their original copyright (© Cockroach Labs). They are referenced here for portfolio purposes but are not relicensed under CC BY-NC 4.0. For licensing those posts, contact Cockroach Labs directly.
+**Important**: Blog posts I wrote for Cockroach Labs that are linked on this
+site retain their original copyright (© Cockroach Labs). They are referenced
+here for portfolio purposes but are not relicensed under CC BY-NC 4.0. For
+licensing those posts, contact Cockroach Labs directly.
 
 ---
 
@@ -734,26 +814,35 @@ Despite the "NonCommercial" content license, **I explicitly permit AI training**
 This project was built using several excellent open-source tools and services:
 
 - **[Astro](https://astro.build)** - Content-focused static site generator
-- **[Claude Code](https://claude.com/claude-code)** - AI-powered development assistant
+- **[Claude Code](https://claude.com/claude-code)** - AI-powered development
+  assistant
 - **[Tailwind CSS](https://tailwindcss.com)** - Utility-first CSS framework
-- **[Stable Diffusion](https://stability.ai/stable-diffusion)** - Blog hero images generated using AI
+- **[Stable Diffusion](https://stability.ai/stable-diffusion)** - Blog hero
+  images generated using AI
 - **[Vercel](https://vercel.com)** - Deployment and hosting platform
 - **[Vitest](https://vitest.dev)** - Testing framework
 - **[TypeScript](https://www.typescriptlang.org)** - Type-safe JavaScript
 
-**Hero Images**: All blog post hero images are AI-generated using Stable Diffusion to create custom artwork that complements each article's theme.
+**Hero Images**: All blog post hero images are AI-generated using Stable
+Diffusion to create custom artwork that complements each article's theme.
 
-**Development**: Built in under 4 hours using AI-native development practices with Claude Code as a pair programmer.
+**Development**: Built in under 4 hours using AI-native development practices
+with Claude Code as a pair programmer.
 
 ---
 
 ## 👨‍💻 About the Author
 
-**Andy Woods** is Director of Product Management at Cockroach Labs, where he leads AI integration, pricing strategy, and ecosystem partnerships. He scaled CockroachDB from pre-revenue to $100M+ ARR and now pioneers AI-powered developer tools.
+**Andy Woods** is Director of Product Management at Cockroach Labs, where he
+leads AI integration, pricing strategy, and ecosystem partnerships. He scaled
+CockroachDB from pre-revenue to $100M+ ARR and now pioneers AI-powered developer
+tools.
 
-**Expertise**: AI/ML infrastructure, distributed databases, enterprise SaaS, product-led growth
+**Expertise**: AI/ML infrastructure, distributed databases, enterprise SaaS,
+product-led growth
 
 **Connect**:
+
 - 🔗 LinkedIn: [andrewscottwoods](https://www.linkedin.com/in/andrewscottwoods/)
 - 🐦 X/Twitter: [@iamandywoods](https://twitter.com/iamandywoods)
 - 💻 GitHub: [awoods187](https://github.com/awoods187)
@@ -762,4 +851,4 @@ This project was built using several excellent open-source tools and services:
 
 **Built with ❤️ using [Astro](https://astro.build)**
 
-*Last updated: 2025-01-21*
+_Last updated: 2025-01-21_
