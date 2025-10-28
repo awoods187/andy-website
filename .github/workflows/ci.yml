@@ -119,7 +119,7 @@ jobs:
     strategy:
       fail-fast: false # Continue testing all versions even if one fails
       matrix:
-        node-version: ['18', '20', '22']
+        node-version: ['20', '22'] # Node 18 removed: vitest 4.x requires Node 18.18+
 
     steps:
       - name: Checkout code
