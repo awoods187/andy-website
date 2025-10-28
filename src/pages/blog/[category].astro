@@ -47,15 +47,17 @@ export async function getStaticPaths() {
   const personalPosts = await getCollection('blog');
   const publishedPersonalPosts: PersonalPost[] = personalPosts
     .filter((post) => !post.data.draft)
-    .map((post: CollectionEntry<'blog'>): PersonalPost => ({
-      title: post.data.title,
-      date: post.data.date,
-      excerpt: post.data.excerpt,
-      tags: post.data.tags,
-      image: post.data.image || null,
-      slug: post.slug,
-      source: 'personal' as const,
-    }));
+    .map(
+      (post: CollectionEntry<'blog'>): PersonalPost => ({
+        title: post.data.title,
+        date: post.data.date,
+        excerpt: post.data.excerpt,
+        tags: post.data.tags,
+        image: post.data.image || null,
+        slug: post.slug,
+        source: 'personal' as const,
+      })
+    );
 
   // Convert CRL posts to same format
   const crlPostsFormatted: ExternalPost[] = crlPosts.map(
@@ -91,9 +93,7 @@ export async function getStaticPaths() {
   ].sort((a, b) => b.date.valueOf() - a.date.valueOf());
 
   // Get all unique tags
-  const allTags: string[] = Array.from(
-    new Set(allPosts.flatMap((post: Post) => post.tags))
-  ).sort();
+  const allTags: string[] = Array.from(new Set(allPosts.flatMap((post: Post) => post.tags))).sort();
 
   // Define categories to generate
   const categories = [
