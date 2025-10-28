@@ -96,11 +96,27 @@
       },
       "rules": {
         // Relax some rules for Astro components
+        // Astro's content collections and zod schemas have complex types that ESLint can't infer
         "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/no-unsafe-assignment": "off",
+        "@typescript-eslint/no-unsafe-call": "off",
+        "@typescript-eslint/no-unsafe-member-access": "off",
         "@typescript-eslint/no-unsafe-return": "off",
+        "@typescript-eslint/no-unsafe-argument": "off",
+        "@typescript-eslint/no-redundant-type-constituents": "off",
         "@typescript-eslint/no-misused-promises": "off",
         "arrow-body-style": "off",
         "no-console": "off"
+      }
+    },
+    // Content config (Zod schemas)
+    {
+      "files": ["src/content/config.ts"],
+      "rules": {
+        // Zod has complex types that ESLint can't properly infer
+        "@typescript-eslint/no-unsafe-assignment": "off",
+        "@typescript-eslint/no-unsafe-call": "off",
+        "@typescript-eslint/no-unsafe-member-access": "off"
       }
     },
     // Test files
