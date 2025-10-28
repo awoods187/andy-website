@@ -206,10 +206,10 @@ describe('Blog Image Validation', () => {
 
       if (orphanedImages.length > 0) {
         console.warn(
-          `\n⚠️  Found ${orphanedImages.length} orphaned image(s) in public/images/blog/:\n` +
-            orphanedImages.map((img) => `   - ${img}`).join('\n') +
-            '\n\nThese images are not referenced by any blog post.\n' +
-            'Consider removing them or updating blog posts to reference them.\n'
+          `\n⚠️  Found ${orphanedImages.length} orphaned image(s) in public/images/blog/:\n${orphanedImages
+            .map((img) => `   - ${img}`)
+            .join('\n')}\n\nThese images are not referenced by any blog post.\n` +
+            `Consider removing them or updating blog posts to reference them.\n`
         );
       }
 
