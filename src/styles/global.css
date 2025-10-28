@@ -110,3 +110,8 @@ body {
   border-radius: 0.5rem;
   margin: 2rem 0;
 }
+
+/* Ensure whitespace-nowrap is always available for badges */
+.whitespace-nowrap {
+  white-space: nowrap;
+}

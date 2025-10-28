@@ -72,6 +72,7 @@ describe('Security Hardening', () => {
       // Should NOT have unrestricted https: or http: wildcard
       // Should have specific domains
       expect(cspHeader.value).toMatch(/img-src[^;]*cockroachlabs\.com/);
+      expect(cspHeader.value).toMatch(/img-src[^;]*ctfassets\.net/);
     });
 
     it('CSP should block object and media elements', () => {
