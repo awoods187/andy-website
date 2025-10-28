@@ -119,6 +119,16 @@
         "@typescript-eslint/no-unsafe-member-access": "off"
       }
     },
+    // RSS feed (uses Astro content collections)
+    {
+      "files": ["src/pages/rss.xml.ts"],
+      "rules": {
+        // Astro's content collections have complex types that ESLint can't infer
+        "@typescript-eslint/no-unsafe-assignment": "off",
+        "@typescript-eslint/no-unsafe-call": "off",
+        "@typescript-eslint/no-unsafe-member-access": "off"
+      }
+    },
     // Test files
     {
       "files": ["tests/**/*.ts", "tests/**/*.test.ts", "**/*.spec.ts"],
