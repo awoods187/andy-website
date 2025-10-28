@@ -3,16 +3,18 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import SubscribeForm from '../../components/SubscribeForm.astro';
 
+type BlogPost = CollectionEntry<'blog'>;
+
 export async function getStaticPaths() {
-  const posts = await getCollection('blog');
-  return posts.map((post) => ({
+  const posts: BlogPost[] = await getCollection('blog');
+  return posts.map((post: BlogPost) => ({
     params: { slug: post.slug },
     props: { post },
   }));
 }
 
 interface Props {
-  post: CollectionEntry<'blog'>;
+  post: BlogPost;
 }
 
 const { post } = Astro.props;
@@ -20,26 +22,26 @@ const { Content } = await post.render();
 
 // Calculate reading time (average reading speed: 200 words/min)
 const wordsPerMinute = 200;
-const textContent = post.body;
-const wordCount = textContent.split(/\s+/g).length;
-const readingTime = Math.ceil(wordCount / wordsPerMinute);
+const textContent: string = post.body;
+const wordCount: number = textContent.split(/\s+/g).length;
+const readingTime: number = Math.ceil(wordCount / wordsPerMinute);
 
 // Format date
-const formattedDate = new Intl.DateTimeFormat('en-US', {
+const formattedDate: string = new Intl.DateTimeFormat('en-US', {
   year: 'numeric',
   month: 'long',
   day: 'numeric',
 }).format(post.data.date);
 
 // Get all posts for prev/next navigation
-const allPosts = await getCollection('blog');
-const sortedPosts = allPosts
-  .filter((p) => !p.data.draft)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const allPosts: BlogPost[] = await getCollection('blog');
+const sortedPosts: BlogPost[] = allPosts
+  .filter((p: BlogPost) => !p.data.draft)
+  .sort((a: BlogPost, b: BlogPost) => b.data.date.valueOf() - a.data.date.valueOf());
 
-const currentIndex = sortedPosts.findIndex((p) => p.slug === post.slug);
-const prevPost = currentIndex < sortedPosts.length - 1 ? sortedPosts[currentIndex + 1] : null;
-const nextPost = currentIndex > 0 ? sortedPosts[currentIndex - 1] : null;
+const currentIndex: number = sortedPosts.findIndex((p: BlogPost) => p.slug === post.slug);
+const prevPost: BlogPost | null = currentIndex < sortedPosts.length - 1 ? sortedPosts[currentIndex + 1] : null;
+const nextPost: BlogPost | null = currentIndex > 0 ? sortedPosts[currentIndex - 1] : null;
 ---
 
 <BaseLayout title={post.data.title} description={post.data.excerpt}>

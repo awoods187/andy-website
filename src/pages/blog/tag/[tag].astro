@@ -3,22 +3,24 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import BlogPostCard from '../../../components/BlogPostCard.astro';
 
+type BlogPost = CollectionEntry<'blog'>;
+
 interface Props {
-  posts: CollectionEntry<'blog'>[];
+  posts: BlogPost[];
   tag: string;
 }
 
 export async function getStaticPaths() {
-  const allPosts = await getCollection('blog');
-  const publishedPosts = allPosts.filter((post) => !post.data.draft);
+  const allPosts: BlogPost[] = await getCollection('blog');
+  const publishedPosts: BlogPost[] = allPosts.filter((post: BlogPost) => !post.data.draft);
 
   // Get all unique tags
-  const uniqueTags: string[] = [...new Set(publishedPosts.flatMap((post) => post.data.tags))];
+  const uniqueTags: string[] = [...new Set(publishedPosts.flatMap((post: BlogPost) => post.data.tags))];
 
   return uniqueTags.map((tag: string) => {
-    const filteredPosts = publishedPosts
-      .filter((post) => post.data.tags.includes(tag))
-      .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+    const filteredPosts: BlogPost[] = publishedPosts
+      .filter((post: BlogPost) => post.data.tags.includes(tag))
+      .sort((a: BlogPost, b: BlogPost) => b.data.date.valueOf() - a.data.date.valueOf());
 
     return {
       params: { tag },
@@ -29,7 +31,6 @@ export async function getStaticPaths() {
 
 const { posts, tag } = Astro.props;
 const capitalizedTag: string = tag.charAt(0).toUpperCase() + tag.slice(1);
-type BlogPost = CollectionEntry<'blog'>;
 ---
 
 <BaseLayout

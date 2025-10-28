@@ -6,10 +6,12 @@
  */
 
 import rss from '@astrojs/rss';
-import { getCollection } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
 import type { APIContext } from 'astro';
 import { crlPosts } from '../data/crl-posts';
 import { publications } from '../data/publications';
+
+type BlogPost = CollectionEntry<'blog'>;
 
 /**
  * GET handler for RSS feed
@@ -19,15 +21,15 @@ import { publications } from '../data/publications';
  */
 export async function GET(context: APIContext): Promise<Response> {
   // Get all blog posts from the content collection
-  const blog = await getCollection('blog');
+  const blog: BlogPost[] = await getCollection('blog');
 
   // Filter out drafts from personal posts
-  const publishedPosts = blog.filter((post) => !post.data.draft);
+  const publishedPosts: BlogPost[] = blog.filter((post: BlogPost) => !post.data.draft);
 
   // Combine all content sources
   const allPosts = [
     // Personal blog posts
-    ...publishedPosts.map((post) => ({
+    ...publishedPosts.map((post: BlogPost) => ({
       title: post.data.title,
       description: post.data.excerpt,
       pubDate: post.data.date,
