@@ -102,7 +102,7 @@ describe('FOUC Prevention', () => {
         const headMatch = indexHtml.match(/<head>[\s\S]*?<\/head>/);
         expect(headMatch).toBeTruthy();
         expect(headMatch![0]).toContain('stylesheet');
-      } catch (error) {
+      } catch (_error) {
         // If dist doesn't exist, skip this test
         console.log('Skipping built HTML test - run npm run build first');
       }
