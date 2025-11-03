@@ -45,7 +45,7 @@ describe('Navigation Redirect Prevention', () => {
           files.push(fullPath);
         }
       }
-    } catch (error) {
+    } catch (_error) {
       // Directory doesn't exist or can't be read
     }
 
