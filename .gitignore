@@ -41,4 +41,4 @@ dist/
 build/
 
 # Lighthouse reports
-lighthouse-report.*
+reports/lighthouse/

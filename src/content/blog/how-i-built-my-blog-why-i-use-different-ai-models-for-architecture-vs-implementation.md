@@ -23,7 +23,7 @@ Most tech professionals publish in multiple places:
 - Company blog for product announcements and technical deep-dives
 - External publications for broader reach
 
-The standard approaches all failed:
+Each platform is tailored for a specific type of content and caters to a different audience.
 
 **Platform limitations:**
 
