@@ -20,7 +20,7 @@ import { join } from 'path';
 
 describe('Security Hardening', () => {
   describe('Vercel Security Headers', () => {
-    const vercelConfigPath = join(process.cwd(), 'vercel.json');
+    const vercelConfigPath = join(process.cwd(), 'config', 'vercel.json');
 
     it('vercel.json should exist', () => {
       expect(existsSync(vercelConfigPath)).toBe(true);
@@ -360,7 +360,7 @@ describe('Security Hardening', () => {
     });
 
     it('should fail if CSP is removed from vercel.json', () => {
-      const vercelConfigPath = join(process.cwd(), 'vercel.json');
+      const vercelConfigPath = join(process.cwd(), 'config', 'vercel.json');
       const config = JSON.parse(readFileSync(vercelConfigPath, 'utf-8'));
 
       const headers = config.headers[0].headers;

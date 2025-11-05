@@ -18,8 +18,8 @@
     "type-check": "astro sync && tsc --noEmit",
     "validate:yaml": "node scripts/validate-yaml-frontmatter.mjs",
     "validate": "npm run format:check && npm run lint && npm run type-check && npm run validate:yaml && npm run test",
-    "lighthouse": "lighthouse https://andywoods.me/blog/hybrid-blog-system-2025 --output=json --output=html --output-path=./lighthouse-report --chrome-flags=\"--headless\" --only-categories=performance,accessibility,best-practices,seo",
-    "lighthouse:view": "open lighthouse-report.report.html",
+    "lighthouse": "lighthouse https://andywoods.me/blog/hybrid-blog-system-2025 --output=json --output=html --output-path=./reports/lighthouse/lighthouse-report --chrome-flags=\"--headless\" --only-categories=performance,accessibility,best-practices,seo",
+    "lighthouse:view": "open reports/lighthouse/lighthouse-report.report.html",
     "prepare": "command -v pre-commit > /dev/null && pre-commit install || echo 'pre-commit not installed, skipping hook setup'"
   },
   "dependencies": {
@@ -30,6 +30,7 @@
     "tailwindcss": "^4.1.14"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.5",
     "@types/js-yaml": "^4.0.9",
     "@typescript-eslint/eslint-plugin": "^8.46.2",
     "@typescript-eslint/parser": "^8.46.2",
