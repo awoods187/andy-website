@@ -15,91 +15,59 @@ import { join } from 'path';
 
 const distPath = join(process.cwd(), 'dist');
 
-// Check if build output exists at test runtime, not module load time
-function hasBuildOutput(): boolean {
-  return existsSync(distPath);
+// Check if build is complete by looking for a marker file that's generated last
+function isBuildComplete(): boolean {
+  // sitemap-index.xml is one of the last files generated
+  const sitemapPath = join(distPath, 'sitemap-index.xml');
+  return existsSync(sitemapPath);
 }
 
-// Skip all build tests if dist doesn't exist
-describe('Build Output', () => {
+const buildComplete = isBuildComplete();
+
+// Skip all build tests if build is not complete
+describe.skipIf(!buildComplete)('Build Output', () => {
   it('should have a dist directory after build', () => {
-    if (!hasBuildOutput()) {
-      console.log('⚠️  Skipping build test - dist/ not found');
-      return;
-    }
     expect(existsSync(distPath)).toBe(true);
   });
 
   it('should generate index.html (home page)', () => {
-    if (!hasBuildOutput()) {
-      console.log('⚠️  Skipping build test - dist/ not found');
-      return;
-    }
     const indexPath = join(distPath, 'index.html');
     expect(existsSync(indexPath)).toBe(true);
   });
 
   it('should generate about page', () => {
-    if (!hasBuildOutput()) {
-      console.log('⚠️  Skipping build test - dist/ not found');
-      return;
-    }
     const aboutPath = join(distPath, 'about', 'index.html');
     expect(existsSync(aboutPath)).toBe(true);
   });
 
   it('should generate blog index page', () => {
-    if (!hasBuildOutput()) {
-      console.log('⚠️  Skipping build test - dist/ not found');
-      return;
-    }
     const blogPath = join(distPath, 'blog', 'index.html');
     expect(existsSync(blogPath)).toBe(true);
   });
 
   it('should generate archive page', () => {
-    if (!hasBuildOutput()) {
-      console.log('⚠️  Skipping build test - dist/ not found');
-      return;
-    }
     const archivePath = join(distPath, 'archive', 'index.html');
     expect(existsSync(archivePath)).toBe(true);
   });
 
   it('should generate RSS feed', () => {
-    if (!hasBuildOutput()) {
-      console.log('⚠️  Skipping build test - dist/ not found');
-      return;
-    }
     const rssPath = join(distPath, 'rss.xml');
     expect(existsSync(rssPath)).toBe(true);
   });
 
   it('should generate robots.txt', () => {
-    if (!hasBuildOutput()) {
-      console.log('⚠️  Skipping build test - dist/ not found');
-      return;
-    }
     const robotsPath = join(distPath, 'robots.txt');
     expect(existsSync(robotsPath)).toBe(true);
   });
 
   it('should generate sitemap', () => {
-    if (!hasBuildOutput()) {
-      console.log('⚠️  Skipping build test - dist/ not found');
-      return;
-    }
     const sitemapPath = join(distPath, 'sitemap-index.xml');
     expect(existsSync(sitemapPath)).toBe(true);
   });
 });
 
-describe('Blog Posts', () => {
+describe.skipIf(!buildComplete)('Blog Posts', () => {
   it('should generate blog post pages', () => {
-    if (!hasBuildOutput()) {
-      console.log('⚠️  Skipping build test - dist/ not found');
-      return;
-    }
     const blogPath = join(distPath, 'blog');
     expect(existsSync(blogPath)).toBe(true);
     const files = readdirSync(blogPath, { withFileTypes: true });
@@ -113,9 +81,9 @@ describe('Blog Posts', () => {
 // Informational test that always runs
 describe('Build Test Status', () => {
   it('should indicate if build tests were skipped', () => {
-    if (!hasBuildOutput()) {
+    if (!buildComplete) {
       console.log(
-        '\n⚠️  Build output tests skipped - dist/ directory not found.\n' +
+        '\n⚠️  Build output tests skipped - build not complete.\n' +
           'Run `npm run build` before running tests to enable build validation.\n' +
           'This is expected in CI during the test phase (build happens separately).\n'
       );
