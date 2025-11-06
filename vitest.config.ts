@@ -37,6 +37,7 @@ export default defineConfig({
         '**/*.d.ts',
         '**/types.ts',
         'public/',
+        '**/*.tmp.*', // Exclude temp files
       ],
 
       // Coverage thresholds - currently disabled to establish baseline
