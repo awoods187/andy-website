@@ -54,14 +54,15 @@ describe('Blog Formatting Consistency', () => {
       }
     });
 
-    it('should use object-fit: contain to preserve aspect ratio', () => {
-      // Images should use object-fit: contain to prevent squashing/cropping
-      expect(templateContent).toContain('object-fit: contain');
+    it('should have proper aspect ratio dimensions for images', () => {
+      // Images should have explicit width and height for aspect ratio
+      expect(templateContent).toContain('width="1200"');
+      expect(templateContent).toContain('height="800"');
     });
 
-    it('should have max-height constraint for images', () => {
-      // Images should have max-height to prevent them from being too large
-      expect(templateContent).toContain('max-height: 400px');
+    it('should constrain image width with max-width', () => {
+      // Images should have max-width to prevent them from being too large
+      expect(templateContent).toContain('max-w-md');
     });
 
     it('should have fetchpriority="high" for hero images', () => {
