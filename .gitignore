@@ -42,3 +42,6 @@ build/
 
 # Lighthouse reports
 reports/lighthouse/
+
+# Test coverage reports
+coverage/

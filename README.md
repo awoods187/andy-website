@@ -5,7 +5,7 @@ zero-JS architecture, and professional SEO optimization built with Astro.
 
 ## 📊 Project Status
 
-![Build](https://img.shields.io/github/actions/workflow/status/awoods187/andy-website/test.yml?branch=main)
+![Build](https://img.shields.io/github/actions/workflow/status/awoods187/andy-website/ci.yml?branch=main)
 ![License](https://img.shields.io/badge/license-Dual%20MIT%2FCC--BY--NC-blue)
 ![Maintenance](https://img.shields.io/badge/maintenance-active-brightgreen)
 
@@ -14,6 +14,9 @@ zero-JS architecture, and professional SEO optimization built with Astro.
 ---
 
 ## 🎯 Why This Exists
+
+This is a repo for my personal website: andywoods.me. It's also an open-source
+repo for other professionals to build their own blogs.
 
 **Problem**: Tech professionals publish across multiple platforms (personal
 blog, company blog, publications), creating fragmented portfolios and duplicate
@@ -221,12 +224,16 @@ npm run test:watch    # Watch mode
 npm run test:coverage # Coverage report
 ```
 
-**Current Coverage**: 15/15 tests passing
+**Current Coverage**: 349/349 tests passing across 17 test suites
 
-- Build output validation
+- Build output validation (30 pages)
 - Content schema validation
 - RSS feed generation
-- Page generation verification
+- Open Graph meta tags validation
+- Security headers and CSP
+- Accessibility (WCAG compliance)
+- Blog formatting consistency
+- Dependency health checks
 
 ---
 
