@@ -295,11 +295,9 @@ Meets WCAG AA standards:
 ## 🐛 Known Limitations
 
 1. **MDX Only**: Component requires `.mdx` files (not `.md`)
-
    - **Workaround**: Rename `.md` → `.mdx` and add import
 
 2. **Manual Import**: Must import component in each post
-
    - **Reason**: Astro doesn't support global components in content collections
    - **Impact**: One extra line per post that uses it
 
