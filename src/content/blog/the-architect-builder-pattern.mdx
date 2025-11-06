@@ -1,0 +1,528 @@
+---
+title: 'The Architect-Builder Pattern: A Production Workflow for AI Development'
+date: 2025-11-06
+excerpt: 'Three-phase AI workflow that separates strategic design from tactical execution. First-time success rates jumped from 45% to 82%, implementation time dropped 62%, and post-deployment bugs fell 80%.'
+tags:
+  [
+    ai,
+    claude-code,
+    software-development,
+    architecture,
+    workflows,
+    productivity,
+    multi-model-orchestration,
+    ai-infrastructure,
+    prompt-engineering,
+  ]
+image: /images/blog/the-architect-builder-pattern-hero.jpg
+imageSource: 'AI-generated using Stable Diffusion'
+license: 'CC BY-NC 4.0'
+copyright: '© 2025 Andy Woods'
+attribution: 'If you quote or translate this post, please provide attribution with a link back to the original at andywoods.me'
+---
+
+import MarkdownDocument from '../../components/MarkdownDocument.astro';
+
+Claude Code amazes me with its power. It also frustrates me with its limitations.
+
+It built complex implementations fast: a [500-line Python scraper](/blog/how-i-built-my-blog-why-i-use-different-ai-models-for-architecture-vs-implementation#example-1-content-scraper-5-minutes) in 5 minutes. Yet it misunderstood simple questions, treating them as implementation requests. "How does this work?" would trigger "Let me change that for you!"
+
+It jumped ahead with assumptions ("if you want x, you must want y too"), misinterpreted ambiguous instructions (turns out English is lossy; coding languages exist for a reason), and sometimes produced code a junior developer wouldn't ship.
+
+It often implemented partial solutions (apply a fix to one file but not all relevant files) and fail to finish without additional instructions. Sometimes bugs only appeared in CI—or worse, production.
+
+## Attempt 1: Two Claude Code Windows
+
+I tried separating design from execution using two Claude Code windows: one for planning, one for implementation. Better, but still messy. Context wasn't always right. I wanted to iterate on designs without dropping into .md files. And because Claude Code uses Sonnet 4.5, I couldn't always get the deep reasoning I needed for complex architectural decisions.
+
+## Attempt 2: Opus for Design
+
+Then I switched to Opus in a separate window for design. Much better. Superior reasoning, easier iteration with Google Docs. But it lacked codebase context, forcing me to upload snippets constantly.
+
+## The Solution: Three-Phase Workflow
+
+Finally, I landed on a three-phase approach: design in Opus, validate against the codebase in Claude Code, implement in a fresh Claude Code session.
+
+Claude's outputs matched my expectations every time. What often took 5+ turns now only took 1.
+
+## The Pattern Emerges
+
+Around the same time, I noticed the pattern emerging elsewhere. In my product leadership Slack ([Supra](https://www.joinsupra.com/)), fellow PMs shared similar workflows in our time-saving-ai-workflow channel. One PM described moving Claude Code from "fast and ugly" to "well-architected" by having it document current architecture, feeding that to Claude in research mode for strategic planning, then back to Claude Code for execution.
+
+Colleagues share it. PMs discuss it in Slack. Engineers adopt it independently. There's a growing consensus: this pattern works.
+
+I call it the [Architect-Builder Pattern](https://github.com/awoods187/PM-Prompt-Patterns/tree/main/prompts/product-strategy/architect-builder-pattern).
+
+## The Problem: Context Loss and Premature Solutions
+
+AI coding assistants fail in two ways: they lose context and they jump to solutions. This results in inconsistent code, integration issues, and costly rewrites.
+
+## The Solution: Three-Phase Separation of Concerns
+
+The [Architect-Builder Pattern](https://github.com/awoods187/PM-Prompt-Patterns/tree/main/prompts/product-strategy/architect-builder-pattern) uses three distinct phases with clear boundaries:
+
+### Phase 1: Strategic Architecture (The Architect)
+
+- **Purpose**: High-level design and architectural decisions
+- **Model**: Claude Opus (or equivalent reasoning-focused model)
+- **Focus**: The "why" and "what" of your solution
+- **Output**: Detailed architecture blueprint with clear specifications
+
+```markdown
+I need to design [SYSTEM]. Provide:
+
+1. Architecture Blueprint (components, data flow, interfaces)
+2. Implementation Checklist (critical path vs nice-to-have)
+3. Validation Criteria (tests, benchmarks, edge cases)
+4. Technical Instructions (files, dependencies, config)
+
+Context: [constraints, tech stack, team size]
+Principles: Be concrete, show don't tell, define boundaries
+```
+
+**💡 Phase 1 Tips:**
+
+> **Iterate first:** "Help me improve this prompt, but don't execute it yet"
+>
+> **Design partner mode:** "Ask clarifying questions before we begin"
+>
+> **Pattern library:** "What are the best practices for [X]? Include real-world examples"
+
+### Phase 2: Pattern Validation (The Validator)
+
+- **Purpose**: Catch integration issues before implementation
+- **Model**: Claude Code with full codebase context
+- **Focus**: Align the design to your context
+- **Output**: Detailed implementation prompt
+
+```markdown
+Validate this design against the codebase:
+[Paste Phase 1 design]
+
+Check:
+
+1. Pattern Consistency (alignment with existing code)
+2. Dependency Analysis (blast radius, hidden coupling)
+3. Risk Assessment (what breaks, rollback plan)
+4. Optimization (reusable components, simplifications)
+
+Output: Refined plan with file paths, patterns to follow, test strategy
+```
+
+### Phase 3: Autonomous Execution (The Builder)
+
+- **Purpose**: Clean implementation without context pollution
+- **Model**: Fresh Claude Code session
+- **Focus**: Clean execution
+- **Output**: Implemented new features and functionality
+
+```markdown
+Implement this validated design:
+[Paste Phase 2 output]
+
+Parameters: Mode [careful/standard/fast], Testing [unit/integration/e2e]
+
+Order:
+
+1. Core Infrastructure → Checkpoint: compilation
+2. Business Logic → Checkpoint: unit tests
+3. UI/API Layer → Checkpoint: integration tests
+4. Full test suite → Checkpoint: all green
+
+Proceed autonomously but pause at checkpoints.
+```
+
+📋 **Full templates with detailed instructions and examples**: [GitHub](https://github.com/awoods187/PM-Prompt-Patterns/tree/main/prompts/product-strategy/architect-builder-pattern)
+
+## Real-World Example: Adding Consumption into Product Health Analysis
+
+I'm building an AI-powered customer intelligence platform that automatically
+collects ~5,000 monthly signals from 14+ sources (GitHub, Slack, Salesforce,
+Zendesk, etc.) and generates weekly product health reports in 20 seconds using
+Claude Opus and RAG. It helps product teams identify at-risk ARR, track customer
+feedback patterns, and make data-driven decisions across, reducing report
+creation time from days to minutes. I'll share more about this app in the future
+(and open-source a version of it).
+
+I added product consumption signals using this pattern:
+
+## Phase 1: Architectural Design (Opus)
+
+```markdown
+I'm building a customer intelligence platform that collects signals from multiple sources (GitHub, Slack, Salesforce, etc.) to generate product health reports. I need to add consumption/usage signals as a new data source to better understand customer engagement patterns.
+
+Current architecture:
+
+- Signal collectors run on schedule to gather data from various APIs
+- Data is normalized and stored for analysis
+- RAG pipeline processes signals to generate insights
+
+I want to add consumption metrics that track:
+
+- Customer resource usage patterns
+- Credit consumption trends
+
+Can you help me design the architecture for this consumption signal collector? I need:
+
+1. Data collection strategy: How should I structure the collection of consumption metrics? What patterns should I follow to ensure consistency with my existing collectors?
+2. Schema design: What key metrics and dimensions should I capture? How should I model the data for both real-time monitoring and historical trend analysis?
+3. Integration approach: How should this new collector integrate with my existing signal processing pipeline?
+4. Performance considerations: What are the key architectural decisions I need to make around caching, batching, and rate limiting when dealing with potentially large volumes of consumption data?
+5. Flexibility: How can I design this to easily adapt to different cloud providers or consumption models in the future?
+
+Please provide a high-level architectural design with clear separation of concerns and extensibility in mind.
+```
+
+The design took 30 minutes and three iterations. Manual research would have taken multiple days.
+
+## Phase 2: Codebase Validation (Claude Code)
+
+```markdown
+Analyze our codebase and validate this design:
+
+[Pasted Opus design]
+```
+
+Validation caught 10+ major issues but I'll highlight three:
+
+### 1. Framework Integration Gap
+
+The design proposed creating a new abstract base class hierarchy:
+
+```python
+# ❌ WRONG - Design proposed:
+class ConsumptionCollector(ABC):
+    @abstractmethod
+    async def collect_metrics(self) -> List[ConsumptionSignal]:
+        pass
+```
+
+But the codebase already had an established pattern:
+
+```python
+# ✅ CORRECT - Existing pattern:
+class BaseCollector(ABC):
+    @abstractmethod
+    async def collect(self) -> List[Signal]:
+        pass
+
+    def _build_signal(self, signal_data: dict) -> Signal:
+        """Standardized signal building method"""
+        pass
+```
+
+### 2. Database Schema Conflicts
+
+Design proposed new tables:
+
+```sql
+-- ❌ WRONG - Would create parallel storage:
+CREATE TABLE consumption_signals (
+    id UUID PRIMARY KEY,
+    customer_id TEXT,
+    provider TEXT,
+    metric_type TEXT,
+    value DECIMAL
+);
+
+CREATE TABLE consumption_aggregates (
+    period TEXT,
+    aggregated_value DECIMAL
+);
+```
+
+But existing schema already supported this:
+
+```sql
+-- ✅ CORRECT - Existing unified schema:
+CREATE TABLE signals (
+    id UUID PRIMARY KEY,
+    customer_id TEXT,
+    source TEXT,  -- Already handles provider tracking
+    signal_type TEXT,  -- Can be 'consumption'
+    severity TEXT,
+    metadata JSONB,  -- Flexible storage for consumption data
+    created_at TIMESTAMP,
+    occurred_at TIMESTAMP
+)
+```
+
+### 3. Testing Strategy Absent
+
+Design had no testing specifications, but codebase had patterns:
+
+```python
+# ✅ CORRECT - Required test structure:
+class TestSnowflakeConsumptionCollector:
+    @pytest.fixture
+    def mock_snowflake_connection():
+        with patch('snowflake.connector.connect') as mock:
+            mock_cursor = Mock()
+            mock_cursor.fetchall.return_value = [
+                {
+                    'START_TIME': '2024-01-15T10:00:00Z',
+                    'WAREHOUSE_NAME': 'COMPUTE_WH',
+                    'CREDITS_USED': 23.5
+                }
+            ]
+            yield mock
+
+    async def test_customer_mapping_not_found(self, mock_db):
+        """Test fallback when no mapping exists"""
+        collector = SnowflakeConsumptionCollector()
+        # Should use account_id as customer_id with warning
+
+    async def test_retry_on_transient_failure(self):
+        """Test exponential backoff retry logic"""
+        with patch('snowflake.connector.connect') as mock:
+            mock.side_effect = [TimeoutError, TimeoutError, Mock()]
+            # Should succeed on third attempt
+```
+
+## Phase 3: Implementation (Fresh Claude Code Session)
+
+In a new window, implement this validated design:
+
+<MarkdownDocument title="Implementation Prompt: Data Collection Feature">
+
+{/* --- Task Overview --- */}
+
+# Task: Implement Data Collection Feature
+
+Objective: Add a new collector that gathers consumption metrics and integrates them into the existing platform as signals, following all established patterns.
+
+{/* --- Critical Context Section --- */}
+
+## Critical Context - Must Follow Existing Architecture
+
+### 1. Extend Existing Base Classes
+
+```python
+# CORRECT: Use existing pattern
+class ConsumptionCollector(BaseCollector):
+    async def collect(self) -> List[Signal]:
+        # Implementation
+```
+
+### 2. Use Unified Data Model
+
+```python
+# Store in existing signals table, NOT new tables
+Signal(
+    id=str(uuid.uuid4()),
+    customer_id="CUST-001",  # from mapping
+    source="consumption_collector",
+    signal_type="consumption",
+    severity=Severity.INFO,
+    metadata={
+        "provider": "cloud_provider",
+        "metric_type": "compute_credits",
+        "value": 123.45,
+        "dimensions": {...}
+    }
+)
+```
+
+{/* --- Implementation Requirements Section --- */}
+
+## Implementation Requirements
+
+### Data Collection
+
+- Query last 7 days on first run
+- Incremental: last 48 hours (accounts for data latency)
+- Handle 3-hour reporting lag in source system
+- Aggregate by hour
+
+### Testing Requirements
+
+```python
+class TestConsumptionCollector:
+    async def test_collect_returns_signals(self):
+        """Test successful collection"""
+
+    async def test_customer_mapping(self):
+        """Test account to customer mapping"""
+
+    async def test_handles_missing_mapping(self):
+        """Test fallback behavior"""
+
+    async def test_retry_on_transient_failure(self):
+        """Test retry logic"""
+```
+
+### File Structure
+
+```bash
+collectors/
+├── consumption_collector.py      # Main implementation
+tests/collectors/
+├── test_consumption_collector.py
+├── fixtures/
+│   └── sample_data.json
+config/
+├── collectors.py                 # Add config class
+```
+
+{/* --- Success Criteria & Scope --- */}
+
+## Success Criteria
+
+✅ Extends existing BaseCollector pattern
+
+✅ Stores in unified signals table
+
+✅ Maps provider accounts to customer IDs
+
+✅ All tests pass with >80% coverage
+
+## Out of Scope - Do NOT Implement
+
+❌ New database tables for this feature
+
+❌ Real-time streaming
+
+❌ Anomaly detection (Phase 2)
+
+❌ Custom caching layer
+
+❌ New configuration formats
+
+## Key Design Decisions
+
+- Why extend BaseCollector: Maintains architectural consistency
+- Why unified storage: Prevents schema fragmentation
+- Why 48-hour lookback: Accounts for source system latency
+
+</MarkdownDocument>
+
+Implementation took less than 1 hour. No rollbacks. No hotfixes. First deployment worked.
+
+## Advanced Patterns
+
+### Progressive Enhancement
+
+Start minimal, layer complexity:
+
+```plaintext
+Iteration 1: Core functionality only
+Iteration 2: Add error handling and edge cases
+Iteration 3: Optimize performance and add monitoring
+```
+
+This prevents over-engineering while ensuring robustness.
+
+### Documentation-Driven Development
+
+Maintain two documents per feature:
+
+- `feature.md`: Clear specifications that outlive implementation
+- `feature_TASKS.md`: Task breakdowns for parallelization
+
+This creates automatic documentation for future development.
+
+### Context Preservation
+
+Create a `PROJECT_CONTEXT.md` file that travels between phases:
+
+```markdown
+# Project Context
+
+## Phase 1 Decisions
+
+- [Architectural choices made]
+- [Key constraints identified]
+
+## Phase 2 Discoveries
+
+- [Integration points found]
+- [Risks identified]
+
+## Phase 3 Implementation Notes
+
+- [Deviations from plan]
+- [Lessons learned]
+```
+
+## Measuring Success
+
+Since adopting this pattern, my metrics transformed:
+
+| Metric                      | Before          | After           | Improvement |
+| --------------------------- | --------------- | --------------- | ----------- |
+| First-time success rate     | 45%             | 82%             | +82%        |
+| Average implementation time | 8 hours         | 3 hours         | -62%        |
+| Post-deployment bugs        | 3-5 per feature | 0-1 per feature | -80%        |
+| LLM API Cost per feature    | ~$25.00         | ~$9.00          | -64%        |
+
+## When to Use This Pattern
+
+### Ideal Use Cases
+
+✅ Complex architectural decisions where mistakes are expensive
+
+✅ Integration with existing codebases where conflicts lurk
+
+✅ Team projects requiring clear documentation
+
+✅ High-stakes deployments where rollback is complex
+
+✅ Regulatory environments requiring audit trails
+
+### When to Skip
+
+❌ Simple scripts or utilities
+
+❌ Isolated proof-of-concepts
+
+❌ Pure greenfield projects with no constraints
+
+❌ Emergency hotfixes (though validation phase still valuable)
+
+## Design becomes documentation
+
+Phase 1 designs become stakeholder-ready documentation. The validator teaches codebase patterns. Single-focus phases reduce cognitive load. The workflow creates documentation for easy knowledge transfer.
+
+## What's Next: Feedback Loop & Automation Opportunities
+
+Each project refines the pattern library, compounding efficiency. The 50th feature takes a fraction of the time of the first.
+The manual process could be automated:
+
+- **API orchestration** for programmatic task routing
+- **Structured handoffs** using JSON schemas instead of markdown
+- **Parallel validation** running multiple checks simultaneously
+- **Learning systems** improving prompts based on success patterns
+
+Keep the separation of concerns. Keep clear boundaries. Automate the repetitive tasks.
+
+## Connection to Multi-Model Orchestration
+
+This pattern is part of a broader shift in how we use AI for development. As I
+wrote in
+[How I Built My Blog](/blog/how-i-built-my-blog-why-i-use-different-ai-models-for-architecture-vs-implementation),
+strategic model selection matters more than any single technical choice.
+
+Different models excel at different tasks:
+
+- **Opus**: Complex reasoning, architectural decisions, ambiguous requirements
+- **Sonnet**: Rapid implementation, codebase analysis, pattern matching
+- **Haiku**: Validation, testing, simple refactors
+
+The [Architect-Builder Pattern](https://github.com/awoods187/PM-Prompt-Patterns/tree/main/prompts/product-strategy/architect-builder-pattern) formalizes this multi-model approach into a
+repeatable workflow.
+
+## What Patterns Are You Seeing?
+
+This pattern emerged from collective experimentation across communities. I've
+seen variations of it independently discovered by PMs, engineers, and technical
+leaders.
+
+I'm curious about your experience:
+
+- What patterns have you discovered for AI-assisted development?
+- How do you handle the handoff between planning and implementation?
+- What metrics matter most in your workflow?
+
+The best patterns emerge from practice, not theory.
+
+P.S. If you want another example of this pattern in action, check out how I used it to [add copy-to-clipboard functionality to code blocks](/the-architect-builder-pattern-adding-copy-to-clipboard.md) on this website.

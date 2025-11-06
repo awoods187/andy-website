@@ -1,0 +1,60 @@
+---
+/**
+ * MarkdownDocument Component
+ *
+ * A dark-themed container for rendering markdown content in Claude artifact style.
+ * Provides copy-to-clipboard functionality for the entire document.
+ *
+ * Usage in blog posts:
+ * <div data-markdown-document data-title="Optional Title">
+ *
+ * # Your Markdown Content
+ *
+ * Code blocks, lists, etc. all work here.
+ *
+ * </div>
+ *
+ * The script will automatically process and style these elements.
+ */
+
+interface Props {
+  title?: string;
+  class?: string;
+}
+
+const { title, class: className } = Astro.props;
+---
+
+<div
+  class={`markdown-document ${className || ''}`}
+  role="region"
+  aria-label={title || 'Markdown document'}
+>
+  {
+    title && (
+      <div class="markdown-document-header">
+        <h3 class="markdown-document-title">{title}</h3>
+        <button class="copy-document-button" type="button" aria-label="Copy document to clipboard">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+          </svg>
+        </button>
+      </div>
+    )
+  }
+
+  <div class="markdown-document-content prose">
+    <slot />
+  </div>
+</div>

@@ -16,6 +16,7 @@
 import { describe, it, expect } from 'vitest';
 import { readFileSync, readdirSync } from 'fs';
 import { join } from 'path';
+import yaml from 'js-yaml';
 
 /**
  * Converts a string to kebab-case slug
@@ -30,7 +31,7 @@ function toKebabCase(str: string): string {
 }
 
 /**
- * Extracts frontmatter from a markdown file
+ * Extracts frontmatter from a markdown file using proper YAML parsing
  */
 function extractFrontmatter(content: string): Record<string, any> {
   const frontmatterMatch = content.match(/^---\n([\s\S]*?)\n---/);
@@ -38,21 +39,12 @@ function extractFrontmatter(content: string): Record<string, any> {
     throw new Error('No frontmatter found');
   }
 
-  const frontmatter: Record<string, any> = {};
-  const lines = frontmatterMatch[1].split('\n');
-
-  for (const line of lines) {
-    // Skip comments and empty lines
-    if (line.trim().startsWith('#') || !line.trim()) continue;
-
-    const match = line.match(/^(\w+):\s*"?([^"]*)"?$/);
-    if (match) {
-      const [, key, value] = match;
-      frontmatter[key] = value.replace(/^"(.*)"$/, '$1'); // Remove quotes
-    }
+  try {
+    const frontmatter = yaml.load(frontmatterMatch[1]);
+    return frontmatter as Record<string, any>;
+  } catch (error) {
+    throw new Error(`Failed to parse YAML frontmatter: ${error}`);
   }
-
-  return frontmatter;
 }
 
 describe('Blog Title/Filename Matching', () => {
@@ -64,6 +56,7 @@ describe('Blog Title/Filename Matching', () => {
   const legacyPosts = new Set([
     'getting-started-ai-pm-perspective.md',
     'why-pms-should-understand-databases.md',
+    'the-architect-builder-pattern.md',
   ]);
 
   it('should have at least one blog post', () => {

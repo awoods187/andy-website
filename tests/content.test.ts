@@ -8,6 +8,24 @@
 import { describe, it, expect } from 'vitest';
 import { readdirSync, readFileSync } from 'fs';
 import { join } from 'path';
+import yaml from 'js-yaml';
+
+/**
+ * Extracts frontmatter from a markdown file using proper YAML parsing
+ */
+function extractFrontmatter(content: string): Record<string, any> {
+  const frontmatterMatch = content.match(/^---\n([\s\S]*?)\n---/);
+  if (!frontmatterMatch) {
+    throw new Error('No frontmatter found');
+  }
+
+  try {
+    const frontmatter = yaml.load(frontmatterMatch[1]);
+    return frontmatter as Record<string, any>;
+  } catch (error) {
+    throw new Error(`Failed to parse YAML frontmatter: ${error}`);
+  }
+}
 
 describe('Blog Content Validation', () => {
   const contentPath = join(process.cwd(), 'src', 'content', 'blog');
@@ -57,15 +75,12 @@ describe('Blog Content Validation', () => {
 
     mdFiles.forEach((file) => {
       const content = readFileSync(join(contentPath, file), 'utf-8');
+      const frontmatter = extractFrontmatter(content);
 
       // Tags should be an array with at least one item
-      const tagsMatch = content.match(/tags:\s*\[(.*?)\]/);
-      expect(tagsMatch).toBeTruthy();
-
-      if (tagsMatch && tagsMatch[1]) {
-        const tags = tagsMatch[1].split(',').map((t) => t.trim());
-        expect(tags.length).toBeGreaterThan(0);
-      }
+      expect(frontmatter.tags).toBeDefined();
+      expect(Array.isArray(frontmatter.tags)).toBe(true);
+      expect(frontmatter.tags.length).toBeGreaterThan(0);
     });
   });
 });

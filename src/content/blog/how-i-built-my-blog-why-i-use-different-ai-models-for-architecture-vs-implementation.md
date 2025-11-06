@@ -110,7 +110,7 @@ context.
 
 **In Claude Opus**, I started with:
 
-```
+```markdown
 "I need a personal website that aggregates blog posts from multiple sources,
 loads fast, and costs almost nothing to host. What approach would you recommend?"
 ```
@@ -136,7 +136,7 @@ have taken **days**.
 **In Claude Code**, I provided the finalized architecture via a prompt written
 by Opus:
 
-```
+```markdown
 "Build an Astro site with:
 - Personal blog posts in Markdown
 - Python scraper for Cockroach Labs posts
@@ -518,7 +518,7 @@ features of this site.
 
 **Prompt**:
 
-```
+```markdown
 Create a Python scraper that:
 1. Extracts blog posts from an author page
 2. Handles missing elements gracefully
@@ -541,7 +541,7 @@ The author page uses <article> cards with varying structures.
 
 **Prompt**:
 
-```
+```markdown
 Set up dual licensing for my blog:
 - Code: MIT License (maximum reusability)
 - Content: CC BY-NC 4.0 (protect written work)
@@ -564,7 +564,7 @@ Set up dual licensing for my blog:
 
 **Prompt**:
 
-```
+```markdown
 Create professional bot and AI crawler controls that position me as LLM-friendly:
 - robots.txt that explicitly allows AI crawlers
 - ai.txt file with training policies
