@@ -78,17 +78,18 @@ const nextPost: BlogPost | null = currentIndex > 0 ? sortedPosts[currentIndex - 
 
     {
       post.data.image && (
-        <div class="mb-8">
+        <div class="mb-12">
           <img
             src={post.data.image}
             srcset={`${post.data.image.replace('.jpg', '-400w.jpg')} 400w, ${post.data.image.replace('.jpg', '-800w.jpg')} 800w, ${post.data.image} 1200w`}
             sizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, 1200px"
             alt={post.data.title}
             class="w-full max-w-xl h-auto rounded-lg mx-auto"
-            style="max-height: 400px; object-fit: cover;"
+            style="max-height: 400px; object-fit: contain;"
             loading="eager"
+            fetchpriority="high"
             width="800"
-            height="400"
+            height="800"
           />
         </div>
       )
@@ -134,3 +135,7 @@ const nextPost: BlogPost | null = currentIndex > 0 ? sortedPosts[currentIndex - 
     }
   </article>
 </BaseLayout>
+
+<script>
+  import '../../scripts/copy-code.ts';
+</script>
