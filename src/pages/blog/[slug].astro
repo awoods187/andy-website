@@ -89,11 +89,10 @@ const nextPost: BlogPost | null = currentIndex > 0 ? sortedPosts[currentIndex - 
             srcset={`${post.data.image.replace('.jpg', '-400w.jpg')} 400w, ${post.data.image.replace('.jpg', '-800w.jpg')} 800w, ${post.data.image} 1200w`}
             sizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, 1200px"
             alt={post.data.title}
-            class="w-full max-w-xl h-auto rounded-lg mx-auto"
-            style="max-height: 400px; object-fit: contain;"
+            class="w-full max-w-md h-auto rounded-lg mx-auto"
             loading="eager"
             fetchpriority="high"
-            width="800"
+            width="1200"
             height="800"
           />
         </div>
