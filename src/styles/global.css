@@ -102,9 +102,26 @@ body {
   margin-bottom: 1rem;
 }
 
+/* Default: wrap all code blocks */
 .prose pre code {
   background-color: transparent;
   padding: 0;
+  white-space: pre-wrap !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+}
+
+/* Override: Keep code examples scrollable for specific languages */
+.prose pre.language-python code,
+.prose pre.language-javascript code,
+.prose pre.language-sql code,
+.prose pre.language-bash code,
+.prose pre[class*='language-python'] code,
+.prose pre[class*='language-javascript'] code,
+.prose pre[class*='language-sql'] code,
+.prose pre[class*='language-bash'] code {
+  white-space: pre !important;
+  overflow-x: auto;
 }
 
 .prose img {
@@ -436,11 +453,28 @@ body {
   margin: 1rem 0;
 }
 
+/* Default: wrap all code blocks in markdown-document */
 .markdown-document .prose pre code {
   background-color: transparent;
   padding: 0;
   border-radius: 0;
   font-size: 0.875rem;
+  white-space: pre-wrap !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+}
+
+/* Override: Keep code examples scrollable in markdown-document for specific languages */
+.markdown-document .prose pre.language-python code,
+.markdown-document .prose pre.language-javascript code,
+.markdown-document .prose pre.language-sql code,
+.markdown-document .prose pre.language-bash code,
+.markdown-document .prose pre[class*='language-python'] code,
+.markdown-document .prose pre[class*='language-javascript'] code,
+.markdown-document .prose pre[class*='language-sql'] code,
+.markdown-document .prose pre[class*='language-bash'] code {
+  white-space: pre !important;
+  overflow-x: auto;
 }
 
 /* Copy button positioning inside markdown-document - matches existing buttons */

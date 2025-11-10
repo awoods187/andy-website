@@ -23,62 +23,27 @@ attribution: 'If you quote or translate this post, please provide attribution wi
 
 import MarkdownDocument from '../../components/MarkdownDocument.astro';
 
-Claude Code amazes me with its power. It also frustrates me with its limitations.
+As a product manager who ships code to production for internal tools, I've experienced both the magic and frustration of Claude Code. I'm building an AI platform that processes 5,000+ customer signals monthly from 14 sources to generate weekly CockroachDB product health reports in 20 seconds.
 
-It built complex implementations fast: a [500-line Python scraper](/blog/how-i-built-my-blog-why-i-use-different-ai-models-for-architecture-vs-implementation#example-1-content-scraper-5-minutes) in 5 minutes. Yet it misunderstood simple questions, treating them as implementation requests. "How does this work?" would trigger "Let me change that for you!"
+It built complex implementations fast: a [500-line Python scraper](/blog/how-i-built-my-blog-why-i-use-different-ai-models-for-architecture-vs-implementation#example-1-content-scraper-5-minutes) in 5 minutes. Yet it misunderstood simple questions, treating them as implementation requests. "How does this work?" would trigger "Let me change that for you!" It made assumptions, jumped ahead, and sometimes produced code that broke in CI, or worse, production.
 
-It jumped ahead with assumptions (\"if you want x, you must want y too\"), misinterpreted ambiguous instructions (turns out English is lossy; coding languages exist for a reason), and sometimes produced code a junior developer wouldn't ship.
+## Finding the Pattern
 
-It often implemented partial solutions (apply a fix to one file but not all relevant files) and fail to finish without additional instructions. Sometimes bugs only appeared in CI—or worse, production.
+I tried everything. Two Claude Code windows to separate planning from execution scattered context between sessions and hit window limits. Opus for design had better reasoning and easier context control but couldn't see the codebase. Each approach solved one problem while creating another.
 
-## Attempt 1: Two Claude Code Windows
+Then I discovered three phases that worked. Design in Opus for deep reasoning. Validate against the codebase in Claude Code to catch integration issues. Implement in a fresh Claude Code session for clean execution.
 
-I tried separating design from execution using two Claude Code windows: one for planning, one for implementation. Better, but still messy. Context wasn't always right. I wanted to iterate on designs without dropping into .md files. And because Claude Code uses Sonnet 4.5, I couldn't always get the deep reasoning I needed for complex architectural decisions.
+The results were immediate: what took 5+ iterations now worked on the first try. Deployment bugs dropped by 80%. Implementation time fell by 62%.
 
-## Attempt 2: Opus for Design
+I wasn't alone in this discovery. In my product leadership Slack ([Supra](https://www.joinsupra.com/)), other PMs were independently finding the same pattern. One described moving from "fast and ugly" to "well-architected" using a similar phased approach.
 
-Then I switched to Opus in a separate window for design. Much better. Superior reasoning, easier iteration with Google Docs. But it lacked codebase context, forcing me to upload snippets constantly.
+The [Architect-Builder Pattern](https://github.com/awoods187/PM-Prompt-Patterns/tree/main/prompts/product-strategy/architect-builder-pattern) is emerging across our community as a repeatable workflow that actually works.
 
-## The Solution: Three-Phase Workflow
+## The Architect-Builder Pattern
 
-Finally, I landed on a three-phase approach: design in Opus, validate against the codebase in Claude Code, implement in a fresh Claude Code session.
+The pattern separates AI development into three distinct phases, each with a specific model and purpose:
 
-Claude's outputs matched my expectations every time. What often took 5+ turns now only took 1.
-
-## The Pattern Emerges
-
-Around the same time, I noticed the pattern emerging elsewhere. In my product leadership Slack ([Supra](https://www.joinsupra.com/)), fellow PMs shared similar workflows in our time-saving-ai-workflow channel. One PM described moving Claude Code from "fast and ugly" to "well-architected" by having it document current architecture, feeding that to Claude in research mode for strategic planning, then back to Claude Code for execution.
-
-Colleagues share it. PMs discuss it in Slack. Engineers adopt it independently. There's a growing consensus: this pattern works.
-
-I call it the [Architect-Builder Pattern](https://github.com/awoods187/PM-Prompt-Patterns/tree/main/prompts/product-strategy/architect-builder-pattern).
-
-## The Problem: Context Loss and Premature Solutions
-
-AI coding assistants fail in two ways: they lose context and they jump to solutions. This results in inconsistent code, integration issues, and costly rewrites.
-
-## The Solution: Three-Phase Separation of Concerns
-
-The [Architect-Builder Pattern](https://github.com/awoods187/PM-Prompt-Patterns/tree/main/prompts/product-strategy/architect-builder-pattern) uses three distinct phases with clear boundaries:
-
-### Phase 1: Strategic Architecture (The Architect)
-
-- **Purpose**: High-level design and architectural decisions
-- **Model**: Claude Opus (or equivalent reasoning-focused model)
-- **Focus**: The "why" and "what" of your solution
-- **Output**: Detailed architecture blueprint with clear specifications
-
-```markdown
-I need to design [SYSTEM]. Provide:
-
-1. Architecture Blueprint (components, data flow, interfaces)
-2. Implementation Checklist (critical path vs nice-to-have)
-3. Validation Criteria (tests, benchmarks, edge cases)
-4. Technical Instructions (files, dependencies, config)
-
-Context: [constraints, tech stack, team size]
-Principles: Be concrete, show don't tell, define boundaries
-```
+**Phase 1: The Architect** uses Claude Opus for high-level design and architectural decisions. This phase focuses on the "why" and "what" of your solution, producing a detailed architecture blueprint without touching code. Opus excels here because it handles ambiguity and complex reasoning better than any other model.
 
 **💡 Phase 1 Tips:**
 
@@ -88,55 +53,17 @@ Principles: Be concrete, show don't tell, define boundaries
 >
 > **Pattern library:** "What are the best practices for [X]? Include real-world examples"
 
-### Phase 2: Pattern Validation (The Validator)
+**Phase 2: The Validator** takes the design into Claude Code with full codebase context. This phase catches integration issues before any code is written—finding naming conflicts, identifying existing patterns to follow, and spotting architectural mismatches. It transforms the abstract design into a concrete implementation plan.
 
-- **Purpose**: Catch integration issues before implementation
-- **Model**: Claude Code with full codebase context
-- **Focus**: Align the design to your context
-- **Output**: Detailed implementation prompt
+**Phase 3: The Builder** starts fresh in a new Claude Code session with only the validated implementation plan. No context pollution, no conflicting instructions—just clean execution. The fresh session ensures Claude Code follows the plan without getting confused by earlier exploratory conversations.
 
-```markdown
-Validate this design against the codebase:
-[Paste Phase 1 design]
+The magic is in the handoffs. Each phase produces exactly what the next phase needs. No ambiguity, no assumptions, no lost context.
 
-Check:
-
-1. Pattern Consistency (alignment with existing code)
-2. Dependency Analysis (blast radius, hidden coupling)
-3. Risk Assessment (what breaks, rollback plan)
-4. Optimization (reusable components, simplifications)
-
-Output: Refined plan with file paths, patterns to follow, test strategy
-```
-
-### Phase 3: Autonomous Execution (The Builder)
-
-- **Purpose**: Clean implementation without context pollution
-- **Model**: Fresh Claude Code session
-- **Focus**: Clean execution
-- **Output**: Implemented new features and functionality
-
-```markdown
-Implement this validated design:
-[Paste Phase 2 output]
-
-Parameters: Mode [careful/standard/fast], Testing [unit/integration/e2e]
-
-Order:
-
-1. Core Infrastructure → Checkpoint: compilation
-2. Business Logic → Checkpoint: unit tests
-3. UI/API Layer → Checkpoint: integration tests
-4. Full test suite → Checkpoint: all green
-
-Proceed autonomously but pause at checkpoints.
-```
-
-📋 **Full templates with detailed instructions and examples**: [GitHub](https://github.com/awoods187/PM-Prompt-Patterns/tree/main/prompts/product-strategy/architect-builder-pattern)
+📋 **Full templates and detailed prompts**: [GitHub Repository](https://github.com/awoods187/PM-Prompt-Patterns/tree/main/prompts/product-strategy/architect-builder-pattern)
 
 ## Real-World Example: Adding Consumption into Product Health Analysis
 
-I'm building an AI-powered customer intelligence platform that automatically
+My AI-powered customer intelligence platform automatically
 collects ~5,000 monthly signals from 14+ sources (GitHub, Slack, Salesforce,
 Zendesk, etc.) and generates weekly product health reports in 20 seconds using
 Claude Opus and RAG. It helps product teams identify at-risk ARR, track customer
@@ -144,44 +71,35 @@ feedback patterns, and make data-driven decisions across, reducing report
 creation time from days to minutes. I'll share more about this app in the future
 (and open-source a version of it).
 
-I added product consumption signals using this pattern:
+I added product consumption signals using this pattern with simplified prompts below:
 
 ## Phase 1: Architectural Design (Opus)
 
 ```markdown
-I'm building a customer intelligence platform that collects signals from multiple sources (GitHub, Slack, Salesforce, etc.) to generate product health reports. I need to add consumption/usage signals as a new data source to better understand customer engagement patterns.
+I'm building a customer intelligence platform that collects signals from multiple sources (GitHub, Slack, Salesforce) to generate product health reports. I need to add consumption/usage signals as a new data source.
 
 Current architecture:
 
-- Signal collectors run on schedule to gather data from various APIs
+- Signal collectors run on schedule, gathering data from APIs
 - Data is normalized and stored for analysis
-- RAG pipeline processes signals to generate insights
+- RAG pipeline processes signals for insights
 
-I want to add consumption metrics that track:
+I want to track customer resource usage patterns and credit consumption trends.
 
-- Customer resource usage patterns
-- Credit consumption trends
+Design the architecture for this consumption signal collector:
 
-Can you help me design the architecture for this consumption signal collector? I need:
+1. Data collection strategy: How should I structure collection to match existing patterns?
+2. Schema design: What metrics and dimensions should I capture for both real-time monitoring and historical analysis?
+3. Integration: How should this integrate with my existing signal pipeline?
+4. Performance: Key decisions for caching, batching, and rate limiting at scale?
+5. Flexibility: How to adapt to different cloud providers?
 
-1. Data collection strategy: How should I structure the collection of consumption metrics? What patterns should I follow to ensure consistency with my existing collectors?
-2. Schema design: What key metrics and dimensions should I capture? How should I model the data for both real-time monitoring and historical trend analysis?
-3. Integration approach: How should this new collector integrate with my existing signal processing pipeline?
-4. Performance considerations: What are the key architectural decisions I need to make around caching, batching, and rate limiting when dealing with potentially large volumes of consumption data?
-5. Flexibility: How can I design this to easily adapt to different cloud providers or consumption models in the future?
-
-Please provide a high-level architectural design with clear separation of concerns and extensibility in mind.
+Provide a high-level design with clear separation of concerns and extensibility.
 ```
 
 The design took 30 minutes and three iterations. Manual research would have taken multiple days.
 
 ## Phase 2: Codebase Validation (Claude Code)
-
-```markdown
-Analyze our codebase and validate this design:
-
-[Pasted Opus design]
-```
 
 Validation caught 10+ major issues but I'll highlight three:
 
@@ -281,7 +199,15 @@ class TestSnowflakeConsumptionCollector:
 
 ## Phase 3: Implementation (Fresh Claude Code Session)
 
-In a new window, implement this validated design:
+Phase 2 revealed the gaps. Now we convert those findings into explicit constraints.
+
+The Phase 3 prompt directly addresses what validation caught:
+
+- "Extend existing BaseCollector" prevents framework integration gaps
+- "Store in unified signals table" prevents schema conflicts
+- "Testing Requirements" section addresses missing test strategy
+
+The pattern's value: converting validation findings into implementation constraints. We open a fresh Claude Code session so it focuses on execution, not analysis.
 
 <MarkdownDocument title="Implementation Prompt: Data Collection Feature">
 
@@ -419,7 +345,7 @@ Maintain two documents per feature:
 - `feature.md`: Clear specifications that outlive implementation
 - `feature_TASKS.md`: Task breakdowns for parallelization
 
-This creates automatic documentation for future development.
+This creates automatic documentation for future development. Phase 1 designs become stakeholder-ready documentation. The validator teaches codebase patterns. Single-focus phases reduce cognitive load. The workflow creates documentation for easy knowledge transfer.
 
 ### Context Preservation
 
@@ -455,34 +381,6 @@ Since adopting this pattern, my metrics transformed:
 | Post-deployment bugs        | 3-5 per feature | 0-1 per feature | -80%        |
 | LLM API Cost per feature    | ~$25.00         | ~$9.00          | -64%        |
 
-## When to Use This Pattern
-
-### Ideal Use Cases
-
-✅ Complex architectural decisions where mistakes are expensive
-
-✅ Integration with existing codebases where conflicts lurk
-
-✅ Team projects requiring clear documentation
-
-✅ High-stakes deployments where rollback is complex
-
-✅ Regulatory environments requiring audit trails
-
-### When to Skip
-
-❌ Simple scripts or utilities
-
-❌ Isolated proof-of-concepts
-
-❌ Pure greenfield projects with no constraints
-
-❌ Emergency hotfixes (though validation phase still valuable)
-
-## Design becomes documentation
-
-Phase 1 designs become stakeholder-ready documentation. The validator teaches codebase patterns. Single-focus phases reduce cognitive load. The workflow creates documentation for easy knowledge transfer.
-
 ## What's Next: Feedback Loop & Automation Opportunities
 
 Each project refines the pattern library, compounding efficiency. The 50th feature takes a fraction of the time of the first.
@@ -513,16 +411,8 @@ repeatable workflow.
 
 ## What Patterns Are You Seeing?
 
-This pattern emerged from collective experimentation across communities. I've
-seen variations of it independently discovered by PMs, engineers, and technical
-leaders.
-
-I'm curious about your experience:
-
-- What patterns have you discovered for AI-assisted development?
-- How do you handle the handoff between planning and implementation?
-- What metrics matter most in your workflow?
-
 The best patterns emerge from practice, not theory.
+
+What patterns have you discovered?
 
 P.S. If you want another example of this pattern in action, check out how I used it to [add copy-to-clipboard functionality to code blocks](/the-architect-builder-pattern-adding-copy-to-clipboard.md) on this website.
