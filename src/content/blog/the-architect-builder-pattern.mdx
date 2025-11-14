@@ -29,21 +29,21 @@ It built complex implementations fast: a [500-line Python scraper](/blog/how-i-b
 
 ## Finding the Pattern
 
-I tried everything. Two Claude Code windows to separate planning from execution scattered context between sessions and hit window limits. Opus for design had better reasoning and easier context control but couldn't see the codebase. Each approach solved one problem while creating another.
+I tried to be more descriptive, or break things into pieces, but Claude works best when it has the entire context for the problem it's solving. I'd hit window limits and force context compaction slowing development.
 
-Then I discovered three phases that worked. Design in Opus for deep reasoning. Validate against the codebase in Claude Code to catch integration issues. Implement in a fresh Claude Code session for clean execution.
+Then I discovered a two phase approach that worked leveraging **Plan Mode**. **Plan Mode** (`Shift + Tab` twice) allowed me to iterate and design in Claude with code base context without accidentally implementing a solution as it only has read access. However, **Plan Mode**, like Claude Code, uses Sonnet 4.5 by default and I wanted something more powerful. Next, I adjusted the `/model` in **Plan Mode** to Opus for design to engage with deep reasoning that is validated against the codebase to catch integration issues. Once I'm satisfied with the design, I exit **Plan Mode**, and switch to a fresh Claude Code session for clean execution control. I also adjust the `/model` back to Sonnet and implement the design with Sonnet for cost control.
 
 The results were immediate: what took 5+ iterations now worked on the first try. Deployment bugs dropped by 80%. Implementation time fell by 62%.
 
 I wasn't alone in this discovery. In my product leadership Slack ([Supra](https://www.joinsupra.com/)), other PMs were independently finding the same pattern. One described moving from "fast and ugly" to "well-architected" using a similar phased approach.
 
-The [Architect-Builder Pattern](https://github.com/awoods187/PM-Prompt-Patterns/tree/main/prompts/product-strategy/architect-builder-pattern) is emerging across our community as a repeatable workflow that actually works.
+The [Architect-Builder Pattern](https://github.com/awoods187/PM-Prompt-Patterns/tree/main/prompts/product-strategy/architect-builder-pattern) is emerging across our community as a repeatable workflow that actually works. The pattern is model provider agnostic and AI-coding agent agnostic.
 
 ## The Architect-Builder Pattern
 
-The pattern separates AI development into three distinct phases, each with a specific model and purpose:
+The pattern separates AI development into two distinct phases, each with a specific model and purpose:
 
-**Phase 1: The Architect** uses Claude Opus for high-level design and architectural decisions. This phase focuses on the "why" and "what" of your solution, producing a detailed architecture blueprint without touching code. Opus excels here because it handles ambiguity and complex reasoning better than any other model.
+**Phase 1: The Architect** uses Claude Opus for high-level design and architectural decisions. This phase focuses on the "why" and "what" of your solution, producing a detailed architecture blueprint with code context. This phase catches integration issues before any code is written—finding naming conflicts, identifying existing patterns to follow, and spotting architectural mismatches. It transforms the abstract design into a concrete implementation plan. Opus excels here because it handles ambiguity and complex reasoning better than any other model.
 
 **💡 Phase 1 Tips:**
 
@@ -53,9 +53,7 @@ The pattern separates AI development into three distinct phases, each with a spe
 >
 > **Pattern library:** "What are the best practices for [X]? Include real-world examples"
 
-**Phase 2: The Validator** takes the design into Claude Code with full codebase context. This phase catches integration issues before any code is written—finding naming conflicts, identifying existing patterns to follow, and spotting architectural mismatches. It transforms the abstract design into a concrete implementation plan.
-
-**Phase 3: The Builder** starts fresh in a new Claude Code session with only the validated implementation plan. No context pollution, no conflicting instructions—just clean execution. The fresh session ensures Claude Code follows the plan without getting confused by earlier exploratory conversations.
+**Phase 2: The Builder** starts fresh in a new Claude Code session with only the validated implementation plan. No context pollution, no conflicting instructions—just clean execution. The fresh session ensures Claude Code follows the plan without getting confused by earlier exploratory conversations.
 
 The magic is in the handoffs. Each phase produces exactly what the next phase needs. No ambiguity, no assumptions, no lost context.
 
@@ -99,9 +97,7 @@ Provide a high-level design with clear separation of concerns and extensibility.
 
 The design took 30 minutes and three iterations. Manual research would have taken multiple days.
 
-## Phase 2: Codebase Validation (Claude Code)
-
-Validation caught 10+ major issues but I'll highlight three:
+Because Plan Mode with Opus has access to the code base, it caught 10+ major issues that designing outside of the code base would have missed. I'll highlight three:
 
 ### 1. Framework Integration Gap
 
@@ -197,17 +193,17 @@ class TestSnowflakeConsumptionCollector:
             # Should succeed on third attempt
 ```
 
-## Phase 3: Implementation (Fresh Claude Code Session)
+## Phase 2: Implementation (Fresh Claude Code Session)
 
-Phase 2 revealed the gaps. Now we convert those findings into explicit constraints.
+Phase 1 revealed the gaps. Now we convert those findings into explicit constraints.
 
-The Phase 3 prompt directly addresses what validation caught:
+The Phase 2 prompt directly addresses what validation caught:
 
 - "Extend existing BaseCollector" prevents framework integration gaps
 - "Store in unified signals table" prevents schema conflicts
 - "Testing Requirements" section addresses missing test strategy
 
-The pattern's value: converting validation findings into implementation constraints. We open a fresh Claude Code session so it focuses on execution, not analysis.
+The pattern's value: converting validation findings into implementation constraints. We open a fresh Claude Code session with `/model` set to Sonnet 4.5 to focus on execution, not analysis.
 
 <MarkdownDocument title="Implementation Prompt: Data Collection Feature">
 
@@ -345,7 +341,7 @@ Maintain two documents per feature:
 - `feature.md`: Clear specifications that outlive implementation
 - `feature_TASKS.md`: Task breakdowns for parallelization
 
-This creates automatic documentation for future development. Phase 1 designs become stakeholder-ready documentation. The validator teaches codebase patterns. Single-focus phases reduce cognitive load. The workflow creates documentation for easy knowledge transfer.
+This creates automatic documentation for future development. Phase 1 designs become stakeholder-ready documentation. Single-focus phases reduce cognitive load. The workflow creates documentation for easy knowledge transfer.
 
 ### Context Preservation
 
@@ -354,17 +350,12 @@ Create a `PROJECT_CONTEXT.md` file that travels between phases:
 ```markdown
 # Project Context
 
-## Phase 1 Decisions
+## Phase 1 Decisions & Discoveries
 
 - [Architectural choices made]
 - [Key constraints identified]
 
-## Phase 2 Discoveries
-
-- [Integration points found]
-- [Risks identified]
-
-## Phase 3 Implementation Notes
+## Phase 2 Implementation Notes
 
 - [Deviations from plan]
 - [Lessons learned]
@@ -380,18 +371,6 @@ Since adopting this pattern, my metrics transformed:
 | Average implementation time | 8 hours         | 3 hours         | -62%        |
 | Post-deployment bugs        | 3-5 per feature | 0-1 per feature | -80%        |
 | LLM API Cost per feature    | ~$25.00         | ~$9.00          | -64%        |
-
-## What's Next: Feedback Loop & Automation Opportunities
-
-Each project refines the pattern library, compounding efficiency. The 50th feature takes a fraction of the time of the first.
-The manual process could be automated:
-
-- **API orchestration** for programmatic task routing
-- **Structured handoffs** using JSON schemas instead of markdown
-- **Parallel validation** running multiple checks simultaneously
-- **Learning systems** improving prompts based on success patterns
-
-Keep the separation of concerns. Keep clear boundaries. Automate the repetitive tasks.
 
 ## Connection to Multi-Model Orchestration
 
