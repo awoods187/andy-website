@@ -31,11 +31,11 @@ attribution:
 
 ## Field Descriptions
 
-| Field         | Value                  | Purpose                                                                        |
-| ------------- | ---------------------- | ------------------------------------------------------------------------------ |
-| `license`     | `"CC BY-NC 4.0"`       | Indicates Creative Commons Attribution-NonCommercial 4.0 International License |
+| Field         | Value                 | Purpose                                                                        |
+| ------------- | --------------------- | ------------------------------------------------------------------------------ |
+| `license`     | `"CC BY-NC 4.0"`      | Indicates Creative Commons Attribution-NonCommercial 4.0 International License |
 | `copyright`   | `"© YYYY Andy Woods"` | Copyright notice (update YYYY to current year)                                 |
-| `attribution` | Instruction text       | Tells readers how to properly attribute when quoting                           |
+| `attribution` | Instruction text      | Tells readers how to properly attribute when quoting                           |
 
 ---
 

@@ -65,7 +65,7 @@ Post**: Add to `src/data/crl-posts.ts` or run scraper
 | `image`       | string  | `/images/default-post.svg` | Featured image (relative to `/public/`) |
 | `imageSource` | string  | -                          | Attribution for image source            |
 | `license`     | string  | `CC BY-NC 4.0`             | Content license                         |
-| `copyright`   | string  | `© 2025 Andy Woods`       | Copyright notice                        |
+| `copyright`   | string  | `© 2025 Andy Woods`        | Copyright notice                        |
 | `attribution` | string  | -                          | Attribution instructions                |
 | `draft`       | boolean | `false`                    | If `true`, post hidden in production    |
 

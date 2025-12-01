@@ -227,7 +227,7 @@ describe.skipIf(!hasRssFeed)('RSS Feed - Specific Blog Post Validation', () => {
 
     // Should include actual content
     expect(content).toContain('Claude Code');
-    expect(content).toContain('Three-Phase Workflow');
+    expect(content).toContain('Phase 1: The Architect');
   });
 
   it('should include "How I Built My Blog" post with images', () => {
