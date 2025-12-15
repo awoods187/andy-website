@@ -23,11 +23,11 @@
     "prepare": "command -v pre-commit > /dev/null && pre-commit install || echo 'pre-commit not installed, skipping hook setup'"
   },
   "dependencies": {
-    "@astrojs/mdx": "^4.3.12",
+    "@astrojs/mdx": "^4.3.13",
     "@astrojs/rss": "^4.0.14",
     "@astrojs/sitemap": "^3.6.0",
-    "@tailwindcss/vite": "^4.1.17",
-    "astro": "^5.16.4",
+    "@tailwindcss/vite": "^4.1.18",
+    "astro": "^5.16.5",
     "tailwindcss": "^4.1.14"
   },
   "devDependencies": {
