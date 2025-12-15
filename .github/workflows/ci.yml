@@ -144,7 +144,7 @@ jobs:
 
       - name: Upload coverage reports
         if: matrix.node-version == '20' # Only upload once
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: coverage-reports
           path: coverage/
@@ -152,7 +152,7 @@ jobs:
 
       - name: Upload coverage to artifact for PR comment
         if: matrix.node-version == '20' && github.event_name == 'pull_request'
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: coverage-summary
           path: coverage/coverage-summary.json
@@ -195,7 +195,7 @@ jobs:
 
       - name: Upload audit results as artifact
         if: always()
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: security-audit-results
           path: npm-audit-results.json
@@ -242,7 +242,7 @@ jobs:
           du -h dist/ | sort -h | tail -20
 
       - name: Upload build artifacts
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: build-output
           path: dist/
