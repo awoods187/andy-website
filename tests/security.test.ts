@@ -278,7 +278,7 @@ describe('Security Hardening', () => {
   });
 
   describe('Requirements and Dependencies', () => {
-    const requirementsPath = join(process.cwd(), 'requirements.txt');
+    const requirementsPath = join(process.cwd(), 'scripts', 'requirements.txt');
 
     it('requirements.txt should exist', () => {
       expect(existsSync(requirementsPath)).toBe(true);
