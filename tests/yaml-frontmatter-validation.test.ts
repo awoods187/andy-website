@@ -48,7 +48,8 @@ describe('YAML Frontmatter Validation', () => {
         } catch (error) {
           if (error instanceof Error) {
             throw new Error(
-              `YAML parsing failed for ${filename}:\n${error.message}\n\nFrontmatter:\n${frontmatterText}`
+              `YAML parsing failed for ${filename}:\n${error.message}\n\nFrontmatter:\n${frontmatterText}`,
+              { cause: error }
             );
           }
           throw error;

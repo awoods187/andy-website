@@ -30,14 +30,18 @@
     "astro": "^5.17.1",
     "tailwindcss": "^4.1.14"
   },
+  "engines": {
+    "node": ">=20.19.0"
+  },
   "devDependencies": {
     "@astrojs/check": "^0.9.6",
+    "@eslint/js": "^10.0.1",
     "@types/js-yaml": "^4.0.9",
     "@typescript-eslint/eslint-plugin": "^8.54.0",
     "@typescript-eslint/parser": "^8.54.0",
     "@vitest/coverage-v8": "^4.0.18",
     "@vitest/ui": "^4.0.17",
-    "eslint": "^9.39.2",
+    "eslint": "^10.0.0",
     "eslint-plugin-astro": "^1.5.0",
     "happy-dom": "^20.5.3",
     "js-yaml": "^4.1.1",

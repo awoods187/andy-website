@@ -43,7 +43,7 @@ function extractFrontmatter(content: string): Record<string, any> {
     const frontmatter = yaml.load(frontmatterMatch[1]);
     return frontmatter as Record<string, any>;
   } catch (error) {
-    throw new Error(`Failed to parse YAML frontmatter: ${error}`);
+    throw new Error(`Failed to parse YAML frontmatter: ${error}`, { cause: error });
   }
 }
 
