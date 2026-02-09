@@ -30,6 +30,9 @@
     "astro": "^5.17.1",
     "tailwindcss": "^4.1.14"
   },
+  "engines": {
+    "node": ">=20.19.0"
+  },
   "devDependencies": {
     "@astrojs/check": "^0.9.6",
     "@types/js-yaml": "^4.0.9",
