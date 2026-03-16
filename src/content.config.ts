@@ -5,7 +5,9 @@
  * This ensures type safety and validation for all blog post frontmatter.
  */
 
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
+import { z } from 'astro/zod';
+import { glob } from 'astro/loaders';
 
 /**
  * Blog Collection Schema
@@ -14,7 +16,7 @@ import { defineCollection, z } from 'astro:content';
  * All blog posts must include these required fields.
  */
 const blog = defineCollection({
-  type: 'content', // Content collection (Markdown/MDX files)
+  loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: './src/content/blog' }),
   schema: z.object({
     title: z.string(), // Post title (required)
     date: z.date(), // Publication date (required)
