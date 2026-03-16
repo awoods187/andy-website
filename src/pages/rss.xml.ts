@@ -88,7 +88,7 @@ function createFullContent(post: BlogPost): string {
   }
 
   // Get the raw markdown/MDX body content
-  let rawBody = post.body;
+  let rawBody = post.body ?? '';
 
   // Remove MDX/JSX import statements and component tags
   rawBody = rawBody
@@ -100,7 +100,7 @@ function createFullContent(post: BlogPost): string {
   const bodyHtml = markdownToHtml(rawBody);
 
   html += bodyHtml;
-  html += `\n\n<p><a href="${SITE_URL}/blog/${post.slug}/">Read the full post on andywoods.me →</a></p>`;
+  html += `\n\n<p><a href="${SITE_URL}/blog/${post.id}/">Read the full post on andywoods.me →</a></p>`;
 
   // Convert all relative URLs to absolute
   return makeImageUrlsAbsolute(html);
@@ -128,7 +128,7 @@ export async function GET(context: APIContext): Promise<Response> {
       description: post.data.excerpt,
       content, // Full HTML content with images
       pubDate: post.data.date,
-      link: `${SITE_URL}/blog/${post.slug}/`,
+      link: `${SITE_URL}/blog/${post.id}/`,
       categories: post.data.tags,
       author: 'Andy Woods',
       // Add enclosure for the hero image (for podcast-style feeds)

@@ -54,7 +54,7 @@ export async function getStaticPaths() {
         excerpt: post.data.excerpt,
         tags: post.data.tags,
         image: post.data.image || null,
-        slug: post.slug,
+        slug: post.id,
         source: 'personal' as const,
       })
     );

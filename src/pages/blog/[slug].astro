@@ -1,5 +1,5 @@
 ---
-import { getCollection, type CollectionEntry } from 'astro:content';
+import { getCollection, render, type CollectionEntry } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import SubscribeForm from '../../components/SubscribeForm.astro';
 
@@ -8,7 +8,7 @@ type BlogPost = CollectionEntry<'blog'>;
 export async function getStaticPaths() {
   const posts: BlogPost[] = await getCollection('blog');
   return posts.map((post: BlogPost) => ({
-    params: { slug: post.slug },
+    params: { slug: post.id },
     props: { post },
   }));
 }
@@ -18,11 +18,11 @@ interface Props {
 }
 
 const { post } = Astro.props;
-const { Content } = await post.render();
+const { Content } = await render(post);
 
 // Calculate reading time (average reading speed: 200 words/min)
 const wordsPerMinute = 200;
-const textContent: string = post.body;
+const textContent: string = post.body ?? '';
 const wordCount: number = textContent.split(/\s+/g).length;
 const readingTime: number = Math.ceil(wordCount / wordsPerMinute);
 
@@ -39,7 +39,7 @@ const sortedPosts: BlogPost[] = allPosts
   .filter((p: BlogPost) => !p.data.draft)
   .sort((a: BlogPost, b: BlogPost) => b.data.date.valueOf() - a.data.date.valueOf());
 
-const currentIndex: number = sortedPosts.findIndex((p: BlogPost) => p.slug === post.slug);
+const currentIndex: number = sortedPosts.findIndex((p: BlogPost) => p.id === post.id);
 const prevPost: BlogPost | null =
   currentIndex < sortedPosts.length - 1 ? sortedPosts[currentIndex + 1] : null;
 const nextPost: BlogPost | null = currentIndex > 0 ? sortedPosts[currentIndex - 1] : null;
@@ -115,7 +115,7 @@ const nextPost: BlogPost | null = currentIndex > 0 ? sortedPosts[currentIndex - 
               <div>
                 <p class="text-sm text-gray-600 mb-2">← Previous</p>
                 <a
-                  href={`/blog/${prevPost.slug}`}
+                  href={`/blog/${prevPost.id}`}
                   class="text-lg font-sans font-semibold text-black no-underline hover:opacity-70 transition-opacity"
                 >
                   {prevPost.data.title}
@@ -126,7 +126,7 @@ const nextPost: BlogPost | null = currentIndex > 0 ? sortedPosts[currentIndex - 
               <div class={prevPost ? 'text-right' : ''}>
                 <p class="text-sm text-gray-600 mb-2">Next →</p>
                 <a
-                  href={`/blog/${nextPost.slug}`}
+                  href={`/blog/${nextPost.id}`}
                   class="text-lg font-sans font-semibold text-black no-underline hover:opacity-70 transition-opacity"
                 >
                   {nextPost.data.title}
