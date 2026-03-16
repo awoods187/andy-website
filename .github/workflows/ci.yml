@@ -54,7 +54,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'npm'
 
       - name: Install dependencies
@@ -76,7 +76,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'npm'
 
       - name: Install dependencies
@@ -98,7 +98,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'npm'
 
       - name: Install dependencies
@@ -119,7 +119,7 @@ jobs:
     strategy:
       fail-fast: false # Continue testing all versions even if one fails
       matrix:
-        node-version: ['20', '22'] # Node 18 removed: vitest 4.x requires Node 18.18+
+        node-version: ['22'] # Astro 6 requires Node.js >= 22.12.0
 
     steps:
       - name: Checkout code
@@ -143,7 +143,7 @@ jobs:
           echo "Minimum required: 80% for all metrics"
 
       - name: Upload coverage reports
-        if: matrix.node-version == '20' # Only upload once
+        if: matrix.node-version == '22' # Only upload once
         uses: actions/upload-artifact@v7
         with:
           name: coverage-reports
@@ -151,7 +151,7 @@ jobs:
           retention-days: 30
 
       - name: Upload coverage to artifact for PR comment
-        if: matrix.node-version == '20' && github.event_name == 'pull_request'
+        if: matrix.node-version == '22' && github.event_name == 'pull_request'
         uses: actions/upload-artifact@v7
         with:
           name: coverage-summary
@@ -171,7 +171,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'npm'
 
       - name: Install dependencies
@@ -214,7 +214,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'npm'
 
       - name: Install dependencies
@@ -261,7 +261,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'npm'
 
       - name: Install dependencies
