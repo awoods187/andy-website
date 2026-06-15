@@ -34,24 +34,25 @@
     "node": ">=22.12.0"
   },
   "overrides": {
-    "devalue": "^5.8.1"
+    "devalue": "^5.8.1",
+    "esbuild": "^0.28.1"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
     "@eslint/js": "^10.0.1",
     "@types/js-yaml": "^4.0.9",
-    "@typescript-eslint/eslint-plugin": "^8.60.1",
-    "@typescript-eslint/parser": "^8.60.1",
-    "@vitest/coverage-v8": "^4.1.8",
-    "@vitest/ui": "^4.1.8",
-    "eslint": "^10.4.1",
+    "@typescript-eslint/eslint-plugin": "^8.61.0",
+    "@typescript-eslint/parser": "^8.61.0",
+    "@vitest/coverage-v8": "^4.1.9",
+    "@vitest/ui": "^4.1.9",
+    "eslint": "^10.5.0",
     "eslint-plugin-astro": "^1.7.0",
-    "happy-dom": "^20.10.2",
+    "happy-dom": "^20.10.3",
     "js-yaml": "^4.2.0",
-    "lighthouse": "^13.3.0",
-    "prettier": "^3.8.3",
+    "lighthouse": "^13.4.0",
+    "prettier": "^3.8.4",
     "prettier-plugin-astro": "^0.14.1",
     "typescript": "^6.0.3",
-    "vitest": "^4.1.8"
+    "vitest": "^4.1.9"
   }
 }
