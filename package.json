@@ -26,8 +26,8 @@
     "@astrojs/mdx": "^6.0.3",
     "@astrojs/rss": "^4.0.18",
     "@astrojs/sitemap": "^3.7.3",
-    "@tailwindcss/vite": "^4.3.0",
-    "astro": "^6.4.5",
+    "@tailwindcss/vite": "^4.3.1",
+    "astro": "^6.4.7",
     "tailwindcss": "^4.1.14"
   },
   "engines": {
