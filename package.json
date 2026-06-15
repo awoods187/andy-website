@@ -34,7 +34,8 @@
     "node": ">=22.12.0"
   },
   "overrides": {
-    "devalue": "^5.8.1"
+    "devalue": "^5.8.1",
+    "esbuild": "^0.28.1"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
