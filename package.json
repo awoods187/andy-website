@@ -48,7 +48,7 @@
     "eslint": "^10.5.0",
     "eslint-plugin-astro": "^2.0.0",
     "happy-dom": "^20.10.6",
-    "js-yaml": "^4.2.0",
+    "js-yaml": "^5.0.0",
     "lighthouse": "^13.4.0",
     "prettier": "^3.8.4",
     "prettier-plugin-astro": "^0.14.1",
