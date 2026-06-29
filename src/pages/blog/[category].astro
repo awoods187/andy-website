@@ -47,43 +47,37 @@ export async function getStaticPaths() {
   const personalPosts = await getCollection('blog');
   const publishedPersonalPosts: PersonalPost[] = personalPosts
     .filter((post) => !post.data.draft)
-    .map(
-      (post: CollectionEntry<'blog'>): PersonalPost => ({
-        title: post.data.title,
-        date: post.data.date,
-        excerpt: post.data.excerpt,
-        tags: post.data.tags,
-        image: post.data.image || null,
-        slug: post.id,
-        source: 'personal' as const,
-      })
-    );
+    .map((post: CollectionEntry<'blog'>): PersonalPost => ({
+      title: post.data.title,
+      date: post.data.date,
+      excerpt: post.data.excerpt,
+      tags: post.data.tags,
+      image: post.data.image || null,
+      slug: post.id,
+      source: 'personal' as const,
+    }));
 
   // Convert CRL posts to same format
-  const crlPostsFormatted: ExternalPost[] = crlPosts.map(
-    (post): ExternalPost => ({
-      title: post.title,
-      date: new Date(post.date),
-      excerpt: post.excerpt,
-      tags: post.tags || [],
-      image: post.image,
-      url: post.url,
-      source: 'cockroach-labs' as const,
-    })
-  );
+  const crlPostsFormatted: ExternalPost[] = crlPosts.map((post): ExternalPost => ({
+    title: post.title,
+    date: new Date(post.date),
+    excerpt: post.excerpt,
+    tags: post.tags || [],
+    image: post.image,
+    url: post.url,
+    source: 'cockroach-labs' as const,
+  }));
 
   // Convert publications to same format
-  const publicationsFormatted: ExternalPost[] = publications.map(
-    (pub): ExternalPost => ({
-      title: pub.title,
-      date: new Date(pub.date),
-      excerpt: `${pub.venue} - ${pub.excerpt}`,
-      tags: pub.tags || [],
-      image: pub.image || null,
-      url: pub.url,
-      source: 'publications' as const,
-    })
-  );
+  const publicationsFormatted: ExternalPost[] = publications.map((pub): ExternalPost => ({
+    title: pub.title,
+    date: new Date(pub.date),
+    excerpt: `${pub.venue} - ${pub.excerpt}`,
+    tags: pub.tags || [],
+    image: pub.image || null,
+    url: pub.url,
+    source: 'publications' as const,
+  }));
 
   // Combine and sort all posts
   const allPosts: Post[] = [
