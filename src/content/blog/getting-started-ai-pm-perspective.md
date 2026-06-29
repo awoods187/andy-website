@@ -180,7 +180,8 @@ This isn't a "set it and forget it" task.
 
 ### 4. Cost Management Is Critical
 
-At scale, AI costs add up fast. GPT-4 API calls can cost $0.01-0.10 per request.
+At scale, AI costs add up fast. GPT-4 API calls can cost
+$0.01-0.10 per request.
 If you have 10,000 users making 10 requests/day, that's $10K-100K/month.
 
 **Cost optimizations:**
