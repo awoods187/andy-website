@@ -35,6 +35,15 @@ updates:
           - 'minor'
           - 'patch'
 
+    # Ignore updates that the toolchain can't yet support.
+    # TypeScript 7.x is the native (Go) compiler; @typescript-eslint and
+    # @astrojs/check don't support it yet, so major bumps break lint and
+    # astro check. Stay on 6.x until the ecosystem catches up.
+    ignore:
+      - dependency-name: 'typescript'
+        update-types:
+          - 'version-update:semver-major'
+
     # Customize PR settings
     commit-message:
       prefix: 'chore(deps)'
