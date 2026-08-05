@@ -38,7 +38,7 @@
     "esbuild": "^0.28.1"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.9.9",
+    "@astrojs/check": "^0.9.10",
     "@eslint/js": "^10.0.1",
     "@types/js-yaml": "^4.0.9",
     "@typescript-eslint/eslint-plugin": "^8.65.0",
