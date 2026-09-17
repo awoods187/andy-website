@@ -74,13 +74,11 @@ const sourceBadge =
       {/* Title with source badge */}
       <h2 class="font-sans text-xl font-semibold mb-2 text-black">
         {title}
-        {
-          sourceBadge && (
-            <span class="ml-2 text-xs font-normal text-gray-600 border border-gray-300 px-2 py-0.5 rounded whitespace-nowrap">
-              {sourceBadge}
-            </span>
-          )
-        }
+        {sourceBadge && (
+          <span class="ml-2 text-xs font-normal text-gray-600 border border-gray-300 px-2 py-0.5 rounded whitespace-nowrap">
+            {sourceBadge}
+          </span>
+        )}
       </h2>
 
       {/* Date */}
@@ -89,20 +87,16 @@ const sourceBadge =
       </time>
 
       {/* Excerpt */}
-      <p class="text-base leading-relaxed text-gray-700 mb-3 line-clamp-2">
-        {excerpt}
-      </p>
+      <p class="text-base leading-relaxed text-gray-700 mb-3 line-clamp-2">{excerpt}</p>
 
       {/* Tags */}
-      {
-        tags.length > 0 && (
-          <div class="flex gap-2 flex-wrap">
-            {tags.slice(0, 4).map((tag: string) => {
-              return <span class="text-xs px-2 py-1 bg-gray-100 text-gray-700 rounded">{tag}</span>;
-            })}
-          </div>
-        )
-      }
+      {tags.length > 0 && (
+        <div class="flex gap-2 flex-wrap">
+          {tags.slice(0, 4).map((tag: string) => {
+            return <span class="text-xs px-2 py-1 bg-gray-100 text-gray-700 rounded">{tag}</span>;
+          })}
+        </div>
+      )}
     </div>
   </a>
 </article>

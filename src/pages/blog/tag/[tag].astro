@@ -41,11 +41,11 @@ const capitalizedTag: string = tag.charAt(0).toUpperCase() + tag.slice(1);
 >
   <header class="mb-12">
     <p class="text-sm text-gray-600 mb-2">
-      <a href="/blog" class="hover:text-black transition-colors">← Back to all posts</a>
+      <a href="/blog" class="hover:text-black transition-colors">
+        ← Back to all posts
+      </a>
     </p>
-    <h1 class="font-sans text-4xl font-bold mb-4 text-black">
-      Posts tagged "{capitalizedTag}"
-    </h1>
+    <h1 class="font-sans text-4xl font-bold mb-4 text-black">Posts tagged "{capitalizedTag}"</h1>
     <p class="text-lg text-gray-600">
       {posts.length}
       {posts.length === 1 ? 'post' : 'posts'}
@@ -53,18 +53,16 @@ const capitalizedTag: string = tag.charAt(0).toUpperCase() + tag.slice(1);
   </header>
 
   <div>
-    {
-      posts.map((post: BlogPost) => {
-        return (
-          <BlogPostCard
-            title={post.data.title}
-            date={post.data.date}
-            excerpt={post.data.excerpt}
-            slug={post.id}
-            tags={post.data.tags}
-          />
-        );
-      })
-    }
+    {posts.map((post: BlogPost) => {
+      return (
+        <BlogPostCard
+          title={post.data.title}
+          date={post.data.date}
+          excerpt={post.data.excerpt}
+          slug={post.id}
+          tags={post.data.tags}
+        />
+      );
+    })}
   </div>
 </BaseLayout>
