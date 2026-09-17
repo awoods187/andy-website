@@ -241,7 +241,6 @@ _Where to add script import:_
 
 ```astro
 // src/pages/blog/[slug].astro // ... existing imports
-
 <BaseLayout title={post.data.title} description={post.data.excerpt}>
   <article>
     <!-- existing content -->

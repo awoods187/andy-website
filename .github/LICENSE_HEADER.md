@@ -181,29 +181,25 @@ const { title, date, license, copyright, attribution } = data;
 
   <Content />
 
-  {
-    license && (
-      <footer class="license-notice">
-        <h2>License</h2>
+  {license && (
+    <footer class="license-notice">
+      <h2>License</h2>
+      <p>
+        This post is licensed under
+        <a href="https://creativecommons.org/licenses/by-nc/4.0/">{license}</a>.
+        {copyright && <span>{copyright}</span>}
+      </p>
+      {attribution && (
         <p>
-          This post is licensed under
-          <a href="https://creativecommons.org/licenses/by-nc/4.0/">
-            {license}
-          </a>
-          .{copyright && <span>{copyright}</span>}
+          <em>{attribution}</em>
         </p>
-        {attribution && (
-          <p>
-            <em>{attribution}</em>
-          </p>
-        )}
-        <p>
-          For commercial republishing, please contact me via
-          <a href="https://www.linkedin.com/in/andrewscottwoods/">LinkedIn</a>.
-        </p>
-      </footer>
-    )
-  }
+      )}
+      <p>
+        For commercial republishing, please contact me via
+        <a href="https://www.linkedin.com/in/andrewscottwoods/">LinkedIn</a>.
+      </p>
+    </footer>
+  )}
 </article>
 ```
 
