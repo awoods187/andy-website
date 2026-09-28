@@ -41,18 +41,18 @@
     "@astrojs/check": "^0.9.10",
     "@eslint/js": "^10.0.1",
     "@types/js-yaml": "^4.0.9",
-    "@typescript-eslint/eslint-plugin": "^8.70.0",
-    "@typescript-eslint/parser": "^8.70.0",
-    "@vitest/coverage-v8": "^5.0.1",
-    "@vitest/ui": "^5.0.1",
-    "eslint": "^10.10.0",
+    "@typescript-eslint/eslint-plugin": "^8.70.1",
+    "@typescript-eslint/parser": "^8.70.1",
+    "@vitest/coverage-v8": "^5.0.2",
+    "@vitest/ui": "^5.0.2",
+    "eslint": "^10.11.0",
     "eslint-plugin-astro": "^3.2.1",
     "happy-dom": "^20.14.5",
     "js-yaml": "^5.4.2",
-    "lighthouse": "^13.4.1",
-    "prettier": "^3.9.8",
-    "prettier-plugin-astro": "^1.0.1",
+    "lighthouse": "^13.5.0",
+    "prettier": "^3.9.9",
+    "prettier-plugin-astro": "^1.1.0",
     "typescript": "^6.0.3",
-    "vitest": "^5.0.1"
+    "vitest": "^5.0.2"
   }
 }
