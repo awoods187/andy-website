@@ -348,7 +348,7 @@ original © Cockroach Labs.
 
 ## 👨‍💻 About
 
-**Andy Woods** • Director of Product Management at Cockroach Labs
+**Andy Woods** • Head of Product at DualEntry
 
 Built with [Astro](https://astro.build) and
 [Claude Code](https://claude.com/claude-code) in under 4 hours using AI-native
