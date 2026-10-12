@@ -57,6 +57,21 @@ function getItemByTitle(xml: string, title: string): string | null {
 }
 
 /**
+ * Helper to get the content:encoded of the first personal blog post
+ * (i.e. one linking to andywoods.me, not an external post)
+ */
+function getFirstPersonalPostContent(xml: string): string | null {
+  const regex = /<content:encoded>([\s\S]*?)<\/content:encoded>/g;
+  const matches = [...xml.matchAll(regex)];
+  for (const match of matches) {
+    if (match[1].includes('andywoods.me/blog/')) {
+      return match[1];
+    }
+  }
+  return null;
+}
+
+/**
  * Helper to extract enclosure URL from item
  */
 function getEnclosureUrl(itemXml: string): string | null {
@@ -96,14 +111,14 @@ describe.skipIf(!hasRssFeed)('RSS Feed - Hero Images', () => {
 
   it('should include hero images in content', () => {
     rssXml = readFileSync(rssPath, 'utf-8');
-    const firstContent = getContentEncoded(rssXml, 0);
+    const firstContent = getFirstPersonalPostContent(rssXml);
     expect(firstContent).toContain('&lt;img src=');
     expect(firstContent).toContain('https://andywoods.me/images/blog/');
   });
 
   it('hero images should use absolute URLs', () => {
     rssXml = readFileSync(rssPath, 'utf-8');
-    const firstContent = getContentEncoded(rssXml, 0);
+    const firstContent = getFirstPersonalPostContent(rssXml);
 
     // Extract all img tags (XML-escaped format)
     const imgRegex = /&lt;img[^&]*?src=&quot;([^&]+?)&quot;/g;
@@ -119,7 +134,7 @@ describe.skipIf(!hasRssFeed)('RSS Feed - Hero Images', () => {
 
   it('hero images should have proper styling for email clients', () => {
     rssXml = readFileSync(rssPath, 'utf-8');
-    const firstContent = getContentEncoded(rssXml, 0);
+    const firstContent = getFirstPersonalPostContent(rssXml);
 
     // Check for responsive image styling
     expect(firstContent).toContain('max-width: 100%');
@@ -150,7 +165,7 @@ describe.skipIf(!hasRssFeed)('RSS Feed - Content Processing', () => {
 
   it('should convert markdown to HTML', () => {
     rssXml = readFileSync(rssPath, 'utf-8');
-    const firstContent = getContentEncoded(rssXml, 0);
+    const firstContent = getFirstPersonalPostContent(rssXml);
 
     // Should have HTML tags (XML-escaped)
     expect(firstContent).toContain('&lt;p&gt;');
@@ -185,7 +200,7 @@ describe.skipIf(!hasRssFeed)('RSS Feed - Content Processing', () => {
 
   it('should include "Read more" link back to website', () => {
     rssXml = readFileSync(rssPath, 'utf-8');
-    const firstContent = getContentEncoded(rssXml, 0);
+    const firstContent = getFirstPersonalPostContent(rssXml);
 
     expect(firstContent).toContain('Read the full post on andywoods.me');
     expect(firstContent).toContain('https://andywoods.me/blog/');
@@ -348,7 +363,7 @@ describe.skipIf(!hasRssFeed)('RSS Feed - Buttondown Compatibility', () => {
 
   it('should have images that will display in email clients', () => {
     rssXml = readFileSync(rssPath, 'utf-8');
-    const firstContent = getContentEncoded(rssXml, 0);
+    const firstContent = getFirstPersonalPostContent(rssXml);
 
     // Images should have:
     // 1. Absolute URLs (for email clients) - XML-escaped
