@@ -10,6 +10,7 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PostCard from '../../components/PostCard.astro';
 import { crlPosts } from '../../data/crl-posts';
+import { dualentryPosts } from '../../data/dualentry-posts';
 import { publications } from '../../data/publications';
 
 // Define post types
@@ -30,7 +31,7 @@ type ExternalPost = {
   tags: string[];
   image: string | null;
   url: string;
-  source: 'cockroach-labs' | 'publications';
+  source: 'cockroach-labs' | 'dualentry' | 'publications';
 };
 
 type Post = PersonalPost | ExternalPost;
@@ -68,6 +69,17 @@ export async function getStaticPaths() {
     source: 'cockroach-labs' as const,
   }));
 
+  // Convert DualEntry posts to same format
+  const dualentryPostsFormatted: ExternalPost[] = dualentryPosts.map((post): ExternalPost => ({
+    title: post.title,
+    date: new Date(post.date),
+    excerpt: post.excerpt,
+    tags: post.tags || [],
+    image: post.image,
+    url: post.url,
+    source: 'dualentry' as const,
+  }));
+
   // Convert publications to same format
   const publicationsFormatted: ExternalPost[] = publications.map((pub): ExternalPost => ({
     title: pub.title,
@@ -83,6 +95,7 @@ export async function getStaticPaths() {
   const allPosts: Post[] = [
     ...publishedPersonalPosts,
     ...crlPostsFormatted,
+    ...dualentryPostsFormatted,
     ...publicationsFormatted,
   ].sort((a, b) => b.date.valueOf() - a.date.valueOf());
 
@@ -94,6 +107,7 @@ export async function getStaticPaths() {
     { slug: 'all', name: 'All categories' },
     { slug: 'personal', name: 'Personal Blog' },
     { slug: 'cockroach-labs', name: 'Cockroach Labs' },
+    { slug: 'dualentry', name: 'DualEntry' },
     { slug: 'publications', name: 'Publications' },
     ...['ai', 'databases', 'product-management']
       .filter((tag) => allTags.includes(tag))
@@ -108,6 +122,8 @@ export async function getStaticPaths() {
       filteredPosts = allPosts.filter((p) => p.source === 'personal');
     } else if (category.slug === 'cockroach-labs') {
       filteredPosts = allPosts.filter((p) => p.source === 'cockroach-labs');
+    } else if (category.slug === 'dualentry') {
+      filteredPosts = allPosts.filter((p) => p.source === 'dualentry');
     } else if (category.slug === 'publications') {
       filteredPosts = allPosts.filter((p) => p.source === 'publications');
     } else if (category.slug !== 'all' && allTags.includes(category.slug)) {
@@ -189,6 +205,21 @@ const { filteredPosts, selectedCategory, allTags } = Astro.props;
             ]}
           >
             Cockroach Labs
+          </a>
+        </li>
+
+        {/* DualEntry */}
+        <li>
+          <a
+            href="/blog/dualentry"
+            class:list={[
+              'text-base no-underline transition-colors pb-2',
+              selectedCategory === 'dualentry'
+                ? 'text-black font-medium border-b-2 border-black'
+                : 'text-gray-600 hover:text-black',
+            ]}
+          >
+            DualEntry
           </a>
         </li>
 

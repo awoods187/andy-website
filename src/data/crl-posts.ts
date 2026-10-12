@@ -7,15 +7,9 @@
  * Last updated: 2025-01-21
  */
 
-export interface ExternalPost {
-  title: string;
-  url: string;
-  date: string;
-  image: string | null;
-  excerpt: string;
-  source: 'cockroach-labs';
-  tags?: string[];
-}
+import type { ExternalPost } from './types';
+
+export type { ExternalPost };
 
 export const crlPosts: ExternalPost[] = [
   {
