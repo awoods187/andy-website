@@ -69,7 +69,10 @@ const sourceBadge =
       <img
         src={imageUrl}
         alt={title}
-        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+        class:list={[
+          'w-full h-full group-hover:scale-105 transition-transform duration-300',
+          isExternal ? 'object-contain' : 'object-cover',
+        ]}
         loading="lazy"
         crossorigin={isExternal ? 'anonymous' : undefined}
       />
