@@ -24,7 +24,7 @@ interface Props {
   url?: string;
   image?: string | null;
   tags: string[];
-  source?: 'personal' | 'cockroach-labs' | 'publications';
+  source?: 'personal' | 'cockroach-labs' | 'dualentry' | 'publications';
 }
 
 const { title, date, excerpt, slug, url, image, tags, source = 'personal' } = Astro.props;
@@ -48,7 +48,7 @@ const imageUrl = image || '/images/default-post.svg';
 
 // Source badge text
 const sourceBadge =
-  source === 'cockroach-labs' ? 'Cockroach Labs' : source === 'publications' ? 'Publication' : null;
+  source === 'cockroach-labs' ? 'Cockroach Labs' : source === 'dualentry' ? 'DualEntry' : source === 'publications' ? 'Publication' : null;
 ---
 
 <article class="mb-8 pb-8 border-b border-gray-200 last:border-b-0">

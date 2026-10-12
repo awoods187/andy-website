@@ -7,6 +7,7 @@
 
 import { describe, it, expect } from 'vitest';
 import { crlPosts } from '../src/data/crl-posts';
+import { dualentryPosts } from '../src/data/dualentry-posts';
 import { publications } from '../src/data/publications';
 
 describe('External Posts Validation', () => {
@@ -25,6 +26,23 @@ describe('External Posts Validation', () => {
     it('should have valid Cockroach Labs URLs', () => {
       crlPosts.forEach((post) => {
         expect(post.url).toMatch(/^https:\/\/www\.cockroachlabs\.com/);
+      });
+    });
+  });
+
+  describe('DualEntry Posts', () => {
+    it('should have valid post structure', () => {
+      dualentryPosts.forEach((post) => {
+        expect(post.title).toBeTruthy();
+        expect(post.url).toBeTruthy();
+        expect(post.date).toBeTruthy();
+        expect(post.source).toBe('dualentry');
+      });
+    });
+
+    it('should have valid DualEntry URLs', () => {
+      dualentryPosts.forEach((post) => {
+        expect(post.url).toMatch(/^https:\/\/www\.dualentry\.com/);
       });
     });
   });

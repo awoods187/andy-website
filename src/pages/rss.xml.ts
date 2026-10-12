@@ -10,6 +10,7 @@ import rss from '@astrojs/rss';
 import { getCollection, type CollectionEntry } from 'astro:content';
 import type { APIContext } from 'astro';
 import { crlPosts } from '../data/crl-posts';
+import { dualentryPosts } from '../data/dualentry-posts';
 import { publications } from '../data/publications';
 
 type BlogPost = CollectionEntry<'blog'>;
@@ -154,6 +155,16 @@ export async function GET(context: APIContext): Promise<Response> {
       content: `<p>${post.excerpt}</p><p><a href="${post.url}">Read the full post at Cockroach Labs →</a></p>`,
       pubDate: new Date(post.date),
       link: post.url, // External URL
+      categories: post.tags,
+      author: 'Andy Woods',
+    })),
+    // DualEntry posts (external URLs)
+    ...dualentryPosts.map((post) => ({
+      title: post.title,
+      description: post.excerpt,
+      content: `<p>${post.excerpt}</p><p><a href="${post.url}">Read the full post at DualEntry →</a></p>`,
+      pubDate: new Date(post.date),
+      link: post.url,
       categories: post.tags,
       author: 'Andy Woods',
     })),
