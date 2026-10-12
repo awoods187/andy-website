@@ -2,17 +2,62 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PostCard from '../components/PostCard.astro';
+import { crlPosts } from '../data/crl-posts';
+import { dualentryPosts } from '../data/dualentry-posts';
 
 type BlogPost = CollectionEntry<'blog'>;
 
+type RecentPost = {
+  title: string;
+  date: Date;
+  excerpt: string;
+  tags: string[];
+  image: string | null;
+  slug?: string;
+  url?: string;
+  source: 'personal' | 'cockroach-labs' | 'dualentry';
+};
+
 // Get all blog posts and sort by date (newest first)
 const allPosts: BlogPost[] = await getCollection('blog');
-const publishedPosts: BlogPost[] = allPosts
+const publishedPosts: RecentPost[] = allPosts
   .filter((post: BlogPost) => !post.data.draft)
-  .sort((a: BlogPost, b: BlogPost) => b.data.date.valueOf() - a.data.date.valueOf());
+  .map((post: BlogPost): RecentPost => ({
+    title: post.data.title,
+    date: post.data.date,
+    excerpt: post.data.excerpt,
+    tags: post.data.tags,
+    image: post.data.image || null,
+    slug: post.id,
+    source: 'personal',
+  }));
+
+// Include external posts
+const externalPosts: RecentPost[] = [
+  ...crlPosts.map((post): RecentPost => ({
+    title: post.title,
+    date: new Date(post.date),
+    excerpt: post.excerpt,
+    tags: post.tags || [],
+    image: post.image,
+    url: post.url,
+    source: 'cockroach-labs',
+  })),
+  ...dualentryPosts.map((post): RecentPost => ({
+    title: post.title,
+    date: new Date(post.date),
+    excerpt: post.excerpt,
+    tags: post.tags || [],
+    image: post.image,
+    url: post.url,
+    source: 'dualentry',
+  })),
+];
 
 // Get the 8 most recent posts for the home page
-const recentPosts: BlogPost[] = publishedPosts.slice(0, 8);
+const recentPosts: RecentPost[] = [...publishedPosts, ...externalPosts]
+  .sort((a, b) => b.date.valueOf() - a.date.valueOf())
+  .slice(0, 8);
 ---
 
 <BaseLayout title="Andy Woods - Product Manager, AI & Database Infrastructure">
@@ -53,16 +98,17 @@ const recentPosts: BlogPost[] = publishedPosts.slice(0, 8);
       </a>
     </div>
     <div>
-      {recentPosts.map((post: BlogPost) => {
+      {recentPosts.map((post: RecentPost) => {
         return (
           <PostCard
-            title={post.data.title}
-            date={post.data.date}
-            excerpt={post.data.excerpt}
-            slug={post.id}
-            tags={post.data.tags}
-            image={post.data.image}
-            source="personal"
+            title={post.title}
+            date={post.date}
+            excerpt={post.excerpt}
+            slug={post.slug}
+            url={post.url}
+            tags={post.tags}
+            image={post.image}
+            source={post.source}
           />
         );
       })}
