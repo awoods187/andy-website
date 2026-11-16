@@ -86,6 +86,7 @@ via [LinkedIn](https://www.linkedin.com/in/andrewscottwoods/)._
 
 Add this license footer at the end of every blog post:
 
+<!-- prettier-ignore -->
 ```markdown
 ---
 
